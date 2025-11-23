@@ -1,9 +1,14 @@
 `text
 Voya
+├── .editorconfig
 ├── .env
 ├── .env.example
 ├── .nvmrc
+├── .prettierignore
 ├── .prettierrc
+├── .vscode
+│   ├── extensions.json
+│   └── settings.json
 ├── README.md
 ├── docs
 │   └── PROJECT_STRUCTURE.md
@@ -13,8 +18,6 @@ Voya
 ├── pnpm-lock.yaml
 ├── public
 │   └── vite.svg
-├── routes
-│   └── routes.ts
 ├── src
 │   ├── App.css
 │   ├── App.tsx
@@ -106,6 +109,8 @@ Voya
 │   │       └── utils
 │   ├── providers
 │   │   └── index.tsx
+│   ├── routes
+│   │   └── routes.ts
 │   ├── theme
 │   │   └── index.ts
 │   ├── types
