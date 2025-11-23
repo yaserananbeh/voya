@@ -1,5 +1,9 @@
 `text
 Voya
+├── .env
+├── .env.example
+├── .nvmrc
+├── .prettierrc
 ├── README.md
 ├── docs
 │   └── PROJECT_STRUCTURE.md
