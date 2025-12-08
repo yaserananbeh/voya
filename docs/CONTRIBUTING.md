@@ -164,6 +164,55 @@ This repository uses:
 
 Your code must pass lint checks before committing.
 
+## 🪝 Git Hooks (Husky + lint-staged)
+
+This project uses **Husky** and **lint-staged** to automatically enforce code quality on every commit.
+
+### 🔍 What Happens on Commit
+
+Whenever you run:
+
+```
+git commit -m "your message"
+```
+
+Husky triggers a **pre-commit hook**, which runs the following through lint-staged:
+
+- **ESLint** (`eslint --fix`) → fixes lint issues
+- **Prettier** (`prettier --write`) → applies code formatting
+
+If any errors remain after auto-fix, the commit will be **blocked** until the issues are resolved.
+This ensures that only clean, consistent code enters the repository.
+
+### 📂 Configuration Locations
+
+- Hooks live in: `.husky/`
+- Lint-staged config: inside `package.json` under the `"lint-staged"` section
+- ESLint config: `eslint.config.js`
+- Prettier config: `.prettierrc`
+
+### 🛠 Manual Commands
+
+Run these at any time to check or fix code:
+
+```sh
+pnpm lint       # run ESLint
+pnpm format     # run Prettier
+pnpm format:check  # verify formatting without writing
+```
+
+### 👍 No Extra Setup Required
+
+Husky was initialized using:
+
+```
+pnpm dlx husky init
+```
+
+This automatically added the correct `prepare` script and Git hook setup.
+
+Everything runs automatically — contributors just write code and commit normally.
+
 ---
 
 # 🚀 Workflow Summary
