@@ -11,6 +11,8 @@ Voya
 │   └── settings.json
 ├── README.md
 ├── docs
+│   ├── CONTRIBUTING.md
+│   ├── GIT_BRANCH_STRATEGY.md
 │   └── PROJECT_STRUCTURE.md
 ├── eslint.config.js
 ├── index.html
