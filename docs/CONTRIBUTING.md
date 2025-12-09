@@ -226,4 +226,10 @@ Everything runs automatically — contributors just write code and commit normal
 
 ---
 
+## ASSETS MANAGEMENT STRATEGY
+
+Refer to `docs/ASSETS_MANAGEMENT_STRATEGY.md` to know the ASSETS MANAGEMENT STRATEGY we use in this project.
+
+---
+
 # ❤️ Thank You
