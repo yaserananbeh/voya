@@ -1,4 +1,4 @@
-import { createTheme, responsiveFontSizes } from '@mui/material/styles'
+import { createTheme, responsiveFontSizes, type Shadows } from '@mui/material/styles'
 
 export const theme = responsiveFontSizes(
   createTheme({
@@ -99,5 +99,15 @@ export const theme = responsiveFontSizes(
         lineHeight: 1.4,
       },
     },
+    spacing: 8, // base multiplier (8px)
+
+    shadows: [
+      'none', // 0
+      '0px 1px 3px rgba(0, 0, 0, 0.12)', // 1
+      '0px 2px 6px rgba(0, 0, 0, 0.12)', // 2
+      '0px 4px 12px rgba(0, 0, 0, 0.12)', // 3
+      '0px 8px 20px rgba(0, 0, 0, 0.15)', // 4
+      ...Array.from({ length: 20 }, () => 'none'), // fill remaining 20 slots (MUI requires 25 shadows)
+    ] as Shadows,
   }),
 )
