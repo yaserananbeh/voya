@@ -100,7 +100,9 @@ export const theme = responsiveFontSizes(
       },
     },
     spacing: 8, // base multiplier (8px)
-
+    shape: {
+      borderRadius: 8,
+    },
     shadows: [
       'none', // 0
       '0px 1px 3px rgba(0, 0, 0, 0.12)', // 1
@@ -109,5 +111,46 @@ export const theme = responsiveFontSizes(
       '0px 8px 20px rgba(0, 0, 0, 0.15)', // 4
       ...Array.from({ length: 20 }, () => 'none'), // fill remaining 20 slots (MUI requires 25 shadows)
     ] as Shadows,
+    components: {
+      // --- BUTTON OVERRIDES ---
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: 8,
+            padding: '8px 20px',
+          },
+        },
+        defaultProps: {
+          disableElevation: true,
+        },
+      },
+
+      // --- CARD OVERRIDES ---
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            borderRadius: 12,
+            boxShadow: '0px 1px 3px rgba(0,0,0,0.12)',
+          },
+        },
+      },
+
+      // --- TEXTFIELD OVERRIDES ---
+      MuiTextField: {
+        defaultProps: {
+          variant: 'outlined',
+          fullWidth: true,
+        },
+      },
+
+      // --- INPUT OVERRIDES ---
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            borderRadius: 8,
+          },
+        },
+      },
+    },
   }),
 )
