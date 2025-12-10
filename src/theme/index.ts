@@ -85,6 +85,28 @@ export const theme = responsiveFontSizes(
         fontWeight: 400,
         lineHeight: 1.6,
       },
+      subtitle1: {
+        fontSize: '1rem', // 16px
+        fontWeight: 500,
+        lineHeight: 1.45,
+        color: '#262626',
+      },
+
+      subtitle2: {
+        fontSize: '0.875rem', // 14px
+        fontWeight: 500,
+        lineHeight: 1.45,
+        color: '#6B6B6B',
+      },
+
+      overline: {
+        fontSize: '0.75rem', // 12px
+        fontWeight: 600,
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
+        lineHeight: 1.4,
+        color: '#6B6B6B',
+      },
 
       // --- Buttons ---
       button: {
