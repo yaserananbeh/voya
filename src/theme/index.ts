@@ -2,30 +2,33 @@ import { createTheme, responsiveFontSizes, type Shadows } from '@mui/material/st
 
 export const theme = responsiveFontSizes(
   createTheme({
+    // ============================
+    //        COLOR PALETTE
+    // ============================
     palette: {
       primary: {
-        main: '#003580', // Booking Blue
+        main: '#003580',
         light: '#3366a6',
         dark: '#00224f',
         contrastText: '#ffffff',
       },
       secondary: {
-        main: '#F9BC02', // Booking Yellow
+        main: '#F9BC02',
         dark: '#c89600',
         contrastText: '#000000',
       },
       success: {
-        main: '#00800D', // Green success
+        main: '#00800D',
         dark: '#005c0a',
         contrastText: '#ffffff',
       },
       error: {
-        main: '#D4111E', // Red alerts
+        main: '#D4111E',
         dark: '#a70d17',
         contrastText: '#ffffff',
       },
       warning: {
-        main: '#F46A25', // Sale / discount
+        main: '#F46A25',
         contrastText: '#ffffff',
       },
       text: {
@@ -39,102 +42,82 @@ export const theme = responsiveFontSizes(
       divider: '#E6E6E6',
     },
 
+    // ============================
+    //        TYPOGRAPHY
+    // ============================
     typography: {
       fontFamily: 'Inter, Roboto, sans-serif',
 
-      // --- Headings ---
-      h1: {
-        fontSize: '2.25rem', // 36px
-        fontWeight: 700,
-        lineHeight: 1.2,
-      },
-      h2: {
-        fontSize: '1.875rem', // 30px
-        fontWeight: 700,
-        lineHeight: 1.25,
-      },
-      h3: {
-        fontSize: '1.5rem', // 24px
-        fontWeight: 600,
-        lineHeight: 1.3,
-      },
-      h4: {
-        fontSize: '1.25rem', // 20px
-        fontWeight: 600,
-        lineHeight: 1.35,
-      },
-      h5: {
-        fontSize: '1.125rem', // 18px
-        fontWeight: 500,
-        lineHeight: 1.4,
-      },
-      h6: {
-        fontSize: '1rem', // 16px
-        fontWeight: 500,
-        lineHeight: 1.4,
-      },
+      // Headings
+      h1: { fontSize: '2.25rem', fontWeight: 700, lineHeight: 1.2 },
+      h2: { fontSize: '1.875rem', fontWeight: 700, lineHeight: 1.25 },
+      h3: { fontSize: '1.5rem', fontWeight: 600, lineHeight: 1.3 },
+      h4: { fontSize: '1.25rem', fontWeight: 600, lineHeight: 1.35 },
+      h5: { fontSize: '1.125rem', fontWeight: 500, lineHeight: 1.4 },
+      h6: { fontSize: '1rem', fontWeight: 500, lineHeight: 1.4 },
 
-      // --- Body text ---
-      body1: {
-        fontSize: '1rem', // 16px
-        fontWeight: 400,
-        lineHeight: 1.6,
-      },
-      body2: {
-        fontSize: '0.875rem', // 14px
-        fontWeight: 400,
-        lineHeight: 1.6,
-      },
+      // Body
+      body1: { fontSize: '1rem', fontWeight: 400, lineHeight: 1.6 },
+      body2: { fontSize: '0.875rem', fontWeight: 400, lineHeight: 1.6 },
+
+      // Buttons
+      button: { textTransform: 'none', fontWeight: 600, fontSize: '0.95rem' },
+
+      // Caption
+      caption: { fontSize: '0.75rem', lineHeight: 1.4 },
+
+      // Subtitle Variants
       subtitle1: {
-        fontSize: '1rem', // 16px
+        fontSize: '1rem',
         fontWeight: 500,
         lineHeight: 1.45,
         color: '#262626',
       },
-
       subtitle2: {
-        fontSize: '0.875rem', // 14px
+        fontSize: '0.875rem',
         fontWeight: 500,
         lineHeight: 1.45,
         color: '#6B6B6B',
       },
 
+      // Overline Variant
       overline: {
-        fontSize: '0.75rem', // 12px
+        fontSize: '0.75rem',
         fontWeight: 600,
         letterSpacing: '0.08em',
         textTransform: 'uppercase',
         lineHeight: 1.4,
         color: '#6B6B6B',
       },
-
-      // --- Buttons ---
-      button: {
-        textTransform: 'none',
-        fontWeight: 600,
-        fontSize: '0.95rem', // ~15px
-      },
-
-      // --- Caption text ---
-      caption: {
-        fontSize: '0.75rem', // 12px
-        lineHeight: 1.4,
-      },
     },
-    spacing: 8, // base multiplier (8px)
+
+    // ============================
+    //       SPACING & SHAPE
+    // ============================
+    spacing: 8,
     shape: {
       borderRadius: 8,
     },
+
+    // ============================
+    //         ELEVATION
+    // ============================
     shadows: [
-      'none', // 0
-      '0px 1px 3px rgba(0, 0, 0, 0.12)', // 1
-      '0px 2px 6px rgba(0, 0, 0, 0.12)', // 2
-      '0px 4px 12px rgba(0, 0, 0, 0.12)', // 3
-      '0px 8px 20px rgba(0, 0, 0, 0.15)', // 4
-      ...Array.from({ length: 20 }, () => 'none'), // fill remaining 20 slots (MUI requires 25 shadows)
+      'none',
+      '0px 1px 3px rgba(0, 0, 0, 0.12)',
+      '0px 2px 6px rgba(0, 0, 0, 0.12)',
+      '0px 4px 12px rgba(0, 0, 0, 0.12)',
+      '0px 8px 20px rgba(0, 0, 0, 0.15)',
+      ...Array.from({ length: 20 }, () => 'none'), //MUI accept 25 strictly -YA
     ] as Shadows,
+
+    // ============================
+    //     COMPONENT OVERRIDES
+    // ============================
     components: {
-      // --- BUTTON OVERRIDES ---
+      // ---------------------------------------------------
+      //                    BUTTON
+      // ---------------------------------------------------
       MuiButton: {
         styleOverrides: {
           root: {
@@ -145,9 +128,49 @@ export const theme = responsiveFontSizes(
         defaultProps: {
           disableElevation: true,
         },
+        variants: [
+          // Primary (same as default)
+          {
+            props: { variant: 'primary' },
+            style: {
+              backgroundColor: '#003580',
+              color: '#fff',
+              '&:hover': { backgroundColor: '#002a66' },
+            },
+          },
+          // Secondary
+          {
+            props: { variant: 'secondary' },
+            style: {
+              backgroundColor: '#F9BC02',
+              color: '#000',
+              '&:hover': { backgroundColor: '#d9a701' },
+            },
+          },
+          // Danger
+          {
+            props: { variant: 'danger' },
+            style: {
+              backgroundColor: '#D4111E',
+              color: '#fff',
+              '&:hover': { backgroundColor: '#a70d17' },
+            },
+          },
+          // Soft / Gray button
+          {
+            props: { variant: 'soft' },
+            style: {
+              backgroundColor: '#E6E6E6',
+              color: '#262626',
+              '&:hover': { backgroundColor: '#d4d4d4' },
+            },
+          },
+        ],
       },
 
-      // --- CARD OVERRIDES ---
+      // ---------------------------------------------------
+      //                     CARD
+      // ---------------------------------------------------
       MuiCard: {
         styleOverrides: {
           root: {
@@ -155,9 +178,27 @@ export const theme = responsiveFontSizes(
             boxShadow: '0px 1px 3px rgba(0,0,0,0.12)',
           },
         },
+        variants: [
+          {
+            props: { variant: 'elevated' },
+            style: {
+              boxShadow: '0px 4px 12px rgba(0,0,0,0.12)',
+              borderRadius: 12,
+            },
+          },
+          {
+            props: { variant: 'outlined' },
+            style: {
+              border: '1px solid #E6E6E6',
+              boxShadow: 'none',
+            },
+          },
+        ],
       },
 
-      // --- TEXTFIELD OVERRIDES ---
+      // ---------------------------------------------------
+      //                    TEXTFIELD
+      // ---------------------------------------------------
       MuiTextField: {
         defaultProps: {
           variant: 'outlined',
@@ -165,13 +206,36 @@ export const theme = responsiveFontSizes(
         },
       },
 
-      // --- INPUT OVERRIDES ---
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
             borderRadius: 8,
           },
         },
+      },
+
+      // ---------------------------------------------------
+      //                  TYPOGRAPHY
+      // ---------------------------------------------------
+      MuiTypography: {
+        variants: [
+          {
+            props: { variant: 'price' },
+            style: {
+              fontWeight: 700,
+              fontSize: '1.25rem',
+              color: '#D4111E',
+            },
+          },
+          {
+            props: { variant: 'label' },
+            style: {
+              fontWeight: 600,
+              fontSize: '0.875rem',
+              color: '#003580',
+            },
+          },
+        ],
       },
     },
   }),
