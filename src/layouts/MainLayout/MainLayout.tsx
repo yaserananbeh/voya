@@ -1,3 +1,4 @@
+import LogoutBtn from '@/components/layout/LogoutBtn'
 import { Outlet } from 'react-router-dom'
 
 export default function MainLayout() {
@@ -5,6 +6,7 @@ export default function MainLayout() {
     <>
       {/* Header / Navbar */}
       <main>
+        <LogoutBtn />
         <Outlet />
       </main>
     </>

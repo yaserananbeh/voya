@@ -1,15 +1,16 @@
-import { baseApi } from '../baseApi'
-import type { LoginRequestDto, LoginResponseDto } from '../../types/models'
+import { baseApi } from '@/api/baseApi'
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    login: build.mutation<LoginResponseDto, LoginRequestDto>({
+    login: build.mutation<
+      { authentication: string; userType: string },
+      { userName: string; password: string }
+    >({
       query: (body) => ({
         url: '/auth/authenticate',
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['Auth'],
     }),
   }),
 })
