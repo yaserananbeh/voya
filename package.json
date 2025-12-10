@@ -12,7 +12,8 @@
     "format:check": "prettier . --check",
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "prepare": "husky"
+    "prepare": "husky",
+    "gen:api": "openapi-typescript http://localhost:5000/swagger.json -o src/types/api.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -21,6 +22,7 @@
     "@mui/material": "^7.3.5",
     "@mui/x-data-grid": "^8.19.0",
     "@mui/x-date-pickers": "^8.19.0",
+    "@reduxjs/toolkit": "^2.11.1",
     "@tanstack/react-query": "^5.90.10",
     "axios": "^1.13.2",
     "date-fns": "^4.1.0",
@@ -31,6 +33,7 @@
     "react-dom": "^19.2.0",
     "react-image-gallery": "^1.4.0",
     "react-leaflet": "^5.0.0",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.6",
     "yup": "^1.7.1",
     "zustand": "^5.0.8"
@@ -56,6 +59,7 @@
     "husky": "^9.1.7",
     "jsdom": "^27.2.0",
     "lint-staged": "^16.2.7",
+    "openapi-typescript": "^7.10.1",
     "prettier": "^3.6.2",
     "tree-node-cli": "^1.6.0",
     "typescript": "~5.9.3",

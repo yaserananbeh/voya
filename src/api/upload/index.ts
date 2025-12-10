@@ -1,19 +1,22 @@
-import api from '../axiosInstance'
+import { baseApi } from '../baseApi'
+import type { PhotoDto } from '../../types/models'
 
-export interface PhotoResponse {
-  id: number
-  url: string | null
-}
+export const uploadApi = baseApi.injectEndpoints({
+  endpoints: (build) => ({
+    uploadPhoto: build.mutation<PhotoDto, File>({
+      query: (file) => {
+        const formData = new FormData()
+        formData.append('file', file)
 
-export const uploadPhoto = async (file: File): Promise<PhotoResponse> => {
-  const formData = new FormData()
-  formData.append('files', file)
+        return {
+          url: '/photos', // baseUrl already /api
+          method: 'POST',
+          body: formData,
+        }
+      },
+      invalidatesTags: ['Photos', 'Hotel', 'Rooms'],
+    }),
+  }),
+})
 
-  const response = await api.post<PhotoResponse>('/photos', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  })
-
-  return response.data
-}
+export const { useUploadPhotoMutation } = uploadApi
