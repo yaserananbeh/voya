@@ -7,7 +7,7 @@ import { defineConfig } from 'eslint/config'
 
 export default defineConfig([
   {
-    ignores: ['dist', 'node_modules'],
+    ignores: ['dist', 'node_modules', 'vitest.config.ts', 'setupTests.ts'],
   },
 
   {
@@ -19,11 +19,7 @@ export default defineConfig([
       globals: globals.browser,
       parser: tseslint.parser,
       parserOptions: {
-        project: [
-          './tsconfig.json',
-          './tsconfig.app.json',
-          './tsconfig.node.json',
-        ],
+        project: ['./tsconfig.json', './tsconfig.app.json', './tsconfig.node.json'],
         tsconfigRootDir: process.cwd(),
       },
     },
