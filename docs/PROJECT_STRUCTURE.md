@@ -30,32 +30,41 @@ Voya
 │   └── settings.json
 ├── README.md
 ├── docs
+│   ├── API_CACHING_STRATEGY.md
 │   ├── ASSETS_MANAGEMENT_STRATEGY.md
 │   ├── CONTRIBUTING.md
 │   ├── GIT_BRANCH_STRATEGY.md
 │   ├── PROJECT_STRUCTURE.md
 │   ├── ROUTES.md
+│   ├── RTK Query vs React Query vs Axios.md
+│   ├── STATE_MGMT_TRADEOFFS.md
 │   ├── UI_COMPONENTS_MUI_MAP.md
 │   ├── adr
-│   │   └── ADR-006-error-logging.md
+│   │   ├── ADR-006-error-logging.md
+│   │   └── ADR-007-rtk-query-vs-axios.md
 │   └── design.md
 ├── eslint.config.js
 ├── index.html
 ├── package.json
 ├── pnpm-lock.yaml
 ├── public
+│   ├── _redirects
 │   └── vite.svg
+├── setupTests.ts
 ├── src
 │   ├── App.tsx
 │   ├── api
 │   │   ├── admin
+│   │   │   └── index.ts
 │   │   ├── auth
-│   │   ├── axiosInstance.ts
+│   │   │   └── index.ts
+│   │   ├── baseApi.ts
 │   │   ├── checkout
+│   │   │   └── index.ts
 │   │   ├── home
+│   │   │   └── index.ts
 │   │   ├── hotel
-│   │   ├── index.ts
-│   │   ├── search
+│   │   │   └── index.ts
 │   │   └── upload
 │   │       └── index.ts
 │   ├── assets
@@ -65,8 +74,13 @@ Voya
 │   │   ├── index.ts
 │   │   └── react.svg
 │   ├── components
+│   │   ├── auth
+│   │   │   ├── AdminRoute.tsx
+│   │   │   ├── ProtectedRoute.tsx
+│   │   │   └── RedirectIfAuthenticated.tsx
 │   │   ├── index.ts
 │   │   ├── layout
+│   │   │   ├── LogoutBtn.tsx
 │   │   │   ├── PageContainer.tsx
 │   │   │   ├── PageHeader.tsx
 │   │   │   └── Section.tsx
@@ -205,25 +219,41 @@ Voya
 │   │   └── index.tsx
 │   ├── routes
 │   │   └── routes.tsx
+│   ├── store
+│   │   ├── authSlice.ts
+│   │   └── store.ts
 │   ├── styles
 │   │   └── reset.css
 │   ├── temp
 │   │   ├── DemoOverrideTest.tsx
 │   │   └── dev.ts
+│   ├── tests
+│   │   └── msw
+│   │       ├── handlers.ts
+│   │       └── server.ts
 │   ├── theme
 │   │   └── index.ts
 │   ├── types
+│   │   ├── api.ts
 │   │   ├── index.ts
-│   │   └── mui.d.ts
+│   │   ├── models.ts
+│   │   ├── mui.d.ts
+│   │   └── swagger.json
 │   └── utils
 │       ├── date.ts
 │       ├── globalErrors.ts
 │       ├── index.ts
 │       ├── logger.ts
 │       ├── responsive.ts
-│       └── string.ts
+│       ├── string.ts
+│       └── tests
+│           ├── date.test.ts
+│           ├── logger.test.ts
+│           ├── responsive.test.ts
+│           └── string.test.ts
 ├── tsconfig.app.json
 ├── tsconfig.json
 ├── tsconfig.node.json
-└── vite.config.ts
+├── vite.config.ts
+└── vitest.config.ts
 `
