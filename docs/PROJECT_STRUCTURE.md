@@ -29,6 +29,36 @@ Voya
 │   ├── extensions.json
 │   └── settings.json
 ├── README.md
+├── dist
+│   ├── _redirects
+│   ├── assets
+│   │   ├── Box-pUQRSzkw.js
+│   │   ├── Button-DMmFr0di.js
+│   │   ├── CircularProgress-CbYJ7RAA.js
+│   │   ├── Container-CmlbRrUS.js
+│   │   ├── LogoutBtn-Dy9IGXfk.js
+│   │   ├── Paper-DTwKwhR4.js
+│   │   ├── Typography-DDbyn4Yo.js
+│   │   ├── index-2gZ9xIiA.js
+│   │   ├── index-B1mt5Eu-.js
+│   │   ├── index-B_ezJJYx.js
+│   │   ├── index-BerZ4fUg.js
+│   │   ├── index-Bh0YueAI.js
+│   │   ├── index-C2Guv9dY.js
+│   │   ├── index-CSsBpVWf.js
+│   │   ├── index-Co4Bz83h.js
+│   │   ├── index-CvpQWpgS.js
+│   │   ├── index-Cxrey-oc.css
+│   │   ├── index-D0fh3uF9.css
+│   │   ├── index-Ditz1SoZ.js
+│   │   ├── index-N-2ZbHV8.js
+│   │   ├── index-StO2EN8l.js
+│   │   ├── index-fzJwvD5u.js
+│   │   ├── index-gVnBl6Yc.js
+│   │   ├── index-tn0RQdqM.css
+│   │   └── index.esm-DCSuFQeq.js
+│   ├── index.html
+│   └── vite.svg
 ├── docs
 │   ├── API_CACHING_STRATEGY.md
 │   ├── ASSETS_MANAGEMENT_STRATEGY.md
@@ -92,8 +122,7 @@ Voya
 │   │   └── messages.ts
 │   ├── hooks
 │   │   ├── index.ts
-│   │   ├── tests
-│   │   └── usePhotoUpload.ts
+│   │   └── tests
 │   ├── layouts
 │   │   ├── AdminLayout
 │   │   │   ├── AdminLayout.module.css
@@ -177,10 +206,18 @@ Voya
 │   │   ├── Home
 │   │   │   ├── Home.tsx
 │   │   │   ├── components
+│   │   │   │   ├── FeaturedDealsSection.tsx
+│   │   │   │   ├── GuestRoomSelector.tsx
+│   │   │   │   ├── HomeSearchBar.tsx
+│   │   │   │   ├── HomeSkeletonCard.tsx
+│   │   │   │   ├── RecentHotelsSection.tsx
+│   │   │   │   ├── RecentHotelsSkeleton.tsx
+│   │   │   │   └── TrendingDestinationsSection.tsx
 │   │   │   ├── hooks
 │   │   │   ├── index.ts
 │   │   │   ├── styles.module.css
 │   │   │   ├── tests
+│   │   │   │   └── HomeSearchBar.test.tsx
 │   │   │   └── utils
 │   │   ├── Hotel
 │   │   │   ├── Hotel.tsx
@@ -221,7 +258,8 @@ Voya
 │   │   └── routes.tsx
 │   ├── store
 │   │   ├── authSlice.ts
-│   │   └── store.ts
+│   │   ├── index.ts
+│   │   └── searchSlice.ts
 │   ├── styles
 │   │   └── reset.css
 │   ├── temp
@@ -244,6 +282,7 @@ Voya
 │       ├── globalErrors.ts
 │       ├── index.ts
 │       ├── logger.ts
+│       ├── recentHotelsStorage.ts
 │       ├── responsive.ts
 │       ├── string.ts
 │       └── tests
@@ -254,6 +293,6 @@ Voya
 ├── tsconfig.app.json
 ├── tsconfig.json
 ├── tsconfig.node.json
-├── vite.config.ts
-└── vitest.config.ts
+├── tsconfig.test.json
+└── vite.config.ts
 `

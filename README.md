@@ -5,3 +5,6 @@ find . -type d -empty -not -path "./node_modules/*" -not -path "./.git/*" -exec 
 pnpm run gen:api
 
 # I added this comment to show from where this boilerplate project could be used (as reusable on the shelf template) for other projects
+
+
+backend: https://travel-and-accommodation-booking-static.onrender.com
