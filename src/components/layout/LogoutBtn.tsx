@@ -8,7 +8,7 @@ export default function LogoutBtn() {
     localStorage.removeItem('token')
     localStorage.removeItem('userType')
 
-    void navigate('/login', { replace: true })
+    void navigate('/home', { replace: true })
   }
 
   return <Button onClick={handleLogout}>Logout</Button>

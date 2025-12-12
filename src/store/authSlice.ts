@@ -41,4 +41,4 @@ export const selectIsAuthenticated = (state: RootStatePartial): boolean =>
 
 export const selectIsAdmin = (state: RootStatePartial): boolean => state?.auth?.userType === 'Admin'
 
-export default authSlice.reducer
+export const authReducer = authSlice.reducer
