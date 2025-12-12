@@ -1,28 +1,30 @@
-// src/components/layout/Section.tsx
-import { Box, type BoxProps } from '@mui/material'
-import type { PropsWithChildren } from 'react'
+import type { ReactNode } from 'react'
+import { Box, Typography } from '@mui/material'
 
-interface SectionProps extends PropsWithChildren<Pick<BoxProps, 'sx'>> {
-  /**
-   * Vertical spacing multiplier using theme.spacing.
-   * 3 = theme.spacing(3) on top & bottom.
-   */
-  spacing?: number
+interface SectionProps {
+  title?: string
+  subtitle?: string
+  children: ReactNode
+  className?: string
 }
 
-/**
- * Simple vertical section wrapper with consistent top/bottom spacing.
- * Useful to separate logical blocks within a page.
- */
-export const Section = ({ children, spacing = 3, sx }: SectionProps) => {
+export function Section({ title, subtitle, children, className }: SectionProps) {
   return (
-    <Box
-      sx={{
-        mt: spacing,
-        mb: spacing,
-        ...(sx || {}),
-      }}
-    >
+    <Box component="section" className={className} sx={{ py: 4 }}>
+      {(title || subtitle) && (
+        <Box mb={3}>
+          {title && (
+            <Typography variant="h5" component="h2" fontWeight="bold">
+              {title}
+            </Typography>
+          )}
+          {subtitle && (
+            <Typography variant="body2" color="text.secondary">
+              {subtitle}
+            </Typography>
+          )}
+        </Box>
+      )}
       {children}
     </Box>
   )
