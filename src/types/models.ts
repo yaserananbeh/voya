@@ -43,6 +43,11 @@ export interface SearchResultDto {
   amenities: string[]
 }
 
+export interface AmenityDto {
+  id: number
+  name: string
+  description?: string | null
+}
 export interface FeaturedDealDto {
   id: number
   hotelId: number
@@ -92,10 +97,10 @@ export interface AmenityDto {
 export interface HotelSummaryDto {
   id: number
   name: string
-  city: string
+  cityName: string
   country?: string | null
   starRating: number
-  imageUrl?: string | null
+  mainPhotoUrl?: string | null
   pricePerNight?: number | null
 }
 export interface HotelAvailableRoomDto {
@@ -117,14 +122,16 @@ export interface HotelReviewDto {
 export interface HotelDetailsDto {
   id: number
   name: string
+  location: string // This replaces 'city'
   description?: string | null
-  city: string
-  country?: string | null
-  location: string
-  amenities: string[]
+  hotelType?: string
   starRating: number
-  numberOfAvailableRooms: number
+  latitude: number
+  longitude: number
   imageUrl?: string | null
+  availableRooms: number
+  cityId: number
+  amenities: { id: number; name: string; description: string | null }[]
 }
 
 export interface HotelPhotoDto {

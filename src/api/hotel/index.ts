@@ -29,22 +29,26 @@ export const hotelApi = baseApi.injectEndpoints({
 
     getHotel: build.query<HotelDetailsDto, number>({
       query: (hotelId) => `/hotels/${hotelId}`,
-      providesTags: (result, error, hotelId) => [{ type: 'Hotel', id: hotelId }, 'Hotel'],
+      providesTags: (_result, _error, hotelId) => [{ type: 'Hotel', id: hotelId }, 'Hotel'],
     }),
 
     getGallery: build.query<HotelPhotoDto[], number>({
       query: (hotelId) => `/hotels/${hotelId}/gallery`,
-      providesTags: (result, error, hotelId) => [{ type: 'Hotel', id: hotelId }, 'Hotel', 'Photos'],
+      providesTags: (_result, _error, hotelId) => [
+        { type: 'Hotel', id: hotelId },
+        'Hotel',
+        'Photos',
+      ],
     }),
 
     getAvailableRooms: build.query<HotelAvailableRoomDto[], number>({
       query: (hotelId) => `/hotels/${hotelId}/available-rooms`,
-      providesTags: (result, error, hotelId) => [{ type: 'Rooms', id: hotelId }, 'Rooms'],
+      providesTags: (_result, _error, hotelId) => [{ type: 'Rooms', id: hotelId }, 'Rooms'],
     }),
 
     getHotelReviews: build.query<HotelReviewDto[], number>({
       query: (hotelId) => `/hotels/${hotelId}/reviews`,
-      providesTags: (result, error, hotelId) => [{ type: 'Hotel', id: hotelId }, 'Hotel'],
+      providesTags: (_result, _error, hotelId) => [{ type: 'Hotel', id: hotelId }, 'Hotel'],
     }),
     getRooms: build.query<
       RoomAvailabilityResultDto[],
@@ -54,7 +58,7 @@ export const hotelApi = baseApi.injectEndpoints({
         url: `/hotels/${hotelId}/rooms`,
         params: { checkInDate, checkOutDate },
       }),
-      providesTags: (result, error, { hotelId }) => [{ type: 'Rooms', id: hotelId }, 'Rooms'],
+      providesTags: (_result, _error, { hotelId }) => [{ type: 'Rooms', id: hotelId }, 'Rooms'],
     }),
   }),
 })

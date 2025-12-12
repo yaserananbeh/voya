@@ -14,7 +14,7 @@ export const checkoutApi = baseApi.injectEndpoints({
 
     getBooking: build.query<BookingDetailsDto, number>({
       query: (id) => `/bookings/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Booking', id }, 'Booking'],
+      providesTags: (_result, _error, id) => [{ type: 'Booking', id }, 'Booking'],
     }),
   }),
 })
