@@ -49,7 +49,7 @@ export function HomeSearchBar() {
       dispatch(setSearchParams(values))
 
       // navigate to search results
-      void navigate('/search-results')
+      void navigate('/search')
     },
   })
 
