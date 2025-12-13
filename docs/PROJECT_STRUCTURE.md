@@ -63,7 +63,9 @@ Voya
 │   │   │   └── index.ts
 │   │   ├── home
 │   │   │   └── index.ts
-│   │   ├── hotel
+│   │   ├── hotels
+│   │   │   └── index.ts
+│   │   ├── searchResults
 │   │   │   └── index.ts
 │   │   └── upload
 │   │       └── index.ts
@@ -92,8 +94,7 @@ Voya
 │   │   └── messages.ts
 │   ├── hooks
 │   │   ├── index.ts
-│   │   ├── tests
-│   │   └── usePhotoUpload.ts
+│   │   └── tests
 │   ├── layouts
 │   │   ├── AdminLayout
 │   │   │   ├── AdminLayout.module.css
@@ -177,10 +178,18 @@ Voya
 │   │   ├── Home
 │   │   │   ├── Home.tsx
 │   │   │   ├── components
+│   │   │   │   ├── FeaturedDealsSection.tsx
+│   │   │   │   ├── GuestRoomSelector.tsx
+│   │   │   │   ├── HomeSearchBar.tsx
+│   │   │   │   ├── HomeSkeletonCard.tsx
+│   │   │   │   ├── RecentHotelsSection.tsx
+│   │   │   │   ├── RecentHotelsSkeleton.tsx
+│   │   │   │   └── TrendingDestinationsSection.tsx
 │   │   │   ├── hooks
 │   │   │   ├── index.ts
 │   │   │   ├── styles.module.css
 │   │   │   ├── tests
+│   │   │   │   └── HomeSearchBar.test.tsx
 │   │   │   └── utils
 │   │   ├── Hotel
 │   │   │   ├── Hotel.tsx
@@ -209,7 +218,16 @@ Voya
 │   │   └── SearchResults
 │   │       ├── SearchResults.tsx
 │   │       ├── components
+│   │       │   ├── AmenitiesFilter.tsx
+│   │       │   ├── FiltersSidebar.tsx
+│   │       │   ├── HotelResultCard.tsx
+│   │       │   ├── HotelTypeFilter.tsx
+│   │       │   ├── PriceFilter.tsx
+│   │       │   ├── ResultsList.tsx
+│   │       │   ├── SelectedFiltersBar.tsx
+│   │       │   └── StarRatingFilter.tsx
 │   │       ├── hooks
+│   │       │   └── useAmenities.ts
 │   │       ├── index.ts
 │   │       ├── styles.module.css
 │   │       ├── tests
@@ -221,7 +239,8 @@ Voya
 │   │   └── routes.tsx
 │   ├── store
 │   │   ├── authSlice.ts
-│   │   └── store.ts
+│   │   ├── index.ts
+│   │   └── searchSlice.ts
 │   ├── styles
 │   │   └── reset.css
 │   ├── temp
@@ -244,6 +263,7 @@ Voya
 │       ├── globalErrors.ts
 │       ├── index.ts
 │       ├── logger.ts
+│       ├── recentHotelsStorage.ts
 │       ├── responsive.ts
 │       ├── string.ts
 │       └── tests
@@ -254,6 +274,6 @@ Voya
 ├── tsconfig.app.json
 ├── tsconfig.json
 ├── tsconfig.node.json
-├── vite.config.ts
-└── vitest.config.ts
+├── tsconfig.test.json
+└── vite.config.ts
 `

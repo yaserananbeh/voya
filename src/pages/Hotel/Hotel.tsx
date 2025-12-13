@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Alert, Container, Typography } from '@mui/material'
-import { useGetHotelQuery } from '@/api/hotel'
+import { useGetHotelQuery } from '@/api/hotels'
 import { addRecentHotel } from '@/utils/recentHotelsStorage'
 
 export default function Hotel() {
