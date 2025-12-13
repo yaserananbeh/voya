@@ -1,25 +1,119 @@
-import { Paper, Typography, Stack } from '@mui/material'
+import { Stack, Typography, CircularProgress, Box } from '@mui/material'
+import { useSelector } from 'react-redux'
+import { selectSearchFilters, selectSearchQuery } from '@/store/searchSlice'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { useGetHotelsQuery, type HotelDto } from '@/api/hotels'
+import { HotelResultCard } from './HotelResultCard'
+
+const PAGE_SIZE = 10
+
+function hotelMatchesFilters(hotel: HotelDto, filters: ReturnType<typeof selectSearchFilters>) {
+  // Stars
+  if (filters.stars != null && hotel.starRating !== filters.stars) return false
+
+  // Hotel type
+  if (filters.hotelTypes?.length && !filters.hotelTypes.includes(hotel.hotelType)) return false
+
+  // Amenities (hotel must include ALL selected amenities)
+  const hotelAmenityNames = (hotel.amenities ?? []).map((a) => a.name)
+  if (filters.amenities?.length && !filters.amenities.every((a) => hotelAmenityNames.includes(a))) {
+    return false
+  }
+
+  // Price range: ANY room price in range passes
+  if (filters.priceRange) {
+    const [min, max] = filters.priceRange
+    const roomPrices = (hotel.rooms ?? []).map((r) => r.price)
+    const anyInRange = roomPrices.some((p) => typeof p === 'number' && p >= min && p <= max)
+    if (!anyInRange) return false
+  }
+
+  return true
+}
 
 export function ResultsList() {
+  const searchQuery = useSelector(selectSearchQuery)
+  const filters = useSelector(selectSearchFilters)
+
+  const [page, setPage] = useState(1)
+  const [allHotels, setAllHotels] = useState<HotelDto[]>([])
+  const [hasMore, setHasMore] = useState(true)
+
+  const { data, isLoading, isError, isFetching } = useGetHotelsQuery({
+    searchQuery,
+    pageNumber: page,
+    pageSize: PAGE_SIZE,
+  })
+
+  // Reset list when query changes (new search)
+  useEffect(() => {
+    setPage(1)
+    setAllHotels([])
+    setHasMore(true)
+  }, [searchQuery])
+
+  // Append fetched page
+  useEffect(() => {
+    if (!data) return
+    setAllHotels((prev) => {
+      const merged = [...prev, ...data]
+      // de-dup by id (safe)
+      const map = new Map<number, HotelDto>()
+      for (const h of merged) map.set(h.id, h)
+      return Array.from(map.values())
+    })
+    if (data.length < PAGE_SIZE) setHasMore(false)
+  }, [data])
+
+  const filteredHotels = useMemo(() => {
+    return allHotels.filter((h) => hotelMatchesFilters(h, filters))
+  }, [allHotels, filters])
+
+  // Infinite scroll sentinel
+  const sentinelRef = useRef<HTMLDivElement | null>(null)
+  useEffect(() => {
+    const el = sentinelRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const first = entries[0]
+        if (!first?.isIntersecting) return
+        if (isFetching || isLoading) return
+        if (!hasMore) return
+        setPage((p) => p + 1)
+      },
+      { rootMargin: '250px' },
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [hasMore, isFetching, isLoading])
+
+  if (isLoading && allHotels.length === 0) return <CircularProgress />
+  if (isError) return <Typography color="error">Failed to load hotels</Typography>
+
   return (
     <Stack spacing={2}>
-      <Paper elevation={1} sx={{ p: 2 }}>
-        <Typography variant="h6">Search Results</Typography>
-        <Typography variant="body2" color="text.secondary">
-          Hotel cards will go here…
-        </Typography>
-      </Paper>
+      {filteredHotels.length === 0 ? (
+        <Typography>No results found</Typography>
+      ) : (
+        filteredHotels.map((hotel) => <HotelResultCard key={hotel.id} hotel={hotel} />)
+      )}
 
-      {/* mock items just to prove layout works */}
-      <Paper elevation={1} sx={{ p: 2 }}>
-        <Typography>Mock Hotel 1</Typography>
-      </Paper>
-      <Paper elevation={1} sx={{ p: 2 }}>
-        <Typography>Mock Hotel 2</Typography>
-      </Paper>
-      <Paper elevation={1} sx={{ p: 2 }}>
-        <Typography>Mock Hotel 3</Typography>
-      </Paper>
+      <Box ref={sentinelRef} sx={{ height: 1 }} />
+
+      {isFetching ? (
+        <Stack direction="row" justifyContent="center" sx={{ py: 2 }}>
+          <CircularProgress size={22} />
+        </Stack>
+      ) : null}
+
+      {!hasMore && allHotels.length > 0 ? (
+        <Typography variant="body2" color="text.secondary" textAlign="center" sx={{ py: 2 }}>
+          You reached the end
+        </Typography>
+      ) : null}
     </Stack>
   )
 }
