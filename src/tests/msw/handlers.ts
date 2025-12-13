@@ -29,30 +29,6 @@ export const handlers = [
   }),
 
   // ===========================
-  // HOTEL DETAILS
-  // ===========================
-  http.get('/api/hotel/:id', ({ params }) => {
-    return HttpResponse.json({
-      id: params.id,
-      name: 'Mock Hotel',
-      starRating: 5,
-      roomsAvailable: 12,
-    })
-  }),
-
-  // ===========================
-  // ROOMS API
-  // ===========================
-  http.get('/api/rooms/:id', ({ params }) => {
-    return HttpResponse.json({
-      id: params.id,
-      hotelId: 1,
-      price: 120,
-      amenities: ['wifi', 'parking'],
-    })
-  }),
-
-  // ===========================
   // CITIES API
   // ===========================
   http.get('/api/cities', () => {
@@ -90,5 +66,57 @@ export const handlers = [
     return HttpResponse.json({
       url: 'https://mockcdn.com/photo123.jpg',
     })
+  }),
+  http.get('/api/search-results/amenities', () =>
+    HttpResponse.json([
+      { id: 1, name: 'Free Wi-Fi' },
+      { id: 2, name: 'Swimming Pool' },
+      { id: 3, name: 'Spa' },
+    ]),
+  ),
+
+  http.get('/api/hotels', ({ request }) => {
+    const url = new URL(request.url)
+    const searchQuery = url.searchParams.get('searchQuery') ?? ''
+    const pageNumber = Number(url.searchParams.get('pageNumber') ?? '1')
+    const pageSize = Number(url.searchParams.get('pageSize') ?? '10')
+
+    // Minimal deterministic list
+    const all = Array.from({ length: 25 }).map((_, i) => {
+      const id = i + 1
+      return {
+        id,
+        name: `Hotel ${id} ${searchQuery}`.trim(),
+        location: id % 2 === 0 ? 'Amman' : 'Bali',
+        description: 'Mock hotel description',
+        hotelType: id % 5 === 0 ? 'Boutique' : 'Hotel',
+        starRating: (id % 5) + 1,
+        rooms: [
+          {
+            id: id * 10 + 1,
+            name: 'Room A',
+            type: 'Standard',
+            price: 100 + id,
+            available: true,
+            maxOccupancy: 2,
+          },
+          {
+            id: id * 10 + 2,
+            name: 'Room B',
+            type: 'Suite',
+            price: 250 + id,
+            available: true,
+            maxOccupancy: 4,
+          },
+        ],
+        amenities: [{ id: 1, name: 'Free Wi-Fi' }],
+        imageUrl: undefined,
+      }
+    })
+
+    const start = (pageNumber - 1) * pageSize
+    const pageItems = all.slice(start, start + pageSize)
+
+    return HttpResponse.json(pageItems)
   }),
 ]
