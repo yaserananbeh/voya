@@ -29,36 +29,6 @@ Voya
 │   ├── extensions.json
 │   └── settings.json
 ├── README.md
-├── dist
-│   ├── _redirects
-│   ├── assets
-│   │   ├── Box-pUQRSzkw.js
-│   │   ├── Button-DMmFr0di.js
-│   │   ├── CircularProgress-CbYJ7RAA.js
-│   │   ├── Container-CmlbRrUS.js
-│   │   ├── LogoutBtn-Dy9IGXfk.js
-│   │   ├── Paper-DTwKwhR4.js
-│   │   ├── Typography-DDbyn4Yo.js
-│   │   ├── index-2gZ9xIiA.js
-│   │   ├── index-B1mt5Eu-.js
-│   │   ├── index-B_ezJJYx.js
-│   │   ├── index-BerZ4fUg.js
-│   │   ├── index-Bh0YueAI.js
-│   │   ├── index-C2Guv9dY.js
-│   │   ├── index-CSsBpVWf.js
-│   │   ├── index-Co4Bz83h.js
-│   │   ├── index-CvpQWpgS.js
-│   │   ├── index-Cxrey-oc.css
-│   │   ├── index-D0fh3uF9.css
-│   │   ├── index-Ditz1SoZ.js
-│   │   ├── index-N-2ZbHV8.js
-│   │   ├── index-StO2EN8l.js
-│   │   ├── index-fzJwvD5u.js
-│   │   ├── index-gVnBl6Yc.js
-│   │   ├── index-tn0RQdqM.css
-│   │   └── index.esm-DCSuFQeq.js
-│   ├── index.html
-│   └── vite.svg
 ├── docs
 │   ├── API_CACHING_STRATEGY.md
 │   ├── ASSETS_MANAGEMENT_STRATEGY.md
@@ -93,7 +63,9 @@ Voya
 │   │   │   └── index.ts
 │   │   ├── home
 │   │   │   └── index.ts
-│   │   ├── hotel
+│   │   ├── hotels
+│   │   │   └── index.ts
+│   │   ├── searchResults
 │   │   │   └── index.ts
 │   │   └── upload
 │   │       └── index.ts
@@ -246,7 +218,16 @@ Voya
 │   │   └── SearchResults
 │   │       ├── SearchResults.tsx
 │   │       ├── components
+│   │       │   ├── AmenitiesFilter.tsx
+│   │       │   ├── FiltersSidebar.tsx
+│   │       │   ├── HotelResultCard.tsx
+│   │       │   ├── HotelTypeFilter.tsx
+│   │       │   ├── PriceFilter.tsx
+│   │       │   ├── ResultsList.tsx
+│   │       │   ├── SelectedFiltersBar.tsx
+│   │       │   └── StarRatingFilter.tsx
 │   │       ├── hooks
+│   │       │   └── useAmenities.ts
 │   │       ├── index.ts
 │   │       ├── styles.module.css
 │   │       ├── tests
