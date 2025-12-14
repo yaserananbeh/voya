@@ -8,3 +8,6 @@ pnpm run gen:api
 
 
 backend: https://travel-and-accommodation-booking-static.onrender.com
+
+
+pnpm verify:stage
