@@ -6,13 +6,22 @@ export type HotelAmenityDto = {
   description?: string
 }
 
-export type HotelRoomDto = {
+export type RoomAmenityDto = {
   id: number
   name: string
-  type: string
+  description: string
+}
+
+export type HotelRoomDto = {
+  roomId: number
+  roomNumber: number
+  roomPhotoUrl: string
+  roomType: string
+  capacityOfAdults: number
+  capacityOfChildren: number
+  amenities: RoomAmenityDto[]
   price: number
-  available: boolean
-  maxOccupancy: number
+  availability: boolean
 }
 
 export type HotelDto = {
@@ -37,10 +46,20 @@ export type GetHotelsQuery = {
   pageNumber: number
   pageSize: number
 }
+export type HotelGalleryPhotoDto = {
+  id: number
+  url: string
+}
 
+export type HotelReviewDto = {
+  reviewId: number
+  customerName: string
+  rating: number
+  description: string
+}
 export const hotelsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // 1. Get List (Search Results)
+    // (Search Results)
     getHotels: builder.query<HotelDto[], GetHotelsQuery>({
       query: ({ searchQuery, pageNumber, pageSize }) => ({
         url: 'hotels',
@@ -58,8 +77,25 @@ export const hotelsApi = baseApi.injectEndpoints({
       query: (id) => `hotels/${id}`,
       providesTags: (_result, _error, id) => [{ type: 'Hotel', id }],
     }),
+    getHotelGallery: builder.query<HotelGalleryPhotoDto[], number>({
+      query: (id) => `hotels/${id}/gallery`,
+    }),
+
+    getHotelRooms: builder.query<HotelRoomDto[], number>({
+      query: (id) => `hotels/${id}/rooms`,
+    }),
+
+    getHotelReviews: builder.query<HotelReviewDto[], number>({
+      query: (id) => `hotels/${id}/reviews`,
+    }),
   }),
 })
 
 // Export both hooks from the same file
-export const { useGetHotelsQuery, useGetHotelQuery } = hotelsApi
+export const {
+  useGetHotelsQuery,
+  useGetHotelQuery,
+  useGetHotelGalleryQuery,
+  useGetHotelRoomsQuery,
+  useGetHotelReviewsQuery,
+} = hotelsApi
