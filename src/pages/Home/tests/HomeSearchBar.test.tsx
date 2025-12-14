@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit'
@@ -13,11 +14,14 @@ function renderWithStore(ui: React.ReactElement) {
     },
   })
 
-  return render(
-    <Provider store={store}>
-      <BrowserRouter>{ui}</BrowserRouter>
-    </Provider>,
-  )
+  return {
+    user: userEvent.setup(),
+    ...render(
+      <Provider store={store}>
+        <BrowserRouter>{ui}</BrowserRouter>
+      </Provider>,
+    ),
+  }
 }
 
 describe('HomeSearchBar', () => {
@@ -25,30 +29,31 @@ describe('HomeSearchBar', () => {
     renderWithStore(<HomeSearchBar />)
 
     expect(screen.getByLabelText(/where are you going\?/i)).toBeInTheDocument()
-
-    const guestButton = screen.getByRole('button', { name: /adult/i })
-    expect(guestButton).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /adult/i })).toBeInTheDocument()
   })
 
-  it('allows user to type city and submit', () => {
-    renderWithStore(<HomeSearchBar />)
+  it('allows user to type city and submit', async () => {
+    const { user } = renderWithStore(<HomeSearchBar />)
 
     const cityInput = screen.getByLabelText(/where are you going\?/i)
-    fireEvent.change(cityInput, { target: { value: 'Amman' } })
+
+    await user.type(cityInput, 'Amman')
 
     const searchButton = screen.getByRole('button', { name: /search/i })
-    fireEvent.click(searchButton)
+
+    await user.click(searchButton)
 
     expect(cityInput).toHaveValue('Amman')
   })
 
-  it('opens guest/room selector popover', () => {
-    renderWithStore(<HomeSearchBar />)
+  it('opens guest/room selector popover', async () => {
+    const { user } = renderWithStore(<HomeSearchBar />)
 
     const guestButton = screen.getByRole('button', { name: /adult/i })
-    fireEvent.click(guestButton)
 
-    expect(screen.getByRole('heading', { name: /adults/i })).toBeVisible()
+    await user.click(guestButton)
+
+    expect(await screen.findByRole('heading', { name: /adults/i })).toBeVisible()
     expect(screen.getByRole('heading', { name: /rooms/i })).toBeVisible()
   })
 })

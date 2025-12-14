@@ -48,7 +48,7 @@ export function HotelResultCard({ hotel }: { hotel: HotelDto }) {
 
           <Stack alignItems="flex-end" spacing={1}>
             <Typography variant="h6">{price !== null ? `$${price}/night` : '—'}</Typography>
-            <Button variant="contained" onClick={() => void navigate(`/hotels/${hotel.id}`)}>
+            <Button variant="contained" onClick={() => void navigate(`/hotel/${hotel.id}`)}>
               View Hotel
             </Button>
           </Stack>
