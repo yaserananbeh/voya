@@ -1,6 +1,6 @@
 // src/tests/msw/handlers.ts
 import { http, HttpResponse } from 'msw'
-
+const API = '*/api'
 export const handlers = [
   // ===========================
   // AUTH API
@@ -118,5 +118,68 @@ export const handlers = [
     const pageItems = all.slice(start, start + pageSize)
 
     return HttpResponse.json(pageItems)
+  }),
+  http.get(`${API}/hotels/:id`, ({ params }) => {
+    const id = Number(params.id)
+    return HttpResponse.json({
+      id,
+      hotelName: `Hotel ${id}`,
+      location: 'Bali, Indonesia',
+      description: 'Mock hotel description for details page',
+      hotelType: 'Resort',
+      starRating: 5,
+      latitude: -8.3405,
+      longitude: 115.0915,
+      imageUrl: 'https://example.com/hotel.jpg',
+      availableRooms: 10,
+      cityId: 101,
+      amenities: [
+        { id: 1, name: 'Free Wi-Fi' },
+        { id: 2, name: 'Swimming Pool' },
+      ],
+      rooms: [
+        {
+          id: 101,
+          name: 'Ocean View Suite',
+          type: 'Suite',
+          price: 500,
+          available: true,
+          maxOccupancy: 4,
+        },
+      ],
+    })
+  }),
+
+  http.get(`${API}/hotels/:id/gallery`, ({ params }) => {
+    const id = Number(params.id)
+    return HttpResponse.json([
+      { id: id * 10 + 1, url: 'https://example.com/photo1.jpg' },
+      { id: id * 10 + 2, url: 'https://example.com/photo2.jpg' },
+    ])
+  }),
+
+  http.get(`${API}/hotels/:id/rooms`, () => {
+    return HttpResponse.json([
+      {
+        id: 101,
+        name: 'Ocean View Suite',
+        type: 'Suite',
+        price: 500,
+        available: true,
+        maxOccupancy: 4,
+      },
+      {
+        id: 102,
+        name: 'Garden View Room',
+        type: 'Standard',
+        price: 200,
+        available: true,
+        maxOccupancy: 2,
+      },
+    ])
+  }),
+
+  http.get(`${API}/hotels/:id/reviews`, () => {
+    return HttpResponse.json([{ id: 1, userName: 'John', rating: 5, comment: 'Amazing stay!' }])
   }),
 ]
