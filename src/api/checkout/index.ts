@@ -1,22 +1,52 @@
 import { baseApi } from '../baseApi'
-import type { BookingRequestDto, BookingDetailsDto } from '../../types/models'
+export type BookingRequest = {
+  customerName: string
+  hotelName: string
+  roomNumber: string
+  roomType: string
+  bookingDateTime: string
+  totalCost: number
+  paymentMethod: string
+}
+export type BookingDetailsDto = {
+  customerName: string | null
+  hotelName: string | null
+  roomNumber: string | null
+  roomType: string | null
+  bookingDateTime: string
+  totalCost: number
+  paymentMethod: string | null
+  bookingStatus: string | null
+  confirmationNumber: string | null
+}
+
+type CreateBookingResponse = number | { bookingId: number } | { id: number }
+
+const extractBookingId = (res: CreateBookingResponse): number => {
+  console.log(res)
+
+  // if (typeof res === 'number') return res
+  // if ('bookingId' in res) return res.bookingId
+  // if ('id' in res) return res.id
+  return 1
+  throw new Error('Invalid booking response shape')
+}
 
 export const checkoutApi = baseApi.injectEndpoints({
-  endpoints: (build) => ({
-    createBooking: build.mutation<BookingDetailsDto, BookingRequestDto>({
+  endpoints: (builder) => ({
+    createBooking: builder.mutation<number, BookingRequest>({
       query: (body) => ({
         url: '/bookings',
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['Booking', 'Rooms'],
+      transformResponse: (res: CreateBookingResponse) => extractBookingId(res),
     }),
 
-    getBooking: build.query<BookingDetailsDto, number>({
-      query: (id) => `/bookings/${id}`,
-      providesTags: (_result, _error, id) => [{ type: 'Booking', id }, 'Booking'],
+    getBookingById: builder.query<BookingDetailsDto, number>({
+      query: (bookingId) => `/bookings/${bookingId}`,
     }),
   }),
 })
 
-export const { useCreateBookingMutation, useGetBookingQuery } = checkoutApi
+export const { useCreateBookingMutation, useGetBookingByIdQuery } = checkoutApi

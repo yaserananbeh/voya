@@ -1,6 +1,18 @@
 // src/tests/msw/handlers.ts
 import { http, HttpResponse } from 'msw'
 const API = '*/api'
+let BOOKING_ID = 1000
+type MockBookingDetails = {
+  customerName: string
+  hotelName: string
+  roomNumber: string
+  roomType: string
+  bookingDateTime: string
+  totalCost: number
+  paymentMethod: string
+  bookingStatus: string
+  confirmationNumber: string
+}
 export const handlers = [
   // ===========================
   // AUTH API
@@ -36,16 +48,6 @@ export const handlers = [
       { id: 1, name: 'Dubai' },
       { id: 2, name: 'Paris' },
     ])
-  }),
-
-  // ===========================
-  // CHECKOUT API
-  // ===========================
-  http.post('/api/checkout', () => {
-    return HttpResponse.json({
-      confirmationId: 'CONFIRM-12345',
-      status: 'success',
-    })
   }),
 
   // ===========================
@@ -181,5 +183,28 @@ export const handlers = [
 
   http.get(`${API}/hotels/:id/reviews`, () => {
     return HttpResponse.json([{ id: 1, userName: 'John', rating: 5, comment: 'Amazing stay!' }])
+  }),
+  http.post('/api/bookings', () => {
+    BOOKING_ID += 1
+
+    return HttpResponse.json({ bookingId: BOOKING_ID }, { status: 201 })
+  }),
+
+  http.get('/api/bookings/:bookingId', ({ params }) => {
+    const bookingId = Number(params.bookingId)
+
+    const response: MockBookingDetails = {
+      customerName: 'Test User',
+      hotelName: 'Test Hotel',
+      roomNumber: '101',
+      roomType: 'Deluxe',
+      bookingDateTime: new Date().toISOString(),
+      totalCost: 250,
+      paymentMethod: 'Card',
+      bookingStatus: 'Confirmed',
+      confirmationNumber: `CNF-${bookingId}`,
+    }
+
+    return HttpResponse.json(response)
   }),
 ]

@@ -71,7 +71,7 @@ export const router = createBrowserRouter([
 
       // Confirmation → user-only
       {
-        path: 'confirmation/:bookingId',
+        path: '/checkout/confirmation/:bookingId',
         element: (
           <ProtectedRoute>
             <Confirmation />
