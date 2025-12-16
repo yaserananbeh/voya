@@ -2,8 +2,10 @@ import { Checkbox, FormControlLabel, FormGroup, Typography, Stack } from '@mui/m
 import { useDispatch, useSelector } from 'react-redux'
 import { setSearchFilters, selectSearchFilters } from '@/store/searchSlice'
 import { useAmenities } from '../hooks/useAmenities'
+import { useTranslation } from 'react-i18next'
 
 export function AmenitiesFilter() {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { amenities = [] } = useSelector(selectSearchFilters)
   const { data, isLoading, isError } = useAmenities()
@@ -20,17 +22,17 @@ export function AmenitiesFilter() {
 
   return (
     <Stack spacing={1}>
-      <Typography variant="subtitle1">Amenities</Typography>
+      <Typography variant="subtitle1">{t('search.amenities')}</Typography>
 
       {isLoading && (
         <Typography variant="body2" color="text.secondary">
-          Loading amenities…
+          {t('search.loadingAmenities')}
         </Typography>
       )}
 
       {isError && (
         <Typography variant="body2" color="error">
-          Failed to load amenities
+          {t('search.failedToLoadAmenities')}
         </Typography>
       )}
 

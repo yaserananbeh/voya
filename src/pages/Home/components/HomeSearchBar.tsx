@@ -8,30 +8,32 @@ import { useAppDispatch, useAppSelector } from '@/hooks'
 import { selectSearchParams, setSearchParams } from '@/store/searchSlice'
 import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from './GuestRoomSelector'
-
-const validationSchema = yup.object({
-  city: yup.string().required('City is required'),
-  checkInDate: yup.string().required('Check-in is required'),
-  checkOutDate: yup
-    .string()
-    .required('Check-out is required')
-    .test('is-after-checkin', 'Check-out must be after check-in', function (value) {
-      const { checkInDate } = this.parent as { checkInDate: string }
-      if (!checkInDate || !value) return true
-      return new Date(value) > new Date(checkInDate)
-    }),
-  adults: yup.number().min(1).required(),
-  children: yup.number().min(0).required(),
-  rooms: yup.number().min(1).required(),
-})
+import { useTranslation } from 'react-i18next'
 
 export function HomeSearchBar() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const stored = useAppSelector(selectSearchParams)
 
   const today = startOfToday()
   const tomorrow = addDays(today, 1)
+
+  const validationSchema = yup.object({
+    city: yup.string().required(t('home.cityRequired')),
+    checkInDate: yup.string().required(t('home.checkInRequired')),
+    checkOutDate: yup
+      .string()
+      .required(t('home.checkOutRequired'))
+      .test('is-after-checkin', t('home.checkOutAfterCheckIn'), function (value) {
+        const { checkInDate } = this.parent as { checkInDate: string }
+        if (!checkInDate || !value) return true
+        return new Date(value) > new Date(checkInDate)
+      }),
+    adults: yup.number().min(1).required(),
+    children: yup.number().min(0).required(),
+    rooms: yup.number().min(1).required(),
+  })
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -66,7 +68,7 @@ export function HomeSearchBar() {
     >
       <TextField
         name="city"
-        label="Where are you going?"
+        label={t('home.whereGoing')}
         size="small"
         value={formik.values.city}
         onChange={formik.handleChange}
@@ -84,7 +86,7 @@ export function HomeSearchBar() {
 
       <TextField
         name="checkInDate"
-        label="Check-in"
+        label={t('home.checkIn')}
         type="date"
         size="small"
         value={formik.values.checkInDate}
@@ -102,7 +104,7 @@ export function HomeSearchBar() {
 
       <TextField
         name="checkOutDate"
-        label="Check-out"
+        label={t('home.checkOut')}
         type="date"
         size="small"
         value={formik.values.checkOutDate}
@@ -133,7 +135,7 @@ export function HomeSearchBar() {
           size="large"
           startIcon={<SearchIcon />}
         >
-          Search
+          {t('common.search')}
         </Button>
       </Box>
     </Paper>

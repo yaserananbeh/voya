@@ -2,8 +2,10 @@ import { Box, Stack, Typography, Button, Chip, alpha, useMediaQuery, useTheme } 
 import { Link as RouterLink } from 'react-router-dom'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
+import { useTranslation } from 'react-i18next'
 
 export function HeroSection() {
+  const { t } = useTranslation()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const scrollToFeatured = () => {
@@ -44,7 +46,7 @@ export function HeroSection() {
       <Stack spacing={3} sx={{ position: 'relative' }}>
         <Chip
           icon={<FlightTakeoffIcon />}
-          label="Find your next stay"
+          label={t('home.heroChip')}
           color="primary"
           variant="outlined"
           sx={{ alignSelf: 'flex-start', fontWeight: 600 }}
@@ -59,7 +61,7 @@ export function HeroSection() {
               fontSize: { xs: '1.75rem', sm: '2.125rem', md: '3rem' },
             }}
           >
-            Discover stays that fit how you travel.
+            {t('home.heroTitle')}
           </Typography>
           <Typography
             variant="h6"
@@ -69,8 +71,7 @@ export function HeroSection() {
               fontSize: { xs: '1rem', sm: '1.25rem' },
             }}
           >
-            Search trusted stays, compare deals, and book in minutes—so you can focus on the trip,
-            not the planning.
+            {t('home.heroSubtitle')}
           </Typography>
         </Stack>
 
@@ -89,7 +90,7 @@ export function HeroSection() {
             }}
             fullWidth={isMobile}
           >
-            Start exploring
+            {t('home.startExploring')}
           </Button>
           <Button
             variant="text"
@@ -100,7 +101,7 @@ export function HeroSection() {
             }}
             fullWidth={isMobile}
           >
-            View featured deals
+            {t('home.viewFeaturedDeals')}
           </Button>
         </Stack>
       </Stack>

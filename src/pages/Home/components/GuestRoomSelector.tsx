@@ -3,6 +3,7 @@ import { Box, Button, IconButton, Popover, Typography } from '@mui/material'
 import PeopleIcon from '@mui/icons-material/People'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
+import { useTranslation } from 'react-i18next'
 
 type GuestRoomSelectorProps = {
   adults: number
@@ -12,6 +13,7 @@ type GuestRoomSelectorProps = {
 }
 
 export function GuestRoomSelector({ adults, children, rooms, onChange }: GuestRoomSelectorProps) {
+  const { t } = useTranslation()
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
   const open = Boolean(anchorEl)
@@ -42,9 +44,11 @@ export function GuestRoomSelector({ adults, children, rooms, onChange }: GuestRo
     onChange(next)
   }
 
-  const summary = `${adults} adult${adults !== 1 ? 's' : ''}${
-    children > 0 ? `, ${children} child${children !== 1 ? 'ren' : ''}` : ''
-  } • ${rooms} room${rooms !== 1 ? 's' : ''}`
+  const summary = `${adults} ${adults !== 1 ? t('guestRoom.adultsPlural') : t('guestRoom.adult')}${
+    children > 0
+      ? `, ${children} ${children !== 1 ? t('guestRoom.childrenPlural') : t('guestRoom.child')}`
+      : ''
+  } • ${rooms} ${rooms !== 1 ? t('guestRoom.roomsPlural') : t('guestRoom.room')}`
 
   return (
     <>
@@ -68,21 +72,21 @@ export function GuestRoomSelector({ adults, children, rooms, onChange }: GuestRo
       >
         <Box sx={{ p: 2, minWidth: 260 }}>
           <Row
-            label="Adults"
-            subtitle="Ages 18+"
+            label={t('guestRoom.adults')}
+            subtitle={t('guestRoom.adultsAges')}
             value={adults}
             onDec={() => handleDecrement('adults')}
             onInc={() => handleIncrement('adults')}
           />
           <Row
-            label="Children"
-            subtitle="Ages 0–17"
+            label={t('guestRoom.children')}
+            subtitle={t('guestRoom.childrenAges')}
             value={children}
             onDec={() => handleDecrement('children')}
             onInc={() => handleIncrement('children')}
           />
           <Row
-            label="Rooms"
+            label={t('guestRoom.rooms')}
             value={rooms}
             onDec={() => handleDecrement('rooms')}
             onInc={() => handleIncrement('rooms')}
@@ -103,9 +107,9 @@ type RowProps = {
 
 function Row({ label, subtitle, value, onDec, onInc }: RowProps) {
   const disabled =
-    (label === 'Adults' && value <= 1) ||
-    (label === 'Rooms' && value <= 1) ||
-    (label === 'Children' && value <= 0)
+    ((label.includes('Adults') || label.includes('بالغين')) && value <= 1) ||
+    ((label.includes('Rooms') || label.includes('غرف')) && value <= 1) ||
+    ((label.includes('Children') || label.includes('أطفال')) && value <= 0)
 
   return (
     <Box

@@ -2,6 +2,7 @@ import { Card, CardContent, CardMedia, Typography, Stack, Box, Button } from '@m
 import { Rating } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import type { HotelDto } from '@/api/hotels'
+import { useTranslation } from 'react-i18next'
 
 function getMinRoomPrice(hotel: HotelDto): number | null {
   const prices = (hotel.rooms ?? []).map((r) => r.price).filter((p) => typeof p === 'number')
@@ -10,8 +11,10 @@ function getMinRoomPrice(hotel: HotelDto): number | null {
 }
 
 export function HotelResultCard({ hotel }: { hotel: HotelDto }) {
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const price = getMinRoomPrice(hotel)
+  const isRTL = i18n.language === 'ar'
 
   return (
     <Card
@@ -108,7 +111,7 @@ export function HotelResultCard({ hotel }: { hotel: HotelDto }) {
                 fontSize: { xs: '1.1rem', sm: '1.25rem' },
               }}
             >
-              {price !== null ? `$${price}/night` : '—'}
+              {price !== null ? `$${price}${t('hotel.perNight')}` : '—'}
             </Typography>
             <Button
               variant="contained"
@@ -117,9 +120,10 @@ export function HotelResultCard({ hotel }: { hotel: HotelDto }) {
               sx={{
                 minWidth: { xs: '100%', sm: 'auto' },
                 width: { xs: '100%', sm: 'auto' },
+                flexDirection: isRTL ? 'row-reverse' : 'row',
               }}
             >
-              View Hotel
+              {t('search.viewHotel')}
             </Button>
           </Stack>
         </Stack>

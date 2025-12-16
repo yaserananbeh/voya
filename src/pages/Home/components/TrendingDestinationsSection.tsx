@@ -3,8 +3,10 @@ import { useTrendingDestinationsQuery } from '@/api/home'
 import { HomeSkeletonCard } from './HomeSkeletonCard'
 import { SafeImage } from '@/components/common/SafeImage'
 import styles from '../styles.module.css'
+import { useTranslation } from 'react-i18next'
 
 export function TrendingDestinationsSection() {
+  const { t } = useTranslation()
   const { data, isLoading, isError } = useTrendingDestinationsQuery()
 
   if (isLoading) {
@@ -18,13 +20,13 @@ export function TrendingDestinationsSection() {
   }
 
   if (isError) {
-    return <Alert severity="error">Unable to load trending destinations at the moment.</Alert>
+    return <Alert severity="error">{t('home.trendingDestinationsError')}</Alert>
   }
 
   if (!data || data.length === 0) {
     return (
       <Typography variant="body2" color="text.secondary">
-        No trending destinations right now. Check back later!
+        {t('home.noTrendingDestinations')}
       </Typography>
     )
   }
