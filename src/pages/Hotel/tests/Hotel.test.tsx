@@ -40,7 +40,7 @@ function renderHotel(route = '/hotel/7') {
 describe('Hotel page data fetching', () => {
   it('shows loading state', () => {
     renderHotel('/hotel/7')
-    expect(screen.getByText('Loading...')).toBeInTheDocument()
+    expect(screen.getByText('Voya')).toBeInTheDocument()
   })
 
   it('renders hotel data on success', async () => {

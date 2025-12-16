@@ -5,6 +5,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import ProtectedRoute from '@/components/auth/ProtectedRoute'
 import AdminRoute from '@/components/auth/AdminRoute'
 import RedirectIfAuthenticated from '@/components/auth/RedirectIfAuthenticated'
+import { VoyaLoader } from '@/components'
 
 // Lazy-loaded pages
 const Home = lazy(() => import('@/pages/Home'))
@@ -26,7 +27,15 @@ const Hotels = lazy(() => import('@/pages/Admin/Hotels'))
 const Rooms = lazy(() => import('@/pages/Admin/Rooms'))
 
 const SuspenseLayout = ({ children }: { children: ReactNode }) => (
-  <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+  <Suspense
+    fallback={
+      <div>
+        <VoyaLoader />
+      </div>
+    }
+  >
+    {children}
+  </Suspense>
 )
 
 export const router = createBrowserRouter([

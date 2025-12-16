@@ -120,6 +120,19 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Rooms'],
     }),
+    getDashboardStats: build.query<
+      {
+        totalCities: number
+        totalHotels: number
+        totalRooms: number
+        averageStarRating: number
+        totalAvailableRooms: number
+      },
+      void
+    >({
+      query: () => '/admin/dashboard',
+      providesTags: ['Admin'],
+    }),
   }),
 })
 
@@ -133,4 +146,8 @@ export const {
   useUpdateCityMutation,
   useDeleteCityMutation,
   useUpdateHotelMutation,
+  useDeleteHotelMutation,
+  useUpdateRoomMutation,
+  useDeleteRoomMutation,
+  useGetDashboardStatsQuery,
 } = adminApi

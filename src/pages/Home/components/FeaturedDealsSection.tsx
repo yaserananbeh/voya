@@ -1,8 +1,10 @@
-// src/pages/Home/components/FeaturedDealsSection.tsx
-import { Alert, Card, CardContent, CardMedia, Typography, Box } from '@mui/material'
+import { Alert, Card, CardContent, Typography, Box, Button, CardActions } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
 import { useFeaturedDealsQuery } from '@/api/home'
 import { HomeSkeletonCard } from './HomeSkeletonCard'
+import { SafeImage } from '@/components/common/SafeImage'
 import styles from '../styles.module.css'
+import VisibilityIcon from '@mui/icons-material/Visibility'
 
 export function FeaturedDealsSection() {
   const { data, isLoading, isError } = useFeaturedDealsQuery()
@@ -30,16 +32,13 @@ export function FeaturedDealsSection() {
   return (
     <Box className={styles.cardsGrid}>
       {data.map((deal) => (
-        <Card key={deal.hotelId}>
-          {deal.roomPhotoUrl && (
-            <CardMedia
-              component="img"
-              height="140"
-              image={deal.roomPhotoUrl}
-              alt={deal.hotelName ?? 'Featured hotel'}
-            />
-          )}
-          <CardContent>
+        <Card key={deal.hotelId} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <SafeImage
+            src={deal.roomPhotoUrl}
+            alt={deal.hotelName ?? 'Featured hotel'}
+            height={140}
+          />
+          <CardContent sx={{ flexGrow: 1 }}>
             <Typography variant="h6">{deal.hotelName}</Typography>
             <Typography variant="body2" color="text.secondary">
               {deal.cityName}
@@ -59,6 +58,17 @@ export function FeaturedDealsSection() {
               </Typography>
             </Typography>
           </CardContent>
+          <CardActions>
+            <Button
+              component={RouterLink}
+              to={`/hotel/${deal.hotelId}`}
+              variant="contained"
+              fullWidth
+              startIcon={<VisibilityIcon />}
+            >
+              View Details
+            </Button>
+          </CardActions>
         </Card>
       ))}
     </Box>

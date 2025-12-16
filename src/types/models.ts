@@ -1,7 +1,3 @@
-// ======================
-// Auth
-// ======================
-
 export type UserType = 'Admin' | 'User'
 
 export interface LoginRequestDto {
@@ -14,13 +10,9 @@ export interface LoginResponseDto {
   userType: UserType
 }
 
-// ======================
-// Home / Search
-// ======================
-
 export interface SearchQueryDto {
   city?: string
-  checkInDate?: string // ISO date
+  checkInDate?: string
   checkOutDate?: string
   adults?: number
   children?: number
@@ -68,7 +60,7 @@ export interface RecentHotelResultDto {
   hotelName: string
   city: string
   starRating: number
-  visitDate: string // ISO date
+  visitDate: string
   thumbnailUrl: string
 }
 
@@ -80,19 +72,11 @@ export interface DestinationDto {
   thumbnailUrl: string
 }
 
-// ======================
-// Amenities (Search Results filters)
-// ======================
-
 export interface AmenityDto {
   id: number
   name: string
   description?: string | null
 }
-
-// ======================
-// Hotel details
-// ======================
 
 export interface HotelSummaryDto {
   id: number
@@ -117,12 +101,12 @@ export interface HotelReviewDto {
   userName: string
   rating: number
   comment?: string | null
-  createdAt: string // ISO date
+  createdAt: string
 }
 export interface HotelDetailsDto {
   id: number
   name: string
-  location: string // This replaces 'city'
+  location: string
   description?: string | null
   hotelType?: string
   starRating: number
@@ -157,10 +141,6 @@ export interface RoomAvailabilityResultDto {
   isAvailable: boolean
 }
 
-// ======================
-// Booking / Checkout
-// ======================
-
 export interface BookingRequestDto {
   hotelId: number
   roomId: number
@@ -188,9 +168,6 @@ export interface BookingDetailsDto {
   createdAt: string
 }
 
-// ======================
-// Admin: Cities / Hotels / Rooms
-// ======================
 export interface CityWithoutHotelsDto {
   id: number
   name: string
@@ -221,31 +198,84 @@ export interface HotelForCreationDto {
   starRating: number
 }
 
-export interface RoomDto {
-  id: number
-  roomNumber: string
-  hotelId: number
-  hotelName: string
-  cityName: string
-  capacity: RoomCapacityDto
-  pricePerNight: number
-}
-
-export interface RoomForCreationDto {
-  roomNumber: string
-  hotelId: number
-  capacity: RoomCapacityDto
-  pricePerNight: number
-}
-
-// ======================
-// Photos / Uploads
-// ======================
-
 export interface PhotoDto {
   id: number
   hotelId?: number
   roomId?: number
   imageUrl: string
   thumbnailUrl?: string | null
+}
+export interface HotelDto {
+  id: number
+  hotelName?: string
+  name: string
+  location: string
+  description: string
+  hotelType: 'Boutique' | 'Resort' | 'Hotel' | 'Lodge' | 'Inn'
+  starRating: number
+  latitude?: number
+  longitude?: number
+  rooms?: Array<{
+    id: number
+    name: string
+    type: string
+    price: number
+    available: boolean
+    maxOccupancy: number
+  }>
+  imageUrl?: string
+  availableRooms?: number
+  cityId: number
+  amenities?: Array<{
+    id: number
+    name: string
+    description?: string
+  }>
+}
+
+export interface HotelWithoutRoomsDto extends Omit<HotelDto, 'rooms'> {
+  numberOfRooms?: number
+}
+
+export interface HotelForCreationDto {
+  name: string
+  cityId: number
+  description?: string | null
+  hotelType?: string
+  starRating: number
+  location?: string
+  latitude?: number
+  longitude?: number
+  imageUrl?: string
+}
+
+export interface RoomDto {
+  roomId: number
+  id?: number
+  roomNumber: number | string
+  roomPhotoUrl?: string
+  roomType: string
+  capacityOfAdults: number
+  capacityOfChildren: number
+  amenities?: Array<{
+    id: number
+    name: string
+    description?: string
+  }>
+  price: number
+  availability: boolean
+  hotelId?: number
+  creationDate?: string
+  modificationDate?: string
+}
+
+export interface RoomForCreationDto {
+  roomNumber: number | string
+  hotelId: number
+  roomType: string
+  capacityOfAdults: number
+  capacityOfChildren: number
+  price: number
+  availability?: boolean
+  roomPhotoUrl?: string
 }

@@ -1,8 +1,20 @@
-import { Alert, Box, Card, CardContent, CardMedia, Rating, Typography } from '@mui/material'
+import {
+  Alert,
+  Box,
+  Card,
+  CardContent,
+  Rating,
+  Typography,
+  Button,
+  CardActions,
+} from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
 import { useRecentHotelsQuery } from '@/api/home'
 import { HomeSkeletonCard } from './HomeSkeletonCard'
+import { SafeImage } from '@/components/common/SafeImage'
 import styles from '../styles.module.css'
 import { formatDistanceToNow } from '@/utils/date'
+import VisibilityIcon from '@mui/icons-material/Visibility'
 
 const MOCK_USER_ID = 1
 
@@ -36,16 +48,9 @@ export function RecentHotelsSection() {
   return (
     <Box className={styles.cardsGrid}>
       {data.map((hotel) => (
-        <Card key={hotel.hotelId}>
-          {hotel.thumbnailUrl && (
-            <CardMedia
-              component="img"
-              height="140"
-              image={hotel.thumbnailUrl}
-              alt={hotel.hotelName ?? 'Hotel'}
-            />
-          )}
-          <CardContent>
+        <Card key={hotel.hotelId} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <SafeImage src={hotel.thumbnailUrl} alt={hotel.hotelName ?? 'Hotel'} height={140} />
+          <CardContent sx={{ flexGrow: 1 }}>
             <Typography variant="h6">{hotel.hotelName}</Typography>
             <Typography variant="body2" color="text.secondary">
               {hotel.cityName}
@@ -63,6 +68,17 @@ export function RecentHotelsSection() {
               })}
             </Typography>
           </CardContent>
+          <CardActions>
+            <Button
+              component={RouterLink}
+              to={`/hotel/${hotel.hotelId}`}
+              variant="contained"
+              fullWidth
+              startIcon={<VisibilityIcon />}
+            >
+              View Details
+            </Button>
+          </CardActions>
         </Card>
       ))}
     </Box>
