@@ -180,6 +180,17 @@
   "errors": {
     "generic": "Something went wrong. Please try again.",
     "network": "Network error. Please check your connection.",
-    "notFound": "Page not found"
+    "notFound": "Page not found",
+    "title": "Oops! Something went wrong",
+    "message": "We encountered an unexpected error. Don't worry, your data is safe.",
+    "reload": "Reload Page",
+    "goHome": "Go to Home",
+    "helpText": "If the problem persists, please contact support.",
+    "notFoundMessage": "The page you're looking for doesn't exist or has been moved.",
+    "serverError": "Server Error",
+    "serverErrorMessage": "Our servers encountered an error. Please try again later.",
+    "httpError": "Error {status}",
+    "loadError": "Failed to Load Page",
+    "loadErrorMessage": "We couldn't load this page. This might be due to a network issue or a temporary server problem. Please try reloading the page."
   }
 }
