@@ -4,7 +4,7 @@ import * as yup from 'yup'
 import { useLoginMutation } from '@/api/auth'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '@/store/authSlice'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import styles from './styles.module.css'
 
 const validationSchema = yup.object({
@@ -15,7 +15,10 @@ const validationSchema = yup.object({
 export default function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const [login, { isLoading }] = useLoginMutation()
+
+  const from = (location.state as { from?: Location })?.from?.pathname || null
 
   const formik = useFormik({
     initialValues: { userName: '', password: '' },
@@ -33,9 +36,9 @@ export default function Login() {
         )
 
         if (result.userType === 'Admin') {
-          await navigate('/admin/dashboard', { replace: true })
+          await navigate(from || '/admin/dashboard', { replace: true })
         } else {
-          await navigate('/home', { replace: true })
+          await navigate(from || '/home', { replace: true })
         }
       } catch (error) {
         console.error('Login failed:', error)

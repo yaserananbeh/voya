@@ -23,6 +23,26 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
       return
     }
 
+    const token = localStorage.getItem('token')
+    if (!token) {
+      const ctx: CheckoutContext = {
+        hotelId,
+        hotelName,
+        roomId: room.roomId,
+        roomNumber: String(room.roomNumber),
+        roomType: room.roomType,
+        cityName: cityName ?? undefined,
+        pricePerNight: room.price,
+        checkInDate: searchParams.checkInDate,
+        checkOutDate: searchParams.checkOutDate,
+        userId: 1,
+      }
+      saveCheckoutContext(ctx)
+
+      void navigate('/login', { state: { from: { pathname: '/checkout' } } })
+      return
+    }
+
     const ctx: CheckoutContext = {
       hotelId,
       hotelName,
