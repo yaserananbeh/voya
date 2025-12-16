@@ -1,4 +1,4 @@
-import { Paper, Typography, Stack, Divider } from '@mui/material'
+import { Paper, Typography, Stack, Divider, Box } from '@mui/material'
 import { PriceFilter } from './PriceFilter'
 import { StarRatingFilter } from './StarRatingFilter'
 import { AmenitiesFilter } from './AmenitiesFilter'
@@ -6,21 +6,53 @@ import { HotelTypeFilter } from './HotelTypeFilter'
 
 export function FiltersSidebar() {
   return (
-    <Paper elevation={1} sx={{ p: 2, position: 'sticky', top: 16 }}>
-      <Stack spacing={3}>
-        <Typography variant="h6">Filters</Typography>
+    <Box
+      sx={{
+        position: 'sticky',
+        top: 80, // Account for header height
+        maxHeight: 'calc(100vh - 100px)',
+        overflowY: 'auto',
+        '&::-webkit-scrollbar': {
+          width: '8px',
+        },
+        '&::-webkit-scrollbar-track': {
+          background: 'transparent',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: 'rgba(0,0,0,0.2)',
+          borderRadius: '4px',
+          '&:hover': {
+            background: 'rgba(0,0,0,0.3)',
+          },
+        },
+      }}
+    >
+      <Paper elevation={1} sx={{ p: 3 }}>
+        <Stack spacing={3}>
+          <Typography variant="h6" fontWeight={600}>
+            Filters
+          </Typography>
 
-        <PriceFilter />
-        <Divider />
+          <Box>
+            <PriceFilter />
+          </Box>
+          <Divider />
 
-        <StarRatingFilter />
-        <Divider />
+          <Box>
+            <StarRatingFilter />
+          </Box>
+          <Divider />
 
-        <AmenitiesFilter />
-        <Divider />
+          <Box>
+            <AmenitiesFilter />
+          </Box>
+          <Divider />
 
-        <HotelTypeFilter />
-      </Stack>
-    </Paper>
+          <Box>
+            <HotelTypeFilter />
+          </Box>
+        </Stack>
+      </Paper>
+    </Box>
   )
 }

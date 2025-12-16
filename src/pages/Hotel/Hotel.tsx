@@ -11,6 +11,7 @@ import { HotelAmenities } from './components/HotelAmenities'
 import { HotelMap } from './components/HotelMap'
 import { HotelRooms } from './components/HotelRooms'
 import { HotelReviews } from './components/HotelReviews'
+import { VoyaLoader } from '@/components'
 
 export default function Hotel() {
   const { hotelId } = useParams()
@@ -23,7 +24,12 @@ export default function Hotel() {
   const { data: reviews } = useGetHotelReviewsQuery(id, { skip: Number.isNaN(id) })
 
   if (Number.isNaN(id)) return <Typography color="error">Invalid hotel id</Typography>
-  if (isLoading) return <Typography>Loading...</Typography>
+  if (isLoading)
+    return (
+      <Typography>
+        <VoyaLoader />
+      </Typography>
+    )
   if (isError || !hotel) return <Typography color="error">Failed to load hotel</Typography>
 
   return (

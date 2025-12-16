@@ -98,7 +98,13 @@ const Home = lazy(() => import('@/pages/Home'))
 Layouts are wrapped in Suspense:
 
 ```tsx
-<Suspense fallback={<div>Loading...</div>}>
+<Suspense
+  fallback={
+    <div>
+      <VoyaLoader />
+    </div>
+  }
+>
   <MainLayout />
 </Suspense>
 ```

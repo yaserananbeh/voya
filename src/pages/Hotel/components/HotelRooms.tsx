@@ -1,20 +1,12 @@
-import {
-  Box,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  Button,
-  Stack,
-  Chip,
-} from '@mui/material'
+import { Box, Card, CardContent, CardActions, Typography, Button, Stack, Chip } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import type { HotelRoomDto } from '@/api/hotels'
 import { selectSearchParams } from '@/store/searchSlice'
 import type { CheckoutContext } from '@/pages/Checkout/types'
 import { saveCheckoutContext } from '@/pages/Checkout/utils/checkoutStorage'
 import { useAppSelector } from '@/hooks'
+import { SafeImage } from '@/components/common/SafeImage'
+
 type Props = {
   hotelId: number
   hotelName: string
@@ -71,13 +63,7 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
               flexDirection: 'column',
             }}
           >
-            <CardMedia
-              component="img"
-              height="180"
-              image={room.roomPhotoUrl || ''}
-              alt={room.roomType}
-              key={room.roomId}
-            />
+            <SafeImage src={room.roomPhotoUrl} alt={room.roomType} height={180} />
 
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography variant="h6">{room.roomType}</Typography>
