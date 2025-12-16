@@ -53,23 +53,29 @@ export default function Checkout() {
   }
 
   return (
-    <>
-      <Typography variant="h4" sx={{ mb: 2 }}>
+    <Box sx={{ px: { xs: 2, sm: 3 }, py: { xs: 2, sm: 3 } }}>
+      <Typography
+        variant="h4"
+        sx={{
+          mb: { xs: 2, sm: 3 },
+          fontSize: { xs: '1.5rem', sm: '2rem' },
+        }}
+      >
         Checkout
       </Typography>
 
       <Box
         sx={{
           display: 'flex',
-          gap: 3,
+          gap: { xs: 2, sm: 3 },
           flexDirection: { xs: 'column', md: 'row' },
         }}
       >
-        <Box sx={{ flex: 1 }}>
+        <Box sx={{ flex: 1, order: { xs: 2, md: 1 } }}>
           <BookingSummary ctx={ctx} />
         </Box>
 
-        <Box sx={{ flex: 2 }}>
+        <Box sx={{ flex: { xs: 1, md: 2 }, order: { xs: 1, md: 2 } }}>
           <UserInfoForm
             initialValues={{ customerName: '', paymentMethod: '' }}
             onSubmit={handleSubmit}
@@ -78,6 +84,6 @@ export default function Checkout() {
           <CheckoutActions error={uiError} />
         </Box>
       </Box>
-    </>
+    </Box>
   )
 }
