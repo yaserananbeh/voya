@@ -1,15 +1,17 @@
-import { Box, Stack, Typography, Button, Chip, alpha } from '@mui/material'
+import { Box, Stack, Typography, Button, Chip, alpha, useMediaQuery, useTheme } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
 
 export function HeroSection() {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const scrollToFeatured = () => {
     const element = document.getElementById('featured-deals')
     if (element) {
-      const headerHeight = 64 // Match your header height
+      const headerHeight = 64
       const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 16 // 16px extra padding
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 16
 
       window.scrollTo({
         top: offsetPosition,
@@ -49,10 +51,24 @@ export function HeroSection() {
         />
 
         <Stack spacing={1}>
-          <Typography variant="h3" fontWeight={700} lineHeight={1.1}>
+          <Typography
+            variant="h3"
+            fontWeight={700}
+            lineHeight={1.1}
+            sx={{
+              fontSize: { xs: '1.75rem', sm: '2.125rem', md: '3rem' },
+            }}
+          >
             Discover stays that fit how you travel.
           </Typography>
-          <Typography variant="h6" color="text.secondary" maxWidth="640px">
+          <Typography
+            variant="h6"
+            color="text.secondary"
+            sx={{
+              maxWidth: { xs: '100%', sm: '640px' },
+              fontSize: { xs: '1rem', sm: '1.25rem' },
+            }}
+          >
             Search trusted stays, compare deals, and book in minutes—so you can focus on the trip,
             not the planning.
           </Typography>
@@ -65,11 +81,25 @@ export function HeroSection() {
             endIcon={<ArrowForwardIcon />}
             component={RouterLink}
             to="/search"
-            sx={{ px: 3, py: 1.2, fontWeight: 700 }}
+            sx={{
+              px: { xs: 2, sm: 3 },
+              py: { xs: 1, sm: 1.2 },
+              fontWeight: 700,
+              fontSize: { xs: '0.875rem', sm: '1rem' },
+            }}
+            fullWidth={isMobile}
           >
             Start exploring
           </Button>
-          <Button variant="text" size="large" onClick={scrollToFeatured}>
+          <Button
+            variant="text"
+            size="large"
+            onClick={scrollToFeatured}
+            sx={{
+              fontSize: { xs: '0.875rem', sm: '1rem' },
+            }}
+            fullWidth={isMobile}
+          >
             View featured deals
           </Button>
         </Stack>

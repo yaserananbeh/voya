@@ -32,7 +32,6 @@ export default function Login() {
           }),
         )
 
-        // REDIRECT BASED ON ROLE
         if (result.userType === 'Admin') {
           await navigate('/admin/dashboard', { replace: true })
         } else {
@@ -45,14 +44,32 @@ export default function Login() {
   })
 
   return (
-    <Box className={styles.loginContainer}>
-      <Card className={styles.loginCard}>
-        <CardContent>
-          <Typography variant="h5" align="center" mb={2}>
+    <Box
+      className={styles.loginContainer}
+      sx={{
+        px: { xs: 2, sm: 3 },
+        py: { xs: 3, sm: 4 },
+      }}
+    >
+      <Card
+        className={styles.loginCard}
+        sx={{
+          maxWidth: { xs: '100%', sm: 400 },
+          width: '100%',
+        }}
+      >
+        <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
+          <Typography
+            variant="h5"
+            align="center"
+            mb={2}
+            sx={{
+              fontSize: { xs: '1.25rem', sm: '1.5rem' },
+            }}
+          >
             Login to Voya
           </Typography>
 
-          {/* IMPORTANT: Formik handles everything. NO custom wrapper. */}
           <form onSubmit={formik.handleSubmit}>
             <TextField
               fullWidth

@@ -1,4 +1,4 @@
-import { Container, Typography, Stack, Rating } from '@mui/material'
+import { Container, Typography, Stack, Rating, Box } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import {
   useGetHotelQuery,
@@ -26,20 +26,34 @@ export default function Hotel() {
   if (Number.isNaN(id)) return <Typography color="error">Invalid hotel id</Typography>
   if (isLoading)
     return (
-      <Typography>
+      <Box>
         <VoyaLoader />
-      </Typography>
+      </Box>
     )
   if (isError || !hotel) return <Typography color="error">Failed to load hotel</Typography>
 
   return (
-    <Container maxWidth="lg">
-      <Stack spacing={4}>
+    <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3 } }}>
+      <Stack spacing={{ xs: 2, sm: 4 }}>
         <div>
-          <Typography variant="h4">{hotel.hotelName ?? hotel.name}</Typography>
-          <Stack direction="row" spacing={1} alignItems="center">
-            <Rating value={hotel.starRating} readOnly />
-            <Typography color="text.secondary">{hotel.location}</Typography>
+          <Typography
+            variant="h4"
+            sx={{
+              fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' },
+            }}
+          >
+            {hotel.hotelName ?? hotel.name}
+          </Typography>
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={1}
+            alignItems={{ xs: 'flex-start', sm: 'center' }}
+            sx={{ mt: 1 }}
+          >
+            <Rating value={hotel.starRating} readOnly size="small" />
+            <Typography color="text.secondary" variant="body2">
+              {hotel.location}
+            </Typography>
           </Stack>
         </div>
 
