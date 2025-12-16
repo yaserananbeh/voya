@@ -1,3 +1,4 @@
 export * from './layout/PageContainer'
-export * from './layout/PageHeader'
 export * from './layout/Section'
+export * from './common/VoyaLoader'
+export * from './common/SafeImage'
