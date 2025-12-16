@@ -11,13 +11,42 @@ import {
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import type { HotelRoomDto } from '@/api/hotels'
-
+import { selectSearchParams } from '@/store/searchSlice'
+import type { CheckoutContext } from '@/pages/Checkout/types'
+import { saveCheckoutContext } from '@/pages/Checkout/utils/checkoutStorage'
+import { useAppSelector } from '@/hooks'
 type Props = {
+  hotelId: number
+  hotelName: string
+  cityName?: string | null
   rooms: HotelRoomDto[]
 }
 
-export function HotelRooms({ rooms }: Props) {
+export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
   const navigate = useNavigate()
+  const searchParams = useAppSelector(selectSearchParams)
+
+  const handleBook = (room: HotelRoomDto) => {
+    if (!searchParams.checkInDate || !searchParams.checkOutDate) {
+      return
+    }
+
+    const ctx: CheckoutContext = {
+      hotelId,
+      hotelName,
+      roomId: room.roomId,
+      roomNumber: String(room.roomNumber),
+      roomType: room.roomType,
+      cityName: cityName ?? undefined,
+      pricePerNight: room.price,
+      checkInDate: searchParams.checkInDate,
+      checkOutDate: searchParams.checkOutDate,
+      userId: 1,
+    }
+
+    saveCheckoutContext(ctx)
+    void navigate('/checkout', { state: { checkout: ctx } })
+  }
 
   return (
     <Box>
@@ -79,7 +108,7 @@ export function HotelRooms({ rooms }: Props) {
                 fullWidth
                 variant="contained"
                 disabled={!room.availability}
-                onClick={() => void navigate('/checkout', { state: room })}
+                onClick={() => handleBook(room)}
               >
                 {room.availability ? 'Book now' : 'Not available'}
               </Button>

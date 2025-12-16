@@ -47,7 +47,12 @@ export default function Hotel() {
           <HotelMap lat={hotel.latitude} lng={hotel.longitude} />
         )}
 
-        <HotelRooms rooms={rooms ?? hotel.rooms} />
+        <HotelRooms
+          hotelId={hotel.id}
+          hotelName={hotel.hotelName ?? hotel.name}
+          cityName={hotel.location}
+          rooms={rooms ?? hotel.rooms}
+        />
 
         <HotelReviews reviews={reviews ?? []} />
       </Stack>
