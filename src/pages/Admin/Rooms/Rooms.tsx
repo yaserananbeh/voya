@@ -32,7 +32,6 @@ export default function Rooms() {
 
   const { data: rooms = [], isLoading } = useGetRoomsAdminQuery()
 
-  // Filter rooms on frontend since API doesn't support search
   const filteredRooms = rooms.filter(
     (room) =>
       !searchQuery ||

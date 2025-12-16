@@ -58,7 +58,7 @@ export default function Cities() {
             size="small"
             onClick={() => {
               setEditingCity(params.row.id)
-              setOpenForm(true) // Add this line to open the dialog
+              setOpenForm(true)
             }}
           >
             <EditIcon />
@@ -80,7 +80,7 @@ export default function Cities() {
     await deleteCity(id).unwrap()
     setDeleteId(null)
   }
-  // Filter cities on the frontend
+
   const filteredCities = cities.filter(
     (city) =>
       !searchQuery ||
@@ -129,7 +129,7 @@ export default function Cities() {
 
       <Box sx={{ width: '100%', overflow: 'auto' }}>
         <DataGrid<CityDto>
-          rows={filteredCities} // Use filteredCities instead of cities
+          rows={filteredCities}
           columns={columns}
           loading={isLoading}
           paginationModel={paginationModel}
