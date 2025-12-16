@@ -17,7 +17,6 @@ describe('Confirmation', () => {
       </Provider>,
     )
 
-    // wait for RTK Query + MSW
     expect(await screen.findByText(/booking confirmed/i, { exact: false })).toBeInTheDocument()
 
     expect(await screen.findByText(/ABC123XYZ/i)).toBeInTheDocument()

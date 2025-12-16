@@ -8,7 +8,6 @@ interface PhotoUploaderProps {
 }
 
 export default function PhotoUploader({ onUploadSuccess }: PhotoUploaderProps) {
-  // ✅ Use the generated mutation hook
   const [uploadPhoto, { isLoading }] = useUploadPhotoMutation()
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {

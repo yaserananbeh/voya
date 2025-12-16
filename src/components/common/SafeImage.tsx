@@ -26,7 +26,6 @@ export function SafeImage({
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   useEffect(() => {
-    // Reset state when src changes
     setHasError(false)
     setIsLoading(true)
 
@@ -36,12 +35,10 @@ export function SafeImage({
       return
     }
 
-    // Clear any existing timeout
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
     }
 
-    // Set timeout to detect slow/failed images (8 seconds)
     timeoutRef.current = setTimeout(() => {
       setIsLoading((prevLoading) => {
         if (prevLoading) {
@@ -75,7 +72,6 @@ export function SafeImage({
     setIsLoading(false)
   }
 
-  // Show fallback if no src or error occurred
   if (!src || hasError) {
     if (fallbackIcon) {
       return (

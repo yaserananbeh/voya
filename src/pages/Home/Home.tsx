@@ -14,7 +14,6 @@ export default function Home() {
       <HeroSection />
 
       <Container maxWidth="lg">
-        {/* SEARCH BAR */}
         <Section className={styles.searchSection}>
           <Typography variant="h5" sx={{ mb: 2 }}>
             Search stays
@@ -22,7 +21,6 @@ export default function Home() {
           <HomeSearchBar />
         </Section>
 
-        {/* FEATURED DEALS */}
         <Section
           id="featured-deals"
           title="Featured deals"
@@ -32,7 +30,6 @@ export default function Home() {
           <FeaturedDealsSection />
         </Section>
 
-        {/* RECENTLY VISITED HOTELS */}
         <Section
           title="Your recently visited hotels"
           subtitle="Quick access to places you checked before"
@@ -41,7 +38,6 @@ export default function Home() {
           <RecentHotelsSection />
         </Section>
 
-        {/* TRENDING DESTINATIONS */}
         <Section
           title="Trending destinations"
           subtitle="Popular cities travelers love right now"

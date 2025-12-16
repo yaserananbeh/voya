@@ -4,7 +4,7 @@ export type RecentHotel = {
   city: string
   starRating: number
   thumbnailUrl?: string
-  visitedAt: string // ISO
+  visitedAt: string
 }
 
 const KEY = 'voya_recent_hotels'

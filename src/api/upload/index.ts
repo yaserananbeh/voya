@@ -9,7 +9,7 @@ export const uploadApi = baseApi.injectEndpoints({
         formData.append('file', file)
 
         return {
-          url: '/photos', // baseUrl already /api
+          url: '/photos',
           method: 'POST',
           body: formData,
         }

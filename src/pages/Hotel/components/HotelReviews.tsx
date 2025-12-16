@@ -20,7 +20,6 @@ export function HotelReviews({ reviews }: Props) {
 
   return (
     <div>
-      {/* Header / Summary */}
       <Stack spacing={1} mb={2}>
         <Typography variant="h6">Guest Reviews</Typography>
         <Stack direction="row" spacing={1} alignItems="center">
@@ -30,7 +29,6 @@ export function HotelReviews({ reviews }: Props) {
         </Stack>
       </Stack>
 
-      {/* Reviews list */}
       <Stack spacing={2}>
         {reviews.map((r) => (
           <Paper key={r.reviewId} sx={{ p: 2 }}>

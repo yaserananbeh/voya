@@ -18,13 +18,11 @@ export function MainFooter() {
     >
       <Container maxWidth="lg">
         <Stack spacing={4}>
-          {/* Main Footer Content */}
           <Stack
             direction={{ xs: 'column', md: 'row' }}
             spacing={4}
             divider={<Divider orientation="vertical" flexItem sx={{ borderColor: 'grey.700' }} />}
           >
-            {/* Brand Section */}
             <Box sx={{ flex: 1 }}>
               <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 2 }}>
                 <FlightTakeoffIcon sx={{ fontSize: 32, color: 'primary.main' }} />
@@ -57,7 +55,6 @@ export function MainFooter() {
               </Stack>
             </Box>
 
-            {/* Quick Links */}
             <Box sx={{ flex: 1 }}>
               <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
                 Quick Links
@@ -75,7 +72,6 @@ export function MainFooter() {
               </Stack>
             </Box>
 
-            {/* Contact Info */}
             <Box sx={{ flex: 1 }}>
               <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
                 Contact Us
@@ -105,7 +101,6 @@ export function MainFooter() {
 
           <Divider sx={{ borderColor: 'grey.700' }} />
 
-          {/* Copyright */}
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
             spacing={2}

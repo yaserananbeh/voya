@@ -1,10 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 export type SearchParams = {
-  // We’ll use this as the "searchQuery" for /api/hotels
   searchQuery?: string
 
-  // Keep these if the rest of the app already uses them (Home flow etc.)
   city?: string
   checkInDate?: string
   checkOutDate?: string
@@ -17,7 +15,7 @@ export type SearchFilters = {
   priceRange?: [number, number]
   stars?: number | null
   amenities?: string[]
-  hotelTypes?: string[] // Boutique/Resort/Hotel/Lodge/Inn
+  hotelTypes?: string[]
 }
 
 export type SearchState = {

@@ -59,7 +59,6 @@ export type HotelReviewDto = {
 }
 export const hotelsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // (Search Results)
     getHotels: builder.query<HotelDto[], GetHotelsQuery>({
       query: ({ searchQuery, pageNumber, pageSize }) => ({
         url: 'hotels',
@@ -72,7 +71,6 @@ export const hotelsApi = baseApi.injectEndpoints({
       providesTags: ['Hotel'],
     }),
 
-    // 2. Get Single (Details Page) - MOVED HERE
     getHotel: builder.query<HotelDto, number>({
       query: (id) => `hotels/${id}`,
       providesTags: (_result, _error, id) => [{ type: 'Hotel', id }],
@@ -91,7 +89,6 @@ export const hotelsApi = baseApi.injectEndpoints({
   }),
 })
 
-// Export both hooks from the same file
 export const {
   useGetHotelsQuery,
   useGetHotelQuery,

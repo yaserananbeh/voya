@@ -1,4 +1,3 @@
-// src/pages/Home/components/HomeSkeletonCard.tsx
 import { Card, CardContent, Skeleton } from '@mui/material'
 
 export function HomeSkeletonCard() {

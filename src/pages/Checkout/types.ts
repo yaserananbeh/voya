@@ -6,7 +6,7 @@ export type CheckoutContext = {
   roomType: string
   cityName?: string
   pricePerNight: number
-  checkInDate: string // YYYY-MM-DD
-  checkOutDate: string // YYYY-MM-DD
+  checkInDate: string
+  checkOutDate: string
   userId: number
 }

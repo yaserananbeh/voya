@@ -16,20 +16,16 @@ export default function Dashboard() {
 
   const isLoading = citiesLoading || hotelsLoading || roomsLoading
 
-  // Calculate statistics
   const stats = useMemo(() => {
     const totalCities = cities.length
     const totalHotels = hotels.length
     const totalRooms = rooms.length
 
-    // Calculate average star rating
     const totalStarRating = hotels.reduce((sum, hotel) => sum + (hotel.starRating || 0), 0)
     const averageStarRating = totalHotels > 0 ? totalStarRating / totalHotels : 0
 
-    // Calculate total available rooms
     const totalAvailableRooms = rooms.filter((room) => room.availability !== false).length
 
-    // Calculate rooms per hotel
     const totalRoomsInHotels = hotels.reduce((sum, hotel) => {
       const rooms = (hotel as { rooms?: unknown[] }).rooms
       const roomCount = Array.isArray(rooms) ? rooms.length : 0
@@ -88,7 +84,6 @@ export default function Dashboard() {
         Admin Dashboard
       </Typography>
 
-      {/* Summary Cards */}
       <Box
         sx={{
           display: 'flex',
@@ -142,7 +137,6 @@ export default function Dashboard() {
         ))}
       </Box>
 
-      {/* Statistics Cards */}
       <Box
         sx={{
           display: 'flex',
@@ -203,7 +197,6 @@ export default function Dashboard() {
         </Box>
       </Box>
 
-      {/* Quick Overview */}
       <Box>
         <Card>
           <CardContent>

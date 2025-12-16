@@ -1,4 +1,3 @@
-// src/tests/msw/handlers.ts
 import { http, HttpResponse } from 'msw'
 const API = '*/api'
 let BOOKING_ID = 1000
@@ -14,9 +13,6 @@ type MockBookingDetails = {
   confirmationNumber: string
 }
 export const handlers = [
-  // ===========================
-  // AUTH API
-  // ===========================
   http.post('/api/auth/login', () => {
     return HttpResponse.json({
       authentication: 'mock-token',
@@ -24,9 +20,6 @@ export const handlers = [
     })
   }),
 
-  // ===========================
-  // HOME API (search, featured, etc.)
-  // ===========================
   http.get('/api/home/search', () => {
     return HttpResponse.json({
       results: [
@@ -40,9 +33,6 @@ export const handlers = [
     return HttpResponse.json([{ id: 1, name: 'Featured Hotel', rating: 4.8 }])
   }),
 
-  // ===========================
-  // CITIES API
-  // ===========================
   http.get('/api/cities', ({ request }) => {
     const url = new URL(request.url)
     const searchQuery = url.searchParams.get('searchQuery') ?? ''
@@ -82,9 +72,6 @@ export const handlers = [
     return HttpResponse.json(filtered)
   }),
 
-  // ===========================
-  // ADMIN API
-  // ===========================
   http.get('/api/admin/dashboard', () => {
     return HttpResponse.json({
       totalBookings: 22,
@@ -93,9 +80,6 @@ export const handlers = [
     })
   }),
 
-  // ===========================
-  // UPLOAD API
-  // ===========================
   http.post('/api/upload/photo', () => {
     return HttpResponse.json({
       url: 'https://mockcdn.com/photo123.jpg',
@@ -115,7 +99,6 @@ export const handlers = [
     const pageNumber = Number(url.searchParams.get('pageNumber') ?? '1')
     const pageSize = Number(url.searchParams.get('pageSize') ?? '10')
 
-    // Minimal deterministic list
     const all = Array.from({ length: 25 }).map((_, i) => {
       const id = i + 1
       return {

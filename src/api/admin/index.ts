@@ -15,7 +15,6 @@ export interface PaginationQuery {
   pageSize?: number
 }
 
-// Cities
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getCities: build.query<CityDto[], PaginationQuery | void>({
@@ -35,7 +34,6 @@ export const adminApi = baseApi.injectEndpoints({
       invalidatesTags: ['Cities'],
     }),
 
-    // Hotels (admin grid)
     getAdminHotels: build.query<HotelWithoutRoomsDto[], PaginationQuery | void>({
       query: (params) => {
         if (!params) return '/hotels'
@@ -53,7 +51,6 @@ export const adminApi = baseApi.injectEndpoints({
       invalidatesTags: ['Hotel'],
     }),
 
-    // Rooms (admin grid)
     getRoomsAdmin: build.query<RoomDto[], PaginationQuery | void>({
       query: (params) => {
         if (!params) return '/rooms'

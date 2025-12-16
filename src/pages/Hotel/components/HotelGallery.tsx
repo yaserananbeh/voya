@@ -25,7 +25,7 @@ export function HotelGallery({ images }: Props) {
     }))
 
   if (items.length === 0) {
-    return null // Or return a placeholder message
+    return null
   }
 
   return <ImageGallery items={items} showPlayButton={false} />

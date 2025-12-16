@@ -7,7 +7,6 @@ describe('logger', () => {
   let errorSpy: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
-    // Mock console methods using Vitest spies
     infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {})
     warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
     errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})

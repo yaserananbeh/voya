@@ -8,19 +8,15 @@ import { HotelResultCard } from './HotelResultCard'
 const PAGE_SIZE = 10
 
 function hotelMatchesFilters(hotel: HotelDto, filters: ReturnType<typeof selectSearchFilters>) {
-  // Stars
   if (filters.stars != null && hotel.starRating !== filters.stars) return false
 
-  // Hotel type
   if (filters.hotelTypes?.length && !filters.hotelTypes.includes(hotel.hotelType)) return false
 
-  // Amenities (hotel must include ALL selected amenities)
   const hotelAmenityNames = (hotel.amenities ?? []).map((a) => a.name)
   if (filters.amenities?.length && !filters.amenities.every((a) => hotelAmenityNames.includes(a))) {
     return false
   }
 
-  // Price range: ANY room price in range passes
   if (filters.priceRange) {
     const [min, max] = filters.priceRange
     const roomPrices = (hotel.rooms ?? []).map((r) => r.price)
@@ -45,19 +41,16 @@ export function ResultsList() {
     pageSize: PAGE_SIZE,
   })
 
-  // Reset list when query changes (new search)
   useEffect(() => {
     setPage(1)
     setAllHotels([])
     setHasMore(true)
   }, [searchQuery])
 
-  // Append fetched page
   useEffect(() => {
     if (!data) return
     setAllHotels((prev) => {
       const merged = [...prev, ...data]
-      // de-dup by id (safe)
       const map = new Map<number, HotelDto>()
       for (const h of merged) map.set(h.id, h)
       return Array.from(map.values())
@@ -69,7 +62,6 @@ export function ResultsList() {
     return allHotels.filter((h) => hotelMatchesFilters(h, filters))
   }, [allHotels, filters])
 
-  // Infinite scroll sentinel
   const sentinelRef = useRef<HTMLDivElement | null>(null)
   useEffect(() => {
     const el = sentinelRef.current

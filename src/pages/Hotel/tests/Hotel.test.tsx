@@ -8,7 +8,6 @@ import { server } from '@/tests/msw/server'
 import { http, HttpResponse } from 'msw'
 import Hotel from '../Hotel'
 
-// Avoid flaky DOM libs in unit tests; we only validate loading/success/error
 vi.mock('../components/HotelGallery', () => ({ HotelGallery: () => <div data-testid="gallery" /> }))
 vi.mock('../components/HotelAmenities', () => ({
   HotelAmenities: () => <div data-testid="amenities" />,
@@ -50,7 +49,6 @@ describe('Hotel page data fetching', () => {
     expect(screen.getByText('Bali, Indonesia')).toBeInTheDocument()
     expect(screen.getByText('Mock hotel description for details page')).toBeInTheDocument()
 
-    // child components mounted (mocked)
     expect(screen.getByTestId('gallery')).toBeInTheDocument()
     expect(screen.getByTestId('amenities')).toBeInTheDocument()
     expect(screen.getByTestId('rooms')).toBeInTheDocument()

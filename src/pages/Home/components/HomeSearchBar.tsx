@@ -17,7 +17,7 @@ const validationSchema = yup.object({
     .required('Check-out is required')
     .test('is-after-checkin', 'Check-out must be after check-in', function (value) {
       const { checkInDate } = this.parent as { checkInDate: string }
-      if (!checkInDate || !value) return true // Let 'required' handle empty values
+      if (!checkInDate || !value) return true
       return new Date(value) > new Date(checkInDate)
     }),
   adults: yup.number().min(1).required(),
@@ -45,10 +45,8 @@ export function HomeSearchBar() {
     },
     validationSchema,
     onSubmit(values) {
-      // sync to global search state
       dispatch(setSearchParams(values))
 
-      // navigate to search results
       void navigate('/search')
     },
   })
@@ -66,7 +64,6 @@ export function HomeSearchBar() {
       component="form"
       onSubmit={formik.handleSubmit}
     >
-      {/* City */}
       <TextField
         name="city"
         label="Where are you going?"
@@ -85,7 +82,6 @@ export function HomeSearchBar() {
         }}
       />
 
-      {/* Dates */}
       <TextField
         name="checkInDate"
         label="Check-in"
@@ -114,11 +110,10 @@ export function HomeSearchBar() {
         InputLabelProps={{ shrink: true }}
         sx={{ flex: 1, minWidth: 150 }}
         inputProps={{
-          min: formik.values.checkInDate, // Prevent picking dates before check-in
+          min: formik.values.checkInDate,
         }}
       />
 
-      {/* Guest / room selector */}
       <GuestRoomSelector
         adults={formik.values.adults}
         children={formik.values.children}
@@ -130,7 +125,6 @@ export function HomeSearchBar() {
         }}
       />
 
-      {/* Submit */}
       <Box sx={{ flexShrink: 0 }}>
         <Button
           type="submit"

@@ -1,13 +1,11 @@
 import { lazy, Suspense, type ReactNode } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 
-// Wrappers
 import ProtectedRoute from '@/components/auth/ProtectedRoute'
 import AdminRoute from '@/components/auth/AdminRoute'
 import RedirectIfAuthenticated from '@/components/auth/RedirectIfAuthenticated'
 import { VoyaLoader } from '@/components'
 
-// Lazy-loaded pages
 const Home = lazy(() => import('@/pages/Home'))
 const Login = lazy(() => import('@/pages/Login'))
 const SearchResults = lazy(() => import('@/pages/SearchResults'))
@@ -16,11 +14,9 @@ const Checkout = lazy(() => import('@/pages/Checkout'))
 const Confirmation = lazy(() => import('@/pages/Checkout/Confirmation'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 
-// Layouts
 const AdminLayout = lazy(() => import('@/layouts/AdminLayout'))
 const MainLayout = lazy(() => import('@/layouts/MainLayout'))
 
-// Admin pages
 const Dashboard = lazy(() => import('@/pages/Admin/Dashboard'))
 const Cities = lazy(() => import('@/pages/Admin/Cities'))
 const Hotels = lazy(() => import('@/pages/Admin/Hotels'))
@@ -39,9 +35,6 @@ const SuspenseLayout = ({ children }: { children: ReactNode }) => (
 )
 
 export const router = createBrowserRouter([
-  // -----------------------------------
-  // PUBLIC ROUTES
-  // -----------------------------------
   {
     path: '/',
     element: (
@@ -61,14 +54,11 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // Home is PUBLIC
       { path: 'home', element: <Home /> },
 
-      // Public browsing pages
       { path: 'search', element: <SearchResults /> },
       { path: 'hotel/:hotelId', element: <Hotel /> },
 
-      // Checkout → must be logged in
       {
         path: 'checkout',
         element: (
@@ -78,7 +68,6 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // Confirmation → user-only
       {
         path: '/checkout/confirmation/:bookingId',
         element: (
@@ -90,9 +79,6 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // -----------------------------------
-  // ADMIN ROUTES
-  // -----------------------------------
   {
     path: '/admin',
     element: (
@@ -114,9 +100,6 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // -----------------------------------
-  // NOT FOUND
-  // -----------------------------------
   {
     path: '*',
     element: (

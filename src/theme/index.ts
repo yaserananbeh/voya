@@ -2,9 +2,6 @@ import { createTheme, responsiveFontSizes, type Shadows } from '@mui/material/st
 
 export const theme = responsiveFontSizes(
   createTheme({
-    // ============================
-    //        COLOR PALETTE
-    // ============================
     palette: {
       primary: {
         main: '#003580',
@@ -42,13 +39,9 @@ export const theme = responsiveFontSizes(
       divider: '#E6E6E6',
     },
 
-    // ============================
-    //        TYPOGRAPHY
-    // ============================
     typography: {
       fontFamily: 'Inter, Roboto, sans-serif',
 
-      // Headings
       h1: { fontSize: '2.25rem', fontWeight: 700, lineHeight: 1.2 },
       h2: { fontSize: '1.875rem', fontWeight: 700, lineHeight: 1.25 },
       h3: { fontSize: '1.5rem', fontWeight: 600, lineHeight: 1.3 },
@@ -56,17 +49,13 @@ export const theme = responsiveFontSizes(
       h5: { fontSize: '1.125rem', fontWeight: 500, lineHeight: 1.4 },
       h6: { fontSize: '1rem', fontWeight: 500, lineHeight: 1.4 },
 
-      // Body
       body1: { fontSize: '1rem', fontWeight: 400, lineHeight: 1.6 },
       body2: { fontSize: '0.875rem', fontWeight: 400, lineHeight: 1.6 },
 
-      // Buttons
       button: { textTransform: 'none', fontWeight: 600, fontSize: '0.95rem' },
 
-      // Caption
       caption: { fontSize: '0.75rem', lineHeight: 1.4 },
 
-      // Subtitle Variants
       subtitle1: {
         fontSize: '1rem',
         fontWeight: 500,
@@ -80,7 +69,6 @@ export const theme = responsiveFontSizes(
         color: '#6B6B6B',
       },
 
-      // Overline Variant
       overline: {
         fontSize: '0.75rem',
         fontWeight: 600,
@@ -91,17 +79,11 @@ export const theme = responsiveFontSizes(
       },
     },
 
-    // ============================
-    //       SPACING & SHAPE
-    // ============================
     spacing: 8,
     shape: {
       borderRadius: 8,
     },
 
-    // ============================
-    //         ELEVATION
-    // ============================
     shadows: [
       'none',
       '0px 1px 3px rgba(0, 0, 0, 0.12)',
@@ -111,13 +93,7 @@ export const theme = responsiveFontSizes(
       ...Array.from({ length: 20 }, () => 'none'), //MUI accept 25 strictly -YA
     ] as Shadows,
 
-    // ============================
-    //     COMPONENT OVERRIDES
-    // ============================
     components: {
-      // ---------------------------------------------------
-      //                    BUTTON
-      // ---------------------------------------------------
       MuiButton: {
         styleOverrides: {
           root: {
@@ -129,7 +105,6 @@ export const theme = responsiveFontSizes(
           disableElevation: true,
         },
         variants: [
-          // Primary (same as default)
           {
             props: { variant: 'primary' },
             style: {
@@ -138,7 +113,6 @@ export const theme = responsiveFontSizes(
               '&:hover': { backgroundColor: '#002a66' },
             },
           },
-          // Secondary
           {
             props: { variant: 'secondary' },
             style: {
@@ -147,7 +121,6 @@ export const theme = responsiveFontSizes(
               '&:hover': { backgroundColor: '#d9a701' },
             },
           },
-          // Danger
           {
             props: { variant: 'danger' },
             style: {
@@ -156,7 +129,6 @@ export const theme = responsiveFontSizes(
               '&:hover': { backgroundColor: '#a70d17' },
             },
           },
-          // Soft / Gray button
           {
             props: { variant: 'soft' },
             style: {
@@ -168,9 +140,6 @@ export const theme = responsiveFontSizes(
         ],
       },
 
-      // ---------------------------------------------------
-      //                     CARD
-      // ---------------------------------------------------
       MuiCard: {
         styleOverrides: {
           root: {
@@ -196,9 +165,6 @@ export const theme = responsiveFontSizes(
         ],
       },
 
-      // ---------------------------------------------------
-      //                    TEXTFIELD
-      // ---------------------------------------------------
       MuiTextField: {
         defaultProps: {
           variant: 'outlined',
@@ -214,9 +180,6 @@ export const theme = responsiveFontSizes(
         },
       },
 
-      // ---------------------------------------------------
-      //                  TYPOGRAPHY
-      // ---------------------------------------------------
       MuiTypography: {
         variants: [
           {

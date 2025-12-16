@@ -5,10 +5,6 @@ type PageContainerProps = PropsWithChildren<
   Pick<ContainerProps, 'maxWidth' | 'disableGutters' | 'sx'>
 >
 
-/**
- * Generic page wrapper that gives consistent horizontal alignment
- * and vertical padding across all pages.
- */
 export const PageContainer = ({
   children,
   maxWidth = 'lg',
