@@ -170,11 +170,20 @@ Voya
 │   │   │   │   ├── tests
 │   │   │   │   └── utils
 │   │   │   ├── components
+│   │   │   │   ├── BookingSummary.tsx
+│   │   │   │   ├── CheckoutActions.tsx
+│   │   │   │   ├── UserInfoForm.tsx
+│   │   │   │   └── bookingSchema.ts
 │   │   │   ├── hooks
 │   │   │   ├── index.ts
 │   │   │   ├── styles.module.css
 │   │   │   ├── tests
+│   │   │   │   ├── Checkout.test.tsx
+│   │   │   │   └── Confirmation.test.tsx
+│   │   │   ├── types.ts
 │   │   │   └── utils
+│   │   │       ├── checkoutStorage.ts
+│   │   │       └── price.ts
 │   │   ├── Home
 │   │   │   ├── Home.tsx
 │   │   │   ├── components
@@ -194,10 +203,16 @@ Voya
 │   │   ├── Hotel
 │   │   │   ├── Hotel.tsx
 │   │   │   ├── components
+│   │   │   │   ├── HotelAmenities.tsx
+│   │   │   │   ├── HotelGallery.tsx
+│   │   │   │   ├── HotelMap.tsx
+│   │   │   │   ├── HotelReviews.tsx
+│   │   │   │   └── HotelRooms.tsx
 │   │   │   ├── hooks
 │   │   │   ├── index.ts
 │   │   │   ├── styles.module.css
 │   │   │   ├── tests
+│   │   │   │   └── Hotel.test.tsx
 │   │   │   └── utils
 │   │   ├── Login
 │   │   │   ├── Login.tsx
