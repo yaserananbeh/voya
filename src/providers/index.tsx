@@ -5,9 +5,12 @@ import { Provider } from 'react-redux'
 import { store } from '@/store'
 import { ThemeProvider, useThemeMode } from './ThemeContext'
 import { NotificationProvider } from './NotificationProvider'
+import '@/i18n/config'
+import { useRTL } from '@/hooks/useRTL'
 
 function ThemeWrapper({ children }: { children: ReactNode }) {
   const { theme } = useThemeMode()
+  useRTL()
 
   return (
     <MuiThemeProvider theme={theme}>
