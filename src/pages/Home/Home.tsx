@@ -1,31 +1,30 @@
-import { Container } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 import { PageContainer } from '@/components/layout/PageContainer'
-import { PageHeader } from '@/components/layout/PageHeader'
 import { Section } from '@/components/layout/Section'
 import { HomeSearchBar } from './components/HomeSearchBar'
 import { FeaturedDealsSection } from './components/FeaturedDealsSection'
 import { RecentHotelsSection } from './components/RecentHotelsSection'
 import { TrendingDestinationsSection } from './components/TrendingDestinationsSection'
+import { HeroSection } from './components/HeroSection'
 import styles from './styles.module.css'
 
 export default function Home() {
-  const pageTitle = 'Find your next stay'
-
   return (
     <PageContainer>
-      <PageHeader
-        title={pageTitle}
-        subtitle="Search hotels, compare prices, and book your perfect trip."
-      />
+      <HeroSection />
 
       <Container maxWidth="lg">
         {/* SEARCH BAR */}
         <Section className={styles.searchSection}>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Search stays
+          </Typography>
           <HomeSearchBar />
         </Section>
 
         {/* FEATURED DEALS */}
         <Section
+          id="featured-deals"
           title="Featured deals"
           subtitle="Special offers tailored for you"
           className={styles.section}

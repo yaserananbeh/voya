@@ -1,7 +1,7 @@
-// src/pages/Home/components/TrendingDestinationsSection.tsx
-import { Alert, Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { Alert, Box, Card, CardContent, Typography } from '@mui/material'
 import { useTrendingDestinationsQuery } from '@/api/home'
 import { HomeSkeletonCard } from './HomeSkeletonCard'
+import { SafeImage } from '@/components/common/SafeImage'
 import styles from '../styles.module.css'
 
 export function TrendingDestinationsSection() {
@@ -33,14 +33,7 @@ export function TrendingDestinationsSection() {
     <Box className={styles.cardsGrid}>
       {data.map((dest) => (
         <Card key={dest.cityId}>
-          {dest.thumbnailUrl && (
-            <CardMedia
-              component="img"
-              height="140"
-              image={dest.thumbnailUrl}
-              alt={dest.cityName ?? 'Destination'}
-            />
-          )}
+          <SafeImage src={dest.thumbnailUrl} alt={dest.cityName ?? 'Destination'} height={140} />
           <CardContent>
             <Typography variant="h6">
               {dest.cityName}, {dest.countryName}
