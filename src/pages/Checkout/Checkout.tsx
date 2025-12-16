@@ -9,6 +9,7 @@ import { CheckoutActions } from './components/CheckoutActions'
 import { calculateTotalCost } from './utils/price'
 import { loadCheckoutContext, saveCheckoutContext } from './utils/checkoutStorage'
 import { useCreateBookingMutation } from '@/api/checkout'
+import { useNotification } from '@/hooks'
 
 type LocationState = { checkout?: CheckoutContext }
 
@@ -18,6 +19,7 @@ export default function Checkout() {
   const [uiError, setUiError] = useState<string | null>(null)
 
   const [createBooking, { isLoading }] = useCreateBookingMutation()
+  const { showSuccess, showError } = useNotification()
 
   const ctx = useMemo<CheckoutContext | null>(() => {
     const state = (location.state as LocationState | null)?.checkout
@@ -37,19 +39,25 @@ export default function Checkout() {
   const handleSubmit = async (values: UserInfoValues) => {
     setUiError(null)
 
-    const totalCost = calculateTotalCost(ctx.pricePerNight, ctx.checkInDate, ctx.checkOutDate)
+    try {
+      const totalCost = calculateTotalCost(ctx.pricePerNight, ctx.checkInDate, ctx.checkOutDate)
 
-    const bookingId = await createBooking({
-      customerName: values.customerName,
-      hotelName: ctx.hotelName,
-      roomNumber: ctx.roomNumber,
-      roomType: ctx.roomType,
-      bookingDateTime: new Date().toISOString(),
-      totalCost,
-      paymentMethod: values.paymentMethod,
-    }).unwrap()
+      const bookingId = await createBooking({
+        customerName: values.customerName,
+        hotelName: ctx.hotelName,
+        roomNumber: ctx.roomNumber,
+        roomType: ctx.roomType,
+        bookingDateTime: new Date().toISOString(),
+        totalCost,
+        paymentMethod: values.paymentMethod,
+      }).unwrap()
 
-    void navigate(`/checkout/confirmation/${bookingId}`, { replace: true })
+      showSuccess('Booking confirmed! Redirecting...')
+      void navigate(`/checkout/confirmation/${bookingId}`, { replace: true })
+    } catch (error) {
+      console.error('Booking failed:', error)
+      showError('Failed to complete booking. Please try again.')
+    }
   }
 
   return (

@@ -6,6 +6,7 @@ import type { CheckoutContext } from '@/pages/Checkout/types'
 import { saveCheckoutContext } from '@/pages/Checkout/utils/checkoutStorage'
 import { useAppSelector } from '@/hooks'
 import { SafeImage } from '@/components/common/SafeImage'
+import { useNotification } from '@/hooks'
 
 type Props = {
   hotelId: number
@@ -17,9 +18,31 @@ type Props = {
 export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
   const navigate = useNavigate()
   const searchParams = useAppSelector(selectSearchParams)
+  const { showWarning } = useNotification()
 
   const handleBook = (room: HotelRoomDto) => {
     if (!searchParams.checkInDate || !searchParams.checkOutDate) {
+      showWarning('Please select check-in and check-out dates first')
+      return
+    }
+
+    const token = localStorage.getItem('token')
+    if (!token) {
+      const ctx: CheckoutContext = {
+        hotelId,
+        hotelName,
+        roomId: room.roomId,
+        roomNumber: String(room.roomNumber),
+        roomType: room.roomType,
+        cityName: cityName ?? undefined,
+        pricePerNight: room.price,
+        checkInDate: searchParams.checkInDate,
+        checkOutDate: searchParams.checkOutDate,
+        userId: 1,
+      }
+      saveCheckoutContext(ctx)
+
+      void navigate('/login', { state: { from: { pathname: '/checkout' } } })
       return
     }
 

@@ -1,7 +1,7 @@
 import { Box, Button, CircularProgress } from '@mui/material'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { useUploadPhotoMutation } from '@/api/upload'
-import { toast } from 'react-toastify'
+import { useNotification } from '@/hooks'
 
 interface PhotoUploaderProps {
   onUploadSuccess?: (url: string) => void
@@ -9,6 +9,7 @@ interface PhotoUploaderProps {
 
 export default function PhotoUploader({ onUploadSuccess }: PhotoUploaderProps) {
   const [uploadPhoto, { isLoading }] = useUploadPhotoMutation()
+  const { showSuccess, showError } = useNotification()
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -16,14 +17,13 @@ export default function PhotoUploader({ onUploadSuccess }: PhotoUploaderProps) {
 
     try {
       const result = await uploadPhoto(file).unwrap()
-
-      toast.success('Photo uploaded successfully!')
+      showSuccess('Photo uploaded successfully!')
       if (onUploadSuccess) {
         onUploadSuccess(result.imageUrl)
       }
     } catch (error) {
       console.error('Upload failed', error)
-      toast.error('Failed to upload photo')
+      showError('Failed to upload photo. Please try again.')
     }
   }
 

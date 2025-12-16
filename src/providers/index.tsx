@@ -1,16 +1,30 @@
-import { ThemeProvider } from '@mui/material/styles'
-import { theme as baseTheme } from '@/theme'
+import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import { type ReactNode, useMemo } from 'react'
+import { type ReactNode } from 'react'
 import { Provider } from 'react-redux'
 import { store } from '@/store'
+import { ThemeProvider, useThemeMode } from './ThemeContext'
+import { NotificationProvider } from './NotificationProvider'
+
+function ThemeWrapper({ children }: { children: ReactNode }) {
+  const { theme } = useThemeMode()
+
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </MuiThemeProvider>
+  )
+}
 
 export const Providers = ({ children }: { children: ReactNode }) => {
-  const theme = useMemo(() => baseTheme, [])
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Provider store={store}>{children}</Provider>
+    <ThemeProvider>
+      <ThemeWrapper>
+        <Provider store={store}>
+          <NotificationProvider>{children}</NotificationProvider>
+        </Provider>
+      </ThemeWrapper>
     </ThemeProvider>
   )
 }

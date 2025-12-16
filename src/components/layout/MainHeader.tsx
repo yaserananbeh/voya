@@ -18,6 +18,7 @@ import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
 import { useAppSelector, useAppDispatch } from '@/hooks'
 import { selectIsAuthenticated, logout } from '@/store/authSlice'
 import LogoutBtn from '@/components/layout/LogoutBtn'
+import { ThemeToggle } from './ThemeToggle'
 
 export default function MainHeader() {
   const theme = useTheme()
@@ -83,6 +84,7 @@ export default function MainHeader() {
         </Box>
         {isMobile ? (
           <>
+            <ThemeToggle />
             <IconButton color="primary" onClick={handleMenuOpen}>
               <MenuIcon />
             </IconButton>
@@ -121,7 +123,8 @@ export default function MainHeader() {
             </Menu>
           </>
         ) : (
-          <Box sx={{ display: 'flex', gap: 1 }}>
+          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+            <ThemeToggle />
             <Button component={RouterLink} to="/home" color="primary">
               Home
             </Button>

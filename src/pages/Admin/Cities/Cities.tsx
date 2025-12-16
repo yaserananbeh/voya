@@ -22,6 +22,7 @@ import {
 import type { CityDto } from '@/types/models'
 import { CityForm } from './components/CityForm'
 import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
+import { useNotification } from '@/hooks/useNotification'
 
 export default function Cities() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -38,6 +39,8 @@ export default function Cities() {
   const [createCity] = useCreateCityMutation()
   const [updateCity] = useUpdateCityMutation()
   const [deleteCity] = useDeleteCityMutation()
+
+  const { showSuccess, showError } = useNotification()
 
   const columns: GridColDef<CityDto>[] = [
     { field: 'name', headerName: 'Name', width: 200, flex: 1 },
@@ -77,8 +80,14 @@ export default function Cities() {
   }
 
   const handleDelete = async (id: number) => {
-    await deleteCity(id).unwrap()
-    setDeleteId(null)
+    try {
+      await deleteCity(id).unwrap()
+      showSuccess('City deleted successfully')
+      setDeleteId(null)
+    } catch {
+      showError('Failed to delete city. Please try again.')
+      setDeleteId(null)
+    }
   }
 
   const filteredCities = cities.filter(
@@ -157,8 +166,10 @@ export default function Cities() {
             onSubmit={async (data) => {
               if (editingCity) {
                 await updateCity({ id: editingCity, data }).unwrap()
+                showSuccess('City updated successfully')
               } else {
                 await createCity(data).unwrap()
+                showSuccess('City created successfully')
               }
               setOpenForm(false)
               setEditingCity(null)
