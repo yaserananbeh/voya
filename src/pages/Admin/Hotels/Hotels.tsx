@@ -97,9 +97,32 @@ export default function Hotels() {
 
   return (
     <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-        <Typography variant="h5">Hotels</Typography>
-        <Button variant="contained" startIcon={<AddIcon />} onClick={handleCreate}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          justifyContent: 'space-between',
+          alignItems: { xs: 'flex-start', sm: 'center' },
+          gap: { xs: 2, sm: 0 },
+          mb: 2,
+        }}
+      >
+        <Typography
+          variant="h5"
+          sx={{
+            fontSize: { xs: '1.25rem', sm: '1.5rem' },
+          }}
+        >
+          Hotels
+        </Typography>
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={handleCreate}
+          sx={{
+            width: { xs: '100%', sm: 'auto' },
+          }}
+        >
           Add Hotel
         </Button>
       </Box>
@@ -112,16 +135,27 @@ export default function Hotels() {
         sx={{ mb: 2 }}
       />
 
-      <DataGrid<HotelDto>
-        rows={hotels}
-        columns={columns}
-        loading={isLoading}
-        paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
-        pageSizeOptions={[5, 10, 25, 50]}
-        getRowId={(row) => row.id}
-        disableRowSelectionOnClick
-      />
+      <Box sx={{ width: '100%', overflow: 'auto' }}>
+        <DataGrid<HotelDto>
+          rows={hotels}
+          columns={columns}
+          loading={isLoading}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          pageSizeOptions={[5, 10, 25, 50]}
+          getRowId={(row) => row.id}
+          disableRowSelectionOnClick
+          sx={{
+            '& .MuiDataGrid-cell': {
+              fontSize: { xs: '0.75rem', sm: '0.875rem' },
+            },
+            '& .MuiDataGrid-columnHeader': {
+              fontSize: { xs: '0.75rem', sm: '0.875rem' },
+            },
+          }}
+          autoHeight
+        />
+      </Box>
 
       <Dialog open={openForm} onClose={() => setOpenForm(false)} maxWidth="md" fullWidth>
         <DialogTitle>{editingHotel ? 'Edit Hotel' : 'Create Hotel'}</DialogTitle>

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Drawer,
   List,
@@ -8,8 +9,12 @@ import {
   AppBar,
   Toolbar,
   Typography,
+  IconButton,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material'
 import { useNavigate, useLocation } from 'react-router-dom'
+import MenuIcon from '@mui/icons-material/Menu'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import LocationCityIcon from '@mui/icons-material/LocationCity'
 import HotelIcon from '@mui/icons-material/Hotel'
@@ -20,6 +25,9 @@ import { Outlet } from 'react-router-dom'
 const DRAWER_WIDTH = 240
 
 export default function AdminLayout() {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const [mobileOpen, setMobileOpen] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -30,10 +38,49 @@ export default function AdminLayout() {
     { path: '/admin/rooms', label: 'Rooms', icon: <BedIcon /> },
   ]
 
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
+
+  const handleNavigation = (path: string) => {
+    void navigate(path)
+    if (isMobile) {
+      setMobileOpen(false)
+    }
+  }
+
+  const drawer = (
+    <Box>
+      <Toolbar />
+      <List>
+        {menuItems.map((item) => (
+          <ListItemButton
+            key={item.path}
+            selected={location.pathname === item.path}
+            onClick={() => handleNavigation(item.path)}
+          >
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.label} />
+          </ListItemButton>
+        ))}
+      </List>
+    </Box>
+  )
+
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+      >
         <Toolbar>
+          {isMobile && (
+            <IconButton color="inherit" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             Admin Dashboard
           </Typography>
@@ -41,35 +88,33 @@ export default function AdminLayout() {
         </Toolbar>
       </AppBar>
 
-      <Drawer
-        variant="permanent"
+      <Box component="nav" sx={{ width: { md: DRAWER_WIDTH }, flexShrink: { md: 0 } }}>
+        <Drawer
+          variant={isMobile ? 'temporary' : 'permanent'}
+          open={isMobile ? mobileOpen : true}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: DRAWER_WIDTH,
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </Box>
+
+      <Box
+        component="main"
         sx={{
-          width: DRAWER_WIDTH,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: DRAWER_WIDTH,
-            boxSizing: 'border-box',
-          },
+          flexGrow: 1,
+          p: { xs: 2, sm: 3 },
+          width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
         }}
       >
-        <Toolbar />
-        <List>
-          {menuItems.map((item) => (
-            <ListItemButton
-              key={item.path}
-              selected={location.pathname === item.path}
-              onClick={() => {
-                void navigate(item.path)
-              }}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.label} />
-            </ListItemButton>
-          ))}
-        </List>
-      </Drawer>
-
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         <Outlet />
       </Box>
