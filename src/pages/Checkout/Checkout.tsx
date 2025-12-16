@@ -10,10 +10,12 @@ import { calculateTotalCost } from './utils/price'
 import { loadCheckoutContext, saveCheckoutContext } from './utils/checkoutStorage'
 import { useCreateBookingMutation } from '@/api/checkout'
 import { useNotification } from '@/hooks'
+import { useTranslation } from 'react-i18next'
 
 type LocationState = { checkout?: CheckoutContext }
 
 export default function Checkout() {
+  const { t } = useTranslation()
   const location = useLocation()
   const navigate = useNavigate()
   const [uiError, setUiError] = useState<string | null>(null)
@@ -31,9 +33,7 @@ export default function Checkout() {
   }, [location.state])
 
   if (!ctx) {
-    return (
-      <Typography variant="h6">Missing booking data. Go back and select a room first.</Typography>
-    )
+    return <Typography variant="h6">{t('checkout.missingData')}</Typography>
   }
 
   const handleSubmit = async (values: UserInfoValues) => {
@@ -52,11 +52,11 @@ export default function Checkout() {
         paymentMethod: values.paymentMethod,
       }).unwrap()
 
-      showSuccess('Booking confirmed! Redirecting...')
+      showSuccess(t('checkout.bookingConfirmed'))
       void navigate(`/checkout/confirmation/${bookingId}`, { replace: true })
     } catch (error) {
       console.error('Booking failed:', error)
-      showError('Failed to complete booking. Please try again.')
+      showError(t('checkout.bookingFailed'))
     }
   }
 
@@ -69,7 +69,7 @@ export default function Checkout() {
           fontSize: { xs: '1.5rem', sm: '2rem' },
         }}
       >
-        Checkout
+        {t('checkout.title')}
       </Typography>
 
       <Box

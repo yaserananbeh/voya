@@ -7,6 +7,7 @@ import { saveCheckoutContext } from '@/pages/Checkout/utils/checkoutStorage'
 import { useAppSelector } from '@/hooks'
 import { SafeImage } from '@/components/common/SafeImage'
 import { useNotification } from '@/hooks'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   hotelId: number
@@ -16,13 +17,15 @@ type Props = {
 }
 
 export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const searchParams = useAppSelector(selectSearchParams)
   const { showWarning } = useNotification()
+  const isRTL = i18n.language === 'ar'
 
   const handleBook = (room: HotelRoomDto) => {
     if (!searchParams.checkInDate || !searchParams.checkOutDate) {
-      showWarning('Please select check-in and check-out dates first')
+      showWarning(t('hotel.pleaseSelectDates'))
       return
     }
 
@@ -66,7 +69,7 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
   return (
     <Box>
       <Typography variant="h6" gutterBottom>
-        Available Rooms
+        {t('hotel.availableRooms')}
       </Typography>
 
       <Box
@@ -96,10 +99,10 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
               <Typography variant="h6">{room.roomType}</Typography>
 
               <Typography color="text.secondary" variant="body2">
-                {room.capacityOfAdults} Adults
+                {room.capacityOfAdults} {t('hotel.adults')}
               </Typography>
               <Typography color="text.secondary" variant="body2">
-                {room.capacityOfChildren} Children
+                {room.capacityOfChildren} {t('hotel.children')}
               </Typography>
 
               <Stack direction="row" spacing={1} mt={1} flexWrap="wrap">
@@ -112,7 +115,7 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
               </Stack>
 
               <Typography mt={2} fontWeight="bold">
-                ${room.price} / night
+                ${room.price} {t('hotel.perNight')}
               </Typography>
             </CardContent>
 
@@ -122,8 +125,11 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
                 variant="contained"
                 disabled={!room.availability}
                 onClick={() => handleBook(room)}
+                sx={{
+                  flexDirection: isRTL ? 'row-reverse' : 'row',
+                }}
               >
-                {room.availability ? 'Book now' : 'Not available'}
+                {room.availability ? t('hotel.bookNow') : t('hotel.notAvailable')}
               </Button>
             </CardActions>
           </Card>
