@@ -5,6 +5,7 @@ import ProtectedRoute from '@/components/auth/ProtectedRoute'
 import AdminRoute from '@/components/auth/AdminRoute'
 import RedirectIfAuthenticated from '@/components/auth/RedirectIfAuthenticated'
 import { VoyaLoader } from '@/components'
+import { RouteError } from '@/pages/Error/RouteError'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Login = lazy(() => import('@/pages/Login'))
@@ -42,6 +43,7 @@ export const router = createBrowserRouter([
         <MainLayout />
       </SuspenseLayout>
     ),
+    errorElement: <RouteError />,
     children: [
       { index: true, element: <Navigate to="/home" replace /> },
 
@@ -55,7 +57,6 @@ export const router = createBrowserRouter([
       },
 
       { path: 'home', element: <Home /> },
-
       { path: 'search', element: <SearchResults /> },
       { path: 'hotel/:hotelId', element: <Hotel /> },
 
@@ -90,9 +91,9 @@ export const router = createBrowserRouter([
         </AdminRoute>
       </ProtectedRoute>
     ),
+    errorElement: <RouteError />,
     children: [
       { index: true, element: <Navigate to="dashboard" replace /> },
-
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'cities', element: <Cities /> },
       { path: 'hotels', element: <Hotels /> },
@@ -107,5 +108,6 @@ export const router = createBrowserRouter([
         <NotFound />
       </SuspenseLayout>
     ),
+    errorElement: <RouteError />,
   },
 ])
