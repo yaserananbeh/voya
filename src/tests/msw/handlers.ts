@@ -43,11 +43,43 @@ export const handlers = [
   // ===========================
   // CITIES API
   // ===========================
-  http.get('/api/cities', () => {
-    return HttpResponse.json([
-      { id: 1, name: 'Dubai' },
-      { id: 2, name: 'Paris' },
-    ])
+  http.get('/api/cities', ({ request }) => {
+    const url = new URL(request.url)
+    const searchQuery = url.searchParams.get('searchQuery') ?? ''
+
+    const allCities = [
+      {
+        id: 3,
+        name: 'Tokyo',
+        description:
+          'The bustling capital of Japan, known for its advanced technology, shopping, and unique blend of old and new.',
+      },
+      {
+        id: 4,
+        name: 'London',
+        description:
+          'The capital of England, famous for its historical landmarks, museums, and theaters.',
+      },
+      {
+        id: 5,
+        name: 'Rome',
+        description:
+          'The capital of Italy, known for its ancient history, stunning architecture, and delicious food.',
+      },
+      { id: 6, name: 'Paris', description: 'good place' },
+    ]
+
+    let filtered = allCities
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase()
+      filtered = allCities.filter(
+        (city) =>
+          city.name.toLowerCase().includes(query) ||
+          city.description?.toLowerCase().includes(query),
+      )
+    }
+
+    return HttpResponse.json(filtered)
   }),
 
   // ===========================

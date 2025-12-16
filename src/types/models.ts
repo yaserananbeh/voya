@@ -191,16 +191,14 @@ export interface BookingDetailsDto {
 // ======================
 // Admin: Cities / Hotels / Rooms
 // ======================
-
 export interface CityWithoutHotelsDto {
   id: number
   name: string
-  country: string
+  description?: string | null
 }
 
 export interface CityForCreationDto {
   name: string
-  country: string
   description?: string | null
 }
 

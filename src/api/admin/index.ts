@@ -1,6 +1,5 @@
 import { baseApi } from '../baseApi'
 import type {
-  CityWithoutHotelsDto,
   CityForCreationDto,
   CityDto,
   HotelWithoutRoomsDto,
@@ -19,7 +18,7 @@ export interface PaginationQuery {
 // Cities
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getCities: build.query<CityWithoutHotelsDto[], PaginationQuery | void>({
+    getCities: build.query<CityDto[], PaginationQuery | void>({
       query: (params) => {
         if (!params) return '/cities'
         return { url: '/cities', params }
@@ -71,6 +70,56 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Rooms'],
     }),
+    updateCity: build.mutation<CityDto, { id: number; data: CityForCreationDto }>({
+      query: ({ id, data }) => ({
+        url: `/cities/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['Cities'],
+    }),
+
+    deleteCity: build.mutation<void, number>({
+      query: (id) => ({
+        url: `/cities/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Cities'],
+    }),
+
+    updateHotel: build.mutation<HotelWithoutRoomsDto, { id: number; data: HotelForCreationDto }>({
+      query: ({ id, data }) => ({
+        url: `/hotels/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['Hotel'],
+    }),
+
+    deleteHotel: build.mutation<void, number>({
+      query: (id) => ({
+        url: `/hotels/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Hotel'],
+    }),
+
+    updateRoom: build.mutation<RoomDto, { id: number; data: RoomForCreationDto }>({
+      query: ({ id, data }) => ({
+        url: `/rooms/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['Rooms'],
+    }),
+
+    deleteRoom: build.mutation<void, number>({
+      query: (id) => ({
+        url: `/rooms/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Rooms'],
+    }),
   }),
 })
 
@@ -81,4 +130,7 @@ export const {
   useCreateHotelMutation,
   useGetRoomsAdminQuery,
   useCreateRoomMutation,
+  useUpdateCityMutation,
+  useDeleteCityMutation,
+  useUpdateHotelMutation,
 } = adminApi
