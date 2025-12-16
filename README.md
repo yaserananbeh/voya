@@ -11,3 +11,6 @@ backend: https://travel-and-accommodation-booking-static.onrender.com
 
 
 pnpm verify:stage
+
+files to execlude from search
+.config.js,.gitignore, README.md, tsconfig.*, *md,_*, reset.css, api.ts,.env*,*.json,*.yaml, *.config.ts,.svg,
