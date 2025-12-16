@@ -6,7 +6,11 @@ import {
   type ThemeOptions,
 } from '@mui/material/styles'
 
-const getThemeOptions = (mode: 'light' | 'dark'): ThemeOptions => ({
+const getThemeOptions = (
+  mode: 'light' | 'dark',
+  direction: 'ltr' | 'rtl' = 'ltr',
+): ThemeOptions => ({
+  direction,
   palette: {
     mode,
     primary: {
@@ -217,8 +221,11 @@ const getThemeOptions = (mode: 'light' | 'dark'): ThemeOptions => ({
   },
 })
 
-export const createAppTheme = (mode: 'light' | 'dark' = 'light') => {
-  return responsiveFontSizes(createTheme(getThemeOptions(mode)))
+export const createAppTheme = (
+  mode: 'light' | 'dark' = 'light',
+  direction: 'ltr' | 'rtl' = 'ltr',
+) => {
+  return responsiveFontSizes(createTheme(getThemeOptions(mode, direction)))
 }
 
 export const theme = createAppTheme('light')

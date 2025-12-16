@@ -15,10 +15,12 @@ import { SafeImage } from '@/components/common/SafeImage'
 import styles from '../styles.module.css'
 import { formatDistanceToNow } from '@/utils/date'
 import VisibilityIcon from '@mui/icons-material/Visibility'
+import { useTranslation } from 'react-i18next'
 
 const MOCK_USER_ID = 1
 
 export function RecentHotelsSection() {
+  const { t } = useTranslation()
   const { data, isLoading, isError } = useRecentHotelsQuery({
     userId: MOCK_USER_ID,
   })
@@ -34,13 +36,13 @@ export function RecentHotelsSection() {
   }
 
   if (isError) {
-    return <Alert severity="error">Couldn&apos;t load your recent hotels right now.</Alert>
+    return <Alert severity="error">{t('home.recentHotelsError')}</Alert>
   }
 
   if (!data || data.length === 0) {
     return (
       <Typography variant="body2" color="text.secondary">
-        You don&apos;t have any recently visited hotels yet.
+        {t('home.noRecentHotels')}
       </Typography>
     )
   }
@@ -58,11 +60,11 @@ export function RecentHotelsSection() {
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, mb: 1 }}>
               <Rating value={hotel.starRating} readOnly size="small" max={5} />
               <Typography variant="body2" sx={{ ml: 1 }}>
-                {hotel.starRating}-star hotel
+                {hotel.starRating} {t('hotel.starHotel')}
               </Typography>
             </Box>
             <Typography variant="body2" color="text.secondary">
-              Visited{' '}
+              {t('hotel.visited')}{' '}
               {formatDistanceToNow(new Date(hotel.visitDate), {
                 addSuffix: true,
               })}
@@ -76,7 +78,7 @@ export function RecentHotelsSection() {
               fullWidth
               startIcon={<VisibilityIcon />}
             >
-              View Details
+              {t('common.viewDetails')}
             </Button>
           </CardActions>
         </Card>

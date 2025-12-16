@@ -13,12 +13,14 @@ import { PriceFilter } from './PriceFilter'
 import { StarRatingFilter } from './StarRatingFilter'
 import { AmenitiesFilter } from './AmenitiesFilter'
 import { HotelTypeFilter } from './HotelTypeFilter'
+import { useTranslation } from 'react-i18next'
 
 type FiltersSidebarProps = {
   onClose?: () => void
 }
 
 export function FiltersSidebar({ onClose }: FiltersSidebarProps) {
+  const { t } = useTranslation()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
@@ -48,7 +50,7 @@ export function FiltersSidebar({ onClose }: FiltersSidebarProps) {
         <Stack spacing={3}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant="h6" fontWeight={600}>
-              Filters
+              {t('search.filters')}
             </Typography>
             {isMobile && onClose && (
               <IconButton onClick={onClose} size="small">

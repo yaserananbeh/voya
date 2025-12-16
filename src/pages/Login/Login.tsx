@@ -7,6 +7,7 @@ import { setCredentials } from '@/store/authSlice'
 import { useNavigate, useLocation } from 'react-router-dom'
 import styles from './styles.module.css'
 import { useNotification } from '@/hooks'
+import { useTranslation } from 'react-i18next'
 
 const validationSchema = yup.object({
   userName: yup.string().required('Username is required'),
@@ -14,6 +15,7 @@ const validationSchema = yup.object({
 })
 
 export default function Login() {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -37,7 +39,7 @@ export default function Login() {
           }),
         )
 
-        showSuccess('Login successful!')
+        showSuccess(t('auth.loginSuccess'))
 
         if (result.userType === 'Admin') {
           await navigate(from || '/admin/dashboard', { replace: true })
@@ -46,7 +48,7 @@ export default function Login() {
         }
       } catch (error) {
         console.error('Login failed:', error)
-        showError('Login failed. Please check your credentials.')
+        showError(t('auth.loginFailed'))
       }
     },
   })
@@ -75,13 +77,13 @@ export default function Login() {
               fontSize: { xs: '1.25rem', sm: '1.5rem' },
             }}
           >
-            Login to Voya
+            {t('auth.loginTitle')}
           </Typography>
 
           <form onSubmit={formik.handleSubmit}>
             <TextField
               fullWidth
-              label="Username"
+              label={t('auth.username')}
               name="userName"
               value={formik.values.userName}
               onChange={formik.handleChange}
@@ -93,7 +95,7 @@ export default function Login() {
             <TextField
               fullWidth
               type="password"
-              label="Password"
+              label={t('auth.password')}
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}

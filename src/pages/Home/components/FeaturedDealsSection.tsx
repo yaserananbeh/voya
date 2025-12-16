@@ -5,8 +5,10 @@ import { HomeSkeletonCard } from './HomeSkeletonCard'
 import { SafeImage } from '@/components/common/SafeImage'
 import styles from '../styles.module.css'
 import VisibilityIcon from '@mui/icons-material/Visibility'
+import { useTranslation } from 'react-i18next'
 
 export function FeaturedDealsSection() {
+  const { t } = useTranslation()
   const { data, isLoading, isError } = useFeaturedDealsQuery()
 
   if (isLoading) {
@@ -20,13 +22,11 @@ export function FeaturedDealsSection() {
   }
 
   if (isError) {
-    return (
-      <Alert severity="error">Couldn&apos;t load featured deals. Please try again later.</Alert>
-    )
+    return <Alert severity="error">{t('home.featuredDealsError')}</Alert>
   }
 
   if (!data || data.length === 0) {
-    return <Typography>No featured deals at the moment.</Typography>
+    return <Typography>{t('home.noFeaturedDeals')}</Typography>
   }
 
   return (
@@ -66,7 +66,7 @@ export function FeaturedDealsSection() {
               fullWidth
               startIcon={<VisibilityIcon />}
             >
-              View Details
+              {t('common.viewDetails')}
             </Button>
           </CardActions>
         </Card>

@@ -1,6 +1,7 @@
 import { Button, MenuItem, Stack, TextField } from '@mui/material'
 import { Form, Formik } from 'formik'
 import { bookingSchema } from './bookingSchema'
+import { useTranslation } from 'react-i18next'
 
 export type UserInfoValues = {
   customerName: string
@@ -16,6 +17,8 @@ export function UserInfoForm({
   onSubmit: (values: UserInfoValues) => Promise<void>
   submitting: boolean
 }) {
+  const { t } = useTranslation()
+
   return (
     <Formik<UserInfoValues>
       initialValues={initialValues}
@@ -27,7 +30,7 @@ export function UserInfoForm({
           if (error instanceof Error) {
             helpers.setStatus(error.message)
           } else {
-            helpers.setStatus('Unexpected error occurred')
+            helpers.setStatus(t('checkout.unexpectedError'))
           }
         }
       }}
@@ -37,7 +40,7 @@ export function UserInfoForm({
           <Stack spacing={2}>
             <TextField
               name="customerName"
-              label="Full name"
+              label={t('checkout.fullName')}
               value={values.customerName}
               onChange={handleChange}
               error={Boolean(touched.customerName && errors.customerName)}
@@ -48,7 +51,7 @@ export function UserInfoForm({
             <TextField
               select
               name="paymentMethod"
-              label="Payment method"
+              label={t('checkout.paymentMethod')}
               value={values.paymentMethod}
               onChange={handleChange}
               error={Boolean(touched.paymentMethod && errors.paymentMethod)}
@@ -67,7 +70,7 @@ export function UserInfoForm({
             )}
 
             <Button type="submit" variant="contained" disabled={submitting}>
-              Confirm booking
+              {t('checkout.confirmBooking')}
             </Button>
           </Stack>
         </Form>

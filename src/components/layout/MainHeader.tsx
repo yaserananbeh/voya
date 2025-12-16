@@ -19,8 +19,11 @@ import { useAppSelector, useAppDispatch } from '@/hooks'
 import { selectIsAuthenticated, logout } from '@/store/authSlice'
 import LogoutBtn from '@/components/layout/LogoutBtn'
 import { ThemeToggle } from './ThemeToggle'
+import { LanguageSwitcher } from './LanguageSwitcher'
+import { useTranslation } from 'react-i18next'
 
 export default function MainHeader() {
+  const { t } = useTranslation()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const navigate = useNavigate()
@@ -84,6 +87,7 @@ export default function MainHeader() {
         </Box>
         {isMobile ? (
           <>
+            <LanguageSwitcher />
             <ThemeToggle />
             <IconButton color="primary" onClick={handleMenuOpen}>
               <MenuIcon />
@@ -102,21 +106,21 @@ export default function MainHeader() {
               }}
             >
               <MenuItem component={RouterLink} to="/home" onClick={handleMenuClose}>
-                Home
+                {t('common.home')}
               </MenuItem>
               <MenuItem component={RouterLink} to="/search" onClick={handleMenuClose}>
-                Search
+                {t('common.search')}
               </MenuItem>
               <MenuItem onClick={handleAuthClick}>
                 {isAuthenticated ? (
                   <>
                     <LogoutIcon sx={{ mr: 1 }} />
-                    Logout
+                    {t('common.logout')}
                   </>
                 ) : (
                   <>
                     <LoginIcon sx={{ mr: 1 }} />
-                    Login
+                    {t('common.login')}
                   </>
                 )}
               </MenuItem>
@@ -124,12 +128,13 @@ export default function MainHeader() {
           </>
         ) : (
           <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+            <LanguageSwitcher />
             <ThemeToggle />
             <Button component={RouterLink} to="/home" color="primary">
-              Home
+              {t('common.home')}
             </Button>
             <Button component={RouterLink} to="/search" color="primary">
-              Search
+              {t('common.search')}
             </Button>
             <LogoutBtn />
           </Box>

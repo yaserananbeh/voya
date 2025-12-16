@@ -1,8 +1,10 @@
 import { Card, CardContent, Divider, Stack, Typography } from '@mui/material'
 import type { CheckoutContext } from '../types'
 import { calculateTotalCost, nightsBetween } from '../utils/price'
+import { useTranslation } from 'react-i18next'
 
 export function BookingSummary({ ctx }: { ctx: CheckoutContext }) {
+  const { t } = useTranslation()
   const nights = nightsBetween(ctx.checkInDate, ctx.checkOutDate)
   const total = calculateTotalCost(ctx.pricePerNight, ctx.checkInDate, ctx.checkOutDate)
 
@@ -10,23 +12,23 @@ export function BookingSummary({ ctx }: { ctx: CheckoutContext }) {
     <Card>
       <CardContent>
         <Typography variant="h6" gutterBottom>
-          Booking summary
+          {t('checkout.bookingSummary')}
         </Typography>
 
         <Stack spacing={1}>
           <Typography>
-            <b>Hotel:</b> {ctx.hotelName}
+            <b>{t('checkout.hotel')}:</b> {ctx.hotelName}
           </Typography>
           <Typography>
-            <b>Room:</b> {ctx.roomType} (#{ctx.roomNumber})
+            <b>{t('checkout.room')}:</b> {ctx.roomType} (#{ctx.roomNumber})
           </Typography>
           {ctx.cityName ? (
             <Typography>
-              <b>City:</b> {ctx.cityName}
+              <b>{t('checkout.city')}:</b> {ctx.cityName}
             </Typography>
           ) : null}
           <Typography>
-            <b>Dates:</b> {ctx.checkInDate} → {ctx.checkOutDate}
+            <b>{t('checkout.dates')}:</b> {ctx.checkInDate} → {ctx.checkOutDate}
           </Typography>
         </Stack>
 
@@ -34,13 +36,13 @@ export function BookingSummary({ ctx }: { ctx: CheckoutContext }) {
 
         <Stack spacing={0.5}>
           <Typography>
-            <b>Price/night:</b> {ctx.pricePerNight.toFixed(2)}
+            <b>{t('checkout.pricePerNight')}:</b> {ctx.pricePerNight.toFixed(2)}
           </Typography>
           <Typography>
-            <b>Nights:</b> {nights}
+            <b>{t('checkout.nights')}:</b> {nights}
           </Typography>
           <Typography variant="h6">
-            <b>Total:</b> {total.toFixed(2)}
+            <b>{t('checkout.total')}:</b> {total.toFixed(2)}
           </Typography>
         </Stack>
       </CardContent>

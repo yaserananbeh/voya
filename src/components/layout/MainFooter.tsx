@@ -4,8 +4,11 @@ import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
 import EmailIcon from '@mui/icons-material/Email'
 import PhoneIcon from '@mui/icons-material/Phone'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
+import { useTranslation } from 'react-i18next'
 
 export function MainFooter() {
+  const { t } = useTranslation()
+
   return (
     <Box
       component="footer"
@@ -40,41 +43,41 @@ export function MainFooter() {
                 </Typography>
               </Stack>
               <Typography variant="body2" color="grey.400" sx={{ mb: 2 }}>
-                Discover your perfect stay. Book with confidence and travel with ease.
+                {t('footer.tagline')}
               </Typography>
               <Stack direction="row" spacing={2}>
                 <Button component={RouterLink} to="/home" color="inherit" size="small">
-                  Home
+                  {t('common.home')}
                 </Button>
                 <Button component={RouterLink} to="/search" color="inherit" size="small">
-                  Search
+                  {t('common.search')}
                 </Button>
                 <Button component={RouterLink} to="/login" color="inherit" size="small">
-                  Login
+                  {t('common.login')}
                 </Button>
               </Stack>
             </Box>
 
             <Box sx={{ flex: 1 }}>
               <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
-                Quick Links
+                {t('footer.quickLinks')}
               </Typography>
               <Stack spacing={1}>
                 <Link component={RouterLink} to="/home" color="inherit" underline="hover">
-                  Browse Hotels
+                  {t('footer.browseHotels')}
                 </Link>
                 <Link component={RouterLink} to="/search" color="inherit" underline="hover">
-                  Search Stays
+                  {t('footer.searchStays')}
                 </Link>
                 <Link component={RouterLink} to="/login" color="inherit" underline="hover">
-                  Sign In
+                  {t('footer.signIn')}
                 </Link>
               </Stack>
             </Box>
 
             <Box sx={{ flex: 1 }}>
               <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
-                Contact Us
+                {t('footer.contactUs')}
               </Typography>
               <Stack spacing={1.5}>
                 <Stack direction="row" spacing={1} alignItems="center">
@@ -108,14 +111,14 @@ export function MainFooter() {
             alignItems="center"
           >
             <Typography variant="body2" color="grey.400">
-              © {new Date().getFullYear()} Voya. All rights reserved.
+              © {new Date().getFullYear()} Voya. {t('footer.copyright')}
             </Typography>
             <Stack direction="row" spacing={2}>
               <Link href="#" color="inherit" underline="hover" variant="body2">
-                Privacy Policy
+                {t('footer.privacyPolicy')}
               </Link>
               <Link href="#" color="inherit" underline="hover" variant="body2">
-                Terms of Service
+                {t('footer.termsOfService')}
               </Link>
             </Stack>
           </Stack>

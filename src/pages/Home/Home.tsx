@@ -7,8 +7,11 @@ import { RecentHotelsSection } from './components/RecentHotelsSection'
 import { TrendingDestinationsSection } from './components/TrendingDestinationsSection'
 import { HeroSection } from './components/HeroSection'
 import styles from './styles.module.css'
+import { useTranslation } from 'react-i18next'
 
 export default function Home() {
+  const { t } = useTranslation()
+
   return (
     <PageContainer>
       <HeroSection />
@@ -16,31 +19,31 @@ export default function Home() {
       <Container maxWidth="lg">
         <Section className={styles.searchSection}>
           <Typography variant="h5" sx={{ mb: 2 }}>
-            Search stays
+            {t('home.searchStays')}
           </Typography>
           <HomeSearchBar />
         </Section>
 
         <Section
           id="featured-deals"
-          title="Featured deals"
-          subtitle="Special offers tailored for you"
+          title={t('home.featuredDeals')}
+          subtitle={t('home.featuredDealsSubtitle')}
           className={styles.section}
         >
           <FeaturedDealsSection />
         </Section>
 
         <Section
-          title="Your recently visited hotels"
-          subtitle="Quick access to places you checked before"
+          title={t('home.recentHotels')}
+          subtitle={t('home.recentHotelsSubtitle')}
           className={styles.section}
         >
           <RecentHotelsSection />
         </Section>
 
         <Section
-          title="Trending destinations"
-          subtitle="Popular cities travelers love right now"
+          title={t('home.trendingDestinations')}
+          subtitle={t('home.trendingDestinationsSubtitle')}
           className={styles.section}
         >
           <TrendingDestinationsSection />

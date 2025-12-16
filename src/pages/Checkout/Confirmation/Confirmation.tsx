@@ -1,8 +1,10 @@
 import { Card, CardContent, CircularProgress, Stack, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { useGetBookingByIdQuery } from '@/api/checkout'
+import { useTranslation } from 'react-i18next'
 
 export default function Confirmation() {
+  const { t } = useTranslation()
   const { bookingId } = useParams()
   const id = Number(bookingId)
 
@@ -11,7 +13,7 @@ export default function Confirmation() {
   })
 
   if (!Number.isFinite(id)) {
-    return <Typography variant="h6">Invalid booking id.</Typography>
+    return <Typography variant="h6">{t('confirmation.invalidBookingId')}</Typography>
   }
 
   if (isLoading) {
@@ -19,40 +21,40 @@ export default function Confirmation() {
   }
 
   if (isError || !data) {
-    return <Typography variant="h6">Failed to load booking details.</Typography>
+    return <Typography variant="h6">{t('confirmation.failedToLoadBooking')}</Typography>
   }
 
   return (
     <Card>
       <CardContent>
         <Typography variant="h4" gutterBottom>
-          Booking confirmed
+          {t('confirmation.bookingConfirmed')}
         </Typography>
 
         <Stack spacing={1}>
           <Typography>
-            <b>Confirmation #:</b> {data.confirmationNumber ?? '—'}
+            <b>{t('confirmation.confirmationNumber')}:</b> {data.confirmationNumber ?? '—'}
           </Typography>
           <Typography>
-            <b>Status:</b> {data.bookingStatus ?? '—'}
+            <b>{t('confirmation.status')}:</b> {data.bookingStatus ?? '—'}
           </Typography>
           <Typography>
-            <b>Name:</b> {data.customerName ?? '—'}
+            <b>{t('confirmation.name')}:</b> {data.customerName ?? '—'}
           </Typography>
           <Typography>
-            <b>Hotel:</b> {data.hotelName ?? '—'}
+            <b>{t('confirmation.hotel')}:</b> {data.hotelName ?? '—'}
           </Typography>
           <Typography>
-            <b>Room:</b> {data.roomType ?? '—'} (#{data.roomNumber ?? '—'})
+            <b>{t('confirmation.room')}:</b> {data.roomType ?? '—'} (#{data.roomNumber ?? '—'})
           </Typography>
           <Typography>
-            <b>Total:</b> {Number(data.totalCost).toFixed(2)}
+            <b>{t('confirmation.total')}:</b> {Number(data.totalCost).toFixed(2)}
           </Typography>
           <Typography>
-            <b>Payment:</b> {data.paymentMethod ?? '—'}
+            <b>{t('confirmation.payment')}:</b> {data.paymentMethod ?? '—'}
           </Typography>
           <Typography>
-            <b>Booked at:</b> {data.bookingDateTime}
+            <b>{t('confirmation.bookedAt')}:</b> {data.bookingDateTime}
           </Typography>
         </Stack>
       </CardContent>

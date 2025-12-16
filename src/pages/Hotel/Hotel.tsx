@@ -12,8 +12,10 @@ import { HotelMap } from './components/HotelMap'
 import { HotelRooms } from './components/HotelRooms'
 import { HotelReviews } from './components/HotelReviews'
 import { VoyaLoader } from '@/components'
+import { useTranslation } from 'react-i18next'
 
 export default function Hotel() {
+  const { t } = useTranslation()
   const { hotelId } = useParams()
   const id = Number(hotelId)
 
@@ -23,14 +25,15 @@ export default function Hotel() {
   const { data: rooms } = useGetHotelRoomsQuery(id, { skip: Number.isNaN(id) })
   const { data: reviews } = useGetHotelReviewsQuery(id, { skip: Number.isNaN(id) })
 
-  if (Number.isNaN(id)) return <Typography color="error">Invalid hotel id</Typography>
+  if (Number.isNaN(id)) return <Typography color="error">{t('hotel.invalidHotelId')}</Typography>
   if (isLoading)
     return (
       <Box>
         <VoyaLoader />
       </Box>
     )
-  if (isError || !hotel) return <Typography color="error">Failed to load hotel</Typography>
+  if (isError || !hotel)
+    return <Typography color="error">{t('hotel.failedToLoadHotel')}</Typography>
 
   return (
     <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3 } }}>
