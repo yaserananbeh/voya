@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { setCredentials } from '@/store/authSlice'
 import { useNavigate, useLocation } from 'react-router-dom'
 import styles from './styles.module.css'
+import { useNotification } from '@/hooks'
 
 const validationSchema = yup.object({
   userName: yup.string().required('Username is required'),
@@ -17,6 +18,7 @@ export default function Login() {
   const navigate = useNavigate()
   const location = useLocation()
   const [login, { isLoading }] = useLoginMutation()
+  const { showSuccess, showError } = useNotification()
 
   const from = (location.state as { from?: Location })?.from?.pathname || null
 
@@ -35,6 +37,8 @@ export default function Login() {
           }),
         )
 
+        showSuccess('Login successful!')
+
         if (result.userType === 'Admin') {
           await navigate(from || '/admin/dashboard', { replace: true })
         } else {
@@ -42,6 +46,7 @@ export default function Login() {
         }
       } catch (error) {
         console.error('Login failed:', error)
+        showError('Login failed. Please check your credentials.')
       }
     },
   })
