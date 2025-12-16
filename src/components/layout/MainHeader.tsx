@@ -1,9 +1,52 @@
-import { AppBar, Toolbar, Box, Button } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import { useState } from 'react'
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
+import MenuIcon from '@mui/icons-material/Menu'
+import LogoutIcon from '@mui/icons-material/Logout'
+import LoginIcon from '@mui/icons-material/Login'
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
+import { useAppSelector, useAppDispatch } from '@/hooks'
+import { selectIsAuthenticated, logout } from '@/store/authSlice'
 import LogoutBtn from '@/components/layout/LogoutBtn'
 
 export default function MainHeader() {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const isAuthenticated = useAppSelector(selectIsAuthenticated)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleMenuClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handleAuthClick = () => {
+    if (isAuthenticated) {
+      localStorage.removeItem('token')
+      localStorage.removeItem('userType')
+      dispatch(logout())
+      void navigate('/home', { replace: true })
+    } else {
+      void navigate('/login')
+    }
+    handleMenuClose()
+  }
+
   return (
     <AppBar position="sticky" color="default" elevation={1}>
       <Toolbar>
@@ -18,11 +61,16 @@ export default function MainHeader() {
             flexGrow: 1,
           }}
         >
-          <FlightTakeoffIcon sx={{ color: 'primary.main', fontSize: 32 }} />
+          <FlightTakeoffIcon
+            sx={{
+              color: 'primary.main',
+              fontSize: { xs: 24, sm: 32 },
+            }}
+          />
           <Box
             component="span"
             sx={{
-              fontSize: '1.5rem',
+              fontSize: { xs: '1.25rem', sm: '1.5rem' },
               fontWeight: 700,
               background: 'linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)',
               WebkitBackgroundClip: 'text',
@@ -33,15 +81,56 @@ export default function MainHeader() {
             Voya
           </Box>
         </Box>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          <Button component={RouterLink} to="/home" color="primary">
-            Home
-          </Button>
-          <Button component={RouterLink} to="/search" color="primary">
-            Search
-          </Button>
-          <LogoutBtn />
-        </Box>
+        {isMobile ? (
+          <>
+            <IconButton color="primary" onClick={handleMenuOpen}>
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+            >
+              <MenuItem component={RouterLink} to="/home" onClick={handleMenuClose}>
+                Home
+              </MenuItem>
+              <MenuItem component={RouterLink} to="/search" onClick={handleMenuClose}>
+                Search
+              </MenuItem>
+              <MenuItem onClick={handleAuthClick}>
+                {isAuthenticated ? (
+                  <>
+                    <LogoutIcon sx={{ mr: 1 }} />
+                    Logout
+                  </>
+                ) : (
+                  <>
+                    <LoginIcon sx={{ mr: 1 }} />
+                    Login
+                  </>
+                )}
+              </MenuItem>
+            </Menu>
+          </>
+        ) : (
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            <Button component={RouterLink} to="/home" color="primary">
+              Home
+            </Button>
+            <Button component={RouterLink} to="/search" color="primary">
+              Search
+            </Button>
+            <LogoutBtn />
+          </Box>
+        )}
       </Toolbar>
     </AppBar>
   )
