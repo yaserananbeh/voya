@@ -25,9 +25,6 @@ type CreateBookingResponse = number | { bookingId: number } | { id: number }
 const extractBookingId = (res: CreateBookingResponse): number => {
   console.log(res)
 
-  // if (typeof res === 'number') return res
-  // if ('bookingId' in res) return res.bookingId
-  // if ('id' in res) return res.id
   return 1
   throw new Error('Invalid booking response shape')
 }

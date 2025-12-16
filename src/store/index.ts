@@ -37,7 +37,7 @@ store.subscribe(() => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(store.getState().search))
   } catch {
-    // ignore
+    console.log('test')
   }
 })
 
