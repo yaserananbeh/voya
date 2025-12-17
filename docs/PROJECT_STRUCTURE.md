@@ -29,6 +29,7 @@ Voya
 │   ├── extensions.json
 │   └── settings.json
 ├── README.md
+├── REQUIREMENTS_COVERAGE.md
 ├── docs
 │   ├── API_CACHING_STRATEGY.md
 │   ├── ASSETS_MANAGEMENT_STRATEGY.md
@@ -49,7 +50,7 @@ Voya
 ├── pnpm-lock.yaml
 ├── public
 │   ├── _redirects
-│   └── vite.svg
+│   └── favicon.svg
 ├── setupTests.ts
 ├── src
 │   ├── App.tsx
@@ -80,12 +81,18 @@ Voya
 │   │   │   ├── AdminRoute.tsx
 │   │   │   ├── ProtectedRoute.tsx
 │   │   │   └── RedirectIfAuthenticated.tsx
+│   │   ├── common
+│   │   │   ├── SafeImage.tsx
+│   │   │   └── VoyaLoader.tsx
 │   │   ├── index.ts
 │   │   ├── layout
+│   │   │   ├── LanguageSwitcher.tsx
 │   │   │   ├── LogoutBtn.tsx
+│   │   │   ├── MainFooter.tsx
+│   │   │   ├── MainHeader.tsx
 │   │   │   ├── PageContainer.tsx
-│   │   │   ├── PageHeader.tsx
-│   │   │   └── Section.tsx
+│   │   │   ├── Section.tsx
+│   │   │   └── ThemeToggle.tsx
 │   │   └── readme.md
 │   ├── constants
 │   │   ├── api.ts
@@ -94,7 +101,15 @@ Voya
 │   │   └── messages.ts
 │   ├── hooks
 │   │   ├── index.ts
-│   │   └── tests
+│   │   ├── tests
+│   │   ├── useNotification.ts
+│   │   ├── useRTL.ts
+│   │   └── useRTLButton.ts
+│   ├── i18n
+│   │   ├── config.ts
+│   │   └── locales
+│   │       ├── ar.json
+│   │       └── en.json
 │   ├── layouts
 │   │   ├── AdminLayout
 │   │   │   ├── AdminLayout.module.css
@@ -111,6 +126,8 @@ Voya
 │   │   │   ├── Cities
 │   │   │   │   ├── Cities.tsx
 │   │   │   │   ├── components
+│   │   │   │   │   ├── CityForm.tsx
+│   │   │   │   │   └── DeleteConfirmDialog.tsx
 │   │   │   │   ├── ducks
 │   │   │   │   │   └── readme.md
 │   │   │   │   ├── hooks
@@ -131,6 +148,8 @@ Voya
 │   │   │   ├── Hotels
 │   │   │   │   ├── Hotels.tsx
 │   │   │   │   ├── components
+│   │   │   │   │   ├── DeleteConfirmDialog.tsx
+│   │   │   │   │   └── HotelForm.tsx
 │   │   │   │   ├── ducks
 │   │   │   │   │   └── readme.md
 │   │   │   │   ├── hooks
@@ -141,6 +160,8 @@ Voya
 │   │   │   ├── Rooms
 │   │   │   │   ├── Rooms.tsx
 │   │   │   │   ├── components
+│   │   │   │   │   ├── DeleteConfirmDialog.tsx
+│   │   │   │   │   └── RoomForm.tsx
 │   │   │   │   ├── ducks
 │   │   │   │   │   └── readme.md
 │   │   │   │   ├── hooks
@@ -184,11 +205,17 @@ Voya
 │   │   │   └── utils
 │   │   │       ├── checkoutStorage.ts
 │   │   │       └── price.ts
+│   │   ├── Error
+│   │   │   ├── ErrorPage.tsx
+│   │   │   ├── QuickErrorTest.tsx
+│   │   │   ├── RouteError.tsx
+│   │   │   └── index.ts
 │   │   ├── Home
 │   │   │   ├── Home.tsx
 │   │   │   ├── components
 │   │   │   │   ├── FeaturedDealsSection.tsx
 │   │   │   │   ├── GuestRoomSelector.tsx
+│   │   │   │   ├── HeroSection.tsx
 │   │   │   │   ├── HomeSearchBar.tsx
 │   │   │   │   ├── HomeSkeletonCard.tsx
 │   │   │   │   ├── RecentHotelsSection.tsx
@@ -249,6 +276,8 @@ Voya
 │   │       └── utils
 │   ├── providers
 │   │   ├── ErrorBoundary.tsx
+│   │   ├── NotificationProvider.tsx
+│   │   ├── ThemeContext.tsx
 │   │   └── index.tsx
 │   ├── routes
 │   │   └── routes.tsx
