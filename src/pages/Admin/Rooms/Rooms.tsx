@@ -48,12 +48,14 @@ export default function Rooms() {
       field: 'roomNumber',
       headerName: 'Room Number',
       width: 150,
+      minWidth: 100,
       valueGetter: (value) => String(value),
     },
     {
       field: 'availability',
       headerName: 'Availability',
       width: 120,
+      minWidth: 100,
       type: 'boolean',
       renderCell: (params) => (params.value ? 'Available' : 'Unavailable'),
     },
@@ -61,18 +63,21 @@ export default function Rooms() {
       field: 'capacityOfAdults',
       headerName: 'Adult Capacity',
       width: 150,
+      minWidth: 100,
       type: 'number',
     },
     {
       field: 'capacityOfChildren',
       headerName: 'Children Capacity',
       width: 150,
+      minWidth: 100,
       type: 'number',
     },
     {
       field: 'actions',
       headerName: 'Actions',
       width: 120,
+      minWidth: 100,
       sortable: false,
       renderCell: (params: GridRenderCellParams<RoomDto>) => (
         <>
@@ -108,7 +113,7 @@ export default function Rooms() {
   }
 
   return (
-    <Box>
+    <Box sx={{ width: '100%', minWidth: 0, maxWidth: '100%', overflow: 'hidden' }}>
       <Box
         sx={{
           display: 'flex',
@@ -147,7 +152,15 @@ export default function Rooms() {
         sx={{ mb: 2 }}
       />
 
-      <Box sx={{ width: '100%', overflow: 'auto' }}>
+      <Box
+        sx={{
+          width: '100%',
+          overflowX: 'auto',
+          overflowY: 'hidden',
+          minWidth: 0,
+          maxWidth: '100%',
+        }}
+      >
         <DataGrid<RoomDto>
           rows={filteredRooms}
           columns={columns}

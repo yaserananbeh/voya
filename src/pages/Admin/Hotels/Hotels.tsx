@@ -46,18 +46,21 @@ export default function Hotels() {
       headerName: 'Name',
       width: 200,
       flex: 1,
+      minWidth: 150,
       valueGetter: (_value, row) => row.hotelName || row.name,
     },
     {
       field: 'starRating',
       headerName: 'Star Rating',
       width: 120,
+      minWidth: 100,
       type: 'number',
     },
     {
       field: 'numberOfRooms',
       headerName: 'Number of Rooms',
       width: 150,
+      minWidth: 120,
       type: 'number',
       valueGetter: (_value, row) => row.rooms?.length ?? 0,
     },
@@ -65,6 +68,7 @@ export default function Hotels() {
       field: 'actions',
       headerName: 'Actions',
       width: 120,
+      minWidth: 100,
       sortable: false,
       renderCell: (params: GridRenderCellParams<HotelDto>) => (
         <>
@@ -96,7 +100,7 @@ export default function Hotels() {
   }
 
   return (
-    <Box>
+    <Box sx={{ width: '100%', minWidth: 0, maxWidth: '100%', overflow: 'hidden' }}>
       <Box
         sx={{
           display: 'flex',
@@ -135,7 +139,15 @@ export default function Hotels() {
         sx={{ mb: 2 }}
       />
 
-      <Box sx={{ width: '100%', overflow: 'auto' }}>
+      <Box
+        sx={{
+          width: '100%',
+          overflowX: 'auto',
+          overflowY: 'hidden',
+          minWidth: 0,
+          maxWidth: '100%',
+        }}
+      >
         <DataGrid<HotelDto>
           rows={hotels}
           columns={columns}
@@ -146,6 +158,8 @@ export default function Hotels() {
           getRowId={(row) => row.id}
           disableRowSelectionOnClick
           sx={{
+            minWidth: 600,
+            width: '100%',
             '& .MuiDataGrid-cell': {
               fontSize: { xs: '0.75rem', sm: '0.875rem' },
             },
