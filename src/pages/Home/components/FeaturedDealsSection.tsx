@@ -1,4 +1,13 @@
-import { Alert, Card, CardContent, Typography, Box, Button, CardActions } from '@mui/material'
+import {
+  Alert,
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  Button,
+  CardActions,
+  Rating,
+} from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import { useFeaturedDealsQuery } from '@/api/home'
 import { HomeSkeletonCard } from './HomeSkeletonCard'
@@ -43,6 +52,12 @@ export function FeaturedDealsSection() {
             <Typography variant="body2" color="text.secondary">
               {deal.cityName}
             </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, mb: 1 }}>
+              <Rating value={deal.hotelStarRating} readOnly size="small" max={5} />
+              <Typography variant="body2" sx={{ ml: 1 }}>
+                {deal.hotelStarRating} {t('hotel.starHotel')}
+              </Typography>
+            </Box>
             <Typography variant="body2" sx={{ mt: 1 }}>
               <strong>${deal.finalPrice.toFixed(2)}</strong>{' '}
               <Typography
