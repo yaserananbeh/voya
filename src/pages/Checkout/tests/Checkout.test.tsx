@@ -21,7 +21,6 @@ const checkoutContext = {
 
 describe('Checkout', () => {
   beforeEach(() => {
-    // Ensure i18n is set to English for tests
     void i18n.changeLanguage('en')
     sessionStorage.setItem('voya.checkout.context', JSON.stringify(checkoutContext))
   })
@@ -39,7 +38,6 @@ describe('Checkout', () => {
       </Provider>,
     )
 
-    // Use the actual English translation text
     const submitBtn = await screen.findByRole('button', {
       name: /confirm booking/i,
     })

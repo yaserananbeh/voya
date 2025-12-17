@@ -20,7 +20,7 @@ void i18n
     fallbackLng: 'en',
     defaultNS: 'translation',
     interpolation: {
-      escapeValue: false, // React already escapes
+      escapeValue: false,
     },
     detection: {
       order: ['localStorage', 'navigator'],

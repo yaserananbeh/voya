@@ -21,7 +21,6 @@ export function RouteError() {
       errorMessage = error.statusText || t('errors.message')
     }
   } else if (error instanceof Error) {
-    // Handle dynamic import errors
     if (error.message.includes('Failed to fetch dynamically imported module')) {
       errorTitle = t('errors.loadError')
       errorMessage = t('errors.loadErrorMessage')
