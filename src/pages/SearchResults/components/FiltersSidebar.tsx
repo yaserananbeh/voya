@@ -1,19 +1,10 @@
-import {
-  Paper,
-  Typography,
-  Stack,
-  Divider,
-  Box,
-  IconButton,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
+import { Box } from '@mui/material'
 import { PriceFilter } from './PriceFilter'
 import { StarRatingFilter } from './StarRatingFilter'
 import { AmenitiesFilter } from './AmenitiesFilter'
 import { HotelTypeFilter } from './HotelTypeFilter'
 import { useTranslation } from 'react-i18next'
+import { FilterContainer, FilterSection } from '@/components/filters'
 
 type FiltersSidebarProps = {
   onClose?: () => void
@@ -21,8 +12,6 @@ type FiltersSidebarProps = {
 
 export function FiltersSidebar({ onClose }: FiltersSidebarProps) {
   const { t } = useTranslation()
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
     <Box
@@ -46,39 +35,23 @@ export function FiltersSidebar({ onClose }: FiltersSidebarProps) {
         },
       }}
     >
-      <Paper elevation={1} sx={{ p: { xs: 2, md: 3 } }}>
-        <Stack spacing={3}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="h6" fontWeight={600}>
-              {t('search.filters')}
-            </Typography>
-            {isMobile && onClose && (
-              <IconButton onClick={onClose} size="small">
-                <CloseIcon />
-              </IconButton>
-            )}
-          </Box>
+      <FilterContainer title={t('search.filters')} onClose={onClose}>
+        <FilterSection>
+          <PriceFilter />
+        </FilterSection>
 
-          <Box>
-            <PriceFilter />
-          </Box>
-          <Divider />
+        <FilterSection>
+          <StarRatingFilter />
+        </FilterSection>
 
-          <Box>
-            <StarRatingFilter />
-          </Box>
-          <Divider />
+        <FilterSection>
+          <AmenitiesFilter />
+        </FilterSection>
 
-          <Box>
-            <AmenitiesFilter />
-          </Box>
-          <Divider />
-
-          <Box>
-            <HotelTypeFilter />
-          </Box>
-        </Stack>
-      </Paper>
+        <FilterSection showDivider={false}>
+          <HotelTypeFilter />
+        </FilterSection>
+      </FilterContainer>
     </Box>
   )
 }
