@@ -4,7 +4,7 @@ import '@/styles/reset.css'
 import App from '@/App.tsx'
 import { ErrorBoundary } from '@/providers/ErrorBoundary.tsx'
 import { setupGlobalErrorHandlers } from '@/utils/globalErrors'
-import { Providers } from './providers'
+import { Providers } from '@/providers/index.tsx'
 setupGlobalErrorHandlers()
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

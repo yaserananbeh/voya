@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { store } from '@/store'
 import { ThemeProvider, useThemeMode } from './ThemeContext'
 import { NotificationProvider } from './NotificationProvider'
+import { LoadingProvider } from './LoadingProvider'
 import '@/i18n/config'
 import { useRTL } from '@/hooks/useRTL'
 
@@ -20,12 +21,14 @@ function ThemeWrapper({ children }: { children: ReactNode }) {
   )
 }
 
-export const Providers = ({ children }: { children: ReactNode }) => {
+export function Providers({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider>
       <ThemeWrapper>
         <Provider store={store}>
-          <NotificationProvider>{children}</NotificationProvider>
+          <NotificationProvider>
+            <LoadingProvider>{children}</LoadingProvider>
+          </NotificationProvider>
         </Provider>
       </ThemeWrapper>
     </ThemeProvider>
