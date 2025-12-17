@@ -1,5 +1,4 @@
 @media print {
-  /* Hide header, footer, and navigation */
   header,
   footer,
   .MuiAppBar-root,
@@ -8,12 +7,10 @@
     display: none !important;
   }
 
-  /* Hide print button */
   .no-print {
     display: none !important;
   }
 
-  /* Remove page margins and padding */
   body {
     margin: 0 !important;
     padding: 0 !important;
@@ -25,13 +22,11 @@
     size: A4;
   }
 
-  /* Remove container padding */
   .MuiContainer-root {
     padding: 0 !important;
     max-width: 100% !important;
   }
 
-  /* Remove all box shadows and elevations */
   .MuiPaper-root,
   .MuiCard-root {
     box-shadow: none !important;
@@ -40,13 +35,11 @@
     page-break-inside: avoid;
   }
 
-  /* Remove gradients - use solid colors */
   .MuiPaper-root {
     background: white !important;
     color: black !important;
   }
 
-  /* Simplify header section for print */
   .MuiPaper-root:first-of-type {
     background: #003580 !important;
     color: white !important;
@@ -55,12 +48,10 @@
     border-radius: 0 !important;
   }
 
-  /* Remove icon colors - make them black/white for print */
   .MuiSvgIcon-root {
     color: inherit !important;
   }
 
-  /* Compact spacing */
   .MuiCardContent-root {
     padding: 16px !important;
   }
@@ -78,55 +69,40 @@
     padding: 0 !important;
   }
 
-  /* Remove dividers or make them subtle */
   .MuiDivider-root {
     border-color: #e0e0e0 !important;
     margin: 12px 0 !important;
   }
 
-  /* Simplify typography for print */
   .MuiTypography-root {
     color: black !important;
   }
 
-  /* Make confirmation number stand out */
   .MuiTypography-h5 {
     font-size: 18px !important;
   }
 
-  /* Remove chip background colors - use border only */
   .MuiChip-root {
     background: white !important;
     border: 1px solid #000 !important;
     color: black !important;
   }
 
-  /* Optimize card layout - remove extra spacing */
   .MuiCard-root {
     margin-bottom: 16px !important;
     page-break-inside: avoid;
   }
 
-  /* Remove unnecessary margins */
   .MuiBox-root {
     margin: 0 !important;
   }
 
-  /* Ensure content fits on page */
   * {
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
 
-  /* Hide icons in print or make them minimal */
   .MuiSvgIcon-root {
     display: none;
   }
-
-  /* Or if you want to keep icons but make them simple:
-    .MuiSvgIcon-root {
-      color: #000 !important;
-      opacity: 0.7;
-    }
-    */
 }
