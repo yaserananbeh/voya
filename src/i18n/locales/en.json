@@ -111,6 +111,9 @@
     "pricePerNight": "Price/night",
     "nights": "Nights",
     "total": "Total",
+    "specialRequests": "Special requests or remarks",
+    "specialRequestsHelper": "Optional: Any special requests or additional information",
+    "specialRequestsPlaceholder": "e.g., Late check-in, dietary requirements, room preferences...",
     "unexpectedError": "Unexpected error occurred"
   },
   "confirmation": {
@@ -124,7 +127,14 @@
     "payment": "Payment",
     "bookedAt": "Booked at",
     "invalidBookingId": "Invalid booking id.",
-    "failedToLoadBooking": "Failed to load booking details."
+    "failedToLoadBooking": "Failed to load booking details.",
+    "print": "Print",
+    "downloadPDF": "Save as PDF",
+    "thankYouMessage": "Thank you for your booking! We look forward to hosting you.",
+    "customerInfo": "Customer Information",
+    "bookingDetails": "Booking Details",
+    "accommodation": "Accommodation",
+    "paymentInfo": "Payment Information"
   },
   "footer": {
     "tagline": "Discover your perfect stay. Book with confidence and travel with ease.",

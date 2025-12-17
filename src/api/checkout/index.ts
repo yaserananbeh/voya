@@ -7,6 +7,7 @@ export type BookingRequest = {
   bookingDateTime: string
   totalCost: number
   paymentMethod: string
+  specialRequests?: string
 }
 export type BookingDetailsDto = {
   customerName: string | null

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 export type UserInfoValues = {
   customerName: string
   paymentMethod: string
+  specialRequests?: string
 }
 
 export function UserInfoForm({
@@ -64,6 +65,23 @@ export function UserInfoForm({
               <MenuItem value="Card">Card</MenuItem>
               <MenuItem value="PayPal">PayPal</MenuItem>
             </TextField>
+
+            <TextField
+              name="specialRequests"
+              label={t('checkout.specialRequests')}
+              value={values.specialRequests || ''}
+              onChange={handleChange}
+              error={Boolean(touched.specialRequests && errors.specialRequests)}
+              helperText={
+                touched.specialRequests && errors.specialRequests
+                  ? errors.specialRequests
+                  : t('checkout.specialRequestsHelper')
+              }
+              fullWidth
+              multiline
+              rows={4}
+              placeholder={t('checkout.specialRequestsPlaceholder')}
+            />
 
             {typeof status === 'string' && (
               <TextField value={status} error fullWidth InputProps={{ readOnly: true }} />

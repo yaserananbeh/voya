@@ -111,6 +111,9 @@
     "pricePerNight": "السعر/ليلة",
     "nights": "الليالي",
     "total": "الإجمالي",
+    "specialRequests": "طلبات خاصة أو ملاحظات",
+    "specialRequestsHelper": "اختياري: أي طلبات خاصة أو معلومات إضافية",
+    "specialRequestsPlaceholder": "مثال: تسجيل متأخر، متطلبات غذائية، تفضيلات الغرفة...",
     "unexpectedError": "حدث خطأ غير متوقع"
   },
   "confirmation": {
@@ -124,7 +127,14 @@
     "payment": "الدفع",
     "bookedAt": "تم الحجز في",
     "invalidBookingId": "رقم حجز غير صالح.",
-    "failedToLoadBooking": "فشل تحميل تفاصيل الحجز."
+    "failedToLoadBooking": "فشل تحميل تفاصيل الحجز.",
+    "print": "طباعة",
+    "downloadPDF": "حفظ كـ PDF",
+    "thankYouMessage": "شكراً لحجزك! نتطلع لاستضافتك.",
+    "customerInfo": "معلومات العميل",
+    "bookingDetails": "تفاصيل الحجز",
+    "accommodation": "الإقامة",
+    "paymentInfo": "معلومات الدفع"
   },
   "footer": {
     "tagline": "اكتشف إقامتك المثالية. احجز بثقة وسافر بسهولة.",

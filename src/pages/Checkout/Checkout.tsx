@@ -50,6 +50,7 @@ export default function Checkout() {
         bookingDateTime: new Date().toISOString(),
         totalCost,
         paymentMethod: values.paymentMethod,
+        specialRequests: values.specialRequests || undefined,
       }).unwrap()
 
       showSuccess(t('checkout.bookingConfirmed'))
@@ -85,7 +86,7 @@ export default function Checkout() {
 
         <Box sx={{ flex: { xs: 1, md: 2 }, order: { xs: 1, md: 2 } }}>
           <UserInfoForm
-            initialValues={{ customerName: '', paymentMethod: '' }}
+            initialValues={{ customerName: '', paymentMethod: '', specialRequests: '' }}
             onSubmit={handleSubmit}
             submitting={isLoading}
           />
