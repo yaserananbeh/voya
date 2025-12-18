@@ -13,24 +13,128 @@ type MockBookingDetails = {
   confirmationNumber: string
 }
 export const handlers = [
-  http.post('/api/auth/login', () => {
+  http.post('/api/auth/authenticate', async ({ request }) => {
+    const body = (await request.json()) as { userName: string; password: string }
+    if (body.userName === 'admin' && body.password === 'admin') {
+      return HttpResponse.json({
+        authentication: 'mock-admin-token',
+        userType: 'Admin',
+      })
+    }
+    if (body.userName === 'user' && body.password === 'user') {
+      return HttpResponse.json({
+        authentication: 'mock-user-token',
+        userType: 'User',
+      })
+    }
+    return HttpResponse.json({ error: 'Invalid credentials' }, { status: 401 })
+  }),
+
+  http.post('/api/auth/login', async ({ request }) => {
+    const body = (await request.json()) as { userName: string; password: string }
+    if (body.userName === 'admin' && body.password === 'admin') {
+      return HttpResponse.json({
+        authentication: 'mock-admin-token',
+        userType: 'Admin',
+      })
+    }
     return HttpResponse.json({
       authentication: 'mock-token',
-      userType: 'admin',
+      userType: 'User',
     })
   }),
 
-  http.get('/api/home/search', () => {
-    return HttpResponse.json({
-      results: [
-        { id: 1, name: 'Mock Hotel 1', city: 'Dubai' },
-        { id: 2, name: 'Mock Hotel 2', city: 'Amman' },
-      ],
-    })
+  http.get('/api/home/search', ({ request }) => {
+    const url = new URL(request.url)
+    const city = url.searchParams.get('city') || ''
+    return HttpResponse.json([
+      {
+        hotelId: 1,
+        hotelName: `Hotel in ${city || 'Dubai'}`,
+        starRating: 4,
+        latitude: 25.2048,
+        longitude: 55.2708,
+        roomPrice: 150,
+        roomType: 'Standard',
+        cityName: city || 'Dubai',
+        roomPhotoUrl: 'https://example.com/room1.jpg',
+        discount: 0.1,
+        amenities: [{ id: 1, name: 'Free Wi-Fi', description: 'High-speed internet' }],
+      },
+    ])
   }),
 
-  http.get('/api/home/featured', () => {
-    return HttpResponse.json([{ id: 1, name: 'Featured Hotel', rating: 4.8 }])
+  http.get('/api/home/featured-deals', () => {
+    return HttpResponse.json([
+      {
+        hotelId: 1,
+        originalRoomPrice: 200,
+        discount: 0.25,
+        finalPrice: 150,
+        cityName: 'Dubai',
+        hotelName: 'Luxury Resort',
+        hotelStarRating: 5,
+        title: 'Summer Special',
+        description: 'Amazing beachfront location',
+        roomPhotoUrl: 'https://example.com/featured1.jpg',
+      },
+      {
+        hotelId: 2,
+        originalRoomPrice: 180,
+        discount: 0.2,
+        finalPrice: 144,
+        cityName: 'Amman',
+        hotelName: 'City Center Hotel',
+        hotelStarRating: 4,
+        title: 'Weekend Getaway',
+        description: 'Perfect for business travelers',
+        roomPhotoUrl: 'https://example.com/featured2.jpg',
+      },
+    ])
+  }),
+
+  http.get('/api/home/users/:userId/recent-hotels', () => {
+    return HttpResponse.json([
+      {
+        hotelId: 1,
+        hotelName: 'Recent Hotel 1',
+        starRating: 4,
+        visitDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+        cityName: 'Dubai',
+        thumbnailUrl: 'https://example.com/recent1.jpg',
+        priceLowerBound: 100,
+        priceUpperBound: 200,
+      },
+      {
+        hotelId: 2,
+        hotelName: 'Recent Hotel 2',
+        starRating: 5,
+        visitDate: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+        cityName: 'Amman',
+        thumbnailUrl: 'https://example.com/recent2.jpg',
+        priceLowerBound: 150,
+        priceUpperBound: 250,
+      },
+    ])
+  }),
+
+  http.get('/api/home/destinations/trending', () => {
+    return HttpResponse.json([
+      {
+        cityId: 1,
+        cityName: 'Dubai',
+        countryName: 'UAE',
+        description: 'Modern city with luxury shopping',
+        thumbnailUrl: 'https://example.com/dubai.jpg',
+      },
+      {
+        cityId: 2,
+        cityName: 'Bali',
+        countryName: 'Indonesia',
+        description: 'Tropical paradise with beautiful beaches',
+        thumbnailUrl: 'https://example.com/bali.jpg',
+      },
+    ])
   }),
 
   http.get('/api/cities', ({ request }) => {
@@ -201,7 +305,6 @@ export const handlers = [
   }),
   http.post('/api/bookings', () => {
     BOOKING_ID += 1
-
     return HttpResponse.json({ bookingId: BOOKING_ID }, { status: 201 })
   }),
 

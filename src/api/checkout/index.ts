@@ -21,24 +21,37 @@ export type BookingDetailsDto = {
   confirmationNumber: string | null
 }
 
-type CreateBookingResponse = number | { bookingId: number } | { id: number }
-
-const extractBookingId = (res: CreateBookingResponse): number => {
-  console.log(res)
-
-  return 1
-  throw new Error('Invalid booking response shape')
-}
+type CreateBookingResponse =
+  | BookingDetailsDto
+  | { bookingId?: number; id?: number; [key: string]: unknown }
 
 export const checkoutApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    createBooking: builder.mutation<number, BookingRequest>({
+    createBooking: builder.mutation<BookingDetailsDto, BookingRequest>({
       query: (body) => ({
         url: '/bookings',
         method: 'POST',
         body,
       }),
-      transformResponse: (res: CreateBookingResponse) => extractBookingId(res),
+      transformResponse: (res: CreateBookingResponse): BookingDetailsDto => {
+        if (typeof res === 'object' && res !== null) {
+          return {
+            customerName: 'customerName' in res ? (res.customerName as string | null) : null,
+            hotelName: 'hotelName' in res ? (res.hotelName as string | null) : null,
+            roomNumber: 'roomNumber' in res ? (res.roomNumber as string | null) : null,
+            roomType: 'roomType' in res ? (res.roomType as string | null) : null,
+            bookingDateTime:
+              'bookingDateTime' in res ? (res.bookingDateTime as string) : new Date().toISOString(),
+            totalCost: 'totalCost' in res ? (res.totalCost as number) : 0,
+            paymentMethod: 'paymentMethod' in res ? (res.paymentMethod as string | null) : null,
+            bookingStatus:
+              'bookingStatus' in res ? (res.bookingStatus as string | null) : 'Confirmed',
+            confirmationNumber:
+              'confirmationNumber' in res ? (res.confirmationNumber as string | null) : null,
+          }
+        }
+        throw new Error('Invalid booking response shape')
+      },
     }),
 
     getBookingById: builder.query<BookingDetailsDto, number>({
