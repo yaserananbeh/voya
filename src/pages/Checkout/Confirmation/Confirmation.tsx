@@ -113,7 +113,7 @@ export default function Confirmation() {
           elevation={2}
           sx={{
             mb: 3,
-            background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.05)} 0%, ${alpha(theme.palette.secondary.main, 0.05)} 100%)`,
+            background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.05)} 0%, ${alpha(theme.palette.primary.main, 0.05)} 100%)`,
             border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
           }}
         >
