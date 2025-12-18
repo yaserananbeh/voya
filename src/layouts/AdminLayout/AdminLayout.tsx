@@ -21,6 +21,7 @@ import HotelIcon from '@mui/icons-material/Hotel'
 import BedIcon from '@mui/icons-material/Bed'
 import LogoutBtn from '@/components/layout/LogoutBtn'
 import { Outlet } from 'react-router-dom'
+import { ScrollToTop } from '@/components/ScrollToTop'
 
 const DRAWER_WIDTH = 240
 
@@ -69,6 +70,7 @@ export default function AdminLayout() {
 
   return (
     <Box sx={{ display: 'flex' }}>
+      <ScrollToTop />
       <AppBar
         position="fixed"
         sx={{

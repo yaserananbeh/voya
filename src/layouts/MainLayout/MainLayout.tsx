@@ -2,10 +2,12 @@ import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 import MainHeader from '@/components/layout/MainHeader'
 import { MainFooter } from '@/components/layout/MainFooter'
+import { ScrollToTop } from '@/components/ScrollToTop'
 
 export default function MainLayout() {
   return (
     <>
+      <ScrollToTop />
       <MainHeader />
       <Box
         component="main"
