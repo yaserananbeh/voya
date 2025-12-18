@@ -14,13 +14,21 @@ export function HotelContainer() {
   const id = Number(hotelId)
 
   const { data: hotel, isLoading, isError } = useGetHotelQuery(id, { skip: Number.isNaN(id) })
-  const { data: gallery } = useGetHotelGalleryQuery(id, { skip: Number.isNaN(id) })
-  const { data: rooms } = useGetHotelRoomsQuery(id, { skip: Number.isNaN(id) })
-  const { data: reviews } = useGetHotelReviewsQuery(id, { skip: Number.isNaN(id) })
+  const { data: gallery, isLoading: galleryLoading } = useGetHotelGalleryQuery(id, {
+    skip: Number.isNaN(id),
+  })
+  const { data: rooms, isLoading: roomsLoading } = useGetHotelRoomsQuery(id, {
+    skip: Number.isNaN(id),
+  })
+  const { data: reviews, isLoading: reviewsLoading } = useGetHotelReviewsQuery(id, {
+    skip: Number.isNaN(id),
+  })
 
   if (Number.isNaN(id)) {
     return <HotelPresentational error={t('hotel.invalidHotelId')} />
   }
+
+  const isLoadingData = isLoading || galleryLoading || roomsLoading || reviewsLoading
 
   return (
     <HotelPresentational
@@ -28,7 +36,7 @@ export function HotelContainer() {
       gallery={gallery}
       rooms={rooms}
       reviews={reviews}
-      isLoading={isLoading}
+      isLoading={isLoadingData}
       isError={isError}
     />
   )

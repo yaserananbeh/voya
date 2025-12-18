@@ -1,5 +1,6 @@
 import { lazy, Suspense, type ReactNode } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { Box } from '@mui/material'
 
 import ProtectedRoute from '@/components/auth/ProtectedRoute'
 import AdminRoute from '@/components/auth/AdminRoute'
@@ -26,9 +27,16 @@ const Rooms = lazy(() => import('@/pages/Admin/Rooms'))
 const SuspenseLayout = ({ children }: { children: ReactNode }) => (
   <Suspense
     fallback={
-      <div>
-        <VoyaLoader />
-      </div>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
+        }}
+      >
+        <VoyaLoader size="medium" />
+      </Box>
     }
   >
     {children}

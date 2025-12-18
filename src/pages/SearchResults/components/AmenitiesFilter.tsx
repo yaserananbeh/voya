@@ -1,8 +1,9 @@
-import { Checkbox, FormControlLabel, FormGroup, Typography, Stack } from '@mui/material'
+import { Checkbox, FormControlLabel, FormGroup, Typography, Stack, Box } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSearchFilters, selectSearchFilters } from '@/store/searchSlice'
 import { useAmenities } from '../hooks/useAmenities'
 import { useTranslation } from 'react-i18next'
+import { VoyaLoader } from '@/components'
 
 export function AmenitiesFilter() {
   const { t } = useTranslation()
@@ -25,9 +26,9 @@ export function AmenitiesFilter() {
       <Typography variant="subtitle1">{t('search.amenities')}</Typography>
 
       {isLoading && (
-        <Typography variant="body2" color="text.secondary">
-          {t('search.loadingAmenities')}
-        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center', py: 2 }}>
+          <VoyaLoader size="small" />
+        </Box>
       )}
 
       {isError && (

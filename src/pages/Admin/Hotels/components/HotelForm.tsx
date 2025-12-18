@@ -1,8 +1,18 @@
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { TextField, Button, Stack, MenuItem, Select, FormControl, InputLabel } from '@mui/material'
+import {
+  TextField,
+  Button,
+  Stack,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  Box,
+} from '@mui/material'
 import { useGetAdminHotelsQuery, useGetCitiesQuery } from '@/api/admin'
 import type { HotelForCreationDto } from '@/types/models'
+import { VoyaLoader } from '@/components'
 
 const validationSchema = yup.object({
   name: yup.string().required('Name is required'),
@@ -23,8 +33,8 @@ type Props = {
 }
 
 export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
-  const { data: hotels } = useGetAdminHotelsQuery()
-  const { data: cities = [] } = useGetCitiesQuery()
+  const { data: hotels, isLoading: hotelsLoading } = useGetAdminHotelsQuery()
+  const { data: cities = [], isLoading: citiesLoading } = useGetCitiesQuery()
   const hotel = hotelId ? hotels?.find((h) => h.id === hotelId) : null
 
   const formik = useFormik<
@@ -52,6 +62,21 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
       await onSubmit(values)
     },
   })
+
+  if (hotelsLoading || citiesLoading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: 'calc(100vh - 200px)',
+        }}
+      >
+        <VoyaLoader size="small" />
+      </Box>
+    )
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>

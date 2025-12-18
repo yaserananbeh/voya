@@ -1,7 +1,7 @@
 import { Alert, Box, Card, CardContent, Typography } from '@mui/material'
 import { useTrendingDestinationsQuery } from '@/api/home'
-import { HomeSkeletonCard } from './HomeSkeletonCard'
 import { SafeImage } from '@/components/common/SafeImage'
+import { VoyaLoader } from '@/components'
 import styles from '../styles.module.css'
 import { useTranslation } from 'react-i18next'
 
@@ -11,10 +11,15 @@ export function TrendingDestinationsSection() {
 
   if (isLoading) {
     return (
-      <Box className={styles.cardsGrid}>
-        {Array.from({ length: 4 }).map((_, i) => (
-          <HomeSkeletonCard key={i} />
-        ))}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '300px',
+        }}
+      >
+        <VoyaLoader size="small" />
       </Box>
     )
   }

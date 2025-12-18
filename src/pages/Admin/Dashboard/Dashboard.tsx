@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
-import { Box, Card, CardContent, Typography, CircularProgress } from '@mui/material'
+import { Box, Card, CardContent, Typography } from '@mui/material'
+import { VoyaLoader } from '@/components'
 import {
   LocationCity as CityIcon,
   Hotel as HotelIcon,
@@ -45,8 +46,15 @@ export default function Dashboard() {
 
   if (isLoading) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
-        <CircularProgress />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: 'calc(100vh - 200px)',
+        }}
+      >
+        <VoyaLoader size="medium" />
       </Box>
     )
   }

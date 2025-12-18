@@ -1,7 +1,6 @@
 import {
   Card,
   CardContent,
-  CircularProgress,
   Stack,
   Typography,
   Box,
@@ -15,6 +14,7 @@ import {
 import { useParams, useLocation } from 'react-router-dom'
 import { useGetBookingByIdQuery, type BookingDetailsDto } from '@/api/checkout'
 import { useTranslation } from 'react-i18next'
+import { VoyaLoader } from '@/components/common/VoyaLoader'
 import PrintIcon from '@mui/icons-material/Print'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import HotelIcon from '@mui/icons-material/Hotel'
@@ -57,9 +57,14 @@ export default function Confirmation() {
   if (isLoading && !bookingFromState) {
     return (
       <Box
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: 'calc(100vh - 200px)',
+        }}
       >
-        <CircularProgress />
+        <VoyaLoader size="medium" />
       </Box>
     )
   }

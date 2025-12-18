@@ -1,9 +1,10 @@
-import { Stack, Typography, CircularProgress, Box } from '@mui/material'
+import { Stack, Typography, Box } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectSearchFilters, selectSearchQuery } from '@/store/searchSlice'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useGetHotelsQuery, type HotelDto } from '@/api/hotels'
 import { HotelResultCard } from './HotelResultCard'
+import { VoyaLoader } from '@/components'
 
 const PAGE_SIZE = 10
 
@@ -82,7 +83,20 @@ export function ResultsList() {
     return () => observer.disconnect()
   }, [hasMore, isFetching, isLoading])
 
-  if (isLoading && allHotels.length === 0) return <CircularProgress />
+  if (isLoading && allHotels.length === 0) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: 'calc(100vh - 200px)',
+        }}
+      >
+        <VoyaLoader size="small" />
+      </Box>
+    )
+  }
   if (isError) return <Typography color="error">Failed to load hotels</Typography>
 
   return (
@@ -97,7 +111,7 @@ export function ResultsList() {
 
       {isFetching ? (
         <Stack direction="row" justifyContent="center" sx={{ py: 2 }}>
-          <CircularProgress size={22} />
+          <VoyaLoader size="small" />
         </Stack>
       ) : null}
 

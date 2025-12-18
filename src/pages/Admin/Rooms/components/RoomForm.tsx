@@ -10,9 +10,11 @@ import {
   InputLabel,
   Switch,
   FormControlLabel,
+  Box,
 } from '@mui/material'
 import { useGetRoomsAdminQuery, useGetAdminHotelsQuery } from '@/api/admin'
 import type { RoomForCreationDto } from '@/types/models'
+import { VoyaLoader } from '@/components'
 
 const validationSchema = yup.object({
   roomNumber: yup.string().required('Room number is required'),
@@ -32,8 +34,8 @@ type Props = {
 }
 
 export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
-  const { data: rooms } = useGetRoomsAdminQuery()
-  const { data: hotels = [] } = useGetAdminHotelsQuery()
+  const { data: rooms, isLoading: roomsLoading } = useGetRoomsAdminQuery()
+  const { data: hotels = [], isLoading: hotelsLoading } = useGetAdminHotelsQuery()
   const room = roomId ? rooms?.find((r) => r.roomId === roomId || r.id === roomId) : null
 
   const formik = useFormik<RoomForCreationDto & { roomPhotoUrl?: string }>({
@@ -53,6 +55,21 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
       await onSubmit(values)
     },
   })
+
+  if (roomsLoading || hotelsLoading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: 'calc(100vh - 200px)',
+        }}
+      >
+        <VoyaLoader size="small" />
+      </Box>
+    )
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>

@@ -10,8 +10,8 @@ import {
 } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import { useRecentHotelsQuery } from '@/api/home'
-import { HomeSkeletonCard } from './HomeSkeletonCard'
 import { SafeImage } from '@/components/common/SafeImage'
+import { VoyaLoader } from '@/components'
 import styles from '../styles.module.css'
 import { formatDistanceToNow } from '@/utils/date'
 import VisibilityIcon from '@mui/icons-material/Visibility'
@@ -27,10 +27,15 @@ export function RecentHotelsSection() {
 
   if (isLoading) {
     return (
-      <Box className={styles.cardsGrid}>
-        {Array.from({ length: 3 }).map((_, i) => (
-          <HomeSkeletonCard key={i} />
-        ))}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '300px',
+        }}
+      >
+        <VoyaLoader size="small" />
       </Box>
     )
   }

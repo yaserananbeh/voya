@@ -1,8 +1,10 @@
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import { Box } from '@mui/material'
 import { useGetCitiesQuery } from '@/api/admin'
 import type { CityForCreationDto } from '@/types/models'
 import { CityFormPresentational } from './CityForm.presentational'
+import { VoyaLoader } from '@/components'
 
 const validationSchema = yup.object({
   name: yup.string().required('Name is required'),
@@ -16,8 +18,23 @@ type Props = {
 }
 
 export function CityFormContainer({ cityId, onSubmit, onCancel }: Props) {
-  const { data: cities } = useGetCitiesQuery()
+  const { data: cities, isLoading } = useGetCitiesQuery()
   const city = cityId ? cities?.find((c) => c.id === cityId) : null
+
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: 'calc(100vh - 200px)',
+        }}
+      >
+        <VoyaLoader size="small" />
+      </Box>
+    )
+  }
 
   return (
     <Formik<CityForCreationDto>

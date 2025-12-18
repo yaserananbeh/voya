@@ -35,7 +35,14 @@ export function HotelPresentational({
 
   if (isLoading) {
     return (
-      <Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: 'calc(100vh - 200px)',
+        }}
+      >
         <VoyaLoader />
       </Box>
     )
