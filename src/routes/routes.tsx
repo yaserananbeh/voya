@@ -70,7 +70,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: '/checkout/confirmation/:bookingId',
+        path: '/checkout/confirmation',
         element: (
           <ProtectedRoute>
             <Confirmation />
