@@ -1,6 +1,7 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, Container, Paper, Grid, alpha, useTheme } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useMemo, useState } from 'react'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 import type { CheckoutContext } from './types'
 import { BookingSummary } from './components/BookingSummary'
@@ -16,6 +17,7 @@ type LocationState = { checkout?: CheckoutContext }
 
 export default function Checkout() {
   const { t } = useTranslation()
+  const theme = useTheme()
   const location = useLocation()
   const navigate = useNavigate()
   const [uiError, setUiError] = useState<string | null>(null)
@@ -65,37 +67,78 @@ export default function Checkout() {
   }
 
   return (
-    <Box sx={{ px: { xs: 2, sm: 3 }, py: { xs: 2, sm: 3 } }}>
-      <Typography
-        variant="h4"
-        sx={{
-          mb: { xs: 2, sm: 3 },
-          fontSize: { xs: '1.5rem', sm: '2rem' },
-        }}
-      >
-        {t('checkout.title')}
-      </Typography>
+    <Box
+      sx={{
+        minHeight: 'calc(100vh - 200px)',
 
-      <Box
-        sx={{
-          display: 'flex',
-          gap: { xs: 2, sm: 3 },
-          flexDirection: { xs: 'column', md: 'row' },
-        }}
-      >
-        <Box sx={{ flex: 1, order: { xs: 2, md: 1 } }}>
-          <BookingSummary ctx={ctx} />
+        py: { xs: 3, sm: 4, md: 5 },
+      }}
+    >
+      <Container maxWidth="lg">
+        <Box sx={{ mb: { xs: 3, sm: 4 } }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
+              mb: 1,
+            }}
+          >
+            <Box
+              sx={{
+                p: 1.5,
+                borderRadius: 2,
+                background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.main} 100%)`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <ShoppingCartIcon sx={{ color: 'white', fontSize: 28 }} />
+            </Box>
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: 700,
+                background: `linear-gradient(135deg, ${theme.palette.primary.main} 30%, ${theme.palette.primary.main} 90%)`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                fontSize: { xs: '1.75rem', sm: '2.25rem' },
+              }}
+            >
+              {t('checkout.title')}
+            </Typography>
+          </Box>
+          <Typography variant="body1" color="text.secondary" sx={{ ml: 7 }}>
+            {t('checkout.subtitle') || 'Complete your booking details'}
+          </Typography>
         </Box>
 
-        <Box sx={{ flex: { xs: 1, md: 2 }, order: { xs: 1, md: 2 } }}>
-          <UserInfoForm
-            initialValues={{ customerName: '', paymentMethod: '', specialRequests: '' }}
-            onSubmit={handleSubmit}
-            submitting={isLoading}
-          />
-          <CheckoutActions error={uiError} />
-        </Box>
-      </Box>
+        <Grid container spacing={3}>
+          <Grid size={{ xs: 12, md: 5 }}>
+            <BookingSummary ctx={ctx} />
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 7 }}>
+            <Paper
+              elevation={3}
+              sx={{
+                p: { xs: 3, sm: 4 },
+                borderRadius: 3,
+                background: `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.95)} 0%, ${alpha(theme.palette.background.paper, 0.98)} 100%)`,
+                border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+              }}
+            >
+              <UserInfoForm
+                initialValues={{ customerName: '', paymentMethod: '', specialRequests: '' }}
+                onSubmit={handleSubmit}
+                submitting={isLoading}
+              />
+              <CheckoutActions error={uiError} />
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
     </Box>
   )
 }

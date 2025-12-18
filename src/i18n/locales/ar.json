@@ -97,6 +97,9 @@
   },
   "checkout": {
     "title": "الدفع",
+    "subtitle": "أكمل تفاصيل حجزك",
+    "customerInfo": "معلومات العميل",
+    "fillDetails": "يرجى ملء التفاصيل لإتمام الحجز",
     "bookingSummary": "ملخص الحجز",
     "fullName": "الاسم الكامل",
     "paymentMethod": "طريقة الدفع",

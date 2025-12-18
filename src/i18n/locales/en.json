@@ -97,6 +97,9 @@
   },
   "checkout": {
     "title": "Checkout",
+    "subtitle": "Complete your booking details",
+    "customerInfo": "Customer Information",
+    "fillDetails": "Please fill in your details to complete the booking",
     "bookingSummary": "Booking Summary",
     "fullName": "Full name",
     "paymentMethod": "Payment method",
