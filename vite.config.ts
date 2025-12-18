@@ -16,6 +16,20 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'mui-vendor': ['@mui/material', '@mui/icons-material', '@mui/x-data-grid'],
+          'redux-vendor': ['@reduxjs/toolkit', 'react-redux'],
+          'form-vendor': ['formik', 'yup'],
+          'i18n-vendor': ['react-i18next', 'i18next'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+  },
   test: {
     globals: true,
     environment: 'jsdom',
