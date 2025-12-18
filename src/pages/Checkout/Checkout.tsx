@@ -42,7 +42,7 @@ export default function Checkout() {
     try {
       const totalCost = calculateTotalCost(ctx.pricePerNight, ctx.checkInDate, ctx.checkOutDate)
 
-      const bookingId = await createBooking({
+      const bookingDetails = await createBooking({
         customerName: values.customerName,
         hotelName: ctx.hotelName,
         roomNumber: ctx.roomNumber,
@@ -54,7 +54,10 @@ export default function Checkout() {
       }).unwrap()
 
       showSuccess(t('checkout.bookingConfirmed'))
-      void navigate(`/checkout/confirmation/${bookingId}`, { replace: true })
+      void navigate('/checkout/confirmation', {
+        replace: true,
+        state: { booking: bookingDetails },
+      })
     } catch (error) {
       console.error('Booking failed:', error)
       showError(t('checkout.bookingFailed'))

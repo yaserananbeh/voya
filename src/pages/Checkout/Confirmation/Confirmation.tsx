@@ -12,8 +12,8 @@ import {
   Container,
   Grid,
 } from '@mui/material'
-import { useParams } from 'react-router-dom'
-import { useGetBookingByIdQuery } from '@/api/checkout'
+import { useParams, useLocation } from 'react-router-dom'
+import { useGetBookingByIdQuery, type BookingDetailsDto } from '@/api/checkout'
 import { useTranslation } from 'react-i18next'
 import PrintIcon from '@mui/icons-material/Print'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
@@ -27,26 +27,34 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import { useRef } from 'react'
 import { alpha, useTheme } from '@mui/material/styles'
 import styles from './confirmation.module.css'
+
+type LocationState = { booking?: BookingDetailsDto }
+
 export default function Confirmation() {
   const { t } = useTranslation()
   const theme = useTheme()
+  const location = useLocation()
   const { bookingId } = useParams()
-  const id = Number(bookingId)
   const printRef = useRef<HTMLDivElement>(null)
 
-  const { data, isLoading, isError } = useGetBookingByIdQuery(id, {
-    skip: !Number.isFinite(id),
+  const bookingFromState = (location.state as LocationState | null)?.booking
+  const id = bookingId ? Number(bookingId) : null
+
+  const {
+    data: bookingFromApi,
+    isLoading,
+    isError,
+  } = useGetBookingByIdQuery(id!, {
+    skip: !id || !Number.isFinite(id),
   })
+
+  const data = bookingFromState || bookingFromApi
 
   const handlePrint = () => {
     window.print()
   }
 
-  if (!Number.isFinite(id)) {
-    return <Typography variant="h6">{t('confirmation.invalidBookingId')}</Typography>
-  }
-
-  if (isLoading) {
+  if (isLoading && !bookingFromState) {
     return (
       <Box
         sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}
@@ -56,7 +64,11 @@ export default function Confirmation() {
     )
   }
 
-  if (isError || !data) {
+  if ((isError || !data) && !bookingFromState) {
+    return <Typography variant="h6">{t('confirmation.failedToLoadBooking')}</Typography>
+  }
+
+  if (!data) {
     return <Typography variant="h6">{t('confirmation.failedToLoadBooking')}</Typography>
   }
 
