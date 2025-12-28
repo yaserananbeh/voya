@@ -19,7 +19,7 @@ import {
   useUpdateCityMutation,
   useDeleteCityMutation,
 } from '@/api/admin'
-import type { CityDto } from '@/types/models'
+import type { CityDto } from '@/types'
 import { CityForm } from './components/CityForm'
 import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
 import { useNotification } from '@/hooks/useNotification'

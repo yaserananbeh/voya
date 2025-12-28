@@ -19,7 +19,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import LocationCityIcon from '@mui/icons-material/LocationCity'
 import HotelIcon from '@mui/icons-material/Hotel'
 import BedIcon from '@mui/icons-material/Bed'
-import LogoutBtn from '@/components/layout/LogoutBtn'
+import { LogoutBtn } from '@/components/layout'
 import { Outlet } from 'react-router-dom'
 import { ScrollToTop } from '@/components/ScrollToTop'
 

@@ -1,4 +1,4 @@
-import type { AmenityDto } from '@/types/models'
+import type { AmenityDto } from '@/types'
 import { baseApi } from '../baseApi'
 export type HomeSearchRequest = {
   checkInDate?: string

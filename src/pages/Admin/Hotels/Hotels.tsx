@@ -19,7 +19,7 @@ import {
   useUpdateHotelMutation,
   useDeleteHotelMutation,
 } from '@/api/admin'
-import type { HotelDto } from '@/types/models'
+import type { HotelDto } from '@/types'
 import { HotelForm } from './components/HotelForm'
 import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
 

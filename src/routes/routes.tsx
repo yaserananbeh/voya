@@ -2,9 +2,7 @@ import { lazy, Suspense, type ReactNode } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { Box } from '@mui/material'
 
-import ProtectedRoute from '@/components/auth/ProtectedRoute'
-import AdminRoute from '@/components/auth/AdminRoute'
-import RedirectIfAuthenticated from '@/components/auth/RedirectIfAuthenticated'
+import { ProtectedRoute, AdminRoute, RedirectIfAuthenticated } from '@/components/auth'
 import { VoyaLoader } from '@/components'
 import { RouteError } from '@/pages/Error/RouteError'
 

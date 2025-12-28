@@ -19,7 +19,7 @@ import {
   useUpdateRoomMutation,
   useDeleteRoomMutation,
 } from '@/api/admin'
-import type { RoomDto } from '@/types/models'
+import type { RoomDto } from '@/types'
 import { RoomForm } from './components/RoomForm'
 import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
 

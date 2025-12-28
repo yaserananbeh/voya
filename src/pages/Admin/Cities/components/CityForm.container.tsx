@@ -2,7 +2,7 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Box } from '@mui/material'
 import { useGetCitiesQuery } from '@/api/admin'
-import type { CityForCreationDto } from '@/types/models'
+import type { CityForCreationDto } from '@/types'
 import { CityFormPresentational } from './CityForm.presentational'
 import { VoyaLoader } from '@/components'
 

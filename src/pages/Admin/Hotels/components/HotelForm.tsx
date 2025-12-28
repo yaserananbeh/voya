@@ -11,7 +11,7 @@ import {
   Box,
 } from '@mui/material'
 import { useGetAdminHotelsQuery, useGetCitiesQuery } from '@/api/admin'
-import type { HotelForCreationDto } from '@/types/models'
+import type { HotelForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
 
 const validationSchema = yup.object({

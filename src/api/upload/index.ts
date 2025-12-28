@@ -1,5 +1,5 @@
 import { baseApi } from '../baseApi'
-import type { PhotoDto } from '@/types/models'
+import type { PhotoDto } from '@/types'
 
 export const uploadApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

@@ -13,7 +13,7 @@ import {
   Box,
 } from '@mui/material'
 import { useGetRoomsAdminQuery, useGetAdminHotelsQuery } from '@/api/admin'
-import type { RoomForCreationDto } from '@/types/models'
+import type { RoomForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
 
 const validationSchema = yup.object({
