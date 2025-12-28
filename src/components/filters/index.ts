@@ -1,1 +1,1 @@
-export { FilterContainer, FilterSection, useFilterContext } from './FilterContainer'
+export { FilterContainer, FilterSection } from './FilterContainer'

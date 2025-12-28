@@ -1,1 +1,1 @@
-export { ComponentErrorBoundary } from './ErrorBoundary'
+// ErrorBoundary is exported from providers/index.ts
