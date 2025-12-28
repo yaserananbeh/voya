@@ -1,0 +1,7 @@
+export { default as MainHeader } from './MainHeader'
+export { MainFooter } from './MainFooter'
+export { default as LogoutBtn } from './LogoutBtn'
+export { LanguageSwitcher } from './LanguageSwitcher'
+export { ThemeToggle } from './ThemeToggle'
+export { PageContainer } from './PageContainer'
+export { Section } from './Section'
