@@ -82,7 +82,8 @@ Voya
 │   │   ├── auth
 │   │   │   ├── AdminRoute.tsx
 │   │   │   ├── ProtectedRoute.tsx
-│   │   │   └── RedirectIfAuthenticated.tsx
+│   │   │   ├── RedirectIfAuthenticated.tsx
+│   │   │   └── index.ts
 │   │   ├── common
 │   │   │   ├── SafeImage.tsx
 │   │   │   ├── VoyaLoader.tsx
@@ -106,7 +107,8 @@ Voya
 │   │   │   ├── MainHeader.tsx
 │   │   │   ├── PageContainer.tsx
 │   │   │   ├── Section.tsx
-│   │   │   └── ThemeToggle.tsx
+│   │   │   ├── ThemeToggle.tsx
+│   │   │   └── index.ts
 │   │   ├── patterns
 │   │   │   ├── RenderProps.tsx
 │   │   │   └── index.ts
@@ -114,6 +116,7 @@ Voya
 │   ├── constants
 │   │   ├── api.ts
 │   │   ├── colors.ts
+│   │   ├── index.ts
 │   │   └── messages.ts
 │   ├── hooks
 │   │   ├── index.ts
@@ -281,6 +284,7 @@ Voya
 │   ├── theme
 │   │   └── index.ts
 │   ├── types
+│   │   ├── index.ts
 │   │   ├── models.ts
 │   │   ├── mui.d.ts
 │   │   └── swagger.json
