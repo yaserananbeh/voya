@@ -67,7 +67,7 @@ A modern, full-featured travel and accommodation booking platform built with Rea
   - Search bar for hotels and cities
   - Interactive calendar for check-in/check-out dates
   - Guest and room selection controls
-  - Default values (today/tomorrow, 2 adults, 1 room)
+  - Default values (today/tomorrow, 1 adult, 1 room)
 
 - **Featured Deals Section**
   - Showcases 3-5 hotels with special offers
@@ -275,7 +275,7 @@ cp .env.example .env
 Edit `.env` and add your configuration:
 
 ```env
-VITE_API_BASE_URL=https://your-api-url.com
+VITE_API_BASE_URL=https://travel-and-accommodation-booking-static.onrender.com
 ```
 
 ### 4. Start Development Server
@@ -372,7 +372,8 @@ Voya/
 │   │   ├── checkout/       # Booking API
 │   │   ├── home/          # Home page API
 │   │   ├── hotels/        # Hotels API
-│   │   └── searchResults/ # Search API
+│   │   ├── searchResults/ # Search API
+│   │   └── upload/        # Photo upload API
 │   ├── assets/            # Images, fonts, icons
 │   ├── components/        # Reusable components
 │   │   ├── auth/         # Auth-related components
@@ -577,16 +578,21 @@ All API endpoints are defined using RTK Query's `injectEndpoints`:
 - `GET /hotels/:id/reviews` - Get hotel reviews
 
 #### Search
-- `GET /search` - Search hotels with filters
+- `GET /hotels` - Get hotels list with search query parameters (used for search results page)
+- `GET /home/search` - Search hotels with filters (used for home page search)
+- `GET /search-results/amenities` - Get available amenities for filtering
 
 #### Home Page
-- `GET /deals/featured` - Get featured deals
-- `GET /users/:userId/recent-hotels` - Get recently visited hotels
-- `GET /destinations/trending` - Get trending destinations
+- `GET /home/featured-deals` - Get featured deals
+- `GET /home/users/:userId/recent-hotels` - Get recently visited hotels
+- `GET /home/destinations/trending` - Get trending destinations
 
 #### Checkout
-- `POST /booking` - Create booking
-- `GET /booking/:id` - Get booking details
+- `POST /bookings` - Create booking
+- `GET /bookings/:id` - Get booking details
+
+#### Upload
+- `POST /photos` - Upload photo (used in admin for city, hotel, and room images)
 
 #### Admin
 - `GET /cities` - Get cities list
