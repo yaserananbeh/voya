@@ -10,6 +10,8 @@
 
 > **TRUE Incremental Development**: Build the Login feature one component at a time, adding translations, types, and API as you go. **NOT all at once!**
 
+> **📝 CRITICAL**: For exact API response formats, authentication flow details, and complete code examples, see [Exact Implementation Reference](10-Exact-Implementation-Reference.md) when implementing login functionality.
+
 ### 🎯 The Incremental Development Pattern
 
 **How Real Developers Build Login Feature**:
@@ -348,25 +350,34 @@ export type LoginRequestDto = {
 }
 
 export type LoginResponseDto = {
-  authentication: string
-  userType: 'Admin' | 'User'
+  authentication: string // CRITICAL: Field name is "authentication" (NOT "token")
+  userType: 'Admin' | 'User' // CRITICAL: Case-sensitive - exactly "Admin" (capital A) or "User" (capital U)
 }
+```
+
+> **📝 CRITICAL API Response Details**:
+>
+> - Response field is `authentication` (NOT `token`)
+> - Request field is `userName` (camelCase with capital N, NOT `username`)
+> - `userType` values are **case-sensitive**: exactly `"Admin"` or `"User"`
+> - For complete API response format and examples, see [Exact Implementation Reference](10-Exact-Implementation-Reference.md#critical-api-response-formats)
 
 export const authApi = baseApi.injectEndpoints({
-  endpoints: (builder) => ({
-    login: builder.mutation<LoginResponseDto, LoginRequestDto>({
-      query: (credentials) => ({
-        url: 'auth/authenticate',
-        method: 'POST',
-        body: credentials,
-      }),
-      invalidatesTags: ['Auth'],
-    }),
-  }),
+endpoints: (builder) => ({
+login: builder.mutation<LoginResponseDto, LoginRequestDto>({
+query: (credentials) => ({
+url: 'auth/authenticate',
+method: 'POST',
+body: credentials,
+}),
+invalidatesTags: ['Auth'],
+}),
+}),
 })
 
 export const { useLoginMutation } = authApi
-```
+
+````
 
 **Update baseApi tagTypes**:
 
@@ -374,7 +385,7 @@ export const { useLoginMutation } = authApi
 
 ```typescript
 tagTypes: ['Auth', 'Home'], // Added Auth tag
-```
+````
 
 **Add Auth types** (incremental):
 
@@ -609,6 +620,8 @@ export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 ```
 
+> **📝 CRITICAL**: For exact API response format and complete login implementation, see [Exact Implementation Reference](10-Exact-Implementation-Reference.md#critical-admin-login-redirect---exact-code).
+
 **Update LoginForm to use Auth Slice** (store token after login):
 
 **Update `src/pages/Login/LoginForm.tsx`**:
@@ -635,15 +648,22 @@ export function LoginForm() {
 
     try {
       const result = await login({ userName: username, password } as LoginRequestDto).unwrap()
+
+      // CRITICAL: Store in localStorage FIRST (before Redux update)
+      localStorage.setItem('token', result.authentication)
+      localStorage.setItem('userType', result.userType)
+
+      // Update Redux state
       dispatch(setCredentials({ token: result.authentication, userType: result.userType }))
       enqueueSnackbar(t('auth.loginSuccess'), { variant: 'success' })
 
-      // Redirect based on user type
+      // CRITICAL: Redirect based on user type (case-sensitive check)
+      // userType values are exactly "Admin" (capital A) or "User" (capital U)
       if (result.userType === 'Admin') {
-        navigate('/admin/dashboard', { replace: true })
+        await navigate(from || '/admin/dashboard', { replace: true })
       } else {
         const redirectTo = from || '/home'
-        navigate(redirectTo, { replace: true })
+        await navigate(redirectTo, { replace: true })
       }
     } catch (err) {
       // Error is handled by RTK Query

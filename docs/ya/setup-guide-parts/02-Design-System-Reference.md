@@ -10,6 +10,8 @@
 
 This section provides **design specifications** that ensure your implementation matches the original Voya design. Use this as a **reference** when building components - you don't need to memorize everything, just refer back when needed.
 
+> **📝 CRITICAL**: For **exact design specifications** with precise values, exact code, and complete component implementations, see [Exact Implementation Reference](10-Exact-Implementation-Reference.md#exact-design-specifications). This section provides general guidelines; the Exact Implementation Reference provides pixel-perfect details.
+
 > **📝 Note**: For complete theme documentation, see `docs/design.md` in the project root. This section provides quick reference for common design decisions.
 
 ---

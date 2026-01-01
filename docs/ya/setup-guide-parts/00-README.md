@@ -100,6 +100,10 @@ This guide has been split into logical parts for easier navigation:
 
 9. **[Polish & Quality](09-Polish-Quality.md)** - Error Handling, Testing, Code Quality Tools, Git Hooks
 
+### Reference Documents
+
+10. **[Exact Implementation Reference](10-Exact-Implementation-Reference.md)** ⭐ **CRITICAL** - Exact API formats, authentication flows, and design specifications from original implementation
+
 ---
 
 ## ⚡ Quick Start

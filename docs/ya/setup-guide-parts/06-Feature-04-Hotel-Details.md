@@ -591,6 +591,8 @@ export interface HotelRoomDto {
 }
 ```
 
+> **📝 CRITICAL**: For exact authentication check method and complete booking flow, see [Exact Implementation Reference](10-Exact-Implementation-Reference.md#critical-booking-flow-authentication---exact-code).
+
 **First, create CheckoutContext type and storage utils** (needed for booking flow):
 
 **Create `src/pages/Checkout/types.ts`**:
@@ -647,7 +649,6 @@ import { useNavigate } from 'react-router-dom'
 import { SafeImage } from '@/components/common/SafeImage'
 import type { HotelRoomDto } from '@/api/hotels'
 import { useAppSelector } from '@/hooks'
-import { selectIsAuthenticated } from '@/store/authSlice'
 import { selectSearchParams } from '@/store/searchSlice'
 import { saveCheckoutContext } from '@/pages/Checkout/utils/checkoutStorage'
 import type { CheckoutContext } from '@/pages/Checkout/types'
@@ -693,8 +694,10 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms: propRooms }: H
       userId: 1, // Will be replaced with actual user ID from auth in later steps
     }
 
-    // Check authentication before navigating to checkout
-    if (!isAuthenticated) {
+    // CRITICAL: Check authentication using localStorage (NOT Redux selector)
+    // Redux state might not be initialized when component first renders
+    const token = localStorage.getItem('token')
+    if (!token) {
       // Save checkout context to session storage for after login
       saveCheckoutContext(ctx)
       // Redirect to login with return path
