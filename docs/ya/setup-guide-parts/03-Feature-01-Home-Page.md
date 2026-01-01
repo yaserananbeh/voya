@@ -2245,11 +2245,44 @@ export function TrendingDestinationsSection() {
 7. Add remaining translations
 8. Test
 
+**Now add API endpoint** (only what TrendingDestinations needs):
+
+**Update `src/api/home/index.ts`** (add to existing file):
+
+```typescript
+// ... existing endpoints ...
+
+// Add Destination type (only what we need)
+export type DestinationDto = {
+  cityId: number
+  cityName: string | null
+  countryName: string | null
+  description: string | null
+  thumbnailUrl: string | null
+}
+
+// Add to endpoints
+export const homeApi = baseApi.injectEndpoints({
+  endpoints: (build) => ({
+    // ... existing featuredDeals and recentHotels endpoints ...
+    trendingDestinations: build.query<DestinationDto[], void>({
+      query: () => ({
+        url: '/home/destinations/trending',
+        method: 'GET',
+      }),
+      providesTags: ['Home'],
+    }),
+  }),
+})
+
+export const { useFeaturedDealsQuery, useRecentHotelsQuery, useTrendingDestinationsQuery } = homeApi
+```
+
 > **📋 Complete Implementation**: For the full TrendingDestinationsSection implementation, see the codebase at `src/pages/Home/components/TrendingDestinationsSection.tsx`. Follow the same incremental pattern:
 >
 > - Create placeholder
 > - Add `trendingDestinations` translation
-> - Add API endpoint (`trendingDestinations` query)
+> - Add API endpoint (`trendingDestinations` query with URL `/home/destinations/trending`)
 > - Add `DestinationDto` type
 > - Enhance component to display destinations
 > - Add error/empty state translations
