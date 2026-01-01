@@ -74,7 +74,7 @@
   - Interactive calendar for check-in/check-out dates
     - Default: today and tomorrow
     - Date validation
-    - Date picker component (MUI X Date Pickers)
+    - Native HTML5 date inputs (TextField type="date")
   - Guest selection controls
     - Adults selector (default: 2)
     - Children selector (default: 0)
@@ -1151,7 +1151,7 @@
 
 - [ ] **Advanced MUI Components**
   - **Data Grid**: `@mui/x-data-grid@8.19.0` - Admin tables
-  - **Date Pickers**: `@mui/x-date-pickers@8.19.0` - Date selection
+  - **Date Pickers**: `@mui/x-date-pickers@8.19.0` - Available but not used; project uses native HTML5 date inputs
   - **Study**: MUI X documentation
 
 ### 9.4 Emotion (CSS-in-JS)

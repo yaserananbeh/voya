@@ -758,20 +758,18 @@ Now let's add the search bar. This needs SearchSlice for state management.
 ```typescript
 import { useState } from 'react'
 import { Box, TextField, Button, Grid } from '@mui/material'
-import { DatePicker } from '@mui/x-date-pickers'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '@/hooks'
 import { setSearchParams } from '@/store/searchSlice'
 import { useTranslation } from 'react-i18next'
-import { format } from 'date-fns'
 
 export function HomeSearchBar() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [city, setCity] = useState('')
-  const [checkIn, setCheckIn] = useState<Date | null>(null)
-  const [checkOut, setCheckOut] = useState<Date | null>(null)
+  const [checkIn, setCheckIn] = useState<string>('')
+  const [checkOut, setCheckOut] = useState<string>('')
 
   const handleSearch = () => {
     if (!city || !checkIn || !checkOut) {
@@ -781,8 +779,8 @@ export function HomeSearchBar() {
     dispatch(
       setSearchParams({
         searchQuery: city,
-        checkInDate: format(checkIn, 'yyyy-MM-dd'),
-        checkOutDate: format(checkOut, 'yyyy-MM-dd'),
+        checkInDate: checkIn,
+        checkOutDate: checkOut,
         adults: 2,
         children: 0,
         rooms: 1,
@@ -805,20 +803,32 @@ export function HomeSearchBar() {
           />
         </Grid>
         <Grid item xs={12} md={3}>
-          <DatePicker
+          <TextField
+            name="checkInDate"
             label={t('home.checkIn')}
+            type="date"
+            size="small"
             value={checkIn}
-            onChange={(date) => setCheckIn(date)}
-            slotProps={{ textField: { fullWidth: true, required: true } }}
+            onChange={(e) => setCheckIn(e.target.value)}
+            InputLabelProps={{ shrink: true }}
+            fullWidth
+            required
           />
         </Grid>
         <Grid item xs={12} md={3}>
-          <DatePicker
+          <TextField
+            name="checkOutDate"
             label={t('home.checkOut')}
+            type="date"
+            size="small"
             value={checkOut}
-            onChange={(date) => setCheckOut(date)}
-            minDate={checkIn || undefined}
-            slotProps={{ textField: { fullWidth: true, required: true } }}
+            onChange={(e) => setCheckOut(e.target.value)}
+            InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: checkIn,
+            }}
+            fullWidth
+            required
           />
         </Grid>
         <Grid item xs={12} md={2}>
@@ -1017,7 +1027,616 @@ export default function Home() {
 
 **Test**: Refresh page → Should see search bar → Enter city and dates → Click search → Should navigate to `/search`.
 
-**✅ Step 4 Complete**: SearchBar is working with SearchSlice and translations!
+**✅ Step 4 Complete**: Basic SearchBar is working with SearchSlice and translations!
+
+---
+
+### 12.10a Step 4a: Add Date Utility Functions
+
+Before we enhance the search bar, let's add date utility functions that we'll need for default dates and formatting.
+
+**Create date utilities**:
+
+**src/utils/date.ts**:
+
+```typescript
+export function startOfToday(): Date {
+  const d = new Date()
+  d.setHours(0, 0, 0, 0)
+  return d
+}
+
+export function addDays(date: Date, amount: number): Date {
+  const d = new Date(date)
+  d.setDate(d.getDate() + amount)
+  return d
+}
+
+export function formatDateForApi(date: Date): string {
+  const year = date.getFullYear()
+  const month = `${date.getMonth() + 1}`.padStart(2, '0')
+  const day = `${date.getDate()}`.padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+export function formatDistanceToNow(date: Date, opts?: { addSuffix?: boolean }): string {
+  const now = new Date().getTime()
+  const diffMs = now - date.getTime()
+  const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24))
+
+  if (diffDays === 0) return 'today'
+  const base = `${Math.abs(diffDays)} day${Math.abs(diffDays) === 1 ? '' : 's'}`
+  if (!opts?.addSuffix) return base
+  return diffDays > 0 ? `${base} ago` : `in ${base}`
+}
+```
+
+**Export from utils index**:
+
+**src/utils/index.ts**:
+
+```typescript
+export * from './date'
+```
+
+**Test**: Verify the file was created and exports work.
+
+**✅ Step 4a Complete**: Date utilities are ready!
+
+---
+
+### 12.10b Step 4b: Build GuestRoomSelector Component
+
+Now let's create the GuestRoomSelector component that will be used in the enhanced search bar.
+
+**Create GuestRoomSelector component**:
+
+**src/pages/Home/components/GuestRoomSelector.tsx**:
+
+```typescript
+import { useState } from 'react'
+import { Box, Button, IconButton, Popover, Typography } from '@mui/material'
+import PeopleIcon from '@mui/icons-material/People'
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
+import { useTranslation } from 'react-i18next'
+
+type GuestRoomSelectorProps = {
+  adults: number
+  children: number
+  rooms: number
+  onChange: (next: { adults: number; children: number; rooms: number }) => void
+}
+
+export function GuestRoomSelector({ adults, children, rooms, onChange }: GuestRoomSelectorProps) {
+  const { t } = useTranslation()
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+
+  const open = Boolean(anchorEl)
+  const id = open ? 'guest-room-popover' : undefined
+
+  const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handleIncrement = (field: 'adults' | 'children' | 'rooms') => {
+    const next = { adults, children, rooms }
+    next[field] = next[field] + 1
+    if (field === 'adults' && next.adults < 1) next.adults = 1
+    if (field === 'rooms' && next.rooms < 1) next.rooms = 1
+    onChange(next)
+  }
+
+  const handleDecrement = (field: 'adults' | 'children' | 'rooms') => {
+    const next = { adults, children, rooms }
+    next[field] = next[field] - 1
+    if (field === 'adults' && next.adults < 1) next.adults = 1
+    if (field === 'children' && next.children < 0) next.children = 0
+    if (field === 'rooms' && next.rooms < 1) next.rooms = 1
+    onChange(next)
+  }
+
+  const summary = `${adults} ${adults !== 1 ? t('guestRoom.adultsPlural') : t('guestRoom.adult')}${
+    children > 0
+      ? `, ${children} ${children !== 1 ? t('guestRoom.childrenPlural') : t('guestRoom.child')}`
+      : ''
+  } • ${rooms} ${rooms !== 1 ? t('guestRoom.roomsPlural') : t('guestRoom.room')}`
+
+  return (
+    <>
+      <Button
+        aria-describedby={id}
+        variant="outlined"
+        size="small"
+        startIcon={<PeopleIcon />}
+        onClick={handleOpen}
+        sx={{ minWidth: 220, justifyContent: 'flex-start' }}
+      >
+        {summary}
+      </Button>
+
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+      >
+        <Box sx={{ p: 2, minWidth: 260 }}>
+          <Row
+            label={t('guestRoom.adults')}
+            subtitle={t('guestRoom.adultsAges')}
+            value={adults}
+            onDec={() => handleDecrement('adults')}
+            onInc={() => handleIncrement('adults')}
+          />
+          <Row
+            label={t('guestRoom.children')}
+            subtitle={t('guestRoom.childrenAges')}
+            value={children}
+            onDec={() => handleDecrement('children')}
+            onInc={() => handleIncrement('children')}
+          />
+          <Row
+            label={t('guestRoom.rooms')}
+            value={rooms}
+            onDec={() => handleDecrement('rooms')}
+            onInc={() => handleIncrement('rooms')}
+          />
+        </Box>
+      </Popover>
+    </>
+  )
+}
+
+type RowProps = {
+  label: string
+  subtitle?: string
+  value: number
+  onDec: () => void
+  onInc: () => void
+}
+
+function Row({ label, subtitle, value, onDec, onInc }: RowProps) {
+  const disabled =
+    ((label.includes('Adults') || label.includes('بالغين')) && value <= 1) ||
+    ((label.includes('Rooms') || label.includes('غرف')) && value <= 1) ||
+    ((label.includes('Children') || label.includes('أطفال')) && value <= 0)
+
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: subtitle ? 'flex-start' : 'center',
+        justifyContent: 'space-between',
+        mb: 1.5,
+      }}
+    >
+      <Box>
+        <Typography variant="subtitle1">{label}</Typography>
+        {subtitle && (
+          <Typography variant="body2" color="text.secondary">
+            {subtitle}
+          </Typography>
+        )}
+      </Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <IconButton size="small" onClick={onDec} disabled={disabled}>
+          <RemoveIcon fontSize="small" />
+        </IconButton>
+        <Typography minWidth={24} textAlign="center">
+          {value}
+        </Typography>
+        <IconButton size="small" onClick={onInc}>
+          <AddIcon fontSize="small" />
+        </IconButton>
+      </Box>
+    </Box>
+  )
+}
+```
+
+**Add ONLY guestRoom translations** (incremental):
+
+**Update `src/i18n/locales/en.json`**:
+
+```json
+{
+  "common": {
+    // ... existing keys ...
+  },
+  "home": {
+    // ... existing keys ...
+  },
+  "guestRoom": {
+    "adults": "Adults",
+    "children": "Children",
+    "rooms": "Rooms",
+    "adultsAges": "Ages 18+",
+    "childrenAges": "Ages 0–17",
+    "adult": "adult",
+    "adultsPlural": "adults",
+    "child": "child",
+    "childrenPlural": "children",
+    "room": "room",
+    "roomsPlural": "rooms"
+  }
+}
+```
+
+**Update `src/i18n/locales/ar.json`**:
+
+```json
+{
+  "common": {
+    // ... existing keys ...
+  },
+  "home": {
+    // ... existing keys ...
+  },
+  "guestRoom": {
+    "adults": "بالغين",
+    "children": "أطفال",
+    "rooms": "غرف",
+    "adultsAges": "18+ سنة",
+    "childrenAges": "0–17 سنة",
+    "adult": "بالغ",
+    "adultsPlural": "بالغين",
+    "child": "طفل",
+    "childrenPlural": "أطفال",
+    "room": "غرفة",
+    "roomsPlural": "غرف"
+  }
+}
+```
+
+**Test**: Verify the component file was created (we'll test it when we integrate it into HomeSearchBar).
+
+**✅ Step 4b Complete**: GuestRoomSelector component is ready!
+
+---
+
+### 12.10c Step 4c: Enhance HomeSearchBar with Formik and Validation
+
+Now let's enhance the HomeSearchBar to use Formik for form management and Yup for validation. This will make the form more robust and user-friendly.
+
+**Enhance HomeSearchBar with Formik**:
+
+**src/pages/Home/components/HomeSearchBar.tsx**:
+
+```typescript
+import { Box, Button, TextField, Paper, InputAdornment } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '@/hooks'
+import { selectSearchParams, setSearchParams } from '@/store/searchSlice'
+import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
+import { useTranslation } from 'react-i18next'
+
+export function HomeSearchBar() {
+  const { t } = useTranslation()
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const stored = useAppSelector(selectSearchParams)
+
+  const today = startOfToday()
+  const tomorrow = addDays(today, 1)
+
+  const validationSchema = yup.object({
+    city: yup.string().required(t('home.cityRequired')),
+    checkInDate: yup.string().required(t('home.checkInRequired')),
+    checkOutDate: yup
+      .string()
+      .required(t('home.checkOutRequired'))
+      .test('is-after-checkin', t('home.checkOutAfterCheckIn'), function (value) {
+        const { checkInDate } = this.parent as { checkInDate: string }
+        if (!checkInDate || !value) return true
+        return new Date(value) > new Date(checkInDate)
+      }),
+    adults: yup.number().min(1).required(),
+    children: yup.number().min(0).required(),
+    rooms: yup.number().min(1).required(),
+  })
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      city: stored.city || '',
+      checkInDate: stored.checkInDate || formatDateForApi(today),
+      checkOutDate: stored.checkOutDate || formatDateForApi(tomorrow),
+      adults: stored.adults ?? 1,
+      children: stored.children ?? 0,
+      rooms: stored.rooms ?? 1,
+    },
+    validationSchema,
+    onSubmit(values) {
+      dispatch(setSearchParams(values))
+      void navigate('/search')
+    },
+  })
+
+  return (
+    <Paper
+      elevation={3}
+      sx={{
+        p: 2,
+        display: 'flex',
+        flexDirection: { xs: 'column', md: 'row' },
+        gap: 2,
+        alignItems: 'center',
+      }}
+      component="form"
+      onSubmit={formik.handleSubmit}
+    >
+      <TextField
+        name="city"
+        label={t('home.whereGoing')}
+        size="small"
+        value={formik.values.city}
+        onChange={formik.handleChange}
+        error={formik.touched.city && Boolean(formik.errors.city)}
+        helperText={formik.touched.city && formik.errors.city}
+        sx={{ flex: 2, minWidth: 180 }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <TextField
+        name="checkInDate"
+        label={t('home.checkIn')}
+        type="date"
+        size="small"
+        value={formik.values.checkInDate}
+        onChange={formik.handleChange}
+        InputLabelProps={{ shrink: true }}
+        sx={{ flex: 1, minWidth: 150 }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <CalendarMonthIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <TextField
+        name="checkOutDate"
+        label={t('home.checkOut')}
+        type="date"
+        size="small"
+        value={formik.values.checkOutDate}
+        onChange={formik.handleChange}
+        InputLabelProps={{ shrink: true }}
+        sx={{ flex: 1, minWidth: 150 }}
+        inputProps={{
+          min: formik.values.checkInDate,
+        }}
+      />
+
+      <Box sx={{ flexShrink: 0 }}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          size="large"
+          startIcon={<SearchIcon />}
+        >
+          {t('common.search')}
+        </Button>
+      </Box>
+    </Paper>
+  )
+}
+```
+
+**Add ONLY validation translation keys** (incremental):
+
+**Update `src/i18n/locales/en.json`**:
+
+```json
+{
+  "home": {
+    // ... existing keys ...
+    "cityRequired": "City is required",
+    "checkInRequired": "Check-in is required",
+    "checkOutRequired": "Check-out is required",
+    "checkOutAfterCheckIn": "Check-out must be after check-in"
+  }
+}
+```
+
+**Update `src/i18n/locales/ar.json`**:
+
+```json
+{
+  "home": {
+    // ... existing keys ...
+    "cityRequired": "المدينة مطلوبة",
+    "checkInRequired": "تاريخ الوصول مطلوب",
+    "checkOutRequired": "تاريخ المغادرة مطلوب",
+    "checkOutAfterCheckIn": "يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول"
+  }
+}
+```
+
+**Test**: Refresh page → Try submitting empty form → Should see validation errors → Fill all fields → Should navigate to `/search`.
+
+**✅ Step 4c Complete**: HomeSearchBar now has Formik validation and better UX!
+
+---
+
+### 12.10d Step 4d: Add GuestRoomSelector to HomeSearchBar
+
+Now let's integrate the GuestRoomSelector into the HomeSearchBar to complete the search functionality.
+
+**Add GuestRoomSelector to HomeSearchBar**:
+
+**src/pages/Home/components/HomeSearchBar.tsx**:
+
+Update the imports and add GuestRoomSelector:
+
+```typescript
+import { Box, Button, TextField, Paper, InputAdornment } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '@/hooks'
+import { selectSearchParams, setSearchParams } from '@/store/searchSlice'
+import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
+import { GuestRoomSelector } from './GuestRoomSelector'
+import { useTranslation } from 'react-i18next'
+
+export function HomeSearchBar() {
+  const { t } = useTranslation()
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const stored = useAppSelector(selectSearchParams)
+
+  const today = startOfToday()
+  const tomorrow = addDays(today, 1)
+
+  const validationSchema = yup.object({
+    city: yup.string().required(t('home.cityRequired')),
+    checkInDate: yup.string().required(t('home.checkInRequired')),
+    checkOutDate: yup
+      .string()
+      .required(t('home.checkOutRequired'))
+      .test('is-after-checkin', t('home.checkOutAfterCheckIn'), function (value) {
+        const { checkInDate } = this.parent as { checkInDate: string }
+        if (!checkInDate || !value) return true
+        return new Date(value) > new Date(checkInDate)
+      }),
+    adults: yup.number().min(1).required(),
+    children: yup.number().min(0).required(),
+    rooms: yup.number().min(1).required(),
+  })
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      city: stored.city || '',
+      checkInDate: stored.checkInDate || formatDateForApi(today),
+      checkOutDate: stored.checkOutDate || formatDateForApi(tomorrow),
+      adults: stored.adults ?? 1,
+      children: stored.children ?? 0,
+      rooms: stored.rooms ?? 1,
+    },
+    validationSchema,
+    onSubmit(values) {
+      dispatch(setSearchParams(values))
+      void navigate('/search')
+    },
+  })
+
+  return (
+    <Paper
+      elevation={3}
+      sx={{
+        p: 2,
+        display: 'flex',
+        flexDirection: { xs: 'column', md: 'row' },
+        gap: 2,
+        alignItems: 'center',
+      }}
+      component="form"
+      onSubmit={formik.handleSubmit}
+    >
+      <TextField
+        name="city"
+        label={t('home.whereGoing')}
+        size="small"
+        value={formik.values.city}
+        onChange={formik.handleChange}
+        error={formik.touched.city && Boolean(formik.errors.city)}
+        helperText={formik.touched.city && formik.errors.city}
+        sx={{ flex: 2, minWidth: 180 }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <TextField
+        name="checkInDate"
+        label={t('home.checkIn')}
+        type="date"
+        size="small"
+        value={formik.values.checkInDate}
+        onChange={formik.handleChange}
+        InputLabelProps={{ shrink: true }}
+        sx={{ flex: 1, minWidth: 150 }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <CalendarMonthIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <TextField
+        name="checkOutDate"
+        label={t('home.checkOut')}
+        type="date"
+        size="small"
+        value={formik.values.checkOutDate}
+        onChange={formik.handleChange}
+        InputLabelProps={{ shrink: true }}
+        sx={{ flex: 1, minWidth: 150 }}
+        inputProps={{
+          min: formik.values.checkInDate,
+        }}
+      />
+
+      <GuestRoomSelector
+        adults={formik.values.adults}
+        children={formik.values.children}
+        rooms={formik.values.rooms}
+        onChange={(next) => {
+          void formik.setFieldValue('adults', next.adults)
+          void formik.setFieldValue('children', next.children)
+          void formik.setFieldValue('rooms', next.rooms)
+        }}
+      />
+
+      <Box sx={{ flexShrink: 0 }}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          size="large"
+          startIcon={<SearchIcon />}
+        >
+          {t('common.search')}
+        </Button>
+      </Box>
+    </Paper>
+  )
+}
+```
+
+**Test**: Refresh page → Click on guest/room selector → Should open popover → Change values → Should update form → Submit → Should navigate with correct values.
+
+**✅ Step 4d Complete**: HomeSearchBar is now fully enhanced with all features!
+
+---
 
 ### 12.11 Step 5: Build FeaturedDealsSection Component
 
@@ -1474,9 +2093,12 @@ import {
 } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import { useRecentHotelsQuery } from '@/api/home'
+import { SafeImage } from '@/components/common/SafeImage'
+import { VoyaLoader } from '@/components'
+import styles from '../styles.module.css'
+import { formatDistanceToNow } from '@/utils/date'
+import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useTranslation } from 'react-i18next'
-import { CircularProgress } from '@mui/material'
-import { formatDistanceToNow } from 'date-fns'
 
 const MOCK_USER_ID = 1
 
@@ -1488,8 +2110,15 @@ export function RecentHotelsSection() {
 
   if (isLoading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
-        <CircularProgress />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '300px',
+        }}
+      >
+        <VoyaLoader size="small" />
       </Box>
     )
   }
@@ -1507,33 +2136,36 @@ export function RecentHotelsSection() {
   }
 
   return (
-    <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 3 }}>
+    <Box className={styles.cardsGrid}>
       {data.map((hotel) => (
-        <Card key={hotel.hotelId}>
-          <Box
-            component="img"
-            src={hotel.thumbnailUrl || ''}
-            alt={hotel.hotelName || 'Hotel'}
-            sx={{ width: '100%', height: 140, objectFit: 'cover' }}
-          />
-          <CardContent>
+        <Card key={hotel.hotelId} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <SafeImage src={hotel.thumbnailUrl} alt={hotel.hotelName ?? 'Hotel'} height={140} />
+          <CardContent sx={{ flexGrow: 1 }}>
             <Typography variant="h6">{hotel.hotelName}</Typography>
             <Typography variant="body2" color="text.secondary">
               {hotel.cityName}
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, mb: 1 }}>
-              <Rating value={hotel.starRating} readOnly size="small" />
+              <Rating value={hotel.starRating} readOnly size="small" max={5} />
+              <Typography variant="body2" sx={{ ml: 1 }}>
+                {hotel.starRating} {t('hotel.starHotel')}
+              </Typography>
             </Box>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-              {t('home.visited', 'Visited')}{' '}
-              {formatDistanceToNow(new Date(hotel.visitDate), { addSuffix: true })}
-            </Typography>
-            <Typography variant="body2">
-              ${hotel.priceLowerBound} - ${hotel.priceUpperBound} / night
+            <Typography variant="body2" color="text.secondary">
+              {t('hotel.visited')}{' '}
+              {formatDistanceToNow(new Date(hotel.visitDate), {
+                addSuffix: true,
+              })}
             </Typography>
           </CardContent>
           <CardActions>
-            <Button component={RouterLink} to={`/hotel/${hotel.hotelId}`} variant="contained" fullWidth>
+            <Button
+              component={RouterLink}
+              to={`/hotel/${hotel.hotelId}`}
+              variant="contained"
+              fullWidth
+              startIcon={<VisibilityIcon />}
+            >
               {t('common.viewDetails')}
             </Button>
           </CardActions>
@@ -1543,6 +2175,8 @@ export function RecentHotelsSection() {
   )
 }
 ```
+
+**Note**: This component uses `styles.module.css` for the cardsGrid. Make sure the CSS file includes the responsive grid styles (see CSS modules section).
 
 **Add ONLY recent hotels translations** (incremental):
 
@@ -2797,20 +3431,18 @@ export function HeroSection() {
 ```typescript
 import { useState } from 'react'
 import { Box, TextField, Button, Grid } from '@mui/material'
-import { DatePicker } from '@mui/x-date-pickers'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '@/hooks'
 import { setSearchParams } from '@/store/searchSlice'
 import { useTranslation } from 'react-i18next'
-import { format } from 'date-fns'
 
 export function HomeSearchBar() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [city, setCity] = useState('')
-  const [checkIn, setCheckIn] = useState<Date | null>(null)
-  const [checkOut, setCheckOut] = useState<Date | null>(null)
+  const [checkIn, setCheckIn] = useState<string>('')
+  const [checkOut, setCheckOut] = useState<string>('')
 
   const handleSearch = () => {
     if (!city || !checkIn || !checkOut) {
@@ -2820,8 +3452,8 @@ export function HomeSearchBar() {
     dispatch(
       setSearchParams({
         searchQuery: city,
-        checkInDate: format(checkIn, 'yyyy-MM-dd'),
-        checkOutDate: format(checkOut, 'yyyy-MM-dd'),
+        checkInDate: checkIn,
+        checkOutDate: checkOut,
         adults: 2,
         children: 0,
         rooms: 1,
@@ -2844,20 +3476,32 @@ export function HomeSearchBar() {
           />
         </Grid>
         <Grid item xs={12} md={3}>
-          <DatePicker
+          <TextField
+            name="checkInDate"
             label={t('home.checkIn')}
+            type="date"
+            size="small"
             value={checkIn}
-            onChange={(date) => setCheckIn(date)}
-            slotProps={{ textField: { fullWidth: true, required: true } }}
+            onChange={(e) => setCheckIn(e.target.value)}
+            InputLabelProps={{ shrink: true }}
+            fullWidth
+            required
           />
         </Grid>
         <Grid item xs={12} md={3}>
-          <DatePicker
+          <TextField
+            name="checkOutDate"
             label={t('home.checkOut')}
+            type="date"
+            size="small"
             value={checkOut}
-            onChange={(date) => setCheckOut(date)}
-            minDate={checkIn || undefined}
-            slotProps={{ textField: { fullWidth: true, required: true } }}
+            onChange={(e) => setCheckOut(e.target.value)}
+            InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: checkIn,
+            }}
+            fullWidth
+            required
           />
         </Grid>
         <Grid item xs={12} md={2}>
@@ -2980,24 +3624,42 @@ export function FeaturedDealsSection() {
 }
 ```
 
-**Note**: This component uses `styles.module.css`. Create a minimal CSS file:
+**Note**: This component uses `styles.module.css`. Create the CSS file with responsive breakpoints:
 
 **src/pages/Home/styles.module.css**:
 
 ```css
-.cardsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  margin-top: 24px;
-}
-
 .searchSection {
-  margin-bottom: 48px;
+  margin-bottom: 2rem;
 }
 
 .section {
-  margin-bottom: 48px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .cardsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
 }
 ```
 

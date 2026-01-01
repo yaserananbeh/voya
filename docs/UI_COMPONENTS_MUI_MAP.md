@@ -45,20 +45,20 @@ Below is the official mapping of **UI kit → MUI components**.
 
 Used in: Login, Search Filters, Checkout, Admin CRUD forms.
 
-| UI Purpose            | MUI Component                           |
-| --------------------- | --------------------------------------- |
-| Text inputs           | `TextField`                             |
-| Password input        | `TextField` with type="password"        |
-| Date pickers          | `DatePicker` (`@mui/x-date-pickers`)    |
-| Dropdowns             | `Select`, `MenuItem`                    |
-| Number inputs         | `TextField` type="number"               |
-| Toggle filters        | `Checkbox`, `Switch`                    |
-| Star rating input     | `Rating`                                |
-| Sliders (price range) | `Slider`                                |
-| Grouped form sections | `FormControl`, `FormGroup`, `FormLabel` |
-| Submit buttons        | `Button`                                |
-| Icon-only actions     | `IconButton`                            |
-| File upload           | `Button` + hidden `<input type="file">` |
+| UI Purpose            | MUI Component                               |
+| --------------------- | ------------------------------------------- |
+| Text inputs           | `TextField`                                 |
+| Password input        | `TextField` with type="password"            |
+| Date pickers          | `TextField` with type="date" (native HTML5) |
+| Dropdowns             | `Select`, `MenuItem`                        |
+| Number inputs         | `TextField` type="number"                   |
+| Toggle filters        | `Checkbox`, `Switch`                        |
+| Star rating input     | `Rating`                                    |
+| Sliders (price range) | `Slider`                                    |
+| Grouped form sections | `FormControl`, `FormGroup`, `FormLabel`     |
+| Submit buttons        | `Button`                                    |
+| Icon-only actions     | `IconButton`                                |
+| File upload           | `Button` + hidden `<input type="file">`     |
 
 ---
 

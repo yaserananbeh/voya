@@ -180,6 +180,8 @@ pnpm add @emotion/react@^11.14.0 @emotion/styled@^11.14.1
 pnpm add @mui/x-data-grid@^8.19.0 @mui/x-date-pickers@^8.19.0
 ```
 
+**Note**: While `@mui/x-date-pickers` is installed, the project uses native HTML5 date inputs (`TextField` with `type="date"`) for the HomeSearchBar component to avoid requiring `LocalizationProvider`. The package is kept in dependencies for potential future use or other components that may need advanced date picker functionality.
+
 **Step 3**: Verify installation
 
 ```bash
