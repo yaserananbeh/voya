@@ -591,7 +591,50 @@ export interface HotelRoomDto {
 }
 ```
 
-**Enhance HotelRooms to use API**:
+**First, create CheckoutContext type and storage utils** (needed for booking flow):
+
+**Create `src/pages/Checkout/types.ts`**:
+
+```typescript
+export type CheckoutContext = {
+  hotelId: number
+  hotelName: string
+  roomId: number
+  roomNumber: string
+  roomType: string
+  cityName?: string
+  pricePerNight: number
+  checkInDate: string
+  checkOutDate: string
+  userId: number
+}
+```
+
+**Create `src/pages/Checkout/utils/checkoutStorage.ts`**:
+
+```typescript
+import type { CheckoutContext } from '../types'
+
+const KEY = 'voya.checkout.context'
+
+export const saveCheckoutContext = (ctx: CheckoutContext) => {
+  sessionStorage.setItem(KEY, JSON.stringify(ctx))
+}
+
+export const loadCheckoutContext = (): CheckoutContext | null => {
+  const raw = sessionStorage.getItem(KEY)
+  if (!raw) return null
+  try {
+    return JSON.parse(raw) as CheckoutContext
+  } catch {
+    return null
+  }
+}
+```
+
+> **📝 Note**: We're creating these utils early because HotelRooms needs them to save checkout context before redirecting to login. They'll be used again in Feature 5 when building the Checkout page.
+
+**Enhance HotelRooms to use API and add authentication check**:
 
 **src/pages/Hotel/components/HotelRooms.tsx**:
 
@@ -600,9 +643,15 @@ import { Box, Typography, Card, CardContent, Button, Stack } from '@mui/material
 import { useGetHotelRoomsQuery } from '@/api/hotels'
 import { useTranslation } from 'react-i18next'
 import { CircularProgress, Alert } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { SafeImage } from '@/components/common/SafeImage'
 import type { HotelRoomDto } from '@/api/hotels'
+import { useAppSelector } from '@/hooks'
+import { selectIsAuthenticated } from '@/store/authSlice'
+import { selectSearchParams } from '@/store/searchSlice'
+import { saveCheckoutContext } from '@/pages/Checkout/utils/checkoutStorage'
+import type { CheckoutContext } from '@/pages/Checkout/types'
+import { useNotification } from '@/hooks'
 
 type HotelRoomsProps = {
   hotelId: number
@@ -613,11 +662,50 @@ type HotelRoomsProps = {
 
 export function HotelRooms({ hotelId, hotelName, cityName, rooms: propRooms }: HotelRoomsProps) {
   const { t } = useTranslation()
+  const navigate = useNavigate()
+  const isAuthenticated = useAppSelector(selectIsAuthenticated)
+  const searchParams = useAppSelector(selectSearchParams)
+  const { showWarning } = useNotification()
   const { data: apiRooms, isLoading, isError } = useGetHotelRoomsQuery(hotelId, {
     skip: !!propRooms,
   })
 
   const rooms = propRooms || apiRooms || []
+
+  const handleBook = (room: HotelRoomDto) => {
+    // Check if dates are selected
+    if (!searchParams.checkInDate || !searchParams.checkOutDate) {
+      showWarning(t('hotel.pleaseSelectDates', 'Please select check-in and check-out dates'))
+      return
+    }
+
+    // Create checkout context
+    const ctx: CheckoutContext = {
+      hotelId,
+      hotelName,
+      roomId: room.roomId,
+      roomNumber: String(room.roomNumber),
+      roomType: room.roomType,
+      cityName: cityName ?? undefined,
+      pricePerNight: room.price,
+      checkInDate: searchParams.checkInDate,
+      checkOutDate: searchParams.checkOutDate,
+      userId: 1, // Will be replaced with actual user ID from auth in later steps
+    }
+
+    // Check authentication before navigating to checkout
+    if (!isAuthenticated) {
+      // Save checkout context to session storage for after login
+      saveCheckoutContext(ctx)
+      // Redirect to login with return path
+      navigate('/login', { state: { from: { pathname: '/checkout' } } })
+      return
+    }
+
+    // If authenticated, proceed to checkout
+    saveCheckoutContext(ctx)
+    navigate('/checkout', { state: { checkout: ctx } })
+  }
 
   if (isLoading && !propRooms) {
     return (
@@ -680,12 +768,11 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms: propRooms }: H
                 ${room.price} {t('hotel.perNight', '/night')}
               </Typography>
               <Button
-                component={RouterLink}
-                to={`/checkout?hotelId=${hotelId}&roomId=${room.roomId}`}
                 variant="contained"
                 fullWidth
                 sx={{ mt: 2 }}
                 disabled={!room.availability}
+                onClick={() => handleBook(room)}
               >
                 {room.availability ? t('hotel.bookNow', 'Book Now') : t('hotel.unavailable', 'Unavailable')}
               </Button>
@@ -698,9 +785,11 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms: propRooms }: H
 }
 ```
 
-**Add ONLY rooms translations** (incremental - only add these 8 keys):
+> **📝 Note**: We check authentication before navigating to checkout. Unauthenticated users are redirected to login with their checkout context saved. After login, they'll be redirected back to checkout. The `handleBook` function replaces the `RouterLink` approach to allow authentication checking.
 
-**Update `src/i18n/locales/en.json`** (add ONLY these 8 keys):
+**Add ONLY rooms translations** (incremental - only add these 9 keys):
+
+**Update `src/i18n/locales/en.json`** (add ONLY these 9 keys):
 
 ```json
 {
@@ -713,12 +802,13 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms: propRooms }: H
     "children": "children", // ← NEW: Add only this
     "perNight": "/night", // ← NEW: Add only this
     "bookNow": "Book Now", // ← NEW: Add only this
-    "unavailable": "Unavailable" // ← NEW: Add only this
+    "unavailable": "Unavailable", // ← NEW: Add only this
+    "pleaseSelectDates": "Please select check-in and check-out dates first" // ← NEW: Add only this
   }
 }
 ```
 
-**Update `src/i18n/locales/ar.json`** (add ONLY these 8 keys):
+**Update `src/i18n/locales/ar.json`** (add ONLY these 9 keys):
 
 ```json
 {
@@ -731,12 +821,13 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms: propRooms }: H
     "children": "أطفال", // ← NEW: Add only this
     "perNight": "/ليلة", // ← NEW: Add only this
     "bookNow": "احجز الآن", // ← NEW: Add only this
-    "unavailable": "غير متاح" // ← NEW: Add only this
+    "unavailable": "غير متاح", // ← NEW: Add only this
+    "pleaseSelectDates": "يرجى اختيار تاريخ الوصول والمغادرة أولاً" // ← NEW: Add only this
   }
 }
 ```
 
-> **📝 Note**: You're adding ONLY 8 new translation keys for the HotelRooms component. Don't add all hotel translations at once!
+> **📝 Note**: You're adding ONLY 9 new translation keys for the HotelRooms component. Don't add all hotel translations at once!
 
 **Test**: Refresh → Should see rooms loading → Then display rooms (or error/empty state).
 

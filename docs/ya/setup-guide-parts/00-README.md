@@ -72,7 +72,13 @@ This guide has been split into logical parts for easier navigation:
    - Common to all React/TypeScript projects
    - Vite setup, dependencies, TypeScript, ESLint, Prettier
 
-2. **[Foundation: Voya-Specific Setup](02-Foundation-Voya-Specific.md)** - Project Structure, Core Setup, State Management, Routing, Theme, i18n, API, Auth
+2. **[Design System Reference](02-Design-System-Reference.md)** - Design Specifications and Guidelines ⭐ **NEW**
+   - Color usage, typography scale, spacing system
+   - Component specifications (Header, Footer, Cards, Forms, etc.)
+   - Responsive breakpoints and icon usage
+   - **Reference this section when building components to ensure visual consistency**
+
+3. **[Foundation: Voya-Specific Setup](02-Foundation-Voya-Specific.md)** - Project Structure, Core Setup, State Management, Routing, Theme, i18n, API, Auth
    - Voya-specific foundation
    - Redux, React Router, MUI Theme, i18n setup
 
@@ -99,9 +105,10 @@ This guide has been split into logical parts for easier navigation:
 ## ⚡ Quick Start
 
 1. Start with [Foundation: Common Setup](01-Foundation-Common-Setup.md)
-2. Then follow [Foundation: Voya-Specific Setup](02-Foundation-Voya-Specific.md)
-3. Build features in order: Feature 1 → Feature 2 → Feature 3 → Feature 4 → Feature 5 → Feature 6
-4. Finish with [Polish & Quality](09-Polish-Quality.md)
+2. Review [Design System Reference](02-Design-System-Reference.md) (reference as needed)
+3. Then follow [Foundation: Voya-Specific Setup](02-Foundation-Voya-Specific.md)
+4. Build features in order: Feature 1 → Feature 2 → Feature 3 → Feature 4 → Feature 5 → Feature 6
+5. Finish with [Polish & Quality](09-Polish-Quality.md)
 
 ## 🎯 Development Philosophy
 

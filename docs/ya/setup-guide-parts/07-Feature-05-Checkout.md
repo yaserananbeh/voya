@@ -99,7 +99,7 @@ import Login from '@/pages/Login'
 import SearchResults from '@/pages/SearchResults'
 import Hotel from '@/pages/Hotel'
 import Checkout from '@/pages/Checkout'
-import { RedirectIfAuthenticated } from '@/components/auth'
+import { RedirectIfAuthenticated, ProtectedRoute } from '@/components/auth'
 
 export const router = createBrowserRouter([
   {
@@ -110,7 +110,14 @@ export const router = createBrowserRouter([
       { path: 'home', element: <Home /> },
       { path: 'search', element: <SearchResults /> },
       { path: 'hotel/:id', element: <Hotel /> },
-      { path: 'checkout', element: <Checkout /> },
+      {
+        path: 'checkout',
+        element: (
+          <ProtectedRoute>
+            <Checkout />
+          </ProtectedRoute>
+        ),
+      },
       {
         path: 'login',
         element: (
@@ -124,7 +131,9 @@ export const router = createBrowserRouter([
 ])
 ```
 
-**Test**: `pnpm dev` → Navigate to `/checkout` → Should see "Checkout" text.
+> **📝 Note**: The checkout route is protected with `ProtectedRoute` because it requires authentication. Users who aren't logged in will be automatically redirected to the login page. After login, they'll be redirected back to checkout.
+
+**Test**: `pnpm dev` → Navigate to `/checkout` without being logged in → Should redirect to `/login` → After login, should redirect back to `/checkout`.
 
 ### 16.3 Step 3: Build BookingSummary Component
 
@@ -889,11 +898,16 @@ export default function Checkout() {
 
 **✅ Step 6 Complete**: Checkout page is displaying all components with mock data!
 
-### 16.7 Step 7: Add CheckoutStorage Utils and CheckoutContext Type (When Checkout Needs to Load Context)
+### 16.7 Step 7: Use CheckoutStorage Utils and CheckoutContext Type (Already Created in Feature 4)
 
-Now that the UI is working, we need to load checkout context when users navigate from HotelRooms. Let's add storage utils and type:
+> **📝 Note**: The `CheckoutContext` type and `checkoutStorage` utils were already created in Feature 4 (Step 6) when building the HotelRooms component. They're located at:
+>
+> - `src/pages/Checkout/types.ts`
+> - `src/pages/Checkout/utils/checkoutStorage.ts`
+>
+> If you haven't created them yet, create them now using the code below. Otherwise, you can skip to the next step.
 
-**Add CheckoutContext type** (when storage needs it):
+**Verify CheckoutContext type exists** (create if needed):
 
 **src/pages/Checkout/types.ts**:
 
@@ -912,7 +926,7 @@ export type CheckoutContext = {
 }
 ```
 
-**Create checkoutStorage utils**:
+**Verify checkoutStorage utils exist** (create if needed):
 
 **src/pages/Checkout/utils/checkoutStorage.ts**:
 

@@ -637,7 +637,14 @@ export function LoginForm() {
       const result = await login({ userName: username, password } as LoginRequestDto).unwrap()
       dispatch(setCredentials({ token: result.authentication, userType: result.userType }))
       enqueueSnackbar(t('auth.loginSuccess'), { variant: 'success' })
-      navigate(from, { replace: true })
+
+      // Redirect based on user type
+      if (result.userType === 'Admin') {
+        navigate('/admin/dashboard', { replace: true })
+      } else {
+        const redirectTo = from || '/home'
+        navigate(redirectTo, { replace: true })
+      }
     } catch (err) {
       // Error is handled by RTK Query
     }
@@ -814,7 +821,7 @@ export function useAuth() {
     dispatch(logoutAction())
     localStorage.removeItem('token')
     localStorage.removeItem('userType')
-    void navigate('/login', { replace: true })
+    void navigate('/home', { replace: true })
   }, [dispatch, navigate])
 
   return {
@@ -842,7 +849,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 export * from './useAuth'
 ```
 
-**Test**: Use `useAuth()` in a component → Should get auth state → Call `logout()` → Should clear token and redirect.
+**Test**: Use `useAuth()` in a component → Should get auth state → Call `logout()` → Should clear token and redirect to `/home`.
 
 **✅ Step 10 Complete**: useAuth hook is working!
 
@@ -855,7 +862,7 @@ export * from './useAuth'
 3. ✅ **Login with valid credentials**: Should redirect to `/home` (or previous page)
 4. ✅ **Check localStorage**: Should have `token` and `userType` stored
 5. ✅ **Try accessing login when authenticated**: Should redirect to home
-6. ✅ **Logout**: Should clear token and redirect to login
+6. ✅ **Logout**: Should clear token and redirect to `/home`
 7. ✅ **Try accessing protected route**: Should work if authenticated
 
 **Common Issues**:
@@ -1203,7 +1210,7 @@ export function useAuth() {
     dispatch(logoutAction())
     localStorage.removeItem('token')
     localStorage.removeItem('userType')
-    void navigate('/login', { replace: true })
+    void navigate('/home', { replace: true })
   }, [dispatch, navigate])
 
   return {
@@ -1271,7 +1278,7 @@ export const router = createBrowserRouter([
 3. ✅ **Login with valid credentials**: Should redirect to `/home` (or previous page)
 4. ✅ **Check localStorage**: Should have `token` and `userType` stored
 5. ✅ **Try accessing protected route**: Should work if authenticated
-6. ✅ **Logout**: Should clear token and redirect to login
+6. ✅ **Logout**: Should clear token and redirect to `/home`
 7. ✅ **Try accessing login when authenticated**: Should redirect to home
 
 **Common Issues**:
