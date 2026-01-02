@@ -187,9 +187,8 @@ A modern, full-featured travel and accommodation booking platform built with Rea
 ### UI Framework
 
 - **Material-UI (MUI) 7.3.5** - Component library
-- **MUI X Data Grid 8.19.0** - Advanced data tables
-- **MUI X Date Pickers 8.19.0** - Date selection
-- **Emotion** - CSS-in-JS styling
+- **MUI X Data Grid 8.19.0** - Advanced data tables (used in admin pages)
+- **Emotion** - CSS-in-JS styling (used by MUI)
 
 ### Routing & Navigation
 
@@ -215,8 +214,6 @@ A modern, full-featured travel and accommodation booking platform built with Rea
 
 ### Utilities
 
-- **date-fns 4.1.0** - Date manipulation
-- **axios 1.13.2** - HTTP client (backup)
 - **notistack 3.0.2** - Toast notifications
 
 ### Development Tools
@@ -559,9 +556,11 @@ test('renders home page', () => {
 
 ### Backend API
 
-The project connects to a RESTful API. The base URL is configured via `VITE_API_BASE_URL`.
+The project connects to a RESTful API using **RTK Query** with native `fetch` API (via `fetchBaseQuery`). The base URL is configured via `VITE_API_BASE_URL`.
 
 **Backend URL**: `https://travel-and-accommodation-booking-static.onrender.com`
+
+**Note**: This project uses RTK Query's `fetchBaseQuery` instead of axios for HTTP requests, providing automatic caching, request deduplication, and seamless Redux integration.
 
 ### API Endpoints
 
