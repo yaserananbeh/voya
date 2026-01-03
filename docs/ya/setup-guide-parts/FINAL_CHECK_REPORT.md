@@ -42,7 +42,7 @@
 - ✅ **Leaflet** - Maps explained (Feature 4)
 - ✅ **react-image-gallery** - Gallery explained (Feature 4)
 - ✅ **notistack** - Notifications explained
-- ✅ **date-fns** - Date handling explained
+- ✅ **Date utilities** - Custom date handling (date-fns was removed, using custom utils)
 - ✅ **Vitest + MSW** - Testing setup explained
 - ✅ **ESLint + Prettier** - Code quality explained
 - ✅ **Husky + lint-staged** - Git hooks explained
@@ -51,7 +51,7 @@
 
 - ✅ **Container/Presentational** pattern (mentioned in Hotel page)
 - ✅ **Render Props** pattern (documented in components)
-- ✅ **Custom Hooks** (useRTL, useDebounce, useLocalStorage, useAuth)
+- ✅ **Custom Hooks** (useRTL ✅ implemented, useNotification ✅ implemented, useDebounce ❌ reference only, useLocalStorage ❌ reference only, useAuth ❌ reference only)
 - ✅ **Error Handling** (ErrorBoundary, RouteError, global handlers)
 - ✅ **API Integration** (RTK Query, baseApi, tag invalidation)
 - ✅ **Authentication Flow** (ProtectedRoute, AdminRoute, token management)
@@ -172,11 +172,11 @@
 
 ### Utilities & Hooks:
 
-- ✅ **useRTL** (`src/hooks/useRTL.ts`) - Documented
-- ✅ **useDebounce** - Documented
-- ✅ **useLocalStorage** - Documented
-- ✅ **useAuth** - Documented (Feature 2)
-- ✅ **useNotification** - Referenced
+- ✅ **useRTL** (`src/hooks/useRTL.ts`) - ✅ **IMPLEMENTED** and used
+- ✅ **useNotification** (`src/hooks/useNotification.ts`) - ✅ **IMPLEMENTED** and used
+- ❌ **useDebounce** - Reference only (not implemented - project doesn't use debouncing)
+- ❌ **useLocalStorage** - Reference only (not implemented - localStorage handled in Redux slices)
+- ❌ **useAuth** - Reference only (not implemented - auth handled via Redux slices and RTK Query)
 - ✅ **Logger** (`src/utils/logger.ts`) - Documented
 - ✅ **Global Error Handlers** (`src/utils/globalErrors.ts`) - Documented
 - ✅ **Price Utils** (`src/pages/Checkout/utils/price.ts`) - Documented
@@ -227,7 +227,7 @@
 - ✅ **Leaflet** (maps) - Documented in Feature 4
 - ✅ **react-image-gallery** - Documented in Feature 4
 - ✅ **notistack** (notifications) - Documented
-- ✅ **date-fns** - Documented
+- ✅ **Custom date utilities** - Documented (date-fns was removed, using custom utils in `src/utils/date.ts`)
 - ✅ **Formik + Yup** - Documented in Feature 2
 
 **Verdict**: ✅ **PASSES** - Complete coverage of all Voya project components

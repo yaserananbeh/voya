@@ -188,10 +188,11 @@ export function FormField({ name, ...props }: FormFieldProps) {
 
 > **Gradual Development Approach**: This section provides **hook examples as reference**. You should create hooks incrementally when you actually need them:
 >
-> - **useRTL** → Created in Section 12.5 (needed for Providers)
-> - **useDebounce** → Create when implementing search/autocomplete features
-> - **useLocalStorage** → Create when you need localStorage management beyond what's already in slices
-> - **Other hooks** → Create as needed for each feature
+> - **useRTL** → ✅ Created in Section 12.5 (needed for Providers) - **ACTUALLY IMPLEMENTED**
+> - **useNotification** → ✅ Created and used throughout the project - **ACTUALLY IMPLEMENTED**
+> - **useDebounce** → ❌ Reference only - **NOT IMPLEMENTED** (project doesn't use debouncing)
+> - **useLocalStorage** → ❌ Reference only - **NOT IMPLEMENTED** (localStorage handled in Redux slices)
+> - **Other hooks** → ❌ Reference only - **NOT IMPLEMENTED**
 
 ### 14.1 useRTL Hook
 
