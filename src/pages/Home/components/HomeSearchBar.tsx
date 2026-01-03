@@ -10,6 +10,15 @@ import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from './GuestRoomSelector'
 import { useTranslation } from 'react-i18next'
 
+type SearchValues = {
+  city: string
+  checkInDate: string
+  checkOutDate: string
+  adults: number
+  children: number
+  rooms: number
+}
+
 export function HomeSearchBar() {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -35,7 +44,7 @@ export function HomeSearchBar() {
     rooms: yup.number().min(1).required(),
   })
 
-  const formik = useFormik({
+  const formik = useFormik<SearchValues>({
     enableReinitialize: true,
     initialValues: {
       city: stored.city || '',
@@ -72,6 +81,7 @@ export function HomeSearchBar() {
         size="small"
         value={formik.values.city}
         onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
         error={formik.touched.city && Boolean(formik.errors.city)}
         helperText={formik.touched.city && formik.errors.city}
         sx={{ flex: 2, minWidth: 180 }}
@@ -91,6 +101,7 @@ export function HomeSearchBar() {
         size="small"
         value={formik.values.checkInDate}
         onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
         InputLabelProps={{ shrink: true }}
         sx={{ flex: 1, minWidth: 150 }}
         InputProps={{
@@ -109,6 +120,7 @@ export function HomeSearchBar() {
         size="small"
         value={formik.values.checkOutDate}
         onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
         InputLabelProps={{ shrink: true }}
         sx={{ flex: 1, minWidth: 150 }}
         inputProps={{

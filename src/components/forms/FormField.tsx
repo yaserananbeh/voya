@@ -1,13 +1,13 @@
 import { TextField } from '@mui/material'
 import type { TextFieldProps } from '@mui/material'
-import { useFormikContext } from 'formik'
-import type { FormikErrors, FormikTouched, FormikValues } from 'formik'
+import type { FormikProps } from 'formik'
 
-type FormFieldProps = Omit<
+type FormFieldProps<T = Record<string, unknown>> = Omit<
   TextFieldProps,
-  'name' | 'value' | 'onChange' | 'error' | 'helperText'
+  'name' | 'value' | 'onChange' | 'onBlur' | 'error' | 'helperText'
 > & {
   name: string
+  formik: FormikProps<T>
 }
 
 function getErrorMessage(error: unknown): string {
@@ -23,23 +23,26 @@ function getErrorMessage(error: unknown): string {
   return ' '
 }
 
-export function FormField({ name, ...props }: FormFieldProps) {
-  const { values, touched, errors, handleChange, handleBlur } = useFormikContext<FormikValues>()
-
-  const fieldTouched = touched[name as keyof FormikTouched<FormikValues>] as boolean | undefined
-  const fieldError = errors[name as keyof FormikErrors<FormikValues>] as unknown
+export function FormField<T = Record<string, unknown>>({
+  name,
+  formik,
+  ...props
+}: FormFieldProps<T>) {
+  const fieldTouched = formik.touched[name as keyof typeof formik.touched] as boolean | undefined
+  const fieldError = formik.errors[name as keyof typeof formik.errors] as unknown
   const hasError = Boolean(fieldTouched && fieldError)
 
   const errorMessage = hasError ? getErrorMessage(fieldError) : ' '
 
-  const fieldValue = (values[name as keyof FormikValues] as string | number | undefined) ?? ''
+  const fieldValue =
+    (formik.values[name as keyof typeof formik.values] as string | number | undefined) ?? ''
 
   return (
     <TextField
       name={name}
       value={fieldValue}
-      onChange={handleChange}
-      onBlur={handleBlur}
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
       error={hasError}
       helperText={errorMessage}
       fullWidth

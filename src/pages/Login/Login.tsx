@@ -29,6 +29,11 @@ const validationSchema = yup.object({
   password: yup.string().required('Password is required'),
 })
 
+type LoginValues = {
+  userName: string
+  password: string
+}
+
 export default function Login() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -39,7 +44,7 @@ export default function Login() {
 
   const from = (location.state as { from?: Location })?.from?.pathname || null
 
-  const formik = useFormik({
+  const formik = useFormik<LoginValues>({
     initialValues: { userName: '', password: '' },
     validationSchema,
     onSubmit: async (values) => {
@@ -160,6 +165,7 @@ export default function Login() {
                 name="userName"
                 value={formik.values.userName}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={formik.touched.userName && Boolean(formik.errors.userName)}
                 helperText={formik.touched.userName && formik.errors.userName}
                 InputProps={{
@@ -229,6 +235,7 @@ export default function Login() {
                 name="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={formik.touched.password && Boolean(formik.errors.password)}
                 helperText={formik.touched.password && formik.errors.password}
                 InputProps={{

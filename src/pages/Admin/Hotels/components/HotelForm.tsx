@@ -86,6 +86,7 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
           label="Hotel Name"
           value={formik.values.name}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={formik.touched.name && Boolean(formik.errors.name)}
           helperText={formik.touched.name && formik.errors.name}
           fullWidth
@@ -112,6 +113,7 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
           label="Description"
           value={formik.values.description || ''}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           multiline
           rows={3}
           fullWidth
@@ -140,6 +142,7 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
           inputProps={{ min: 1, max: 5 }}
           value={formik.values.starRating}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={formik.touched.starRating && Boolean(formik.errors.starRating)}
           helperText={formik.touched.starRating && formik.errors.starRating}
           fullWidth
@@ -150,6 +153,7 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
           label="Location"
           value={formik.values.location || ''}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           fullWidth
         />
 
@@ -158,6 +162,7 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
           label="Image URL"
           value={formik.values.imageUrl || ''}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={formik.touched.imageUrl && Boolean(formik.errors.imageUrl)}
           helperText={formik.touched.imageUrl && formik.errors.imageUrl}
           fullWidth
