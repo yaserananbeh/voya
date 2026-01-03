@@ -1,13 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { UserInfoForm } from '../components/UserInfoForm'
 import { NotificationProvider } from '@/providers/NotificationProvider'
-import i18n from '@/i18n/config'
-
-beforeEach(() => {
-  void i18n.changeLanguage('en')
-})
 
 const renderUserInfoForm = (props: Parameters<typeof UserInfoForm>[0]) => {
   return render(

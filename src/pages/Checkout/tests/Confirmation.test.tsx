@@ -1,14 +1,9 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { screen, render } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { store } from '@/store'
 import Confirmation from '../Confirmation/Confirmation'
-import i18n from '@/i18n/config'
-
-beforeEach(() => {
-  void i18n.changeLanguage('en')
-})
 
 describe('Confirmation', () => {
   it('renders booking details', async () => {

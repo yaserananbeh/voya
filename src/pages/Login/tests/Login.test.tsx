@@ -11,7 +11,6 @@ import { searchReducer } from '@/store/searchSlice'
 import { http, HttpResponse } from 'msw'
 import { server } from '@/tests/msw/server'
 import { NotificationProvider } from '@/providers/NotificationProvider'
-import i18n from '@/i18n/config'
 
 const createTestStore = () => {
   return configureStore({
@@ -39,7 +38,6 @@ const renderLogin = () => {
 
 describe('Login Form', () => {
   beforeEach(() => {
-    void i18n.changeLanguage('en')
     server.resetHandlers()
   })
 
