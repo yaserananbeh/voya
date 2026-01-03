@@ -16,8 +16,6 @@ Follow existing conventions when adding new pages, hooks, utils, or API modules.
 
 ## 1. Branching Strategy
 
-Refer to `docs/GIT_BRANCH_STRATEGY.md` to know the branching strategy we use in this project.
-
 Create a new branch for every task — never commit directly to `main`.
 
 ---
@@ -223,12 +221,6 @@ Everything runs automatically — contributors just write code and commit normal
 4. Commit using the allowed commit format
 5. Push branch & open PR
 6. Request review if needed
-
----
-
-## ASSETS MANAGEMENT STRATEGY
-
-Refer to `docs/ASSETS_MANAGEMENT_STRATEGY.md` to know the ASSETS MANAGEMENT STRATEGY we use in this project.
 
 ---
 

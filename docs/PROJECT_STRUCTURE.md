@@ -28,29 +28,13 @@ Voya
 ├── .vscode
 │   ├── extensions.json
 │   └── settings.json
-├── REACT_PATTERNS_IMPLEMENTATION.md
 ├── README.md
-├── REQUIREMENTS_COVERAGE.md
 ├── docs
-│   ├── API_CACHING_STRATEGY.md
-│   ├── ASSETS_MANAGEMENT_STRATEGY.md
 │   ├── CONTRIBUTING.md
-│   ├── GIT_BRANCH_STRATEGY.md
+│   ├── DOCUMENTATION_UPDATE_CHECKLIST.md
 │   ├── Helpful_commands_Dev.md
 │   ├── PROJECT_STRUCTURE.md
-│   ├── ROUTES.md
-│   ├── RTK Query vs React Query vs Axios.md
-│   ├── RTK_AND_RTK_QUERY_GUIDE.md
-│   ├── RTK_QUICK_REFERENCE.md
-│   ├── STATE_MGMT_TRADEOFFS.md
-│   ├── UI_COMPONENTS_MUI_MAP.md
-│   ├── adr
-│   │   ├── ADR-006-error-logging.md
-│   │   └── ADR-007-rtk-query-vs-axios.md
-│   ├── design.md
-│   └── ya
-│       ├── PROJECT_SETUP_GUIDE.md
-│       └── STUDY_GUIDE.md
+│   └── REQUIREMENTS_COVERAGE.md
 ├── eslint.config.js
 ├── index.html
 ├── package.json
@@ -98,7 +82,6 @@ Voya
 │   │   │   ├── FormActions.tsx
 │   │   │   ├── FormField.tsx
 │   │   │   └── index.ts
-│   │   ├── hoc
 │   │   ├── index.ts
 │   │   ├── layout
 │   │   │   ├── LanguageSwitcher.tsx
