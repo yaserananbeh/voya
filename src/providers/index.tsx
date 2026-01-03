@@ -6,7 +6,6 @@ import { store } from '@/store'
 import { ThemeProvider, useThemeMode } from './ThemeContext'
 import { NotificationProvider } from './NotificationProvider'
 import { LoadingProvider } from './LoadingProvider'
-import '@/i18n/config'
 import { useRTL } from '@/hooks/useRTL'
 
 function ThemeWrapper({ children }: { children: ReactNode }) {

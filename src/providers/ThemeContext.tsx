@@ -2,7 +2,6 @@ import { createContext, useContext, useState, useEffect, type ReactNode } from '
 import { createAppTheme } from '@/theme'
 import type { Theme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
-import '@/i18n/config'
 
 type ThemeMode = 'light' | 'dark'
 
