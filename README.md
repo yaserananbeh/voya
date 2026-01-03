@@ -67,7 +67,7 @@ A modern, full-featured travel and accommodation booking platform built with Rea
   - Search bar for hotels and cities
   - Interactive calendar for check-in/check-out dates
   - Guest and room selection controls
-  - Default values (today/tomorrow, 1 adult, 1 room)
+  - Default values (today/tomorrow, 1 adult, 0 children, 1 room)
 
 - **Featured Deals Section**
   - Showcases 3-5 hotels with special offers
@@ -371,7 +371,6 @@ Voya/
 │   │   ├── hotels/        # Hotels API
 │   │   ├── searchResults/ # Search API
 │   │   └── upload/        # Photo upload API
-│   ├── assets/            # Images, fonts, icons
 │   ├── components/        # Reusable components
 │   │   ├── auth/         # Auth-related components
 │   │   ├── common/       # Common components
@@ -465,9 +464,7 @@ const [createHotel, { isLoading }] = useCreateHotelMutation()
 await createHotel(data).unwrap()
 ```
 
-For comprehensive RTK/RTK Query documentation, see:
-- [RTK & RTK Query Guide](./docs/RTK_AND_RTK_QUERY_GUIDE.md)
-- [RTK Quick Reference](./docs/RTK_QUICK_REFERENCE.md)
+For RTK/RTK Query usage, refer to the [Redux Toolkit documentation](https://redux-toolkit.js.org/) and [RTK Query documentation](https://redux-toolkit.js.org/rtk-query/overview).
 
 ---
 
@@ -624,30 +621,7 @@ Comprehensive documentation is available in the `docs/` directory:
 ### Core Documentation
 
 - [**PROJECT_STRUCTURE.md**](./docs/PROJECT_STRUCTURE.md) - Detailed project structure
-- [**ROUTES.md**](./docs/ROUTES.md) - Application routing documentation
 - [**CONTRIBUTING.md**](./docs/CONTRIBUTING.md) - Contribution guidelines
-
-### Technical Guides
-
-- [**RTK & RTK Query Guide**](./docs/RTK_AND_RTK_QUERY_GUIDE.md) - Complete RTK/RTK Query tutorial
-- [**RTK Quick Reference**](./docs/RTK_QUICK_REFERENCE.md) - Quick reference cheat sheet
-- [**API_CACHING_STRATEGY.md**](./docs/API_CACHING_STRATEGY.md) - Caching strategy
-- [**STATE_MGMT_TRADEOFFS.md**](./docs/STATE_MGMT_TRADEOFFS.md) - State management decisions
-
-### Design & Architecture
-
-- [**UI_COMPONENTS_MUI_MAP.md**](./docs/UI_COMPONENTS_MUI_MAP.md) - MUI component mapping
-- [**ASSETS_MANAGEMENT_STRATEGY.md**](./docs/ASSETS_MANAGEMENT_STRATEGY.md) - Asset management
-- [**GIT_BRANCH_STRATEGY.md**](./docs/GIT_BRANCH_STRATEGY.md) - Git workflow
-
-### Architecture Decision Records (ADR)
-
-- [**ADR-006-error-logging.md**](./docs/adr/ADR-006-error-logging.md) - Error logging strategy
-- [**ADR-007-rtk-query-vs-axios.md**](./docs/adr/ADR-007-rtk-query-vs-axios.md) - RTK Query decision
-
-### Requirements
-
-- [**REQUIREMENTS_COVERAGE.md**](./REQUIREMENTS_COVERAGE.md) - Project requirements coverage
 
 ---
 
