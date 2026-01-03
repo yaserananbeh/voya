@@ -74,6 +74,8 @@ export function ResultsList() {
         if (!first?.isIntersecting) return
         if (isFetching || isLoading) return
         if (!hasMore) return
+        // Prevent triggering on initial load - only allow pagination when we have data
+        if (allHotels.length === 0) return
         setPage((p) => p + 1)
       },
       { rootMargin: '250px' },
@@ -81,7 +83,7 @@ export function ResultsList() {
 
     observer.observe(el)
     return () => observer.disconnect()
-  }, [hasMore, isFetching, isLoading])
+  }, [hasMore, isFetching, isLoading, allHotels.length])
 
   if (isLoading && allHotels.length === 0) {
     return (
