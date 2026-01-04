@@ -37,7 +37,7 @@ store.subscribe(() => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(store.getState().search))
   } catch {
-    // Silently fail if localStorage is unavailable (e.g., private browsing mode)
+    // Silent fail if localStorage is unavailable -eg, private browsing mode
   }
 })
 

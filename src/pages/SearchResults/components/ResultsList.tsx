@@ -74,7 +74,6 @@ export function ResultsList() {
         if (!first?.isIntersecting) return
         if (isFetching || isLoading) return
         if (!hasMore) return
-        // Prevent triggering on initial load - only allow pagination when we have data
         if (allHotels.length === 0) return
         setPage((p) => p + 1)
       },
