@@ -70,7 +70,6 @@ export default function Checkout() {
     <Box
       sx={{
         minHeight: 'calc(100vh - 200px)',
-        background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.05)} 0%, ${alpha(theme.palette.secondary.main, 0.05)} 100%)`,
         py: { xs: 3, sm: 4, md: 5 },
       }}
     >

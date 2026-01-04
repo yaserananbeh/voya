@@ -170,7 +170,7 @@ export function UserInfoForm({
             fontSize: '1rem',
             textTransform: 'none',
             '&:hover': {
-              background: `linear-gradient(135deg, ${theme.palette.primary.dark} 30%, ${theme.palette.secondary.dark} 90%)`,
+              background: `linear-gradient(135deg, ${theme.palette.primary.dark} 30%, ${theme.palette.primary.light} 90%)`,
             },
             '&:disabled': {
               background: alpha(theme.palette.primary.main, 0.5),
