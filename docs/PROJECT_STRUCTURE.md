@@ -31,7 +31,6 @@ Voya
 ├── README.md
 ├── docs
 │   ├── CONTRIBUTING.md
-│   ├── DOCUMENTATION_UPDATE_CHECKLIST.md
 │   ├── Helpful_commands_Dev.md
 │   ├── PROJECT_STRUCTURE.md
 │   └── REQUIREMENTS_COVERAGE.md
@@ -72,9 +71,6 @@ Voya
 │   │   │   ├── SafeImage.tsx
 │   │   │   ├── VoyaLoader.tsx
 │   │   │   └── index.ts
-│   │   ├── error
-│   │   │   ├── ErrorBoundary.tsx
-│   │   │   └── index.ts
 │   │   ├── filters
 │   │   │   ├── FilterContainer.tsx
 │   │   │   └── index.ts
@@ -91,9 +87,6 @@ Voya
 │   │   │   ├── PageContainer.tsx
 │   │   │   ├── Section.tsx
 │   │   │   ├── ThemeToggle.tsx
-│   │   │   └── index.ts
-│   │   ├── patterns
-│   │   │   ├── RenderProps.tsx
 │   │   │   └── index.ts
 │   │   └── readme.md
 │   ├── constants
@@ -157,8 +150,6 @@ Voya
 │   │   │   │   │   └── readme.md
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
-│   │   │   ├── components
-│   │   │   │   └── PhotoUploader.tsx
 │   │   │   ├── ducks
 │   │   │   │   └── readme.md
 │   │   │   └── styles.module.css
@@ -237,7 +228,6 @@ Voya
 │   │       │   ├── HotelResultCard.tsx
 │   │       │   ├── HotelTypeFilter.tsx
 │   │       │   ├── PriceFilter.tsx
-│   │       │   ├── ResultsList.renderProps.tsx
 │   │       │   ├── ResultsList.tsx
 │   │       │   ├── SelectedFiltersBar.tsx
 │   │       │   └── StarRatingFilter.tsx
