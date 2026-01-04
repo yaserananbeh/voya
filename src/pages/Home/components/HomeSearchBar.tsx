@@ -1,6 +1,5 @@
 import { Box, Button, TextField, Paper, InputAdornment } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
@@ -104,13 +103,6 @@ export function HomeSearchBar() {
         onBlur={formik.handleBlur}
         InputLabelProps={{ shrink: true }}
         sx={{ flex: 1, minWidth: 150 }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <CalendarMonthIcon />
-            </InputAdornment>
-          ),
-        }}
       />
 
       <TextField
