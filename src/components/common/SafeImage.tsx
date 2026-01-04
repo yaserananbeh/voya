@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Box, CardMedia, Skeleton } from '@mui/material'
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported'
+import { UI } from '@/constants'
 
 type SafeImageProps = {
   src?: string | null
@@ -47,7 +48,7 @@ export function SafeImage({
         }
         return prevLoading
       })
-    }, 8000)
+    }, UI.IMAGE_LOAD_TIMEOUT)
 
     return () => {
       if (timeoutRef.current) {

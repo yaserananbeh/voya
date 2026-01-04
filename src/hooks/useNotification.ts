@@ -1,4 +1,5 @@
 import { useSnackbar } from 'notistack'
+import { UI } from '@/constants'
 
 export function useNotification() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
@@ -6,28 +7,28 @@ export function useNotification() {
   const showSuccess = (message: string) => {
     enqueueSnackbar(message, {
       variant: 'success',
-      autoHideDuration: 3000,
+      autoHideDuration: UI.NOTIFICATION.AUTO_HIDE_DURATION.SUCCESS,
     })
   }
 
   const showError = (message: string) => {
     enqueueSnackbar(message, {
       variant: 'error',
-      autoHideDuration: 5000,
+      autoHideDuration: UI.NOTIFICATION.AUTO_HIDE_DURATION.ERROR,
     })
   }
 
   const showWarning = (message: string) => {
     enqueueSnackbar(message, {
       variant: 'warning',
-      autoHideDuration: 4000,
+      autoHideDuration: UI.NOTIFICATION.AUTO_HIDE_DURATION.WARNING,
     })
   }
 
   const showInfo = (message: string) => {
     enqueueSnackbar(message, {
       variant: 'info',
-      autoHideDuration: 4000,
+      autoHideDuration: UI.NOTIFICATION.AUTO_HIDE_DURATION.INFO,
     })
   }
 

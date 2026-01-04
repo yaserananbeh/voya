@@ -8,6 +8,7 @@ import { useAppSelector } from '@/hooks'
 import { SafeImage } from '@/components/common/SafeImage'
 import { useNotification } from '@/hooks'
 import { useTranslation } from 'react-i18next'
+import { STORAGE_KEYS, ROUTES, USER } from '@/constants'
 
 type Props = {
   hotelId: number
@@ -29,7 +30,7 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
       return
     }
 
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
     if (!token) {
       const ctx: CheckoutContext = {
         hotelId,
@@ -41,11 +42,11 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
         pricePerNight: room.price,
         checkInDate: searchParams.checkInDate,
         checkOutDate: searchParams.checkOutDate,
-        userId: 1,
+        userId: USER.MOCK_USER_ID,
       }
       saveCheckoutContext(ctx)
 
-      void navigate('/login', { state: { from: { pathname: '/checkout' } } })
+      void navigate(ROUTES.LOGIN, { state: { from: { pathname: ROUTES.CHECKOUT } } })
       return
     }
 
@@ -59,11 +60,11 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
       pricePerNight: room.price,
       checkInDate: searchParams.checkInDate,
       checkOutDate: searchParams.checkOutDate,
-      userId: 1,
+      userId: USER.MOCK_USER_ID,
     }
 
     saveCheckoutContext(ctx)
-    void navigate('/checkout', { state: { checkout: ctx } })
+    void navigate(ROUTES.CHECKOUT, { state: { checkout: ctx } })
   }
 
   return (

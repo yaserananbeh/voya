@@ -15,6 +15,7 @@ import {
 import { useGetRoomsAdminQuery, useGetAdminHotelsQuery } from '@/api/admin'
 import type { RoomForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
+import { VALIDATION } from '@/constants'
 
 const validationSchema = yup.object({
   roomNumber: yup.string().required('Room number is required'),
@@ -116,7 +117,7 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
           name="capacityOfAdults"
           label="Adult Capacity"
           type="number"
-          inputProps={{ min: 1 }}
+          inputProps={{ min: VALIDATION.ROOM.CAPACITY_OF_ADULTS_MIN }}
           value={formik.values.capacityOfAdults}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -129,7 +130,7 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
           name="capacityOfChildren"
           label="Children Capacity"
           type="number"
-          inputProps={{ min: 0 }}
+          inputProps={{ min: VALIDATION.ROOM.CAPACITY_OF_CHILDREN_MIN }}
           value={formik.values.capacityOfChildren}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -142,7 +143,7 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
           name="price"
           label="Price"
           type="number"
-          inputProps={{ min: 0, step: 0.01 }}
+          inputProps={{ min: VALIDATION.ROOM.PRICE_MIN, step: VALIDATION.ROOM.PRICE_STEP }}
           value={formik.values.price}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

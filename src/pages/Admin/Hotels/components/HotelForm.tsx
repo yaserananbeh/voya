@@ -13,13 +13,18 @@ import {
 import { useGetAdminHotelsQuery, useGetCitiesQuery } from '@/api/admin'
 import type { HotelForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
+import { HOTEL, VALIDATION } from '@/constants'
 
 const validationSchema = yup.object({
   name: yup.string().required('Name is required'),
   cityId: yup.number().required('City is required'),
   description: yup.string(),
   hotelType: yup.string(),
-  starRating: yup.number().min(1).max(5).required('Star rating is required'),
+  starRating: yup
+    .number()
+    .min(VALIDATION.HOTEL.STAR_RATING_MIN)
+    .max(VALIDATION.HOTEL.STAR_RATING_MAX)
+    .required('Star rating is required'),
   location: yup.string(),
   latitude: yup.number(),
   longitude: yup.number(),
@@ -127,11 +132,11 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
             onChange={formik.handleChange}
             label="Hotel Type"
           >
-            <MenuItem value="Hotel">Hotel</MenuItem>
-            <MenuItem value="Resort">Resort</MenuItem>
-            <MenuItem value="Boutique">Boutique</MenuItem>
-            <MenuItem value="Lodge">Lodge</MenuItem>
-            <MenuItem value="Inn">Inn</MenuItem>
+            {HOTEL.TYPE_OPTIONS.map((type) => (
+              <MenuItem key={type} value={type}>
+                {type}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
 
@@ -139,7 +144,10 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
           name="starRating"
           label="Star Rating"
           type="number"
-          inputProps={{ min: 1, max: 5 }}
+          inputProps={{
+            min: VALIDATION.HOTEL.STAR_RATING_MIN,
+            max: VALIDATION.HOTEL.STAR_RATING_MAX,
+          }}
           value={formik.values.starRating}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

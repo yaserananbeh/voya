@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
 import { useTranslation } from 'react-i18next'
+import { ROUTES } from '@/constants'
 
 export function HeroSection() {
   const { t } = useTranslation()
@@ -81,7 +82,7 @@ export function HeroSection() {
             size="large"
             endIcon={<ArrowForwardIcon />}
             component={RouterLink}
-            to="/search"
+            to={ROUTES.SEARCH}
             sx={{
               px: { xs: 2, sm: 3 },
               py: { xs: 1, sm: 1.2 },

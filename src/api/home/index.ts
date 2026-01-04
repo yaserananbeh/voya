@@ -1,5 +1,6 @@
 import type { AmenityDto } from '@/types'
 import { baseApi } from '../baseApi'
+import { API_ENDPOINTS } from '@/constants'
 export type HomeSearchRequest = {
   checkInDate?: string
   checkOutDate?: string
@@ -61,7 +62,7 @@ export const homeApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     homeSearch: build.query<SearchResultDto[], HomeSearchRequest>({
       query: (params) => ({
-        url: '/home/search',
+        url: API_ENDPOINTS.HOME_SEARCH,
         method: 'GET',
         params,
       }),
@@ -69,28 +70,28 @@ export const homeApi = baseApi.injectEndpoints({
     }),
     featuredDeals: build.query<FeaturedDealDto[], void>({
       query: () => ({
-        url: '/home/featured-deals',
+        url: API_ENDPOINTS.HOME_FEATURED_DEALS,
         method: 'GET',
       }),
       providesTags: ['Home'],
     }),
     recentHotels: build.query<RecentHotelResultDto[], { userId: number }>({
       query: ({ userId }) => ({
-        url: `/home/users/${userId}/recent-hotels`,
+        url: API_ENDPOINTS.HOME_RECENT_HOTELS(userId),
         method: 'GET',
       }),
       providesTags: ['Home'],
     }),
     trendingDestinations: build.query<DestinationDto[], void>({
       query: () => ({
-        url: '/home/destinations/trending',
+        url: API_ENDPOINTS.HOME_TRENDING_DESTINATIONS,
         method: 'GET',
       }),
       providesTags: ['Home'],
     }),
     amenities: build.query<AmenityDto[], void>({
       query: () => ({
-        url: '/search-results/amenities',
+        url: API_ENDPOINTS.SEARCH_AMENITIES,
         method: 'GET',
       }),
       providesTags: ['Amenities'],

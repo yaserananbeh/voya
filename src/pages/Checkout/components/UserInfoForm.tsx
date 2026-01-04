@@ -15,6 +15,7 @@ import NotesIcon from '@mui/icons-material/Notes'
 import { useFormik } from 'formik'
 import { bookingSchema } from './bookingSchema'
 import { useTranslation } from 'react-i18next'
+import { PAYMENT_METHOD_OPTIONS, UI } from '@/constants'
 
 export type UserInfoValues = {
   customerName: string
@@ -116,9 +117,11 @@ export function UserInfoForm({
             },
           }}
         >
-          <MenuItem value="Cash">Cash</MenuItem>
-          <MenuItem value="Card">Card</MenuItem>
-          <MenuItem value="PayPal">PayPal</MenuItem>
+          {PAYMENT_METHOD_OPTIONS.map((method) => (
+            <MenuItem key={method} value={method}>
+              {method}
+            </MenuItem>
+          ))}
         </TextField>
 
         <TextField
@@ -135,7 +138,7 @@ export function UserInfoForm({
           }
           fullWidth
           multiline
-          rows={4}
+          rows={UI.FORM.SPECIAL_REQUESTS_ROWS}
           placeholder={t('checkout.specialRequestsPlaceholder')}
           InputProps={{
             startAdornment: (

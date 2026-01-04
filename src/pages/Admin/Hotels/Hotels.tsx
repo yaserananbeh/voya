@@ -23,9 +23,11 @@ import type { HotelDto } from '@/types'
 import { HotelForm } from './components/HotelForm'
 import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
 
+import { getInitialPaginationModel, PAGINATION } from '@/constants'
+
 export default function Hotels() {
   const [searchQuery, setSearchQuery] = useState('')
-  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
+  const [paginationModel, setPaginationModel] = useState(getInitialPaginationModel())
   const [openForm, setOpenForm] = useState(false)
   const [editingHotel, setEditingHotel] = useState<number | null>(null)
   const [deleteId, setDeleteId] = useState<number | null>(null)
@@ -154,7 +156,7 @@ export default function Hotels() {
           loading={isLoading}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          pageSizeOptions={[5, 10, 25, 50]}
+          pageSizeOptions={PAGINATION.PAGE_SIZE_OPTIONS}
           getRowId={(row) => row.id}
           disableRowSelectionOnClick
           sx={{

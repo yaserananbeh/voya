@@ -8,6 +8,7 @@ import { selectSearchParams, setSearchParams } from '@/store/searchSlice'
 import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from './GuestRoomSelector'
 import { useTranslation } from 'react-i18next'
+import { ROUTES } from '@/constants'
 
 type SearchValues = {
   city: string
@@ -57,7 +58,7 @@ export function HomeSearchBar() {
     onSubmit(values) {
       dispatch(setSearchParams(values))
 
-      void navigate('/search')
+      void navigate(ROUTES.SEARCH)
     },
   })
 

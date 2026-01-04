@@ -1,17 +1,23 @@
 import { Stack, Chip } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectSearchFilters, setSearchFilters } from '@/store/searchSlice'
+import { useTranslation } from 'react-i18next'
+import { HOTEL } from '@/constants'
 
 export function SelectedFiltersBar() {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { priceRange, stars, amenities = [], hotelTypes = [] } = useSelector(selectSearchFilters)
 
   const chips: Array<{ key: string; label: string; onDelete: () => void }> = []
 
-  if (priceRange && (priceRange[0] !== 0 || priceRange[1] !== 2000)) {
+  if (
+    priceRange &&
+    (priceRange[0] !== HOTEL.PRICE_RANGE.MIN || priceRange[1] !== HOTEL.PRICE_RANGE.MAX)
+  ) {
     chips.push({
       key: 'priceRange',
-      label: `Price: ${priceRange[0]} - ${priceRange[1]}`,
+      label: t('search.priceLabel', { min: priceRange[0], max: priceRange[1] }),
       onDelete: () => dispatch(setSearchFilters({ priceRange: undefined })),
     })
   }

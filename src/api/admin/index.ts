@@ -7,6 +7,7 @@ import type {
   RoomDto,
   RoomForCreationDto,
 } from '../../types/models'
+import { API_ENDPOINTS } from '@/constants'
 
 export interface PaginationQuery {
   searchQuery?: string
@@ -19,15 +20,15 @@ export const adminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getCities: build.query<CityDto[], PaginationQuery | void>({
       query: (params) => {
-        if (!params) return '/cities'
-        return { url: '/cities', params }
+        if (!params) return API_ENDPOINTS.CITIES
+        return { url: API_ENDPOINTS.CITIES, params }
       },
       providesTags: ['Cities'],
     }),
 
     createCity: build.mutation<CityDto, CityForCreationDto>({
       query: (body) => ({
-        url: '/cities',
+        url: API_ENDPOINTS.CITIES,
         method: 'POST',
         body,
       }),
@@ -36,15 +37,15 @@ export const adminApi = baseApi.injectEndpoints({
 
     getAdminHotels: build.query<HotelWithoutRoomsDto[], PaginationQuery | void>({
       query: (params) => {
-        if (!params) return '/hotels'
-        return { url: '/hotels', params }
+        if (!params) return API_ENDPOINTS.HOTELS
+        return { url: API_ENDPOINTS.HOTELS, params }
       },
       providesTags: ['Hotel'],
     }),
 
     createHotel: build.mutation<HotelWithoutRoomsDto, HotelForCreationDto>({
       query: (body) => ({
-        url: '/hotels',
+        url: API_ENDPOINTS.HOTELS,
         method: 'POST',
         body,
       }),
@@ -53,15 +54,15 @@ export const adminApi = baseApi.injectEndpoints({
 
     getRoomsAdmin: build.query<RoomDto[], PaginationQuery | void>({
       query: (params) => {
-        if (!params) return '/rooms'
-        return { url: '/rooms', params }
+        if (!params) return API_ENDPOINTS.ROOMS
+        return { url: API_ENDPOINTS.ROOMS, params }
       },
       providesTags: ['Rooms'],
     }),
 
     createRoom: build.mutation<RoomDto, RoomForCreationDto>({
       query: (body) => ({
-        url: '/rooms',
+        url: API_ENDPOINTS.ROOMS,
         method: 'POST',
         body,
       }),
@@ -69,7 +70,7 @@ export const adminApi = baseApi.injectEndpoints({
     }),
     updateCity: build.mutation<CityDto, { id: number; data: CityForCreationDto }>({
       query: ({ id, data }) => ({
-        url: `/cities/${id}`,
+        url: API_ENDPOINTS.CITY_BY_ID(id),
         method: 'PUT',
         body: data,
       }),
@@ -78,7 +79,7 @@ export const adminApi = baseApi.injectEndpoints({
 
     deleteCity: build.mutation<void, number>({
       query: (id) => ({
-        url: `/cities/${id}`,
+        url: API_ENDPOINTS.CITY_BY_ID(id),
         method: 'DELETE',
       }),
       invalidatesTags: ['Cities'],
@@ -86,7 +87,7 @@ export const adminApi = baseApi.injectEndpoints({
 
     updateHotel: build.mutation<HotelWithoutRoomsDto, { id: number; data: HotelForCreationDto }>({
       query: ({ id, data }) => ({
-        url: `/hotels/${id}`,
+        url: API_ENDPOINTS.HOTEL_BY_ID(id),
         method: 'PUT',
         body: data,
       }),
@@ -95,7 +96,7 @@ export const adminApi = baseApi.injectEndpoints({
 
     deleteHotel: build.mutation<void, number>({
       query: (id) => ({
-        url: `/hotels/${id}`,
+        url: API_ENDPOINTS.HOTEL_BY_ID(id),
         method: 'DELETE',
       }),
       invalidatesTags: ['Hotel'],
@@ -103,7 +104,7 @@ export const adminApi = baseApi.injectEndpoints({
 
     updateRoom: build.mutation<RoomDto, { id: number; data: RoomForCreationDto }>({
       query: ({ id, data }) => ({
-        url: `/rooms/${id}`,
+        url: API_ENDPOINTS.ROOM_BY_ID(id),
         method: 'PUT',
         body: data,
       }),
@@ -112,7 +113,7 @@ export const adminApi = baseApi.injectEndpoints({
 
     deleteRoom: build.mutation<void, number>({
       query: (id) => ({
-        url: `/rooms/${id}`,
+        url: API_ENDPOINTS.ROOM_BY_ID(id),
         method: 'DELETE',
       }),
       invalidatesTags: ['Rooms'],
@@ -127,7 +128,7 @@ export const adminApi = baseApi.injectEndpoints({
       },
       void
     >({
-      query: () => '/admin/dashboard',
+      query: () => API_ENDPOINTS.ADMIN_DASHBOARD,
       providesTags: ['Admin'],
     }),
   }),

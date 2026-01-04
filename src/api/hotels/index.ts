@@ -1,4 +1,5 @@
 import { baseApi } from '@/api/baseApi'
+import { API_ENDPOINTS } from '@/constants'
 
 export type HotelAmenityDto = {
   id: number
@@ -61,7 +62,7 @@ export const hotelsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getHotels: builder.query<HotelDto[], GetHotelsQuery>({
       query: ({ searchQuery, pageNumber, pageSize }) => ({
-        url: 'hotels',
+        url: API_ENDPOINTS.HOTELS,
         params: {
           ...(searchQuery ? { searchQuery } : {}),
           pageNumber,
@@ -72,19 +73,19 @@ export const hotelsApi = baseApi.injectEndpoints({
     }),
 
     getHotel: builder.query<HotelDto, number>({
-      query: (id) => `hotels/${id}`,
+      query: (id) => API_ENDPOINTS.HOTEL_BY_ID(id),
       providesTags: (_result, _error, id) => [{ type: 'Hotel', id }],
     }),
     getHotelGallery: builder.query<HotelGalleryPhotoDto[], number>({
-      query: (id) => `hotels/${id}/gallery`,
+      query: (id) => API_ENDPOINTS.HOTEL_GALLERY(id),
     }),
 
     getHotelRooms: builder.query<HotelRoomDto[], number>({
-      query: (id) => `hotels/${id}/rooms`,
+      query: (id) => API_ENDPOINTS.HOTEL_ROOMS(id),
     }),
 
     getHotelReviews: builder.query<HotelReviewDto[], number>({
-      query: (id) => `hotels/${id}/reviews`,
+      query: (id) => API_ENDPOINTS.HOTEL_REVIEWS(id),
     }),
   }),
 })

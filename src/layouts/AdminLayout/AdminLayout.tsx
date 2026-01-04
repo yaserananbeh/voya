@@ -22,8 +22,7 @@ import BedIcon from '@mui/icons-material/Bed'
 import { LogoutBtn } from '@/components/layout'
 import { Outlet } from 'react-router-dom'
 import { ScrollToTop } from '@/components/ScrollToTop'
-
-const DRAWER_WIDTH = 240
+import { UI, ROUTES } from '@/constants'
 
 export default function AdminLayout() {
   const theme = useTheme()
@@ -33,10 +32,10 @@ export default function AdminLayout() {
   const location = useLocation()
 
   const menuItems = [
-    { path: '/admin/dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
-    { path: '/admin/cities', label: 'Cities', icon: <LocationCityIcon /> },
-    { path: '/admin/hotels', label: 'Hotels', icon: <HotelIcon /> },
-    { path: '/admin/rooms', label: 'Rooms', icon: <BedIcon /> },
+    { path: ROUTES.ADMIN_DASHBOARD, label: 'Dashboard', icon: <DashboardIcon /> },
+    { path: ROUTES.ADMIN_CITIES, label: 'Cities', icon: <LocationCityIcon /> },
+    { path: ROUTES.ADMIN_HOTELS, label: 'Hotels', icon: <HotelIcon /> },
+    { path: ROUTES.ADMIN_ROOMS, label: 'Rooms', icon: <BedIcon /> },
   ]
 
   const handleDrawerToggle = () => {
@@ -90,7 +89,10 @@ export default function AdminLayout() {
         </Toolbar>
       </AppBar>
 
-      <Box component="nav" sx={{ width: { md: DRAWER_WIDTH }, flexShrink: { md: 0 } }}>
+      <Box
+        component="nav"
+        sx={{ width: { md: UI.ADMIN_LAYOUT.DRAWER_WIDTH }, flexShrink: { md: 0 } }}
+      >
         <Drawer
           variant={isMobile ? 'temporary' : 'permanent'}
           open={isMobile ? mobileOpen : true}
@@ -101,7 +103,7 @@ export default function AdminLayout() {
           sx={{
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
-              width: DRAWER_WIDTH,
+              width: UI.ADMIN_LAYOUT.DRAWER_WIDTH,
             },
           }}
         >
@@ -114,7 +116,7 @@ export default function AdminLayout() {
         sx={{
           flexGrow: 1,
           p: { xs: 2, sm: 3 },
-          width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
+          width: { md: `calc(100% - ${UI.ADMIN_LAYOUT.DRAWER_WIDTH}px)` },
           minWidth: 0,
           overflowX: 'hidden',
         }}

@@ -24,9 +24,11 @@ import { CityForm } from './components/CityForm'
 import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
 import { useNotification } from '@/hooks/useNotification'
 
+import { getInitialPaginationModel, PAGINATION } from '@/constants'
+
 export default function Cities() {
   const [searchQuery, setSearchQuery] = useState('')
-  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
+  const [paginationModel, setPaginationModel] = useState(getInitialPaginationModel())
   const [openForm, setOpenForm] = useState(false)
   const [editingCity, setEditingCity] = useState<number | null>(null)
   const [deleteId, setDeleteId] = useState<number | null>(null)
@@ -143,7 +145,7 @@ export default function Cities() {
           loading={isLoading}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          pageSizeOptions={[5, 10, 25, 50]}
+          pageSizeOptions={PAGINATION.PAGE_SIZE_OPTIONS}
           getRowId={(row) => row.id}
           disableRowSelectionOnClick
           sx={{

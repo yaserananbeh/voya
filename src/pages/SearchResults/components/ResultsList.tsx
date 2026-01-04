@@ -5,8 +5,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useGetHotelsQuery, type HotelDto } from '@/api/hotels'
 import { HotelResultCard } from './HotelResultCard'
 import { VoyaLoader } from '@/components'
-
-const PAGE_SIZE = 10
+import { PAGINATION } from '@/constants'
 
 function hotelMatchesFilters(hotel: HotelDto, filters: ReturnType<typeof selectSearchFilters>) {
   if (filters.stars != null && hotel.starRating !== filters.stars) return false
@@ -37,7 +36,7 @@ export function ResultsList() {
   const { data, isLoading, isError, isFetching } = useGetHotelsQuery({
     searchQuery,
     pageNumber: page,
-    pageSize: PAGE_SIZE,
+    pageSize: PAGINATION.DEFAULT_PAGE_SIZE,
   })
 
   useEffect(() => {
@@ -50,7 +49,7 @@ export function ResultsList() {
     if (data) {
       setAllHotels((prev) => [...prev, ...data])
 
-      if (data.length < PAGE_SIZE) {
+      if (data.length < PAGINATION.DEFAULT_PAGE_SIZE) {
         setHasMore(false)
       }
     }

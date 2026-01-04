@@ -76,6 +76,7 @@
     "viewHotel": "View Hotel",
     "perNight": "/night",
     "priceRange": "Price Range",
+    "priceLabel": "Price: {min} - {max}",
     "starRating": "Star Rating",
     "amenities": "Amenities",
     "hotelType": "Hotel Type",

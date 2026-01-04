@@ -23,6 +23,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import styles from './styles.module.css'
 import { useNotification } from '@/hooks'
 import { useTranslation } from 'react-i18next'
+import { STORAGE_KEYS, ROUTES } from '@/constants'
 
 const validationSchema = yup.object({
   userName: yup.string().required('Username is required'),
@@ -50,8 +51,8 @@ export default function Login() {
     onSubmit: async (values) => {
       try {
         const result = await login(values).unwrap()
-        localStorage.setItem('token', result.authentication)
-        localStorage.setItem('userType', result.userType)
+        localStorage.setItem(STORAGE_KEYS.TOKEN, result.authentication)
+        localStorage.setItem(STORAGE_KEYS.USER_TYPE, result.userType)
         dispatch(
           setCredentials({
             token: result.authentication,
@@ -62,9 +63,9 @@ export default function Login() {
         showSuccess(t('auth.loginSuccess'))
 
         if (result.userType === 'Admin') {
-          await navigate(from || '/admin/dashboard', { replace: true })
+          await navigate(from || ROUTES.ADMIN_DASHBOARD, { replace: true })
         } else {
-          await navigate(from || '/home', { replace: true })
+          await navigate(from || ROUTES.HOME, { replace: true })
         }
       } catch (error) {
         console.error('Login failed:', error)

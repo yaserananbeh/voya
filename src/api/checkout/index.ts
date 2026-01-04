@@ -1,4 +1,5 @@
 import { baseApi } from '../baseApi'
+import { API_ENDPOINTS } from '@/constants'
 export type BookingRequest = {
   customerName: string
   hotelName: string
@@ -29,7 +30,7 @@ export const checkoutApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createBooking: builder.mutation<BookingDetailsDto, BookingRequest>({
       query: (body) => ({
-        url: '/bookings',
+        url: API_ENDPOINTS.BOOKINGS,
         method: 'POST',
         body,
       }),
@@ -55,7 +56,7 @@ export const checkoutApi = baseApi.injectEndpoints({
     }),
 
     getBookingById: builder.query<BookingDetailsDto, number>({
-      query: (bookingId) => `/bookings/${bookingId}`,
+      query: (bookingId) => API_ENDPOINTS.BOOKING_BY_ID(bookingId),
     }),
   }),
 })

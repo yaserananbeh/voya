@@ -1,5 +1,6 @@
 import { baseApi } from '../baseApi'
 import type { PhotoDto } from '@/types'
+import { API_ENDPOINTS } from '@/constants'
 
 export const uploadApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -9,7 +10,7 @@ export const uploadApi = baseApi.injectEndpoints({
         formData.append('file', file)
 
         return {
-          url: '/photos',
+          url: API_ENDPOINTS.UPLOAD_PHOTO,
           method: 'POST',
           body: formData,
         }

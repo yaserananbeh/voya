@@ -5,6 +5,7 @@ import { Box } from '@mui/material'
 import { ProtectedRoute, AdminRoute, RedirectIfAuthenticated } from '@/components/auth'
 import { VoyaLoader } from '@/components'
 import { RouteError } from '@/pages/Error/RouteError'
+import { ROUTES } from '@/constants'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Login = lazy(() => import('@/pages/Login'))
@@ -43,7 +44,7 @@ const SuspenseLayout = ({ children }: { children: ReactNode }) => (
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: ROUTES.ROOT,
     element: (
       <SuspenseLayout>
         <MainLayout />
@@ -51,7 +52,7 @@ export const router = createBrowserRouter([
     ),
     errorElement: <RouteError />,
     children: [
-      { index: true, element: <Navigate to="/home" replace /> },
+      { index: true, element: <Navigate to={ROUTES.HOME} replace /> },
 
       {
         path: 'login',
@@ -76,7 +77,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: '/checkout/confirmation',
+        path: ROUTES.CHECKOUT_CONFIRMATION,
         element: (
           <ProtectedRoute>
             <Confirmation />
@@ -87,7 +88,7 @@ export const router = createBrowserRouter([
   },
 
   {
-    path: '/admin',
+    path: ROUTES.ADMIN,
     element: (
       <ProtectedRoute>
         <AdminRoute>
