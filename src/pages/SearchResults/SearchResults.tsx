@@ -5,6 +5,7 @@ import FilterListIcon from '@mui/icons-material/FilterList'
 import { FiltersSidebar } from './components/FiltersSidebar'
 import { ResultsList } from './components/ResultsList'
 import { SelectedFiltersBar } from './components/SelectedFiltersBar'
+import { EditableSearchBar } from './components/EditableSearchBar'
 
 export default function SearchResults() {
   const theme = useTheme()
@@ -54,6 +55,7 @@ export default function SearchResults() {
         </Grid>
 
         <Grid size={{ xs: 12, md: 9 }}>
+          <EditableSearchBar />
           <SelectedFiltersBar />
           <ResultsList />
         </Grid>

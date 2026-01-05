@@ -27,3 +27,19 @@ export function formatDistanceToNow(date: Date, opts?: { addSuffix?: boolean }):
   if (!opts?.addSuffix) return base
   return diffDays > 0 ? `${base} ago` : `in ${base}`
 }
+
+export function formatDateForDisplay(dateStr: string): string {
+  try {
+    const date = new Date(dateStr)
+    if (isNaN(date.getTime())) {
+      return dateStr
+    }
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })
+  } catch {
+    return dateStr
+  }
+}
