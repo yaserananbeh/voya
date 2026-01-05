@@ -8,7 +8,9 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  InputAdornment,
 } from '@mui/material'
+import ClearIcon from '@mui/icons-material/Clear'
 import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -139,6 +141,20 @@ export default function Hotels() {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         sx={{ mb: 2 }}
+        InputProps={{
+          endAdornment: searchQuery ? (
+            <InputAdornment position="end">
+              <IconButton
+                size="small"
+                onClick={() => setSearchQuery('')}
+                edge="end"
+                aria-label="clear"
+              >
+                <ClearIcon fontSize="small" />
+              </IconButton>
+            </InputAdornment>
+          ) : undefined,
+        }}
       />
 
       <Box

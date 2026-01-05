@@ -9,6 +9,7 @@ import {
   TextField,
   InputAdornment,
   Collapse,
+  IconButton,
 } from '@mui/material'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -18,6 +19,7 @@ import { useTranslation } from 'react-i18next'
 import EditIcon from '@mui/icons-material/Edit'
 import SearchIcon from '@mui/icons-material/Search'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import ClearIcon from '@mui/icons-material/Clear'
 import { formatDateForDisplay, startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from '@/pages/Home/components/GuestRoomSelector'
 
@@ -225,6 +227,20 @@ export function EditableSearchBar() {
                     <SearchIcon />
                   </InputAdornment>
                 ),
+                endAdornment: formik.values.city ? (
+                  <InputAdornment position="end">
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        void formik.setFieldValue('city', '')
+                      }}
+                      edge="end"
+                      aria-label="clear"
+                    >
+                      <ClearIcon fontSize="small" />
+                    </IconButton>
+                  </InputAdornment>
+                ) : undefined,
               }}
             />
 

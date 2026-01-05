@@ -1,5 +1,6 @@
-import { Box, Button, TextField, Paper, InputAdornment } from '@mui/material'
+import { Box, Button, TextField, Paper, InputAdornment, IconButton } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
+import ClearIcon from '@mui/icons-material/Clear'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
@@ -92,6 +93,20 @@ export function HomeSearchBar() {
               <SearchIcon />
             </InputAdornment>
           ),
+          endAdornment: formik.values.city ? (
+            <InputAdornment position="end">
+              <IconButton
+                size="small"
+                onClick={() => {
+                  void formik.setFieldValue('city', '')
+                }}
+                edge="end"
+                aria-label="clear"
+              >
+                <ClearIcon fontSize="small" />
+              </IconButton>
+            </InputAdornment>
+          ) : undefined,
         }}
       />
 
