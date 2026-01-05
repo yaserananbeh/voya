@@ -14,12 +14,13 @@ import {
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import { selectSearchParams, setSearchParams } from '@/store/searchSlice'
+import { selectSearchParams, setSearchParams, clearSearchParams } from '@/store/searchSlice'
 import { useTranslation } from 'react-i18next'
 import EditIcon from '@mui/icons-material/Edit'
 import SearchIcon from '@mui/icons-material/Search'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import ClearIcon from '@mui/icons-material/Clear'
+import RefreshIcon from '@mui/icons-material/Refresh'
 import { formatDateForDisplay, startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from '@/pages/Home/components/GuestRoomSelector'
 
@@ -33,7 +34,7 @@ export function EditableSearchBar() {
   const tomorrow = addDays(today, 1)
 
   const validationSchema = yup.object({
-    city: yup.string().required(t('home.cityRequired')),
+    city: yup.string(),
     checkInDate: yup.string().required(t('home.checkInRequired')),
     checkOutDate: yup
       .string()
@@ -83,10 +84,8 @@ export function EditableSearchBar() {
   const children = stored.children ?? 0
   const rooms = stored.rooms ?? 0
 
-  // Don't show if no search parameters exist
-  if (!searchQuery && !stored.checkInDate) {
-    return null
-  }
+  // Show the search bar if there are any search parameters or if user is on search results page
+  // This allows users to explore all hotels by clearing the search
 
   return (
     <Paper
@@ -183,6 +182,28 @@ export function EditableSearchBar() {
           </Stack>
         </Box>
         <Box sx={{ display: 'flex', gap: 1, flexShrink: 0 }}>
+          <Button
+            variant="outlined"
+            size="small"
+            color="secondary"
+            startIcon={<RefreshIcon />}
+            onClick={() => {
+              dispatch(clearSearchParams())
+              void formik.resetForm({
+                values: {
+                  city: '',
+                  checkInDate: formatDateForApi(today),
+                  checkOutDate: formatDateForApi(tomorrow),
+                  adults: 1,
+                  children: 0,
+                  rooms: 1,
+                },
+              })
+              setIsExpanded(false)
+            }}
+          >
+            {t('common.clear')}
+          </Button>
           <Button
             variant="outlined"
             size="small"
@@ -286,14 +307,38 @@ export function EditableSearchBar() {
               }}
             />
 
-            <Box sx={{ flexShrink: 0 }}>
+            <Box sx={{ flexShrink: 0, display: 'flex', gap: 1, width: { xs: '100%', md: 'auto' } }}>
+              <Button
+                type="button"
+                variant="outlined"
+                color="secondary"
+                size="large"
+                startIcon={<RefreshIcon />}
+                onClick={() => {
+                  dispatch(clearSearchParams())
+                  void formik.resetForm({
+                    values: {
+                      city: '',
+                      checkInDate: formatDateForApi(today),
+                      checkOutDate: formatDateForApi(tomorrow),
+                      adults: 1,
+                      children: 0,
+                      rooms: 1,
+                    },
+                  })
+                  setIsExpanded(false)
+                }}
+                sx={{ flex: { xs: 1, md: 'none' } }}
+              >
+                {t('common.clear')}
+              </Button>
               <Button
                 type="submit"
                 variant="contained"
                 color="primary"
                 size="large"
                 startIcon={<SearchIcon />}
-                fullWidth
+                sx={{ flex: { xs: 1, md: 'none' } }}
               >
                 {t('common.search')}
               </Button>

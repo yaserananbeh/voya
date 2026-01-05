@@ -44,14 +44,23 @@ const searchSlice = createSlice({
       state.filters = {}
     },
 
+    clearSearchParams(state) {
+      state.params = {}
+    },
+
     hydrateSearchState(_state, action: PayloadAction<SearchState>) {
       return action.payload
     },
   },
 })
 
-export const { setSearchParams, setSearchFilters, clearSearchFilters, hydrateSearchState } =
-  searchSlice.actions
+export const {
+  setSearchParams,
+  setSearchFilters,
+  clearSearchFilters,
+  clearSearchParams,
+  hydrateSearchState,
+} = searchSlice.actions
 
 export const searchReducer = searchSlice.reducer
 

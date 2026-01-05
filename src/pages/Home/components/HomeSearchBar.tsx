@@ -1,11 +1,12 @@
 import { Box, Button, TextField, Paper, InputAdornment, IconButton } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import ClearIcon from '@mui/icons-material/Clear'
+import RefreshIcon from '@mui/icons-material/Refresh'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import { selectSearchParams, setSearchParams } from '@/store/searchSlice'
+import { selectSearchParams, setSearchParams, clearSearchParams } from '@/store/searchSlice'
 import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from './GuestRoomSelector'
 import { useTranslation } from 'react-i18next'
@@ -30,7 +31,7 @@ export function HomeSearchBar() {
   const tomorrow = addDays(today, 1)
 
   const validationSchema = yup.object({
-    city: yup.string().required(t('home.cityRequired')),
+    city: yup.string(),
     checkInDate: yup.string().required(t('home.checkInRequired')),
     checkOutDate: yup
       .string()
@@ -148,7 +149,29 @@ export function HomeSearchBar() {
         }}
       />
 
-      <Box sx={{ flexShrink: 0 }}>
+      <Box sx={{ flexShrink: 0, display: 'flex', gap: 1 }}>
+        <Button
+          type="button"
+          variant="outlined"
+          color="primary"
+          size="large"
+          startIcon={<RefreshIcon />}
+          onClick={() => {
+            dispatch(clearSearchParams())
+            void formik.resetForm({
+              values: {
+                city: '',
+                checkInDate: formatDateForApi(today),
+                checkOutDate: formatDateForApi(tomorrow),
+                adults: 1,
+                children: 0,
+                rooms: 1,
+              },
+            })
+          }}
+        >
+          {t('common.clear')}
+        </Button>
         <Button
           type="submit"
           variant="contained"
