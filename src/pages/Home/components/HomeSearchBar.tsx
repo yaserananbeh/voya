@@ -85,13 +85,6 @@ export function HomeSearchBar() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched.city && Boolean(formik.errors.city)}
-        helperText={
-          formik.touched.city && formik.errors.city
-            ? formik.errors.city
-            : formik.touched.city
-              ? t('home.whereGoingHelper')
-              : ''
-        }
         sx={{ flex: 2, minWidth: 180 }}
         InputProps={{
           startAdornment: (

@@ -38,8 +38,6 @@ export function HeroSection() {
         sx={{
           position: 'absolute',
           inset: 0,
-          background:
-            'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.35), transparent 35%), radial-gradient(circle at 80% 0%, rgba(255,255,255,0.3), transparent 30%), radial-gradient(circle at 40% 80%, rgba(255,255,255,0.25), transparent 35%)',
           pointerEvents: 'none',
         }}
       />
