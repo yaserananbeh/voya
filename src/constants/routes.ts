@@ -19,6 +19,9 @@ export const ROUTES = {
   ADMIN_HOTELS: '/admin/hotels',
   ADMIN_ROOMS: '/admin/rooms',
 
+  // Error routes
+  FORBIDDEN: '/forbidden',
+
   // Root
   ROOT: '/',
 } as const

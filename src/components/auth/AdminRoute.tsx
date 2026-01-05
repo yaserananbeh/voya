@@ -15,7 +15,7 @@ export default function AdminRoute({ children }: Props): ReactElement {
   }
 
   if (userType !== USER.TYPES.ADMIN) {
-    return <Navigate to={ROUTES.HOME} replace />
+    return <Navigate to={ROUTES.FORBIDDEN} replace />
   }
 
   return children

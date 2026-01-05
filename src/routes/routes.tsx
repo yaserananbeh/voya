@@ -14,6 +14,7 @@ const Hotel = lazy(() => import('@/pages/Hotel'))
 const Checkout = lazy(() => import('@/pages/Checkout'))
 const Confirmation = lazy(() => import('@/pages/Checkout/Confirmation'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
+const Forbidden = lazy(() => import('@/pages/Forbidden'))
 
 const AdminLayout = lazy(() => import('@/layouts/AdminLayout'))
 const MainLayout = lazy(() => import('@/layouts/MainLayout'))
@@ -83,6 +84,11 @@ export const router = createBrowserRouter([
             <Confirmation />
           </ProtectedRoute>
         ),
+      },
+
+      {
+        path: ROUTES.FORBIDDEN,
+        element: <Forbidden />,
       },
     ],
   },
