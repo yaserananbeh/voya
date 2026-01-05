@@ -21,6 +21,8 @@ void i18n
     defaultNS: 'translation',
     interpolation: {
       escapeValue: false,
+      prefix: '{',
+      suffix: '}',
     },
     detection: {
       order: ['localStorage', 'navigator'],
