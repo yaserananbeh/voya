@@ -1,9 +1,3 @@
-export function formatDate(date: Date | string): string {
-  const d = typeof date === 'string' ? new Date(date) : date
-  if (isNaN(d.getTime())) return ''
-
-  return d.toISOString().split('T')[0]
-}
 export function startOfToday(): Date {
   const d = new Date()
   d.setHours(0, 0, 0, 0)
@@ -32,4 +26,20 @@ export function formatDistanceToNow(date: Date, opts?: { addSuffix?: boolean }):
   const base = `${Math.abs(diffDays)} day${Math.abs(diffDays) === 1 ? '' : 's'}`
   if (!opts?.addSuffix) return base
   return diffDays > 0 ? `${base} ago` : `in ${base}`
+}
+
+export function formatDateForDisplay(dateStr: string): string {
+  try {
+    const date = new Date(dateStr)
+    if (isNaN(date.getTime())) {
+      return dateStr
+    }
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })
+  } catch {
+    return dateStr
+  }
 }

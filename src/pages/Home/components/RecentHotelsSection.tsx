@@ -16,13 +16,12 @@ import styles from '../styles.module.css'
 import { formatDistanceToNow } from '@/utils/date'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useTranslation } from 'react-i18next'
-
-const MOCK_USER_ID = 1
+import { USER } from '@/constants'
 
 export function RecentHotelsSection() {
   const { t } = useTranslation()
   const { data, isLoading, isError } = useRecentHotelsQuery({
-    userId: MOCK_USER_ID,
+    userId: USER.MOCK_USER_ID,
   })
 
   if (isLoading) {

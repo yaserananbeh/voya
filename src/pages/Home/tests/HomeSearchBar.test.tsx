@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux'
@@ -6,11 +6,6 @@ import { BrowserRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit'
 import { searchReducer } from '@/store/searchSlice'
 import { HomeSearchBar } from '../components/HomeSearchBar'
-import i18n from '@/i18n/config'
-
-beforeEach(() => {
-  void i18n.changeLanguage('en')
-})
 
 function renderWithStore(ui: React.ReactElement) {
   const store = configureStore({
@@ -33,14 +28,14 @@ describe('HomeSearchBar', () => {
   it('renders with default values', () => {
     renderWithStore(<HomeSearchBar />)
 
-    expect(screen.getByLabelText(/where are you going\?/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/search hotels or destinations/i)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /adult/i })).toBeInTheDocument()
   })
 
   it('allows user to type city and submit', async () => {
     const { user } = renderWithStore(<HomeSearchBar />)
 
-    const cityInput = screen.getByLabelText(/where are you going\?/i)
+    const cityInput = screen.getByLabelText(/search hotels or destinations/i)
 
     await user.type(cityInput, 'Amman')
 

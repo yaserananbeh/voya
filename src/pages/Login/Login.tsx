@@ -23,11 +23,17 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import styles from './styles.module.css'
 import { useNotification } from '@/hooks'
 import { useTranslation } from 'react-i18next'
+import { STORAGE_KEYS, ROUTES } from '@/constants'
 
 const validationSchema = yup.object({
   userName: yup.string().required('Username is required'),
   password: yup.string().required('Password is required'),
 })
+
+type LoginValues = {
+  userName: string
+  password: string
+}
 
 export default function Login() {
   const { t } = useTranslation()
@@ -39,14 +45,14 @@ export default function Login() {
 
   const from = (location.state as { from?: Location })?.from?.pathname || null
 
-  const formik = useFormik({
+  const formik = useFormik<LoginValues>({
     initialValues: { userName: '', password: '' },
     validationSchema,
     onSubmit: async (values) => {
       try {
         const result = await login(values).unwrap()
-        localStorage.setItem('token', result.authentication)
-        localStorage.setItem('userType', result.userType)
+        localStorage.setItem(STORAGE_KEYS.TOKEN, result.authentication)
+        localStorage.setItem(STORAGE_KEYS.USER_TYPE, result.userType)
         dispatch(
           setCredentials({
             token: result.authentication,
@@ -57,9 +63,9 @@ export default function Login() {
         showSuccess(t('auth.loginSuccess'))
 
         if (result.userType === 'Admin') {
-          await navigate(from || '/admin/dashboard', { replace: true })
+          await navigate(from || ROUTES.ADMIN_DASHBOARD, { replace: true })
         } else {
-          await navigate(from || '/home', { replace: true })
+          await navigate(from || ROUTES.HOME, { replace: true })
         }
       } catch (error) {
         console.error('Login failed:', error)
@@ -160,6 +166,7 @@ export default function Login() {
                 name="userName"
                 value={formik.values.userName}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={formik.touched.userName && Boolean(formik.errors.userName)}
                 helperText={formik.touched.userName && formik.errors.userName}
                 InputProps={{
@@ -229,6 +236,7 @@ export default function Login() {
                 name="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={formik.touched.password && Boolean(formik.errors.password)}
                 helperText={formik.touched.password && formik.errors.password}
                 InputProps={{

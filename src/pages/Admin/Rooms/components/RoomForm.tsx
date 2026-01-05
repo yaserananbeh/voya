@@ -13,8 +13,9 @@ import {
   Box,
 } from '@mui/material'
 import { useGetRoomsAdminQuery, useGetAdminHotelsQuery } from '@/api/admin'
-import type { RoomForCreationDto } from '@/types/models'
+import type { RoomForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
+import { VALIDATION } from '@/constants'
 
 const validationSchema = yup.object({
   roomNumber: yup.string().required('Room number is required'),
@@ -79,6 +80,7 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
           label="Room Number"
           value={formik.values.roomNumber}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={formik.touched.roomNumber && Boolean(formik.errors.roomNumber)}
           helperText={formik.touched.roomNumber && formik.errors.roomNumber}
           fullWidth
@@ -105,6 +107,7 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
           label="Room Type"
           value={formik.values.roomType}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={formik.touched.roomType && Boolean(formik.errors.roomType)}
           helperText={formik.touched.roomType && formik.errors.roomType}
           fullWidth
@@ -114,9 +117,10 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
           name="capacityOfAdults"
           label="Adult Capacity"
           type="number"
-          inputProps={{ min: 1 }}
+          inputProps={{ min: VALIDATION.ROOM.CAPACITY_OF_ADULTS_MIN }}
           value={formik.values.capacityOfAdults}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={formik.touched.capacityOfAdults && Boolean(formik.errors.capacityOfAdults)}
           helperText={formik.touched.capacityOfAdults && formik.errors.capacityOfAdults}
           fullWidth
@@ -126,9 +130,10 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
           name="capacityOfChildren"
           label="Children Capacity"
           type="number"
-          inputProps={{ min: 0 }}
+          inputProps={{ min: VALIDATION.ROOM.CAPACITY_OF_CHILDREN_MIN }}
           value={formik.values.capacityOfChildren}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={formik.touched.capacityOfChildren && Boolean(formik.errors.capacityOfChildren)}
           helperText={formik.touched.capacityOfChildren && formik.errors.capacityOfChildren}
           fullWidth
@@ -138,9 +143,10 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
           name="price"
           label="Price"
           type="number"
-          inputProps={{ min: 0, step: 0.01 }}
+          inputProps={{ min: VALIDATION.ROOM.PRICE_MIN, step: VALIDATION.ROOM.PRICE_STEP }}
           value={formik.values.price}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={formik.touched.price && Boolean(formik.errors.price)}
           helperText={formik.touched.price && formik.errors.price}
           fullWidth
@@ -162,6 +168,7 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
           label="Room Photo URL"
           value={formik.values.roomPhotoUrl || ''}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={formik.touched.roomPhotoUrl && Boolean(formik.errors.roomPhotoUrl)}
           helperText={formik.touched.roomPhotoUrl && formik.errors.roomPhotoUrl}
           fullWidth

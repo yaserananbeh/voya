@@ -17,10 +17,11 @@ import LoginIcon from '@mui/icons-material/Login'
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
 import { useAppSelector, useAppDispatch } from '@/hooks'
 import { selectIsAuthenticated, logout } from '@/store/authSlice'
-import LogoutBtn from '@/components/layout/LogoutBtn'
+import { LogoutBtn } from '@/components/layout'
 import { ThemeToggle } from './ThemeToggle'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { useTranslation } from 'react-i18next'
+import { STORAGE_KEYS, ROUTES } from '@/constants'
 
 export default function MainHeader() {
   const { t } = useTranslation()
@@ -41,12 +42,12 @@ export default function MainHeader() {
 
   const handleAuthClick = () => {
     if (isAuthenticated) {
-      localStorage.removeItem('token')
-      localStorage.removeItem('userType')
+      localStorage.removeItem(STORAGE_KEYS.TOKEN)
+      localStorage.removeItem(STORAGE_KEYS.USER_TYPE)
       dispatch(logout())
-      void navigate('/home', { replace: true })
+      void navigate(ROUTES.HOME, { replace: true })
     } else {
-      void navigate('/login')
+      void navigate(ROUTES.LOGIN)
     }
     handleMenuClose()
   }
@@ -56,7 +57,7 @@ export default function MainHeader() {
       <Toolbar>
         <Box
           component={RouterLink}
-          to="/home"
+          to={ROUTES.HOME}
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -105,10 +106,10 @@ export default function MainHeader() {
                 horizontal: 'right',
               }}
             >
-              <MenuItem component={RouterLink} to="/home" onClick={handleMenuClose}>
+              <MenuItem component={RouterLink} to={ROUTES.HOME} onClick={handleMenuClose}>
                 {t('common.home')}
               </MenuItem>
-              <MenuItem component={RouterLink} to="/search" onClick={handleMenuClose}>
+              <MenuItem component={RouterLink} to={ROUTES.SEARCH} onClick={handleMenuClose}>
                 {t('common.search')}
               </MenuItem>
               <MenuItem onClick={handleAuthClick}>
@@ -130,10 +131,10 @@ export default function MainHeader() {
           <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
             <LanguageSwitcher />
             <ThemeToggle />
-            <Button component={RouterLink} to="/home" color="primary">
+            <Button component={RouterLink} to={ROUTES.HOME} color="primary">
               {t('common.home')}
             </Button>
-            <Button component={RouterLink} to="/search" color="primary">
+            <Button component={RouterLink} to={ROUTES.SEARCH} color="primary">
               {t('common.search')}
             </Button>
             <LogoutBtn />

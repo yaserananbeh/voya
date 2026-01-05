@@ -29,21 +29,11 @@ Voya
 │   ├── extensions.json
 │   └── settings.json
 ├── README.md
-├── REQUIREMENTS_COVERAGE.md
 ├── docs
-│   ├── API_CACHING_STRATEGY.md
-│   ├── ASSETS_MANAGEMENT_STRATEGY.md
 │   ├── CONTRIBUTING.md
-│   ├── GIT_BRANCH_STRATEGY.md
+│   ├── Helpful_commands_Dev.md
 │   ├── PROJECT_STRUCTURE.md
-│   ├── ROUTES.md
-│   ├── RTK Query vs React Query vs Axios.md
-│   ├── STATE_MGMT_TRADEOFFS.md
-│   ├── UI_COMPONENTS_MUI_MAP.md
-│   ├── adr
-│   │   ├── ADR-006-error-logging.md
-│   │   └── ADR-007-rtk-query-vs-axios.md
-│   └── design.md
+│   └── REQUIREMENTS_COVERAGE.md
 ├── eslint.config.js
 ├── index.html
 ├── package.json
@@ -70,20 +60,24 @@ Voya
 │   │   │   └── index.ts
 │   │   └── upload
 │   │       └── index.ts
-│   ├── assets
-│   │   ├── fonts
-│   │   ├── icons
-│   │   ├── images
-│   │   ├── index.ts
-│   │   └── react.svg
 │   ├── components
+│   │   ├── ScrollToTop.tsx
 │   │   ├── auth
 │   │   │   ├── AdminRoute.tsx
 │   │   │   ├── ProtectedRoute.tsx
-│   │   │   └── RedirectIfAuthenticated.tsx
+│   │   │   ├── RedirectIfAuthenticated.tsx
+│   │   │   └── index.ts
 │   │   ├── common
 │   │   │   ├── SafeImage.tsx
-│   │   │   └── VoyaLoader.tsx
+│   │   │   ├── VoyaLoader.tsx
+│   │   │   └── index.ts
+│   │   ├── filters
+│   │   │   ├── FilterContainer.tsx
+│   │   │   └── index.ts
+│   │   ├── forms
+│   │   │   ├── FormActions.tsx
+│   │   │   ├── FormField.tsx
+│   │   │   └── index.ts
 │   │   ├── index.ts
 │   │   ├── layout
 │   │   │   ├── LanguageSwitcher.tsx
@@ -92,19 +86,27 @@ Voya
 │   │   │   ├── MainHeader.tsx
 │   │   │   ├── PageContainer.tsx
 │   │   │   ├── Section.tsx
-│   │   │   └── ThemeToggle.tsx
+│   │   │   ├── ThemeToggle.tsx
+│   │   │   └── index.ts
 │   │   └── readme.md
 │   ├── constants
 │   │   ├── api.ts
 │   │   ├── colors.ts
+│   │   ├── hotel.ts
 │   │   ├── index.ts
-│   │   └── messages.ts
+│   │   ├── map.ts
+│   │   ├── messages.ts
+│   │   ├── pagination.ts
+│   │   ├── payment.ts
+│   │   ├── routes.ts
+│   │   ├── storage.ts
+│   │   ├── ui.ts
+│   │   ├── user.ts
+│   │   └── validation.ts
 │   ├── hooks
 │   │   ├── index.ts
-│   │   ├── tests
 │   │   ├── useNotification.ts
-│   │   ├── useRTL.ts
-│   │   └── useRTLButton.ts
+│   │   └── useRTL.ts
 │   ├── i18n
 │   │   ├── config.ts
 │   │   └── locales
@@ -122,29 +124,23 @@ Voya
 │   ├── main.tsx
 │   ├── pages
 │   │   ├── Admin
-│   │   │   ├── Admin.tsx
 │   │   │   ├── Cities
 │   │   │   │   ├── Cities.tsx
 │   │   │   │   ├── components
+│   │   │   │   │   ├── CityForm.container.tsx
+│   │   │   │   │   ├── CityForm.presentational.tsx
 │   │   │   │   │   ├── CityForm.tsx
 │   │   │   │   │   └── DeleteConfirmDialog.tsx
 │   │   │   │   ├── ducks
 │   │   │   │   │   └── readme.md
-│   │   │   │   ├── hooks
 │   │   │   │   ├── index.ts
-│   │   │   │   ├── styles.module.css
-│   │   │   │   ├── tests
-│   │   │   │   └── utils
+│   │   │   │   └── styles.module.css
 │   │   │   ├── Dashboard
 │   │   │   │   ├── Dashboard.tsx
-│   │   │   │   ├── components
 │   │   │   │   ├── ducks
 │   │   │   │   │   └── readme.md
-│   │   │   │   ├── hooks
 │   │   │   │   ├── index.ts
-│   │   │   │   ├── styles.module.css
-│   │   │   │   ├── tests
-│   │   │   │   └── utils
+│   │   │   │   └── styles.module.css
 │   │   │   ├── Hotels
 │   │   │   │   ├── Hotels.tsx
 │   │   │   │   ├── components
@@ -152,11 +148,8 @@ Voya
 │   │   │   │   │   └── HotelForm.tsx
 │   │   │   │   ├── ducks
 │   │   │   │   │   └── readme.md
-│   │   │   │   ├── hooks
 │   │   │   │   ├── index.ts
-│   │   │   │   ├── styles.module.css
-│   │   │   │   ├── tests
-│   │   │   │   └── utils
+│   │   │   │   └── styles.module.css
 │   │   │   ├── Rooms
 │   │   │   │   ├── Rooms.tsx
 │   │   │   │   ├── components
@@ -164,50 +157,37 @@ Voya
 │   │   │   │   │   └── RoomForm.tsx
 │   │   │   │   ├── ducks
 │   │   │   │   │   └── readme.md
-│   │   │   │   ├── hooks
 │   │   │   │   ├── index.ts
-│   │   │   │   ├── styles.module.css
-│   │   │   │   ├── tests
-│   │   │   │   └── utils
-│   │   │   ├── components
-│   │   │   │   └── PhotoUploader.tsx
+│   │   │   │   └── styles.module.css
 │   │   │   ├── ducks
 │   │   │   │   └── readme.md
-│   │   │   ├── hooks
-│   │   │   ├── index.ts
-│   │   │   ├── styles.module.css
-│   │   │   ├── tests
-│   │   │   └── utils
+│   │   │   └── styles.module.css
 │   │   ├── Checkout
 │   │   │   ├── Checkout.tsx
 │   │   │   ├── Confirmation
 │   │   │   │   ├── Confirmation.tsx
-│   │   │   │   ├── components
+│   │   │   │   ├── confirmation.module.css
 │   │   │   │   ├── ducks
 │   │   │   │   │   └── readme.md
-│   │   │   │   ├── hooks
 │   │   │   │   ├── index.ts
-│   │   │   │   ├── styles.module.css
-│   │   │   │   ├── tests
-│   │   │   │   └── utils
+│   │   │   │   └── styles.module.css
 │   │   │   ├── components
 │   │   │   │   ├── BookingSummary.tsx
 │   │   │   │   ├── CheckoutActions.tsx
 │   │   │   │   ├── UserInfoForm.tsx
 │   │   │   │   └── bookingSchema.ts
-│   │   │   ├── hooks
 │   │   │   ├── index.ts
 │   │   │   ├── styles.module.css
 │   │   │   ├── tests
 │   │   │   │   ├── Checkout.test.tsx
-│   │   │   │   └── Confirmation.test.tsx
+│   │   │   │   ├── Confirmation.test.tsx
+│   │   │   │   └── UserInfoForm.test.tsx
 │   │   │   ├── types.ts
 │   │   │   └── utils
 │   │   │       ├── checkoutStorage.ts
 │   │   │       └── price.ts
 │   │   ├── Error
 │   │   │   ├── ErrorPage.tsx
-│   │   │   ├── QuickErrorTest.tsx
 │   │   │   ├── RouteError.tsx
 │   │   │   └── index.ts
 │   │   ├── Home
@@ -221,13 +201,13 @@ Voya
 │   │   │   │   ├── RecentHotelsSection.tsx
 │   │   │   │   ├── RecentHotelsSkeleton.tsx
 │   │   │   │   └── TrendingDestinationsSection.tsx
-│   │   │   ├── hooks
 │   │   │   ├── index.ts
 │   │   │   ├── styles.module.css
-│   │   │   ├── tests
-│   │   │   │   └── HomeSearchBar.test.tsx
-│   │   │   └── utils
+│   │   │   └── tests
+│   │   │       └── HomeSearchBar.test.tsx
 │   │   ├── Hotel
+│   │   │   ├── Hotel.container.tsx
+│   │   │   ├── Hotel.presentational.tsx
 │   │   │   ├── Hotel.tsx
 │   │   │   ├── components
 │   │   │   │   ├── HotelAmenities.tsx
@@ -235,28 +215,20 @@ Voya
 │   │   │   │   ├── HotelMap.tsx
 │   │   │   │   ├── HotelReviews.tsx
 │   │   │   │   └── HotelRooms.tsx
-│   │   │   ├── hooks
 │   │   │   ├── index.ts
 │   │   │   ├── styles.module.css
-│   │   │   ├── tests
-│   │   │   │   └── Hotel.test.tsx
-│   │   │   └── utils
+│   │   │   └── tests
+│   │   │       └── Hotel.test.tsx
 │   │   ├── Login
 │   │   │   ├── Login.tsx
-│   │   │   ├── components
-│   │   │   ├── hooks
 │   │   │   ├── index.ts
 │   │   │   ├── styles.module.css
-│   │   │   ├── tests
-│   │   │   └── utils
+│   │   │   └── tests
+│   │   │       └── Login.test.tsx
 │   │   ├── NotFound
 │   │   │   ├── NotFound.tsx
-│   │   │   ├── components
-│   │   │   ├── hooks
 │   │   │   ├── index.ts
-│   │   │   ├── styles.module.css
-│   │   │   ├── tests
-│   │   │   └── utils
+│   │   │   └── styles.module.css
 │   │   └── SearchResults
 │   │       ├── SearchResults.tsx
 │   │       ├── components
@@ -271,13 +243,13 @@ Voya
 │   │       ├── hooks
 │   │       │   └── useAmenities.ts
 │   │       ├── index.ts
-│   │       ├── styles.module.css
-│   │       ├── tests
-│   │       └── utils
+│   │       └── styles.module.css
 │   ├── providers
 │   │   ├── ErrorBoundary.tsx
+│   │   ├── LoadingProvider.tsx
 │   │   ├── NotificationProvider.tsx
 │   │   ├── ThemeContext.tsx
+│   │   ├── index.ts
 │   │   └── index.tsx
 │   ├── routes
 │   │   └── routes.tsx
@@ -287,9 +259,6 @@ Voya
 │   │   └── searchSlice.ts
 │   ├── styles
 │   │   └── reset.css
-│   ├── temp
-│   │   ├── DemoOverrideTest.tsx
-│   │   └── dev.ts
 │   ├── tests
 │   │   └── msw
 │   │       ├── handlers.ts
@@ -297,7 +266,6 @@ Voya
 │   ├── theme
 │   │   └── index.ts
 │   ├── types
-│   │   ├── api.ts
 │   │   ├── index.ts
 │   │   ├── models.ts
 │   │   ├── mui.d.ts
@@ -307,14 +275,8 @@ Voya
 │       ├── globalErrors.ts
 │       ├── index.ts
 │       ├── logger.ts
-│       ├── recentHotelsStorage.ts
-│       ├── responsive.ts
-│       ├── string.ts
 │       └── tests
-│           ├── date.test.ts
-│           ├── logger.test.ts
-│           ├── responsive.test.ts
-│           └── string.test.ts
+│           └── logger.test.ts
 ├── tsconfig.app.json
 ├── tsconfig.json
 ├── tsconfig.node.json

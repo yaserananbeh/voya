@@ -4,6 +4,7 @@ import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '@/hooks'
 import { selectIsAuthenticated, logout } from '@/store/authSlice'
+import { STORAGE_KEYS, ROUTES } from '@/constants'
 
 export default function LogoutBtn() {
   const navigate = useNavigate()
@@ -12,12 +13,12 @@ export default function LogoutBtn() {
 
   const handleClick = () => {
     if (isAuthenticated) {
-      localStorage.removeItem('token')
-      localStorage.removeItem('userType')
+      localStorage.removeItem(STORAGE_KEYS.TOKEN)
+      localStorage.removeItem(STORAGE_KEYS.USER_TYPE)
       dispatch(logout())
-      void navigate('/home', { replace: true })
+      void navigate(ROUTES.HOME, { replace: true })
     } else {
-      void navigate('/login')
+      void navigate(ROUTES.LOGIN)
     }
   }
 

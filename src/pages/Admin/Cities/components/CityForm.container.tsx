@@ -1,8 +1,8 @@
-import { Formik } from 'formik'
+import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { Box } from '@mui/material'
 import { useGetCitiesQuery } from '@/api/admin'
-import type { CityForCreationDto } from '@/types/models'
+import type { CityForCreationDto } from '@/types'
 import { CityFormPresentational } from './CityForm.presentational'
 import { VoyaLoader } from '@/components'
 
@@ -21,6 +21,18 @@ export function CityFormContainer({ cityId, onSubmit, onCancel }: Props) {
   const { data: cities, isLoading } = useGetCitiesQuery()
   const city = cityId ? cities?.find((c) => c.id === cityId) : null
 
+  const formik = useFormik<CityForCreationDto>({
+    initialValues: {
+      name: city?.name || '',
+      description: city?.description || '',
+    },
+    validationSchema,
+    enableReinitialize: true,
+    onSubmit: async (values) => {
+      await onSubmit(values)
+    },
+  })
+
   if (isLoading) {
     return (
       <Box
@@ -36,19 +48,5 @@ export function CityFormContainer({ cityId, onSubmit, onCancel }: Props) {
     )
   }
 
-  return (
-    <Formik<CityForCreationDto>
-      initialValues={{
-        name: city?.name || '',
-        description: city?.description || '',
-      }}
-      validationSchema={validationSchema}
-      enableReinitialize={true}
-      onSubmit={async (values) => {
-        await onSubmit(values)
-      }}
-    >
-      <CityFormPresentational cityId={cityId} onCancel={onCancel} />
-    </Formik>
-  )
+  return <CityFormPresentational cityId={cityId} onCancel={onCancel} formik={formik} />
 }

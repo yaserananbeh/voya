@@ -14,9 +14,9 @@ const getThemeOptions = (
   palette: {
     mode,
     primary: {
-      main: '#003580',
-      light: '#3366a6',
-      dark: '#00224f',
+      main: mode === 'dark' ? '#5BA3F5' : '#003580',
+      light: mode === 'dark' ? '#7BB5F7' : '#3366a6',
+      dark: mode === 'dark' ? '#4A90E2' : '#00224f',
       contrastText: '#ffffff',
     },
     secondary: {
@@ -115,9 +115,11 @@ const getThemeOptions = (
         {
           props: { variant: 'primary' },
           style: {
-            backgroundColor: '#003580',
+            backgroundColor: mode === 'dark' ? '#5BA3F5' : '#003580',
             color: '#fff',
-            '&:hover': { backgroundColor: '#002a66' },
+            '&:hover': {
+              backgroundColor: mode === 'dark' ? '#4A90E2' : '#002a66',
+            },
           },
         },
         {
@@ -204,7 +206,7 @@ const getThemeOptions = (
           style: {
             fontWeight: 600,
             fontSize: '0.875rem',
-            color: '#003580',
+            color: mode === 'dark' ? '#5BA3F5' : '#003580',
           },
         },
       ],

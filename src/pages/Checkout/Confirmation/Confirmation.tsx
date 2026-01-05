@@ -125,11 +125,11 @@ export default function Confirmation() {
                   {t('confirmation.confirmationNumber')}
                 </Typography>
                 <Typography variant="h5" fontWeight="bold" color="primary">
-                  {data.confirmationNumber ?? '—'}
+                  {data.confirmationNumber ?? t('confirmation.pendingConfirmation')}
                 </Typography>
               </Box>
               <Chip
-                label={data.bookingStatus ?? '—'}
+                label={data.bookingStatus ?? '-'}
                 color={getStatusColor(data.bookingStatus)}
                 sx={{ fontWeight: 600 }}
               />
@@ -154,7 +154,7 @@ export default function Confirmation() {
                       {t('confirmation.name')}
                     </Typography>
                     <Typography variant="body1" fontWeight="500">
-                      {data.customerName ?? '—'}
+                      {data.customerName ?? '-'}
                     </Typography>
                   </Box>
                 </Stack>
@@ -202,7 +202,7 @@ export default function Confirmation() {
                       {t('confirmation.hotel')}
                     </Typography>
                     <Typography variant="body1" fontWeight="500">
-                      {data.hotelName ?? '—'}
+                      {data.hotelName ?? '-'}
                     </Typography>
                   </Box>
                   <Box>
@@ -212,7 +212,7 @@ export default function Confirmation() {
                     <Stack direction="row" spacing={1} alignItems="center">
                       <RoomIcon fontSize="small" color="action" />
                       <Typography variant="body1" fontWeight="500">
-                        {data.roomType ?? '—'} (#{data.roomNumber ?? '—'})
+                        {data.roomType ?? '-'} (#{data.roomNumber ?? '-'})
                       </Typography>
                     </Stack>
                   </Box>
@@ -237,7 +237,7 @@ export default function Confirmation() {
                       {t('confirmation.payment')}
                     </Typography>
                     <Typography variant="body1" fontWeight="500">
-                      {data.paymentMethod ?? '—'}
+                      {data.paymentMethod ?? '-'}
                     </Typography>
                   </Box>
                   <Box>

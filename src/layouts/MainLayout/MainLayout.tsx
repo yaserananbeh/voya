@@ -1,7 +1,6 @@
 import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
-import MainHeader from '@/components/layout/MainHeader'
-import { MainFooter } from '@/components/layout/MainFooter'
+import { MainHeader, MainFooter } from '@/components/layout'
 import { ScrollToTop } from '@/components/ScrollToTop'
 
 export default function MainLayout() {

@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { STORAGE_KEYS, USER } from '@/constants'
 
 interface AuthState {
   token: string | null
@@ -6,8 +7,8 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  token: localStorage.getItem('token'),
-  userType: localStorage.getItem('userType'),
+  token: localStorage.getItem(STORAGE_KEYS.TOKEN),
+  userType: localStorage.getItem(STORAGE_KEYS.USER_TYPE),
 }
 
 const authSlice = createSlice({
@@ -39,6 +40,7 @@ export const selectUserType = (state: RootStatePartial): string | null =>
 export const selectIsAuthenticated = (state: RootStatePartial): boolean =>
   Boolean(state?.auth?.token)
 
-export const selectIsAdmin = (state: RootStatePartial): boolean => state?.auth?.userType === 'Admin'
+export const selectIsAdmin = (state: RootStatePartial): boolean =>
+  state?.auth?.userType === USER.TYPES.ADMIN
 
 export const authReducer = authSlice.reducer

@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { store } from '@/store'
 import Checkout from '../Checkout'
-import i18n from '@/i18n/config'
 
 const checkoutContext = {
   hotelId: 1,
@@ -21,7 +20,6 @@ const checkoutContext = {
 
 describe('Checkout', () => {
   beforeEach(() => {
-    void i18n.changeLanguage('en')
     sessionStorage.setItem('voya.checkout.context', JSON.stringify(checkoutContext))
   })
 

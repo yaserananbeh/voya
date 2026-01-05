@@ -2,11 +2,10 @@ import { lazy, Suspense, type ReactNode } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { Box } from '@mui/material'
 
-import ProtectedRoute from '@/components/auth/ProtectedRoute'
-import AdminRoute from '@/components/auth/AdminRoute'
-import RedirectIfAuthenticated from '@/components/auth/RedirectIfAuthenticated'
+import { ProtectedRoute, AdminRoute, RedirectIfAuthenticated } from '@/components/auth'
 import { VoyaLoader } from '@/components'
 import { RouteError } from '@/pages/Error/RouteError'
+import { ROUTES } from '@/constants'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Login = lazy(() => import('@/pages/Login'))
@@ -15,6 +14,7 @@ const Hotel = lazy(() => import('@/pages/Hotel'))
 const Checkout = lazy(() => import('@/pages/Checkout'))
 const Confirmation = lazy(() => import('@/pages/Checkout/Confirmation'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
+const Forbidden = lazy(() => import('@/pages/Forbidden'))
 
 const AdminLayout = lazy(() => import('@/layouts/AdminLayout'))
 const MainLayout = lazy(() => import('@/layouts/MainLayout'))
@@ -45,7 +45,7 @@ const SuspenseLayout = ({ children }: { children: ReactNode }) => (
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: ROUTES.ROOT,
     element: (
       <SuspenseLayout>
         <MainLayout />
@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
     ),
     errorElement: <RouteError />,
     children: [
-      { index: true, element: <Navigate to="/home" replace /> },
+      { index: true, element: <Navigate to={ROUTES.HOME} replace /> },
 
       {
         path: 'login',
@@ -78,18 +78,23 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: '/checkout/confirmation',
+        path: ROUTES.CHECKOUT_CONFIRMATION,
         element: (
           <ProtectedRoute>
             <Confirmation />
           </ProtectedRoute>
         ),
       },
+
+      {
+        path: ROUTES.FORBIDDEN,
+        element: <Forbidden />,
+      },
     ],
   },
 
   {
-    path: '/admin',
+    path: ROUTES.ADMIN,
     element: (
       <ProtectedRoute>
         <AdminRoute>

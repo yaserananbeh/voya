@@ -5,6 +5,7 @@ import EmailIcon from '@mui/icons-material/Email'
 import PhoneIcon from '@mui/icons-material/Phone'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { useTranslation } from 'react-i18next'
+import { ROUTES } from '@/constants'
 
 export function MainFooter() {
   const { t } = useTranslation()
@@ -46,13 +47,13 @@ export function MainFooter() {
                 {t('footer.tagline')}
               </Typography>
               <Stack direction="row" spacing={2}>
-                <Button component={RouterLink} to="/home" color="inherit" size="small">
+                <Button component={RouterLink} to={ROUTES.HOME} color="inherit" size="small">
                   {t('common.home')}
                 </Button>
-                <Button component={RouterLink} to="/search" color="inherit" size="small">
+                <Button component={RouterLink} to={ROUTES.SEARCH} color="inherit" size="small">
                   {t('common.search')}
                 </Button>
-                <Button component={RouterLink} to="/login" color="inherit" size="small">
+                <Button component={RouterLink} to={ROUTES.LOGIN} color="inherit" size="small">
                   {t('common.login')}
                 </Button>
               </Stack>
@@ -63,13 +64,13 @@ export function MainFooter() {
                 {t('footer.quickLinks')}
               </Typography>
               <Stack spacing={1}>
-                <Link component={RouterLink} to="/home" color="inherit" underline="hover">
+                <Link component={RouterLink} to={ROUTES.HOME} color="inherit" underline="hover">
                   {t('footer.browseHotels')}
                 </Link>
-                <Link component={RouterLink} to="/search" color="inherit" underline="hover">
+                <Link component={RouterLink} to={ROUTES.SEARCH} color="inherit" underline="hover">
                   {t('footer.searchStays')}
                 </Link>
-                <Link component={RouterLink} to="/login" color="inherit" underline="hover">
+                <Link component={RouterLink} to={ROUTES.LOGIN} color="inherit" underline="hover">
                   {t('footer.signIn')}
                 </Link>
               </Stack>

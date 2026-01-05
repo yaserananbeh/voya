@@ -8,7 +8,9 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  InputAdornment,
 } from '@mui/material'
+import ClearIcon from '@mui/icons-material/Clear'
 import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -19,13 +21,15 @@ import {
   useUpdateRoomMutation,
   useDeleteRoomMutation,
 } from '@/api/admin'
-import type { RoomDto } from '@/types/models'
+import type { RoomDto } from '@/types'
 import { RoomForm } from './components/RoomForm'
 import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
 
+import { getInitialPaginationModel, PAGINATION } from '@/constants'
+
 export default function Rooms() {
   const [searchQuery, setSearchQuery] = useState('')
-  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
+  const [paginationModel, setPaginationModel] = useState(getInitialPaginationModel())
   const [openForm, setOpenForm] = useState(false)
   const [editingRoom, setEditingRoom] = useState<number | null>(null)
   const [deleteId, setDeleteId] = useState<number | null>(null)
@@ -150,6 +154,20 @@ export default function Rooms() {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         sx={{ mb: 2 }}
+        InputProps={{
+          endAdornment: searchQuery ? (
+            <InputAdornment position="end">
+              <IconButton
+                size="small"
+                onClick={() => setSearchQuery('')}
+                edge="end"
+                aria-label="clear"
+              >
+                <ClearIcon fontSize="small" />
+              </IconButton>
+            </InputAdornment>
+          ) : undefined,
+        }}
       />
 
       <Box
@@ -167,7 +185,7 @@ export default function Rooms() {
           loading={isLoading}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          pageSizeOptions={[5, 10, 25, 50]}
+          pageSizeOptions={PAGINATION.PAGE_SIZE_OPTIONS}
           getRowId={(row) => row.roomId || row.id || 0}
           disableRowSelectionOnClick
           sx={{

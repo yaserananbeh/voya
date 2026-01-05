@@ -111,7 +111,7 @@ export function HotelResultCard({ hotel }: { hotel: HotelDto }) {
                 fontSize: { xs: '1.1rem', sm: '1.25rem' },
               }}
             >
-              {price !== null ? `$${price}${t('hotel.perNight')}` : '—'}
+              {price !== null ? `$${price}${t('hotel.perNight')}` : '-'}
             </Typography>
             <Button
               variant="contained"

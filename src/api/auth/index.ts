@@ -1,4 +1,5 @@
 import { baseApi } from '@/api/baseApi'
+import { API_ENDPOINTS } from '@/constants'
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -7,7 +8,7 @@ export const authApi = baseApi.injectEndpoints({
       { userName: string; password: string }
     >({
       query: (body) => ({
-        url: '/auth/authenticate',
+        url: API_ENDPOINTS.AUTH_AUTHENTICATE,
         method: 'POST',
         body,
       }),

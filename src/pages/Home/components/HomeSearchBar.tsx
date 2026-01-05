@@ -1,14 +1,25 @@
-import { Box, Button, TextField, Paper, InputAdornment } from '@mui/material'
+import { Box, Button, TextField, Paper, InputAdornment, IconButton } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import ClearIcon from '@mui/icons-material/Clear'
+import RefreshIcon from '@mui/icons-material/Refresh'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import { selectSearchParams, setSearchParams } from '@/store/searchSlice'
+import { selectSearchParams, setSearchParams, clearSearchParams } from '@/store/searchSlice'
 import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from './GuestRoomSelector'
 import { useTranslation } from 'react-i18next'
+import { ROUTES } from '@/constants'
+
+type SearchValues = {
+  city: string
+  checkInDate: string
+  checkOutDate: string
+  adults: number
+  children: number
+  rooms: number
+}
 
 export function HomeSearchBar() {
   const { t } = useTranslation()
@@ -20,7 +31,7 @@ export function HomeSearchBar() {
   const tomorrow = addDays(today, 1)
 
   const validationSchema = yup.object({
-    city: yup.string().required(t('home.cityRequired')),
+    city: yup.string(),
     checkInDate: yup.string().required(t('home.checkInRequired')),
     checkOutDate: yup
       .string()
@@ -35,7 +46,7 @@ export function HomeSearchBar() {
     rooms: yup.number().min(1).required(),
   })
 
-  const formik = useFormik({
+  const formik = useFormik<SearchValues>({
     enableReinitialize: true,
     initialValues: {
       city: stored.city || '',
@@ -47,9 +58,10 @@ export function HomeSearchBar() {
     },
     validationSchema,
     onSubmit(values) {
-      dispatch(setSearchParams(values))
+      // Store both city and searchQuery for backward compatibility
+      dispatch(setSearchParams({ ...values, searchQuery: values.city }))
 
-      void navigate('/search')
+      void navigate(ROUTES.SEARCH)
     },
   })
 
@@ -69,11 +81,12 @@ export function HomeSearchBar() {
       <TextField
         name="city"
         label={t('home.whereGoing')}
+        placeholder={t('home.whereGoingPlaceholder')}
         size="small"
         value={formik.values.city}
         onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
         error={formik.touched.city && Boolean(formik.errors.city)}
-        helperText={formik.touched.city && formik.errors.city}
         sx={{ flex: 2, minWidth: 180 }}
         InputProps={{
           startAdornment: (
@@ -81,6 +94,20 @@ export function HomeSearchBar() {
               <SearchIcon />
             </InputAdornment>
           ),
+          endAdornment: formik.values.city ? (
+            <InputAdornment position="end">
+              <IconButton
+                size="small"
+                onClick={() => {
+                  void formik.setFieldValue('city', '')
+                }}
+                edge="end"
+                aria-label="clear"
+              >
+                <ClearIcon fontSize="small" />
+              </IconButton>
+            </InputAdornment>
+          ) : undefined,
         }}
       />
 
@@ -91,15 +118,9 @@ export function HomeSearchBar() {
         size="small"
         value={formik.values.checkInDate}
         onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
         InputLabelProps={{ shrink: true }}
         sx={{ flex: 1, minWidth: 150 }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <CalendarMonthIcon />
-            </InputAdornment>
-          ),
-        }}
       />
 
       <TextField
@@ -109,6 +130,7 @@ export function HomeSearchBar() {
         size="small"
         value={formik.values.checkOutDate}
         onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
         InputLabelProps={{ shrink: true }}
         sx={{ flex: 1, minWidth: 150 }}
         inputProps={{
@@ -127,7 +149,29 @@ export function HomeSearchBar() {
         }}
       />
 
-      <Box sx={{ flexShrink: 0 }}>
+      <Box sx={{ flexShrink: 0, display: 'flex', gap: 1 }}>
+        <Button
+          type="button"
+          variant="outlined"
+          color="primary"
+          size="large"
+          startIcon={<RefreshIcon />}
+          onClick={() => {
+            dispatch(clearSearchParams())
+            void formik.resetForm({
+              values: {
+                city: '',
+                checkInDate: formatDateForApi(today),
+                checkOutDate: formatDateForApi(tomorrow),
+                adults: 1,
+                children: 0,
+                rooms: 1,
+              },
+            })
+          }}
+        >
+          {t('common.clear')}
+        </Button>
         <Button
           type="submit"
           variant="contained"

@@ -308,7 +308,7 @@ export const handlers = [
     return HttpResponse.json({ bookingId: BOOKING_ID }, { status: 201 })
   }),
 
-  http.get('/api/bookings/:bookingId', ({ params }) => {
+  http.get('*/api/bookings/:bookingId', ({ params }) => {
     const bookingId = Number(params.bookingId)
 
     const response: MockBookingDetails = {
@@ -320,7 +320,7 @@ export const handlers = [
       totalCost: 250,
       paymentMethod: 'Card',
       bookingStatus: 'Confirmed',
-      confirmationNumber: `CNF-${bookingId}`,
+      confirmationNumber: bookingId === 1234 ? 'ABC123XYZ' : `CNF-${bookingId}`,
     }
 
     return HttpResponse.json(response)

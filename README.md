@@ -67,7 +67,7 @@ A modern, full-featured travel and accommodation booking platform built with Rea
   - Search bar for hotels and cities
   - Interactive calendar for check-in/check-out dates
   - Guest and room selection controls
-  - Default values (today/tomorrow, 2 adults, 1 room)
+  - Default values (today/tomorrow, 1 adult, 0 children, 1 room)
 
 - **Featured Deals Section**
   - Showcases 3-5 hotels with special offers
@@ -187,9 +187,8 @@ A modern, full-featured travel and accommodation booking platform built with Rea
 ### UI Framework
 
 - **Material-UI (MUI) 7.3.5** - Component library
-- **MUI X Data Grid 8.19.0** - Advanced data tables
-- **MUI X Date Pickers 8.19.0** - Date selection
-- **Emotion** - CSS-in-JS styling
+- **MUI X Data Grid 8.19.0** - Advanced data tables (used in admin pages)
+- **Emotion** - CSS-in-JS styling (used by MUI)
 
 ### Routing & Navigation
 
@@ -215,8 +214,6 @@ A modern, full-featured travel and accommodation booking platform built with Rea
 
 ### Utilities
 
-- **date-fns 4.1.0** - Date manipulation
-- **axios 1.13.2** - HTTP client (backup)
 - **notistack 3.0.2** - Toast notifications
 
 ### Development Tools
@@ -275,7 +272,7 @@ cp .env.example .env
 Edit `.env` and add your configuration:
 
 ```env
-VITE_API_BASE_URL=https://your-api-url.com
+VITE_API_BASE_URL=https://travel-and-accommodation-booking-static.onrender.com
 ```
 
 ### 4. Start Development Server
@@ -372,8 +369,8 @@ Voya/
 │   │   ├── checkout/       # Booking API
 │   │   ├── home/          # Home page API
 │   │   ├── hotels/        # Hotels API
-│   │   └── searchResults/ # Search API
-│   ├── assets/            # Images, fonts, icons
+│   │   ├── searchResults/ # Search API
+│   │   └── upload/        # Photo upload API
 │   ├── components/        # Reusable components
 │   │   ├── auth/         # Auth-related components
 │   │   ├── common/       # Common components
@@ -467,9 +464,7 @@ const [createHotel, { isLoading }] = useCreateHotelMutation()
 await createHotel(data).unwrap()
 ```
 
-For comprehensive RTK/RTK Query documentation, see:
-- [RTK & RTK Query Guide](./docs/RTK_AND_RTK_QUERY_GUIDE.md)
-- [RTK Quick Reference](./docs/RTK_QUICK_REFERENCE.md)
+For RTK/RTK Query usage, refer to the [Redux Toolkit documentation](https://redux-toolkit.js.org/) and [RTK Query documentation](https://redux-toolkit.js.org/rtk-query/overview).
 
 ---
 
@@ -558,9 +553,11 @@ test('renders home page', () => {
 
 ### Backend API
 
-The project connects to a RESTful API. The base URL is configured via `VITE_API_BASE_URL`.
+The project connects to a RESTful API using **RTK Query** with native `fetch` API (via `fetchBaseQuery`). The base URL is configured via `VITE_API_BASE_URL`.
 
 **Backend URL**: `https://travel-and-accommodation-booking-static.onrender.com`
+
+**Note**: This project uses RTK Query's `fetchBaseQuery` instead of axios for HTTP requests, providing automatic caching, request deduplication, and seamless Redux integration.
 
 ### API Endpoints
 
@@ -577,16 +574,21 @@ All API endpoints are defined using RTK Query's `injectEndpoints`:
 - `GET /hotels/:id/reviews` - Get hotel reviews
 
 #### Search
-- `GET /search` - Search hotels with filters
+- `GET /hotels` - Get hotels list with search query parameters (used for search results page)
+- `GET /home/search` - Search hotels with filters (used for home page search)
+- `GET /search-results/amenities` - Get available amenities for filtering
 
 #### Home Page
-- `GET /deals/featured` - Get featured deals
-- `GET /users/:userId/recent-hotels` - Get recently visited hotels
-- `GET /destinations/trending` - Get trending destinations
+- `GET /home/featured-deals` - Get featured deals
+- `GET /home/users/:userId/recent-hotels` - Get recently visited hotels
+- `GET /home/destinations/trending` - Get trending destinations
 
 #### Checkout
-- `POST /booking` - Create booking
-- `GET /booking/:id` - Get booking details
+- `POST /bookings` - Create booking
+- `GET /bookings/:id` - Get booking details
+
+#### Upload
+- `POST /photos` - Upload photo (used in admin for city, hotel, and room images)
 
 #### Admin
 - `GET /cities` - Get cities list
@@ -619,30 +621,7 @@ Comprehensive documentation is available in the `docs/` directory:
 ### Core Documentation
 
 - [**PROJECT_STRUCTURE.md**](./docs/PROJECT_STRUCTURE.md) - Detailed project structure
-- [**ROUTES.md**](./docs/ROUTES.md) - Application routing documentation
 - [**CONTRIBUTING.md**](./docs/CONTRIBUTING.md) - Contribution guidelines
-
-### Technical Guides
-
-- [**RTK & RTK Query Guide**](./docs/RTK_AND_RTK_QUERY_GUIDE.md) - Complete RTK/RTK Query tutorial
-- [**RTK Quick Reference**](./docs/RTK_QUICK_REFERENCE.md) - Quick reference cheat sheet
-- [**API_CACHING_STRATEGY.md**](./docs/API_CACHING_STRATEGY.md) - Caching strategy
-- [**STATE_MGMT_TRADEOFFS.md**](./docs/STATE_MGMT_TRADEOFFS.md) - State management decisions
-
-### Design & Architecture
-
-- [**UI_COMPONENTS_MUI_MAP.md**](./docs/UI_COMPONENTS_MUI_MAP.md) - MUI component mapping
-- [**ASSETS_MANAGEMENT_STRATEGY.md**](./docs/ASSETS_MANAGEMENT_STRATEGY.md) - Asset management
-- [**GIT_BRANCH_STRATEGY.md**](./docs/GIT_BRANCH_STRATEGY.md) - Git workflow
-
-### Architecture Decision Records (ADR)
-
-- [**ADR-006-error-logging.md**](./docs/adr/ADR-006-error-logging.md) - Error logging strategy
-- [**ADR-007-rtk-query-vs-axios.md**](./docs/adr/ADR-007-rtk-query-vs-axios.md) - RTK Query decision
-
-### Requirements
-
-- [**REQUIREMENTS_COVERAGE.md**](./REQUIREMENTS_COVERAGE.md) - Project requirements coverage
 
 ---
 

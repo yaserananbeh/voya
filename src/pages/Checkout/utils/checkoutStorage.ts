@@ -15,7 +15,3 @@ export const loadCheckoutContext = (): CheckoutContext | null => {
     return null
   }
 }
-
-export const clearCheckoutContext = () => {
-  sessionStorage.removeItem(KEY)
-}

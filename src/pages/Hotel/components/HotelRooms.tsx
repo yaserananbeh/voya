@@ -1,13 +1,15 @@
 import { Box, Card, CardContent, CardActions, Typography, Button, Stack, Chip } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import type { HotelRoomDto } from '@/api/hotels'
 import { selectSearchParams } from '@/store/searchSlice'
 import type { CheckoutContext } from '@/pages/Checkout/types'
 import { saveCheckoutContext } from '@/pages/Checkout/utils/checkoutStorage'
 import { useAppSelector } from '@/hooks'
 import { SafeImage } from '@/components/common/SafeImage'
-import { useNotification } from '@/hooks'
 import { useTranslation } from 'react-i18next'
+import { STORAGE_KEYS, ROUTES, USER } from '@/constants'
+import { DateSelectionDialog } from './DateSelectionDialog'
 
 type Props = {
   hotelId: number
@@ -20,16 +22,12 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
   const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const searchParams = useAppSelector(selectSearchParams)
-  const { showWarning } = useNotification()
   const isRTL = i18n.language === 'ar'
+  const [dateDialogOpen, setDateDialogOpen] = useState(false)
+  const [pendingRoom, setPendingRoom] = useState<HotelRoomDto | null>(null)
 
-  const handleBook = (room: HotelRoomDto) => {
-    if (!searchParams.checkInDate || !searchParams.checkOutDate) {
-      showWarning(t('hotel.pleaseSelectDates'))
-      return
-    }
-
-    const token = localStorage.getItem('token')
+  const proceedWithBooking = (room: HotelRoomDto, checkInDate: string, checkOutDate: string) => {
+    const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
     if (!token) {
       const ctx: CheckoutContext = {
         hotelId,
@@ -39,13 +37,13 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
         roomType: room.roomType,
         cityName: cityName ?? undefined,
         pricePerNight: room.price,
-        checkInDate: searchParams.checkInDate,
-        checkOutDate: searchParams.checkOutDate,
-        userId: 1,
+        checkInDate,
+        checkOutDate,
+        userId: USER.MOCK_USER_ID,
       }
       saveCheckoutContext(ctx)
 
-      void navigate('/login', { state: { from: { pathname: '/checkout' } } })
+      void navigate(ROUTES.LOGIN, { state: { from: { pathname: ROUTES.CHECKOUT } } })
       return
     }
 
@@ -57,13 +55,31 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
       roomType: room.roomType,
       cityName: cityName ?? undefined,
       pricePerNight: room.price,
-      checkInDate: searchParams.checkInDate,
-      checkOutDate: searchParams.checkOutDate,
-      userId: 1,
+      checkInDate,
+      checkOutDate,
+      userId: USER.MOCK_USER_ID,
     }
 
     saveCheckoutContext(ctx)
-    void navigate('/checkout', { state: { checkout: ctx } })
+    void navigate(ROUTES.CHECKOUT, { state: { checkout: ctx } })
+  }
+
+  const handleBook = (room: HotelRoomDto) => {
+    if (!searchParams.checkInDate || !searchParams.checkOutDate) {
+      // Open date selection dialog instead of blocking
+      setPendingRoom(room)
+      setDateDialogOpen(true)
+      return
+    }
+
+    proceedWithBooking(room, searchParams.checkInDate, searchParams.checkOutDate)
+  }
+
+  const handleDateConfirm = (checkInDate: string, checkOutDate: string) => {
+    if (pendingRoom) {
+      proceedWithBooking(pendingRoom, checkInDate, checkOutDate)
+      setPendingRoom(null)
+    }
   }
 
   return (
@@ -135,6 +151,15 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
           </Card>
         ))}
       </Box>
+
+      <DateSelectionDialog
+        open={dateDialogOpen}
+        onClose={() => {
+          setDateDialogOpen(false)
+          setPendingRoom(null)
+        }}
+        onConfirm={handleDateConfirm}
+      />
     </Box>
   )
 }

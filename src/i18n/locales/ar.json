@@ -37,10 +37,12 @@
     "startExploring": "ابدأ الاستكشاف",
     "viewFeaturedDeals": "عرض العروض المميزة",
     "searchStays": "بحث عن أماكن الإقامة",
-    "whereGoing": "إلى أين أنت ذاهب؟",
+    "whereGoing": "ابحث عن فنادق أو وجهات",
+    "whereGoingPlaceholder": "اسم الفندق، المدينة، أو الوصف",
+    "whereGoingHelper": "ابحث عن طريق اسم الفندق، المدينة، أو الوصف",
     "checkIn": "تاريخ الوصول",
     "checkOut": "تاريخ المغادرة",
-    "cityRequired": "المدينة مطلوبة",
+    "cityRequired": "استعلام البحث مطلوب",
     "checkInRequired": "تاريخ الوصول مطلوب",
     "checkOutRequired": "تاريخ المغادرة مطلوب",
     "checkOutAfterCheckIn": "يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول",
@@ -76,11 +78,16 @@
     "viewHotel": "عرض الفندق",
     "perNight": "/ليلة",
     "priceRange": "نطاق السعر",
+    "priceLabel": "السعر: {min} - {max}",
     "starRating": "التقييم بالنجوم",
     "amenities": "المرافق",
     "hotelType": "نوع الفندق",
     "loadingAmenities": "جاري تحميل المرافق…",
-    "failedToLoadAmenities": "فشل تحميل المرافق"
+    "failedToLoadAmenities": "فشل تحميل المرافق",
+    "currentSearch": "معاملات البحث الحالية",
+    "searchQuery": "بحث",
+    "editSearch": "تعديل البحث",
+    "collapseSearch": "طي"
   },
   "hotel": {
     "availableRooms": "الغرف المتاحة",
@@ -93,7 +100,9 @@
     "visited": "تمت الزيارة",
     "invalidHotelId": "معرف فندق غير صالح",
     "failedToLoadHotel": "فشل تحميل الفندق",
-    "pleaseSelectDates": "يرجى اختيار تاريخ الوصول والمغادرة أولاً"
+    "pleaseSelectDates": "يرجى اختيار تاريخ الوصول والمغادرة أولاً",
+    "selectDates": "اختر تاريخ الوصول والمغادرة",
+    "selectDatesMessage": "يرجى اختيار تاريخ الوصول والمغادرة للمتابعة مع الحجز."
   },
   "checkout": {
     "title": "الدفع",
@@ -122,6 +131,7 @@
   "confirmation": {
     "bookingConfirmed": "تم تأكيد الحجز",
     "confirmationNumber": "رقم التأكيد",
+    "pendingConfirmation": "قيد الانتظار",
     "status": "الحالة",
     "name": "الاسم",
     "hotel": "الفندق",
@@ -204,6 +214,9 @@
     "serverErrorMessage": "واجهت خوادمنا خطأ. يرجى المحاولة مرة أخرى لاحقاً.",
     "httpError": "خطأ {status}",
     "loadError": "فشل تحميل الصفحة",
-    "loadErrorMessage": "لم نتمكن من تحميل هذه الصفحة. قد يكون هذا بسبب مشكلة في الشبكة أو مشكلة مؤقتة في الخادم. يرجى محاولة إعادة تحميل الصفحة."
+    "loadErrorMessage": "لم نتمكن من تحميل هذه الصفحة. قد يكون هذا بسبب مشكلة في الشبكة أو مشكلة مؤقتة في الخادم. يرجى محاولة إعادة تحميل الصفحة.",
+    "forbidden": "الوصول محظور",
+    "forbiddenMessage": "ليس لديك إذن للوصول إلى هذه الصفحة. هذه المنطقة مقيدة للمستخدمين المصرح لهم فقط.",
+    "forbiddenHelpText": "إذا كنت تعتقد أن هذا خطأ، يرجى الاتصال بالدعم أو العودة إلى الصفحة الرئيسية."
   }
 }

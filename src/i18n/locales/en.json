@@ -37,10 +37,12 @@
     "startExploring": "Start exploring",
     "viewFeaturedDeals": "View featured deals",
     "searchStays": "Search stays",
-    "whereGoing": "Where are you going?",
+    "whereGoing": "Search hotels or destinations",
+    "whereGoingPlaceholder": "Hotel name, city, or description",
+    "whereGoingHelper": "Search by hotel name, city, or description",
     "checkIn": "Check-in",
     "checkOut": "Check-out",
-    "cityRequired": "City is required",
+    "cityRequired": "Search query is required",
     "checkInRequired": "Check-in is required",
     "checkOutRequired": "Check-out is required",
     "checkOutAfterCheckIn": "Check-out must be after check-in",
@@ -76,11 +78,16 @@
     "viewHotel": "View Hotel",
     "perNight": "/night",
     "priceRange": "Price Range",
+    "priceLabel": "Price: {min} - {max}",
     "starRating": "Star Rating",
     "amenities": "Amenities",
     "hotelType": "Hotel Type",
     "loadingAmenities": "Loading amenities…",
-    "failedToLoadAmenities": "Failed to load amenities"
+    "failedToLoadAmenities": "Failed to load amenities",
+    "currentSearch": "Current search parameters",
+    "searchQuery": "Search",
+    "editSearch": "Edit search",
+    "collapseSearch": "Collapse"
   },
   "hotel": {
     "availableRooms": "Available Rooms",
@@ -93,7 +100,9 @@
     "visited": "Visited",
     "invalidHotelId": "Invalid hotel id",
     "failedToLoadHotel": "Failed to load hotel",
-    "pleaseSelectDates": "Please select check-in and check-out dates first"
+    "pleaseSelectDates": "Please select check-in and check-out dates first",
+    "selectDates": "Select Check-in and Check-out Dates",
+    "selectDatesMessage": "Please select your check-in and check-out dates to proceed with booking."
   },
   "checkout": {
     "title": "Checkout",
@@ -122,6 +131,7 @@
   "confirmation": {
     "bookingConfirmed": "Booking confirmed",
     "confirmationNumber": "Confirmation #",
+    "pendingConfirmation": "Pending",
     "status": "Status",
     "name": "Name",
     "hotel": "Hotel",
@@ -204,6 +214,9 @@
     "serverErrorMessage": "Our servers encountered an error. Please try again later.",
     "httpError": "Error {status}",
     "loadError": "Failed to Load Page",
-    "loadErrorMessage": "We couldn't load this page. This might be due to a network issue or a temporary server problem. Please try reloading the page."
+    "loadErrorMessage": "We couldn't load this page. This might be due to a network issue or a temporary server problem. Please try reloading the page.",
+    "forbidden": "Access Forbidden",
+    "forbiddenMessage": "You don't have permission to access this page. This area is restricted to authorized users only.",
+    "forbiddenHelpText": "If you believe this is an error, please contact support or return to the home page."
   }
 }

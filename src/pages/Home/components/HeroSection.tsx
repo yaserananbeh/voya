@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
 import { useTranslation } from 'react-i18next'
+import { ROUTES } from '@/constants'
 
 export function HeroSection() {
   const { t } = useTranslation()
@@ -37,8 +38,6 @@ export function HeroSection() {
         sx={{
           position: 'absolute',
           inset: 0,
-          background:
-            'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.35), transparent 35%), radial-gradient(circle at 80% 0%, rgba(255,255,255,0.3), transparent 30%), radial-gradient(circle at 40% 80%, rgba(255,255,255,0.25), transparent 35%)',
           pointerEvents: 'none',
         }}
       />
@@ -81,7 +80,7 @@ export function HeroSection() {
             size="large"
             endIcon={<ArrowForwardIcon />}
             component={RouterLink}
-            to="/search"
+            to={ROUTES.SEARCH}
             sx={{
               px: { xs: 2, sm: 3 },
               py: { xs: 1, sm: 1.2 },

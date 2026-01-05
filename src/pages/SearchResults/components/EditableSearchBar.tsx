@@ -1,0 +1,351 @@
+import { useState } from 'react'
+import {
+  Box,
+  Paper,
+  Typography,
+  Button,
+  Chip,
+  Stack,
+  TextField,
+  InputAdornment,
+  Collapse,
+  IconButton,
+} from '@mui/material'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { useAppDispatch, useAppSelector } from '@/hooks'
+import { selectSearchParams, setSearchParams, clearSearchParams } from '@/store/searchSlice'
+import { useTranslation } from 'react-i18next'
+import EditIcon from '@mui/icons-material/Edit'
+import SearchIcon from '@mui/icons-material/Search'
+import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import ClearIcon from '@mui/icons-material/Clear'
+import RefreshIcon from '@mui/icons-material/Refresh'
+import { formatDateForDisplay, startOfToday, addDays, formatDateForApi } from '@/utils/date'
+import { GuestRoomSelector } from '@/pages/Home/components/GuestRoomSelector'
+
+export function EditableSearchBar() {
+  const { t } = useTranslation()
+  const dispatch = useAppDispatch()
+  const stored = useAppSelector(selectSearchParams)
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const today = startOfToday()
+  const tomorrow = addDays(today, 1)
+
+  const validationSchema = yup.object({
+    city: yup.string(),
+    checkInDate: yup.string().required(t('home.checkInRequired')),
+    checkOutDate: yup
+      .string()
+      .required(t('home.checkOutRequired'))
+      .test('is-after-checkin', t('home.checkOutAfterCheckIn'), function (value) {
+        const { checkInDate } = this.parent as { checkInDate: string }
+        if (!checkInDate || !value) return true
+        return new Date(value) > new Date(checkInDate)
+      }),
+    adults: yup.number().min(1).required(),
+    children: yup.number().min(0).required(),
+    rooms: yup.number().min(1).required(),
+  })
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      city: stored.city || stored.searchQuery || '',
+      checkInDate: stored.checkInDate || formatDateForApi(today),
+      checkOutDate: stored.checkOutDate || formatDateForApi(tomorrow),
+      adults: stored.adults ?? 1,
+      children: stored.children ?? 0,
+      rooms: stored.rooms ?? 1,
+    },
+    validationSchema,
+    onSubmit(values) {
+      // Update search params and trigger new search
+      dispatch(setSearchParams({ ...values, searchQuery: values.city }))
+      setIsExpanded(false)
+      // The ResultsList component will automatically refetch due to searchQuery change
+    },
+  })
+
+  const formatDate = (dateStr?: string) => {
+    if (!dateStr) return ''
+    try {
+      return formatDateForDisplay(dateStr)
+    } catch {
+      return dateStr
+    }
+  }
+
+  const searchQuery = stored.searchQuery || stored.city || ''
+  const checkInDate = formatDate(stored.checkInDate)
+  const checkOutDate = formatDate(stored.checkOutDate)
+  const adults = stored.adults ?? 0
+  const children = stored.children ?? 0
+  const rooms = stored.rooms ?? 0
+
+  // Show the search bar if there are any search parameters or if user is on search results page
+  // This allows users to explore all hotels by clearing the search
+
+  return (
+    <Paper
+      elevation={1}
+      sx={{
+        p: 2,
+        mb: 2,
+        backgroundColor: 'background.paper',
+        border: '1px solid',
+        borderColor: 'divider',
+      }}
+    >
+      {/* Compact View */}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          flexWrap: 'wrap',
+          gap: 2,
+        }}
+      >
+        <Box sx={{ flex: 1, minWidth: 200 }}>
+          <Typography variant="caption" color="text.secondary" sx={{ mb: 1, display: 'block' }}>
+            {t('search.currentSearch')}
+          </Typography>
+          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+            {searchQuery && (
+              <Chip
+                label={
+                  <Typography variant="body2">
+                    <strong>{t('search.searchQuery')}:</strong> {searchQuery}
+                  </Typography>
+                }
+                size="small"
+                variant="outlined"
+              />
+            )}
+            {checkInDate && (
+              <Chip
+                label={
+                  <Typography variant="body2">
+                    <strong>{t('home.checkIn')}:</strong> {checkInDate}
+                  </Typography>
+                }
+                size="small"
+                variant="outlined"
+              />
+            )}
+            {checkOutDate && (
+              <Chip
+                label={
+                  <Typography variant="body2">
+                    <strong>{t('home.checkOut')}:</strong> {checkOutDate}
+                  </Typography>
+                }
+                size="small"
+                variant="outlined"
+              />
+            )}
+            {adults > 0 && (
+              <Chip
+                label={
+                  <Typography variant="body2">
+                    <strong>{t('guestRoom.adults')}:</strong> {adults}
+                  </Typography>
+                }
+                size="small"
+                variant="outlined"
+              />
+            )}
+            {children > 0 && (
+              <Chip
+                label={
+                  <Typography variant="body2">
+                    <strong>{t('guestRoom.children')}:</strong> {children}
+                  </Typography>
+                }
+                size="small"
+                variant="outlined"
+              />
+            )}
+            {rooms > 0 && (
+              <Chip
+                label={
+                  <Typography variant="body2">
+                    <strong>{t('guestRoom.rooms')}:</strong> {rooms}
+                  </Typography>
+                }
+                size="small"
+                variant="outlined"
+              />
+            )}
+          </Stack>
+        </Box>
+        <Box sx={{ display: 'flex', gap: 1, flexShrink: 0 }}>
+          <Button
+            variant="outlined"
+            size="small"
+            color="secondary"
+            startIcon={<RefreshIcon />}
+            onClick={() => {
+              dispatch(clearSearchParams())
+              void formik.resetForm({
+                values: {
+                  city: '',
+                  checkInDate: formatDateForApi(today),
+                  checkOutDate: formatDateForApi(tomorrow),
+                  adults: 1,
+                  children: 0,
+                  rooms: 1,
+                },
+              })
+              setIsExpanded(false)
+            }}
+          >
+            {t('common.clear')}
+          </Button>
+          <Button
+            variant="outlined"
+            size="small"
+            startIcon={isExpanded ? <ExpandLessIcon /> : <EditIcon />}
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            {isExpanded ? t('search.collapseSearch') : t('search.editSearch')}
+          </Button>
+        </Box>
+      </Box>
+
+      {/* Expanded Edit Form */}
+      <Collapse in={isExpanded}>
+        <Box
+          component="form"
+          onSubmit={formik.handleSubmit}
+          sx={{
+            mt: 2,
+            pt: 2,
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Stack
+            direction={{ xs: 'column', md: 'row' }}
+            spacing={2}
+            sx={{ alignItems: { xs: 'stretch', md: 'center' } }}
+          >
+            <TextField
+              name="city"
+              label={t('home.whereGoing')}
+              placeholder={t('home.whereGoingPlaceholder')}
+              size="small"
+              value={formik.values.city}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.city && Boolean(formik.errors.city)}
+              sx={{ flex: 2, minWidth: 180 }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+                endAdornment: formik.values.city ? (
+                  <InputAdornment position="end">
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        void formik.setFieldValue('city', '')
+                      }}
+                      edge="end"
+                      aria-label="clear"
+                    >
+                      <ClearIcon fontSize="small" />
+                    </IconButton>
+                  </InputAdornment>
+                ) : undefined,
+              }}
+            />
+
+            <TextField
+              name="checkInDate"
+              label={t('home.checkIn')}
+              type="date"
+              size="small"
+              value={formik.values.checkInDate}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.checkInDate && Boolean(formik.errors.checkInDate)}
+              helperText={formik.touched.checkInDate && formik.errors.checkInDate}
+              InputLabelProps={{ shrink: true }}
+              sx={{ flex: 1, minWidth: 150 }}
+            />
+
+            <TextField
+              name="checkOutDate"
+              label={t('home.checkOut')}
+              type="date"
+              size="small"
+              value={formik.values.checkOutDate}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.checkOutDate && Boolean(formik.errors.checkOutDate)}
+              helperText={formik.touched.checkOutDate && formik.errors.checkOutDate}
+              InputLabelProps={{ shrink: true }}
+              sx={{ flex: 1, minWidth: 150 }}
+              inputProps={{
+                min: formik.values.checkInDate,
+              }}
+            />
+
+            <GuestRoomSelector
+              adults={formik.values.adults}
+              children={formik.values.children}
+              rooms={formik.values.rooms}
+              onChange={(next) => {
+                void formik.setFieldValue('adults', next.adults)
+                void formik.setFieldValue('children', next.children)
+                void formik.setFieldValue('rooms', next.rooms)
+              }}
+            />
+
+            <Box sx={{ flexShrink: 0, display: 'flex', gap: 1, width: { xs: '100%', md: 'auto' } }}>
+              <Button
+                type="button"
+                variant="outlined"
+                color="secondary"
+                size="large"
+                startIcon={<RefreshIcon />}
+                onClick={() => {
+                  dispatch(clearSearchParams())
+                  void formik.resetForm({
+                    values: {
+                      city: '',
+                      checkInDate: formatDateForApi(today),
+                      checkOutDate: formatDateForApi(tomorrow),
+                      adults: 1,
+                      children: 0,
+                      rooms: 1,
+                    },
+                  })
+                  setIsExpanded(false)
+                }}
+                sx={{ flex: { xs: 1, md: 'none' } }}
+              >
+                {t('common.clear')}
+              </Button>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                size="large"
+                startIcon={<SearchIcon />}
+                sx={{ flex: { xs: 1, md: 'none' } }}
+              >
+                {t('common.search')}
+              </Button>
+            </Box>
+          </Stack>
+        </Box>
+      </Collapse>
+    </Paper>
+  )
+}
