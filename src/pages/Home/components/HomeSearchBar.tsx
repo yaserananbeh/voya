@@ -56,7 +56,8 @@ export function HomeSearchBar() {
     },
     validationSchema,
     onSubmit(values) {
-      dispatch(setSearchParams(values))
+      // Store both city and searchQuery for backward compatibility
+      dispatch(setSearchParams({ ...values, searchQuery: values.city }))
 
       void navigate(ROUTES.SEARCH)
     },
@@ -78,12 +79,19 @@ export function HomeSearchBar() {
       <TextField
         name="city"
         label={t('home.whereGoing')}
+        placeholder={t('home.whereGoingPlaceholder')}
         size="small"
         value={formik.values.city}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched.city && Boolean(formik.errors.city)}
-        helperText={formik.touched.city && formik.errors.city}
+        helperText={
+          formik.touched.city && formik.errors.city
+            ? formik.errors.city
+            : formik.touched.city
+              ? t('home.whereGoingHelper')
+              : ''
+        }
         sx={{ flex: 2, minWidth: 180 }}
         InputProps={{
           startAdornment: (

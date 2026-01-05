@@ -37,10 +37,12 @@
     "startExploring": "ابدأ الاستكشاف",
     "viewFeaturedDeals": "عرض العروض المميزة",
     "searchStays": "بحث عن أماكن الإقامة",
-    "whereGoing": "إلى أين أنت ذاهب؟",
+    "whereGoing": "ابحث عن فنادق أو وجهات",
+    "whereGoingPlaceholder": "اسم الفندق، المدينة، أو الوصف",
+    "whereGoingHelper": "ابحث عن طريق اسم الفندق، المدينة، أو الوصف",
     "checkIn": "تاريخ الوصول",
     "checkOut": "تاريخ المغادرة",
-    "cityRequired": "المدينة مطلوبة",
+    "cityRequired": "استعلام البحث مطلوب",
     "checkInRequired": "تاريخ الوصول مطلوب",
     "checkOutRequired": "تاريخ المغادرة مطلوب",
     "checkOutAfterCheckIn": "يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول",
@@ -81,7 +83,11 @@
     "amenities": "المرافق",
     "hotelType": "نوع الفندق",
     "loadingAmenities": "جاري تحميل المرافق…",
-    "failedToLoadAmenities": "فشل تحميل المرافق"
+    "failedToLoadAmenities": "فشل تحميل المرافق",
+    "currentSearch": "معاملات البحث الحالية",
+    "searchQuery": "بحث",
+    "editSearch": "تعديل البحث",
+    "collapseSearch": "طي"
   },
   "hotel": {
     "availableRooms": "الغرف المتاحة",
@@ -94,7 +100,9 @@
     "visited": "تمت الزيارة",
     "invalidHotelId": "معرف فندق غير صالح",
     "failedToLoadHotel": "فشل تحميل الفندق",
-    "pleaseSelectDates": "يرجى اختيار تاريخ الوصول والمغادرة أولاً"
+    "pleaseSelectDates": "يرجى اختيار تاريخ الوصول والمغادرة أولاً",
+    "selectDates": "اختر تاريخ الوصول والمغادرة",
+    "selectDatesMessage": "يرجى اختيار تاريخ الوصول والمغادرة للمتابعة مع الحجز."
   },
   "checkout": {
     "title": "الدفع",

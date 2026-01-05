@@ -28,14 +28,14 @@ describe('HomeSearchBar', () => {
   it('renders with default values', () => {
     renderWithStore(<HomeSearchBar />)
 
-    expect(screen.getByLabelText(/where are you going\?/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/search hotels or destinations/i)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /adult/i })).toBeInTheDocument()
   })
 
   it('allows user to type city and submit', async () => {
     const { user } = renderWithStore(<HomeSearchBar />)
 
-    const cityInput = screen.getByLabelText(/where are you going\?/i)
+    const cityInput = screen.getByLabelText(/search hotels or destinations/i)
 
     await user.type(cityInput, 'Amman')
 
