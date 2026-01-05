@@ -131,6 +131,7 @@
   "confirmation": {
     "bookingConfirmed": "Booking confirmed",
     "confirmationNumber": "Confirmation #",
+    "pendingConfirmation": "Pending",
     "status": "Status",
     "name": "Name",
     "hotel": "Hotel",

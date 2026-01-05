@@ -131,6 +131,7 @@
   "confirmation": {
     "bookingConfirmed": "تم تأكيد الحجز",
     "confirmationNumber": "رقم التأكيد",
+    "pendingConfirmation": "قيد الانتظار",
     "status": "الحالة",
     "name": "الاسم",
     "hotel": "الفندق",
