@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, type SxProps, type Theme } from '@mui/material'
 
 interface SectionProps {
   id?: string
@@ -7,11 +7,12 @@ interface SectionProps {
   subtitle?: string
   children: ReactNode
   className?: string
+  sx?: SxProps<Theme>
 }
 
-export function Section({ id, title, subtitle, children, className }: SectionProps) {
+export function Section({ id, title, subtitle, children, className, sx }: SectionProps) {
   return (
-    <Box component="section" id={id} className={className} sx={{ py: 4 }}>
+    <Box component="section" id={id} className={className} sx={{ py: 4, ...sx }}>
       {(title || subtitle) && (
         <Box mb={3}>
           {title && (

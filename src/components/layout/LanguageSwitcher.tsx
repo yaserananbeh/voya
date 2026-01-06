@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
 export function LanguageSwitcher() {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -24,9 +24,15 @@ export function LanguageSwitcher() {
 
   return (
     <>
-      <Tooltip title="Change language">
-        <IconButton onClick={handleMenuOpen} color="inherit" aria-label="change language">
-          <LanguageIcon />
+      <Tooltip title={t('common.changeLanguage')}>
+        <IconButton
+          onClick={handleMenuOpen}
+          color="inherit"
+          aria-label={t('common.changeLanguage') || 'Change language'}
+          aria-expanded={Boolean(anchorEl)}
+          aria-haspopup="true"
+        >
+          <LanguageIcon aria-hidden="true" />
         </IconButton>
       </Tooltip>
       <Menu
@@ -41,11 +47,23 @@ export function LanguageSwitcher() {
           vertical: 'top',
           horizontal: 'right',
         }}
+        role="menu"
+        aria-label={t('common.selectLanguage') || 'Select language'}
       >
-        <MenuItem onClick={() => changeLanguage('en')} selected={currentLanguage === 'en'}>
+        <MenuItem
+          onClick={() => changeLanguage('en')}
+          selected={currentLanguage === 'en'}
+          role="menuitemradio"
+          aria-checked={currentLanguage === 'en'}
+        >
           English
         </MenuItem>
-        <MenuItem onClick={() => changeLanguage('ar')} selected={currentLanguage === 'ar'}>
+        <MenuItem
+          onClick={() => changeLanguage('ar')}
+          selected={currentLanguage === 'ar'}
+          role="menuitemradio"
+          aria-checked={currentLanguage === 'ar'}
+        >
           العربية
         </MenuItem>
       </Menu>

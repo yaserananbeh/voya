@@ -58,8 +58,10 @@ describe('Login Form', () => {
     await user.click(submitButton)
 
     await waitFor(() => {
-      expect(screen.getByText(/username is required/i)).toBeInTheDocument()
-      expect(screen.getByText(/password is required/i)).toBeInTheDocument()
+      const usernameErrors = screen.getAllByText(/username is required/i)
+      const passwordErrors = screen.getAllByText(/password is required/i)
+      expect(usernameErrors.length).toBeGreaterThan(0)
+      expect(passwordErrors.length).toBeGreaterThan(0)
     })
   })
 

@@ -1,0 +1,18 @@
+# robots.txt for Voya
+# This file tells search engines which pages they can and cannot access
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /checkout/confirmation
+
+# Allow all public pages
+Allow: /home
+Allow: /search
+Allow: /hotel/
+Allow: /login
+
+# Sitemap location (if you add one later)
+# Sitemap: https://yourdomain.com/sitemap.xml
+

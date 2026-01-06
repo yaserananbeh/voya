@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { Box, Card, CardContent, Typography } from '@mui/material'
-import { VoyaLoader } from '@/components'
+import { Box, Typography, useTheme } from '@mui/material'
+import { VoyaLoader, StatCard, StatisticCard, QuickOverviewCard } from '@/components'
 import {
   LocationCity as CityIcon,
   Hotel as HotelIcon,
@@ -9,8 +9,11 @@ import {
   CheckCircle as AvailableIcon,
 } from '@mui/icons-material'
 import { useGetCitiesQuery, useGetAdminHotelsQuery, useGetRoomsAdminQuery } from '@/api/admin'
+import { usePageTitle } from '@/hooks'
 
 export default function Dashboard() {
+  usePageTitle('pages.adminDashboard')
+  const theme = useTheme()
   const { data: cities = [], isLoading: citiesLoading } = useGetCitiesQuery()
   const { data: hotels = [], isLoading: hotelsLoading } = useGetAdminHotelsQuery()
   const { data: rooms = [], isLoading: roomsLoading } = useGetRoomsAdminQuery()
@@ -41,6 +44,11 @@ export default function Dashboard() {
       averageStarRating: averageStarRating.toFixed(1),
       totalAvailableRooms,
       averageRoomsPerHotel: averageRoomsPerHotel.toFixed(1),
+      unavailableRooms: totalRooms - totalAvailableRooms,
+      citiesWithHotels: new Set(hotels.map((h) => h.cityId)).size,
+      occupancyRate: totalRooms > 0 ? ((totalAvailableRooms / totalRooms) * 100).toFixed(1) : 0,
+      totalHotelTypes: new Set(hotels.map((h) => h.hotelType || h.hotelName).filter(Boolean)).size,
+      roomsPerCityAvg: totalCities > 0 ? (totalRooms / totalCities).toFixed(1) : 0,
     }
   }, [cities, hotels, rooms])
 
@@ -64,25 +72,25 @@ export default function Dashboard() {
       title: 'Total Cities',
       value: stats.totalCities,
       icon: <CityIcon sx={{ fontSize: 40 }} />,
-      color: '#1976d2',
+      color: theme.palette.primary.main,
     },
     {
       title: 'Total Hotels',
       value: stats.totalHotels,
       icon: <HotelIcon sx={{ fontSize: 40 }} />,
-      color: '#2e7d32',
+      color: theme.palette.success.main,
     },
     {
       title: 'Total Rooms',
       value: stats.totalRooms,
       icon: <BedIcon sx={{ fontSize: 40 }} />,
-      color: '#ed6c02',
+      color: theme.palette.warning.main,
     },
     {
       title: 'Available Rooms',
       value: stats.totalAvailableRooms,
       icon: <AvailableIcon sx={{ fontSize: 40 }} />,
-      color: '#0288d1',
+      color: theme.palette.primary.light,
     },
   ]
 
@@ -108,39 +116,7 @@ export default function Dashboard() {
               minWidth: 0,
             }}
           >
-            <Card
-              sx={{
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: 4,
-                },
-              }}
-            >
-              <CardContent sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', gap: 2 }}>
-                <Box
-                  sx={{
-                    color: card.color,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {card.icon}
-                </Box>
-                <Box sx={{ flexGrow: 1 }}>
-                  <Typography color="text.secondary" variant="body2" gutterBottom>
-                    {card.title}
-                  </Typography>
-                  <Typography variant="h4" component="div" fontWeight="bold">
-                    {card.value}
-                  </Typography>
-                </Box>
-              </CardContent>
-            </Card>
+            <StatCard title={card.title} value={card.value} icon={card.icon} color={card.color} />
           </Box>
         ))}
       </Box>
@@ -154,127 +130,50 @@ export default function Dashboard() {
         }}
       >
         <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 calc(50% - 12px)' }, minWidth: 0 }}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Hotel Statistics
-              </Typography>
-              <Box sx={{ mt: 2 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                  <Typography color="text.secondary">Average Star Rating</Typography>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <StarIcon sx={{ color: '#ffc107' }} />
-                    <Typography variant="h6" fontWeight="bold">
-                      {stats.averageStarRating}
-                    </Typography>
-                  </Box>
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography color="text.secondary">Average Rooms per Hotel</Typography>
-                  <Typography variant="h6" fontWeight="bold">
-                    {stats.averageRoomsPerHotel}
-                  </Typography>
-                </Box>
-              </Box>
-            </CardContent>
-          </Card>
+          <StatisticCard
+            title="Hotel Statistics"
+            items={[
+              {
+                label: 'Average Star Rating',
+                value: stats.averageStarRating,
+                icon: <StarIcon sx={{ color: 'warning.main' }} />,
+              },
+              {
+                label: 'Average Rooms per Hotel',
+                value: stats.averageRoomsPerHotel,
+              },
+            ]}
+          />
         </Box>
 
         <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 calc(50% - 12px)' }, minWidth: 0 }}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Room Statistics
-              </Typography>
-              <Box sx={{ mt: 2 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                  <Typography color="text.secondary">Available Rooms</Typography>
-                  <Typography variant="h6" fontWeight="bold" color="success.main">
-                    {stats.totalAvailableRooms}
-                  </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography color="text.secondary">Unavailable Rooms</Typography>
-                  <Typography variant="h6" fontWeight="bold" color="error.main">
-                    {stats.totalRooms - stats.totalAvailableRooms}
-                  </Typography>
-                </Box>
-              </Box>
-            </CardContent>
-          </Card>
+          <StatisticCard
+            title="Room Statistics"
+            items={[
+              {
+                label: 'Available Rooms',
+                value: stats.totalAvailableRooms,
+                color: 'success',
+              },
+              {
+                label: 'Unavailable Rooms',
+                value: stats.unavailableRooms,
+                color: 'error',
+              },
+            ]}
+          />
         </Box>
       </Box>
 
       <Box>
-        <Card>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Quick Overview
-            </Typography>
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 2,
-                mt: 1,
-              }}
-            >
-              <Box
-                sx={{
-                  flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 8px)', md: '1 1 calc(25% - 12px)' },
-                  minWidth: 0,
-                }}
-              >
-                <Typography variant="body2" color="text.secondary">
-                  Cities with Hotels
-                </Typography>
-                <Typography variant="h6">{new Set(hotels.map((h) => h.cityId)).size}</Typography>
-              </Box>
-              <Box
-                sx={{
-                  flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 8px)', md: '1 1 calc(25% - 12px)' },
-                  minWidth: 0,
-                }}
-              >
-                <Typography variant="body2" color="text.secondary">
-                  Occupancy Rate
-                </Typography>
-                <Typography variant="h6">
-                  {stats.totalRooms > 0
-                    ? ((stats.totalAvailableRooms / stats.totalRooms) * 100).toFixed(1)
-                    : 0}
-                  %
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 8px)', md: '1 1 calc(25% - 12px)' },
-                  minWidth: 0,
-                }}
-              >
-                <Typography variant="body2" color="text.secondary">
-                  Total Hotel Types
-                </Typography>
-                <Typography variant="h6">
-                  {new Set(hotels.map((h) => h.hotelType || h.hotelName).filter(Boolean)).size}
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 8px)', md: '1 1 calc(25% - 12px)' },
-                  minWidth: 0,
-                }}
-              >
-                <Typography variant="body2" color="text.secondary">
-                  Rooms per City (Avg)
-                </Typography>
-                <Typography variant="h6">
-                  {stats.totalCities > 0 ? (stats.totalRooms / stats.totalCities).toFixed(1) : 0}
-                </Typography>
-              </Box>
-            </Box>
-          </CardContent>
-        </Card>
+        <QuickOverviewCard
+          items={[
+            { label: 'Cities with Hotels', value: stats.citiesWithHotels },
+            { label: 'Occupancy Rate', value: `${stats.occupancyRate}%` },
+            { label: 'Total Hotel Types', value: stats.totalHotelTypes },
+            { label: 'Rooms per City (Avg)', value: stats.roomsPerCityAvg },
+          ]}
+        />
       </Box>
     </Box>
   )

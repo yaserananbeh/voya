@@ -427,7 +427,7 @@ For detailed structure, see [PROJECT_STRUCTURE.md](./docs/PROJECT_STRUCTURE.md).
 | `pnpm typecheck` | Run TypeScript type checking |
 | `pnpm verify` | Run all checks (typecheck, lint, test, build) |
 | `pnpm verify:stage` | Run checks on staged files |
-| `pnpm gen:api` | Generate TypeScript types from OpenAPI spec |
+| `pnpm gen:api` | Generate TypeScript types from OpenAPI spec (requires local backend running on port 5000) |
 
 ---
 
@@ -438,7 +438,9 @@ This project uses **Redux Toolkit (RTK)** and **RTK Query** for state management
 ### RTK Slices (Client State)
 
 - **`authSlice`**: Authentication state (token, userType)
-- **`searchSlice`**: Search parameters and filters
+- **`searchSlice`**: Search parameters and filters (persisted to localStorage)
+
+**Note**: The search state is automatically persisted to localStorage and restored on app initialization for better user experience.
 
 ### RTK Query (Server State)
 
@@ -519,13 +521,23 @@ Tests are co-located with their components:
 ```
 src/
   ├── pages/
-  │   └── Home/
+  │   ├── Home/
+  │   │   └── tests/
+  │   │       └── HomeSearchBar.test.tsx
+  │   ├── Login/
+  │   │   └── tests/
+  │   │       └── Login.test.tsx
+  │   ├── Hotel/
+  │   │   └── tests/
+  │   │       └── Hotel.test.tsx
+  │   └── Checkout/
   │       └── tests/
-  │           └── Home.test.tsx
-  ├── hooks/
-  │   └── tests/
+  │           ├── Checkout.test.tsx
+  │           ├── Confirmation.test.tsx
+  │           └── UserInfoForm.test.tsx
   └── utils/
       └── tests/
+          └── logger.test.ts
 ```
 
 ### Testing Tools
@@ -545,6 +557,48 @@ test('renders home page', () => {
   render(<Home />)
   expect(screen.getByText('Welcome')).toBeInTheDocument()
 })
+```
+
+---
+
+## 🪝 Custom Hooks
+
+The project includes several custom React hooks for common functionality:
+
+### Available Hooks
+
+- **`usePageTitle`**: Dynamically sets the document title with i18n support
+  - Supports translation keys and dynamic titles
+  - Automatically includes app name
+  - Located in `src/hooks/usePageTitle.ts`
+
+- **`useNotification`**: Hook for displaying toast notifications
+  - Wraps notistack functionality
+  - Located in `src/hooks/useNotification.ts`
+
+- **`useRTL`**: Hook for managing RTL (Right-to-Left) layout direction
+  - Automatically adjusts based on current language
+  - Located in `src/hooks/useRTL.ts`
+
+- **`useAppDispatch`** and **`useAppSelector`**: Typed Redux hooks
+  - Type-safe alternatives to `useDispatch` and `useSelector`
+  - Located in `src/hooks/index.ts`
+
+### Usage Example
+
+```typescript
+import { usePageTitle, useNotification } from '@/hooks'
+
+function MyComponent() {
+  const { showSuccess } = useNotification()
+  usePageTitle('pages.myPage.title')
+  
+  const handleClick = () => {
+    showSuccess('Operation completed!')
+  }
+  
+  return <button onClick={handleClick}>Click me</button>
+}
 ```
 
 ---
@@ -604,13 +658,15 @@ All authenticated requests automatically include the Bearer token in the Authori
 ```typescript
 // Configured in baseApi.ts
 prepareHeaders: (headers) => {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
   if (token) {
-    headers.set('Authorization', `Bearer ${token}`)
+    headers.set('Authorization', `${AUTH_HEADER_PREFIX} ${token}`)
   }
   return headers
 }
 ```
+
+**Note**: The project uses constants from `src/constants` for storage keys and header prefixes to ensure consistency across the application.
 
 ---
 
@@ -622,6 +678,7 @@ Comprehensive documentation is available in the `docs/` directory:
 
 - [**PROJECT_STRUCTURE.md**](./docs/PROJECT_STRUCTURE.md) - Detailed project structure
 - [**CONTRIBUTING.md**](./docs/CONTRIBUTING.md) - Contribution guidelines
+- [**Helpful_commands_Dev.md**](./docs/Helpful_commands_Dev.md) - Useful development commands
 
 ---
 

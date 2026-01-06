@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardActions, Typography, Button, Stack, Chip } from '@mui/material'
+import { Box, Card, CardContent, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import type { HotelRoomDto } from '@/api/hotels'
@@ -6,10 +6,10 @@ import { selectSearchParams } from '@/store/searchSlice'
 import type { CheckoutContext } from '@/pages/Checkout/types'
 import { saveCheckoutContext } from '@/pages/Checkout/utils/checkoutStorage'
 import { useAppSelector } from '@/hooks'
-import { SafeImage } from '@/components/common/SafeImage'
 import { useTranslation } from 'react-i18next'
 import { STORAGE_KEYS, ROUTES, USER } from '@/constants'
 import { DateSelectionDialog } from './DateSelectionDialog'
+import { RoomCardImage, RoomCardInfo, RoomCardActions } from '@/components/atomic'
 
 type Props = {
   hotelId: number
@@ -66,7 +66,6 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
 
   const handleBook = (room: HotelRoomDto) => {
     if (!searchParams.checkInDate || !searchParams.checkOutDate) {
-      // Open date selection dialog instead of blocking
       setPendingRoom(room)
       setDateDialogOpen(true)
       return
@@ -109,45 +108,17 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
               flexDirection: 'column',
             }}
           >
-            <SafeImage src={room.roomPhotoUrl} alt={room.roomType} height={180} />
+            <RoomCardImage imageUrl={room.roomPhotoUrl} alt={room.roomType} />
 
             <CardContent sx={{ flexGrow: 1 }}>
-              <Typography variant="h6">{room.roomType}</Typography>
-
-              <Typography color="text.secondary" variant="body2">
-                {room.capacityOfAdults} {t('hotel.adults')}
-              </Typography>
-              <Typography color="text.secondary" variant="body2">
-                {room.capacityOfChildren} {t('hotel.children')}
-              </Typography>
-
-              <Stack direction="row" spacing={1} mt={1} flexWrap="wrap">
-                {(room.amenities || []).slice(0, 3).map((a) => (
-                  <Chip key={a.id} label={a.name} size="small" />
-                ))}
-                {(room.amenities?.length || 0) > 3 && (
-                  <Chip label={`+${(room.amenities?.length || 0) - 3}`} size="small" />
-                )}
-              </Stack>
-
-              <Typography mt={2} fontWeight="bold">
-                ${room.price} {t('hotel.perNight')}
-              </Typography>
+              <RoomCardInfo room={room} />
             </CardContent>
 
-            <CardActions>
-              <Button
-                fullWidth
-                variant="contained"
-                disabled={!room.availability}
-                onClick={() => handleBook(room)}
-                sx={{
-                  flexDirection: isRTL ? 'row-reverse' : 'row',
-                }}
-              >
-                {room.availability ? t('hotel.bookNow') : t('hotel.notAvailable')}
-              </Button>
-            </CardActions>
+            <RoomCardActions
+              available={room.availability ?? false}
+              onBook={() => handleBook(room)}
+              isRTL={isRTL}
+            />
           </Card>
         ))}
       </Box>

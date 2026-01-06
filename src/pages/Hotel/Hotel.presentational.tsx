@@ -1,4 +1,4 @@
-import { Container, Typography, Stack, Rating, Box } from '@mui/material'
+import { Container, Typography, Stack, Box } from '@mui/material'
 import { HotelGallery } from './components/HotelGallery'
 import { HotelAmenities } from './components/HotelAmenities'
 import { HotelMap } from './components/HotelMap'
@@ -6,6 +6,7 @@ import { HotelRooms } from './components/HotelRooms'
 import { HotelReviews } from './components/HotelReviews'
 import { VoyaLoader } from '@/components'
 import { useTranslation } from 'react-i18next'
+import { StarRatingDisplay } from '@/components/atomic'
 import type { HotelDto, HotelRoomDto, HotelReviewDto, HotelGalleryPhotoDto } from '@/api/hotels'
 
 type HotelPresentationalProps = {
@@ -70,7 +71,7 @@ export function HotelPresentational({
             alignItems={{ xs: 'flex-start', sm: 'center' }}
             sx={{ mt: 1 }}
           >
-            <Rating value={hotel.starRating} readOnly size="small" />
+            <StarRatingDisplay rating={hotel.starRating ?? 0} />
             <Typography color="text.secondary" variant="body2">
               {hotel.location}
             </Typography>

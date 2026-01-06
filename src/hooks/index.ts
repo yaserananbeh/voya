@@ -6,3 +6,4 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export { useNotification } from './useNotification'
 export { useRTL } from './useRTL'
+export { usePageTitle } from './usePageTitle'

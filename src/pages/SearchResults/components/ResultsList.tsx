@@ -1,11 +1,12 @@
-import { Stack, Typography, Box, Button } from '@mui/material'
+import { Stack, Typography, Button } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectSearchFilters, selectSearchQuery } from '@/store/searchSlice'
 import { useEffect, useMemo, useState } from 'react'
 import { useGetHotelsQuery, type HotelDto } from '@/api/hotels'
 import { HotelResultCard } from './HotelResultCard'
-import { VoyaLoader } from '@/components'
+import { LoadingState, ErrorState } from '@/components/common'
 import { PAGINATION } from '@/constants'
+import { useTranslation } from 'react-i18next'
 
 function hotelMatchesFilters(hotel: HotelDto, filters: ReturnType<typeof selectSearchFilters>) {
   if (filters.stars != null && hotel.starRating !== filters.stars) return false
@@ -26,6 +27,7 @@ function hotelMatchesFilters(hotel: HotelDto, filters: ReturnType<typeof selectS
 }
 
 export function ResultsList() {
+  const { t } = useTranslation()
   const searchQuery = useSelector(selectSearchQuery)
   const filters = useSelector(selectSearchFilters)
 
@@ -61,29 +63,18 @@ export function ResultsList() {
   )
 
   if (isLoading && allHotels.length === 0) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: 'calc(100vh - 200px)',
-        }}
-      >
-        <VoyaLoader size="small" />
-      </Box>
-    )
+    return <LoadingState minHeight="calc(100vh - 200px)" />
   }
 
   if (isError) {
-    return <Typography color="error">Failed to load hotels</Typography>
+    return <ErrorState message={t('search.failedToLoadHotels')} variant="typography" />
   }
 
   return (
     <Stack spacing={2}>
       {filteredHotels.length === 0 ? (
         <Typography>
-          {hasMore ? "No matches in loaded results — try 'Load more'." : 'No results found'}
+          {hasMore ? t('search.noMatchesTryLoadMore') : t('search.noResultsFound')}
         </Typography>
       ) : (
         filteredHotels.map((hotel) => <HotelResultCard key={hotel.id} hotel={hotel} />)
@@ -92,14 +83,14 @@ export function ResultsList() {
       {hasMore && (
         <Stack direction="row" justifyContent="center" sx={{ py: 2 }}>
           <Button variant="outlined" disabled={isFetching} onClick={() => setPage((p) => p + 1)}>
-            {isFetching ? 'Loading…' : 'Load more'}
+            {isFetching ? t('search.loading') : t('search.loadMore')}
           </Button>
         </Stack>
       )}
 
       {!hasMore && allHotels.length > 0 && (
         <Typography variant="body2" color="text.secondary" textAlign="center" sx={{ py: 2 }}>
-          You reached the end
+          {t('search.reachedEnd')}
         </Typography>
       )}
     </Stack>

@@ -19,16 +19,26 @@
     "next": "Next",
     "previous": "Previous",
     "viewDetails": "View Details",
-    "clear": "Clear"
+    "clear": "Clear",
+    "changeLanguage": "Change language",
+    "switchToDarkMode": "Switch to dark mode",
+    "switchToLightMode": "Switch to light mode",
+    "skipToContent": "Skip to main content",
+    "menu": "Menu",
+    "mainNavigation": "Main navigation",
+    "selectLanguage": "Select language",
+    "toggleFilters": "Toggle filters"
   },
   "auth": {
     "loginTitle": "Login to Voya",
+    "welcomeBack": "Welcome back! Please sign in to your account",
     "username": "Username",
     "password": "Password",
     "usernameRequired": "Username is required",
     "passwordRequired": "Password is required",
     "loginSuccess": "Login successful!",
-    "loginFailed": "Login failed. Please check your credentials."
+    "loginFailed": "Login failed. Please check your credentials.",
+    "loggingIn": "Logging in..."
   },
   "home": {
     "heroTitle": "Discover stays that fit how you travel.",
@@ -70,7 +80,8 @@
     "child": "child",
     "childrenPlural": "children",
     "room": "room",
-    "roomsPlural": "rooms"
+    "roomsPlural": "rooms",
+    "selectGuests": "Select Guests and Rooms"
   },
   "search": {
     "filters": "Filters",
@@ -87,7 +98,13 @@
     "currentSearch": "Current search parameters",
     "searchQuery": "Search",
     "editSearch": "Edit search",
-    "collapseSearch": "Collapse"
+    "collapseSearch": "Collapse",
+    "loadMore": "Load more",
+    "loading": "Loading…",
+    "noMatchesTryLoadMore": "No matches in loaded results — try 'Load more'.",
+    "noResultsFound": "No results found",
+    "reachedEnd": "You reached the end",
+    "failedToLoadHotels": "Failed to load hotels"
   },
   "hotel": {
     "availableRooms": "Available Rooms",
@@ -126,7 +143,14 @@
     "specialRequests": "Special requests or remarks",
     "specialRequestsHelper": "Optional: Any special requests or additional information",
     "specialRequestsPlaceholder": "e.g., Late check-in, dietary requirements, room preferences...",
-    "unexpectedError": "Unexpected error occurred"
+    "unexpectedError": "Unexpected error occurred",
+    "error": "Error",
+    "processing": "Processing booking...",
+    "paymentMethods": {
+      "Cash": "Cash",
+      "Card": "Card",
+      "PayPal": "PayPal"
+    }
   },
   "confirmation": {
     "bookingConfirmed": "Booking confirmed",
@@ -147,7 +171,13 @@
     "customerInfo": "Customer Information",
     "bookingDetails": "Booking Details",
     "accommodation": "Accommodation",
-    "paymentInfo": "Payment Information"
+    "paymentInfo": "Payment Information",
+    "bookingStatus": {
+      "Confirmed": "Confirmed",
+      "Pending": "Pending",
+      "Cancelled": "Cancelled",
+      "Canceled": "Cancelled"
+    }
   },
   "footer": {
     "tagline": "Discover your perfect stay. Book with confidence and travel with ease.",
@@ -200,6 +230,33 @@
     "description": "Description",
     "actions": "Actions"
   },
+  "validation": {
+    "required": "This field is required",
+    "nameRequired": "Name is required",
+    "roomNumberRequired": "Room number is required",
+    "hotelRequired": "Hotel is required",
+    "cityRequired": "City is required",
+    "roomTypeRequired": "Room type is required",
+    "adultCapacityRequired": "Adult capacity is required",
+    "childrenCapacityRequired": "Children capacity is required",
+    "priceRequired": "Price is required",
+    "starRatingRequired": "Star rating is required",
+    "customerNameRequired": "Customer name is required",
+    "paymentMethodRequired": "Payment method is required",
+    "usernameRequired": "Username is required",
+    "passwordRequired": "Password is required",
+    "invalidUrl": "Must be a valid URL",
+    "specialRequestsMaxLength": "Special requests must be less than {max} characters",
+    "minValue": "This field must be at least {min}",
+    "adultsMin": "At least 1 adult is required",
+    "childrenMin": "Number of children cannot be negative",
+    "roomsMin": "At least 1 room is required",
+    "adultCapacityMin": "Adult capacity must be at least 1",
+    "childrenCapacityMin": "Children capacity cannot be negative",
+    "priceMin": "Price cannot be negative",
+    "starRatingMin": "Star rating must be at least {min}",
+    "starRatingMax": "Star rating must be at most {max}"
+  },
   "errors": {
     "generic": "Something went wrong. Please try again.",
     "network": "Network error. Please check your connection.",
@@ -218,5 +275,62 @@
     "forbidden": "Access Forbidden",
     "forbiddenMessage": "You don't have permission to access this page. This area is restricted to authorized users only.",
     "forbiddenHelpText": "If you believe this is an error, please contact support or return to the home page."
+  },
+  "pages": {
+    "home": "Home",
+    "search": "Search Results",
+    "login": "Login",
+    "hotel": "Hotel Details",
+    "checkout": "Checkout",
+    "confirmation": "Booking Confirmation",
+    "notFound": "Page Not Found",
+    "forbidden": "Access Forbidden",
+    "error": "Error",
+    "adminDashboard": "Admin Dashboard",
+    "adminCities": "Manage Cities",
+    "adminHotels": "Manage Hotels",
+    "adminRooms": "Manage Rooms"
+  },
+  "seo": {
+    "home": {
+      "title": "Home",
+      "description": "Discover stays that fit how you travel. Search trusted stays, compare deals, and book in minutes—so you can focus on the trip, not the planning.",
+      "keywords": "hotels, booking, travel, accommodation, stays, vacation, trip, book hotel"
+    },
+    "search": {
+      "title": "Search Results",
+      "description": "Find the perfect hotel for your stay. Compare prices, amenities, and locations to make the best choice for your trip.",
+      "keywords": "hotel search, find hotels, compare hotels, hotel booking, accommodation search"
+    },
+    "hotel": {
+      "title": "Hotel Details",
+      "description": "View detailed information about this hotel including rooms, amenities, location, and reviews. Book your stay today.",
+      "keywords": "hotel details, hotel information, book hotel, hotel rooms, hotel amenities"
+    },
+    "login": {
+      "title": "Login",
+      "description": "Sign in to your Voya account to access your bookings and manage your travel plans.",
+      "keywords": "login, sign in, account, user account"
+    },
+    "checkout": {
+      "title": "Checkout",
+      "description": "Complete your hotel booking by providing your details and payment information.",
+      "keywords": "checkout, booking, payment, hotel reservation"
+    },
+    "confirmation": {
+      "title": "Booking Confirmation",
+      "description": "Your booking has been confirmed. View your booking details and confirmation number.",
+      "keywords": "booking confirmation, reservation confirmed, booking details"
+    },
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist or has been moved.",
+      "keywords": "404, page not found, error"
+    },
+    "forbidden": {
+      "title": "Access Forbidden",
+      "description": "You don't have permission to access this page.",
+      "keywords": "403, forbidden, access denied"
+    }
   }
 }

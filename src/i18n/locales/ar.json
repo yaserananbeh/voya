@@ -19,16 +19,26 @@
     "next": "التالي",
     "previous": "السابق",
     "viewDetails": "عرض التفاصيل",
-    "clear": "مسح"
+    "clear": "مسح",
+    "changeLanguage": "تغيير اللغة",
+    "switchToDarkMode": "التبديل إلى الوضع الداكن",
+    "switchToLightMode": "التبديل إلى الوضع الفاتح",
+    "skipToContent": "تخطي إلى المحتوى الرئيسي",
+    "menu": "القائمة",
+    "mainNavigation": "التنقل الرئيسي",
+    "selectLanguage": "اختر اللغة",
+    "toggleFilters": "تبديل المرشحات"
   },
   "auth": {
     "loginTitle": "تسجيل الدخول إلى Voya",
+    "welcomeBack": "مرحباً بعودتك! يرجى تسجيل الدخول إلى حسابك",
     "username": "اسم المستخدم",
     "password": "كلمة المرور",
     "usernameRequired": "اسم المستخدم مطلوب",
     "passwordRequired": "كلمة المرور مطلوبة",
     "loginSuccess": "تم تسجيل الدخول بنجاح!",
-    "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد."
+    "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد.",
+    "loggingIn": "جاري تسجيل الدخول..."
   },
   "home": {
     "heroTitle": "اكتشف أماكن الإقامة التي تناسب طريقة سفرك.",
@@ -70,7 +80,8 @@
     "child": "طفل",
     "childrenPlural": "أطفال",
     "room": "غرفة",
-    "roomsPlural": "غرف"
+    "roomsPlural": "غرف",
+    "selectGuests": "اختر الضيوف والغرف"
   },
   "search": {
     "filters": "المرشحات",
@@ -87,7 +98,13 @@
     "currentSearch": "معاملات البحث الحالية",
     "searchQuery": "بحث",
     "editSearch": "تعديل البحث",
-    "collapseSearch": "طي"
+    "collapseSearch": "طي",
+    "loadMore": "تحميل المزيد",
+    "loading": "جاري التحميل…",
+    "noMatchesTryLoadMore": "لا توجد نتائج مطابقة في النتائج المحملة — جرب 'تحميل المزيد'.",
+    "noResultsFound": "لم يتم العثور على نتائج",
+    "reachedEnd": "وصلت إلى النهاية",
+    "failedToLoadHotels": "فشل تحميل الفنادق"
   },
   "hotel": {
     "availableRooms": "الغرف المتاحة",
@@ -126,7 +143,12 @@
     "specialRequests": "طلبات خاصة أو ملاحظات",
     "specialRequestsHelper": "اختياري: أي طلبات خاصة أو معلومات إضافية",
     "specialRequestsPlaceholder": "مثال: تسجيل متأخر، متطلبات غذائية، تفضيلات الغرفة...",
-    "unexpectedError": "حدث خطأ غير متوقع"
+    "unexpectedError": "حدث خطأ غير متوقع",
+    "paymentMethods": {
+      "Cash": "نقد",
+      "Card": "بطاقة",
+      "PayPal": "باي بال"
+    }
   },
   "confirmation": {
     "bookingConfirmed": "تم تأكيد الحجز",
@@ -147,7 +169,13 @@
     "customerInfo": "معلومات العميل",
     "bookingDetails": "تفاصيل الحجز",
     "accommodation": "الإقامة",
-    "paymentInfo": "معلومات الدفع"
+    "paymentInfo": "معلومات الدفع",
+    "bookingStatus": {
+      "Confirmed": "مؤكد",
+      "Pending": "قيد الانتظار",
+      "Cancelled": "ملغى",
+      "Canceled": "ملغى"
+    }
   },
   "footer": {
     "tagline": "اكتشف إقامتك المثالية. احجز بثقة وسافر بسهولة.",
@@ -200,6 +228,33 @@
     "description": "الوصف",
     "actions": "الإجراءات"
   },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "nameRequired": "الاسم مطلوب",
+    "roomNumberRequired": "رقم الغرفة مطلوب",
+    "hotelRequired": "الفندق مطلوب",
+    "cityRequired": "المدينة مطلوبة",
+    "roomTypeRequired": "نوع الغرفة مطلوب",
+    "adultCapacityRequired": "سعة البالغين مطلوبة",
+    "childrenCapacityRequired": "سعة الأطفال مطلوبة",
+    "priceRequired": "السعر مطلوب",
+    "starRatingRequired": "التقييم بالنجوم مطلوب",
+    "customerNameRequired": "اسم العميل مطلوب",
+    "paymentMethodRequired": "طريقة الدفع مطلوبة",
+    "usernameRequired": "اسم المستخدم مطلوب",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "invalidUrl": "يجب أن يكون رابطاً صالحاً",
+    "specialRequestsMaxLength": "يجب أن تكون الطلبات الخاصة أقل من {max} حرفاً",
+    "minValue": "يجب أن يكون هذا الحقل على الأقل {min}",
+    "adultsMin": "يجب أن يكون هناك بالغ واحد على الأقل",
+    "childrenMin": "لا يمكن أن يكون عدد الأطفال سالباً",
+    "roomsMin": "يجب أن تكون هناك غرفة واحدة على الأقل",
+    "adultCapacityMin": "يجب أن تكون سعة البالغين على الأقل 1",
+    "childrenCapacityMin": "لا يمكن أن تكون سعة الأطفال سالبة",
+    "priceMin": "لا يمكن أن يكون السعر سالباً",
+    "starRatingMin": "يجب أن يكون التقييم بالنجوم على الأقل {min}",
+    "starRatingMax": "يجب أن يكون التقييم بالنجوم على الأكثر {max}"
+  },
   "errors": {
     "generic": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
     "network": "خطأ في الشبكة. يرجى التحقق من اتصالك.",
@@ -218,5 +273,62 @@
     "forbidden": "الوصول محظور",
     "forbiddenMessage": "ليس لديك إذن للوصول إلى هذه الصفحة. هذه المنطقة مقيدة للمستخدمين المصرح لهم فقط.",
     "forbiddenHelpText": "إذا كنت تعتقد أن هذا خطأ، يرجى الاتصال بالدعم أو العودة إلى الصفحة الرئيسية."
+  },
+  "pages": {
+    "home": "الرئيسية",
+    "search": "نتائج البحث",
+    "login": "تسجيل الدخول",
+    "hotel": "تفاصيل الفندق",
+    "checkout": "الدفع",
+    "confirmation": "تأكيد الحجز",
+    "notFound": "الصفحة غير موجودة",
+    "forbidden": "الوصول محظور",
+    "error": "خطأ",
+    "adminDashboard": "لوحة تحكم المسؤول",
+    "adminCities": "إدارة المدن",
+    "adminHotels": "إدارة الفنادق",
+    "adminRooms": "إدارة الغرف"
+  },
+  "seo": {
+    "home": {
+      "title": "الرئيسية",
+      "description": "اكتشف أماكن الإقامة التي تناسب طريقة سفرك. ابحث عن أماكن إقامة موثوقة، وقارن العروض، واحجز في دقائق—حتى تتمكن من التركيز على الرحلة، وليس التخطيط.",
+      "keywords": "فنادق, حجز, سفر, إقامة, أماكن إقامة, عطلة, رحلة, حجز فندق"
+    },
+    "search": {
+      "title": "نتائج البحث",
+      "description": "ابحث عن الفندق المثالي لإقامتك. قارن الأسعار والمرافق والمواقع لاتخاذ أفضل خيار لرحلتك.",
+      "keywords": "بحث عن فنادق, العثور على فنادق, مقارنة فنادق, حجز فندق, بحث عن إقامة"
+    },
+    "hotel": {
+      "title": "تفاصيل الفندق",
+      "description": "اطلع على معلومات مفصلة عن هذا الفندق بما في ذلك الغرف والمرافق والموقع والمراجعات. احجز إقامتك اليوم.",
+      "keywords": "تفاصيل الفندق, معلومات الفندق, حجز فندق, غرف الفندق, مرافق الفندق"
+    },
+    "login": {
+      "title": "تسجيل الدخول",
+      "description": "قم بتسجيل الدخول إلى حسابك في Voya للوصول إلى حجوزاتك وإدارة خطط سفرك.",
+      "keywords": "تسجيل الدخول, دخول, حساب, حساب المستخدم"
+    },
+    "checkout": {
+      "title": "الدفع",
+      "description": "أكمل حجز فندقك من خلال تقديم تفاصيلك ومعلومات الدفع.",
+      "keywords": "الدفع, الحجز, الدفع, حجز الفندق"
+    },
+    "confirmation": {
+      "title": "تأكيد الحجز",
+      "description": "تم تأكيد حجزك. عرض تفاصيل حجزك ورقم التأكيد.",
+      "keywords": "تأكيد الحجز, تأكيد الحجز, تفاصيل الحجز"
+    },
+    "notFound": {
+      "title": "الصفحة غير موجودة",
+      "description": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+      "keywords": "404, صفحة غير موجودة, خطأ"
+    },
+    "forbidden": {
+      "title": "الوصول محظور",
+      "description": "ليس لديك إذن للوصول إلى هذه الصفحة.",
+      "keywords": "403, محظور, رفض الوصول"
+    }
   }
 }

@@ -2,7 +2,6 @@ import { Alert, Box, Card, CardContent, Typography } from '@mui/material'
 import { useTrendingDestinationsQuery } from '@/api/home'
 import { SafeImage } from '@/components/common/SafeImage'
 import { VoyaLoader } from '@/components'
-import styles from '../styles.module.css'
 import { useTranslation } from 'react-i18next'
 
 export function TrendingDestinationsSection() {
@@ -37,7 +36,18 @@ export function TrendingDestinationsSection() {
   }
 
   return (
-    <Box className={styles.cardsGrid}>
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: {
+          xs: '1fr',
+          sm: 'repeat(2, 1fr)',
+          md: 'repeat(3, 1fr)',
+          lg: 'repeat(auto-fill, minmax(260px, 1fr))',
+        },
+        gap: 3,
+      }}
+    >
       {data.map((dest) => (
         <Card key={dest.cityId}>
           <SafeImage src={dest.thumbnailUrl} alt={dest.cityName ?? 'Destination'} height={140} />

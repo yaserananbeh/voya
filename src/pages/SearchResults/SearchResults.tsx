@@ -6,11 +6,16 @@ import { FiltersSidebar } from './components/FiltersSidebar'
 import { ResultsList } from './components/ResultsList'
 import { SelectedFiltersBar } from './components/SelectedFiltersBar'
 import { EditableSearchBar } from './components/EditableSearchBar'
+import { usePageTitle } from '@/hooks'
+import { SEO } from '@/components/common'
+import { useTranslation } from 'react-i18next'
 
 export default function SearchResults() {
+  const { t } = useTranslation()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  usePageTitle('pages.search')
 
   const handleFiltersToggle = () => {
     setMobileFiltersOpen(!mobileFiltersOpen)
@@ -18,14 +23,22 @@ export default function SearchResults() {
 
   return (
     <>
+      <SEO
+        title={t('seo.search.title')}
+        description={t('seo.search.description')}
+        keywords={t('seo.search.keywords')}
+      />
       {isMobile && (
         <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
           <IconButton
             onClick={handleFiltersToggle}
             color="primary"
+            aria-label={t('common.toggleFilters') || 'Toggle filters'}
+            aria-expanded={mobileFiltersOpen}
+            aria-controls="filters-drawer"
             sx={{ border: 1, borderColor: 'divider' }}
           >
-            <FilterListIcon />
+            <FilterListIcon aria-hidden="true" />
           </IconButton>
         </Box>
       )}
@@ -34,6 +47,8 @@ export default function SearchResults() {
         anchor="left"
         open={isMobile ? mobileFiltersOpen : false}
         onClose={handleFiltersToggle}
+        id="filters-drawer"
+        aria-labelledby="filters-drawer-title"
         ModalProps={{
           keepMounted: true,
         }}

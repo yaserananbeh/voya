@@ -23,9 +23,11 @@ import ClearIcon from '@mui/icons-material/Clear'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import { formatDateForDisplay, startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from '@/pages/Home/components/GuestRoomSelector'
+import { UI } from '@/constants'
 
 export function EditableSearchBar() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isRTL = i18n.language === 'ar'
   const dispatch = useAppDispatch()
   const stored = useAppSelector(selectSearchParams)
   const [isExpanded, setIsExpanded] = useState(false)
@@ -44,9 +46,9 @@ export function EditableSearchBar() {
         if (!checkInDate || !value) return true
         return new Date(value) > new Date(checkInDate)
       }),
-    adults: yup.number().min(1).required(),
-    children: yup.number().min(0).required(),
-    rooms: yup.number().min(1).required(),
+    adults: yup.number().min(1, t('validation.adultsMin')).required(t('validation.required')),
+    children: yup.number().min(0, t('validation.childrenMin')).required(t('validation.required')),
+    rooms: yup.number().min(1, t('validation.roomsMin')).required(t('validation.required')),
   })
 
   const formik = useFormik({
@@ -55,16 +57,14 @@ export function EditableSearchBar() {
       city: stored.city || stored.searchQuery || '',
       checkInDate: stored.checkInDate || formatDateForApi(today),
       checkOutDate: stored.checkOutDate || formatDateForApi(tomorrow),
-      adults: stored.adults ?? 1,
+      adults: stored.adults ?? 2,
       children: stored.children ?? 0,
       rooms: stored.rooms ?? 1,
     },
     validationSchema,
     onSubmit(values) {
-      // Update search params and trigger new search
       dispatch(setSearchParams({ ...values, searchQuery: values.city }))
       setIsExpanded(false)
-      // The ResultsList component will automatically refetch due to searchQuery change
     },
   })
 
@@ -84,9 +84,6 @@ export function EditableSearchBar() {
   const children = stored.children ?? 0
   const rooms = stored.rooms ?? 0
 
-  // Show the search bar if there are any search parameters or if user is on search results page
-  // This allows users to explore all hotels by clearing the search
-
   return (
     <Paper
       elevation={1}
@@ -98,7 +95,6 @@ export function EditableSearchBar() {
         borderColor: 'divider',
       }}
     >
-      {/* Compact View */}
       <Box
         sx={{
           display: 'flex',
@@ -194,7 +190,7 @@ export function EditableSearchBar() {
                   city: '',
                   checkInDate: formatDateForApi(today),
                   checkOutDate: formatDateForApi(tomorrow),
-                  adults: 1,
+                  adults: 2,
                   children: 0,
                   rooms: 1,
                 },
@@ -215,7 +211,6 @@ export function EditableSearchBar() {
         </Box>
       </Box>
 
-      {/* Expanded Edit Form */}
       <Collapse in={isExpanded}>
         <Box
           component="form"
@@ -241,7 +236,7 @@ export function EditableSearchBar() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.city && Boolean(formik.errors.city)}
-              sx={{ flex: 2, minWidth: 180 }}
+              sx={{ flex: UI.SEARCH_BAR.CITY_FLEX, minWidth: UI.SEARCH_BAR.CITY_MIN_WIDTH }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -276,7 +271,10 @@ export function EditableSearchBar() {
               error={formik.touched.checkInDate && Boolean(formik.errors.checkInDate)}
               helperText={formik.touched.checkInDate && formik.errors.checkInDate}
               InputLabelProps={{ shrink: true }}
-              sx={{ flex: 1, minWidth: 150 }}
+              sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
+              inputProps={{
+                dir: isRTL ? 'rtl' : 'ltr',
+              }}
             />
 
             <TextField
@@ -290,9 +288,10 @@ export function EditableSearchBar() {
               error={formik.touched.checkOutDate && Boolean(formik.errors.checkOutDate)}
               helperText={formik.touched.checkOutDate && formik.errors.checkOutDate}
               InputLabelProps={{ shrink: true }}
-              sx={{ flex: 1, minWidth: 150 }}
+              sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
               inputProps={{
                 min: formik.values.checkInDate,
+                dir: isRTL ? 'rtl' : 'ltr',
               }}
             />
 
@@ -321,7 +320,7 @@ export function EditableSearchBar() {
                       city: '',
                       checkInDate: formatDateForApi(today),
                       checkOutDate: formatDateForApi(tomorrow),
-                      adults: 1,
+                      adults: 2,
                       children: 0,
                       rooms: 1,
                     },

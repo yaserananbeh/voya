@@ -12,21 +12,11 @@ import {
   FormControlLabel,
   Box,
 } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 import { useGetRoomsAdminQuery, useGetAdminHotelsQuery } from '@/api/admin'
 import type { RoomForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
 import { VALIDATION } from '@/constants'
-
-const validationSchema = yup.object({
-  roomNumber: yup.string().required('Room number is required'),
-  hotelId: yup.number().required('Hotel is required'),
-  roomType: yup.string().required('Room type is required'),
-  capacityOfAdults: yup.number().min(1).required('Adult capacity is required'),
-  capacityOfChildren: yup.number().min(0).required('Children capacity is required'),
-  price: yup.number().min(0).required('Price is required'),
-  availability: yup.boolean(),
-  roomPhotoUrl: yup.string().url('Must be a valid URL'),
-})
 
 type Props = {
   roomId: number | null
@@ -35,9 +25,27 @@ type Props = {
 }
 
 export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
+  const { t } = useTranslation()
   const { data: rooms, isLoading: roomsLoading } = useGetRoomsAdminQuery()
   const { data: hotels = [], isLoading: hotelsLoading } = useGetAdminHotelsQuery()
   const room = roomId ? rooms?.find((r) => r.roomId === roomId || r.id === roomId) : null
+
+  const validationSchema = yup.object({
+    roomNumber: yup.string().required(t('validation.roomNumberRequired')),
+    hotelId: yup.number().required(t('validation.hotelRequired')),
+    roomType: yup.string().required(t('validation.roomTypeRequired')),
+    capacityOfAdults: yup
+      .number()
+      .min(1, t('validation.adultCapacityMin'))
+      .required(t('validation.adultCapacityRequired')),
+    capacityOfChildren: yup
+      .number()
+      .min(0, t('validation.childrenCapacityMin'))
+      .required(t('validation.childrenCapacityRequired')),
+    price: yup.number().min(0, t('validation.priceMin')).required(t('validation.priceRequired')),
+    availability: yup.boolean(),
+    roomPhotoUrl: yup.string().url(t('validation.invalidUrl')),
+  })
 
   const formik = useFormik<RoomForCreationDto & { roomPhotoUrl?: string }>({
     initialValues: {

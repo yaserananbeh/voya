@@ -1,19 +1,6 @@
 import { useState } from 'react'
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  IconButton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  InputAdornment,
-} from '@mui/material'
-import ClearIcon from '@mui/icons-material/Clear'
-import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
+import { Box } from '@mui/material'
+import { type GridColDef } from '@mui/x-data-grid'
 import AddIcon from '@mui/icons-material/Add'
 import {
   useGetRoomsAdminQuery,
@@ -23,11 +10,19 @@ import {
 } from '@/api/admin'
 import type { RoomDto } from '@/types'
 import { RoomForm } from './components/RoomForm'
-import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
-
-import { getInitialPaginationModel, PAGINATION } from '@/constants'
+import {
+  DeleteConfirmDialog,
+  PageHeader,
+  SearchBar,
+  DataGridActions,
+  AdminDataGrid,
+  AdminFormDialog,
+} from '@/components'
+import { usePageTitle } from '@/hooks'
+import { getInitialPaginationModel } from '@/constants'
 
 export default function Rooms() {
+  usePageTitle('pages.adminRooms')
   const [searchQuery, setSearchQuery] = useState('')
   const [paginationModel, setPaginationModel] = useState(getInitialPaginationModel())
   const [openForm, setOpenForm] = useState(false)
@@ -83,25 +78,14 @@ export default function Rooms() {
       width: 120,
       minWidth: 100,
       sortable: false,
-      renderCell: (params: GridRenderCellParams<RoomDto>) => (
-        <>
-          <IconButton
-            size="small"
-            onClick={() => {
-              setEditingRoom(params.row.roomId || params.row.id || 0)
-              setOpenForm(true)
-            }}
-          >
-            <EditIcon />
-          </IconButton>
-          <IconButton
-            size="small"
-            onClick={() => setDeleteId(params.row.roomId || params.row.id || 0)}
-            color="error"
-          >
-            <DeleteIcon />
-          </IconButton>
-        </>
+      renderCell: (params) => (
+        <DataGridActions
+          onEdit={() => {
+            setEditingRoom(params.row.roomId || params.row.id || 0)
+            setOpenForm(true)
+          }}
+          onDelete={() => setDeleteId(params.row.roomId || params.row.id || 0)}
+        />
       ),
     },
   ]
@@ -118,109 +102,47 @@ export default function Rooms() {
 
   return (
     <Box sx={{ width: '100%', minWidth: 0, maxWidth: '100%', overflow: 'hidden' }}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-          justifyContent: 'space-between',
-          alignItems: { xs: 'flex-start', sm: 'center' },
-          gap: { xs: 2, sm: 0 },
-          mb: 2,
-        }}
-      >
-        <Typography
-          variant="h5"
-          sx={{
-            fontSize: { xs: '1.25rem', sm: '1.5rem' },
-          }}
-        >
-          Rooms
-        </Typography>
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={handleCreate}
-          sx={{
-            width: { xs: '100%', sm: 'auto' },
-          }}
-        >
-          Add Room
-        </Button>
-      </Box>
-
-      <TextField
-        fullWidth
-        label="Search"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        sx={{ mb: 2 }}
-        InputProps={{
-          endAdornment: searchQuery ? (
-            <InputAdornment position="end">
-              <IconButton
-                size="small"
-                onClick={() => setSearchQuery('')}
-                edge="end"
-                aria-label="clear"
-              >
-                <ClearIcon fontSize="small" />
-              </IconButton>
-            </InputAdornment>
-          ) : undefined,
-        }}
+      <PageHeader
+        title="Rooms"
+        actionLabel="Add Room"
+        actionIcon={<AddIcon />}
+        onAction={handleCreate}
       />
 
-      <Box
-        sx={{
-          width: '100%',
-          overflowX: 'auto',
-          overflowY: 'hidden',
-          minWidth: 0,
-          maxWidth: '100%',
-        }}
-      >
-        <DataGrid<RoomDto>
-          rows={filteredRooms}
-          columns={columns}
-          loading={isLoading}
-          paginationModel={paginationModel}
-          onPaginationModelChange={setPaginationModel}
-          pageSizeOptions={PAGINATION.PAGE_SIZE_OPTIONS}
-          getRowId={(row) => row.roomId || row.id || 0}
-          disableRowSelectionOnClick
-          sx={{
-            '& .MuiDataGrid-cell': {
-              fontSize: { xs: '0.75rem', sm: '0.875rem' },
-            },
-            '& .MuiDataGrid-columnHeader': {
-              fontSize: { xs: '0.75rem', sm: '0.875rem' },
-            },
-          }}
-          autoHeight
-        />
-      </Box>
+      <SearchBar value={searchQuery} onChange={setSearchQuery} />
 
-      <Dialog open={openForm} onClose={() => setOpenForm(false)} maxWidth="md" fullWidth>
-        <DialogTitle>{editingRoom ? 'Edit Room' : 'Create Room'}</DialogTitle>
-        <DialogContent>
-          <RoomForm
-            roomId={editingRoom}
-            onSubmit={async (data) => {
-              if (editingRoom) {
-                await updateRoom({ id: editingRoom, data }).unwrap()
-              } else {
-                await createRoom(data).unwrap()
-              }
-              setOpenForm(false)
-              setEditingRoom(null)
-            }}
-            onCancel={() => {
-              setOpenForm(false)
-              setEditingRoom(null)
-            }}
-          />
-        </DialogContent>
-      </Dialog>
+      <AdminDataGrid<RoomDto>
+        rows={filteredRooms}
+        columns={columns}
+        loading={isLoading}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
+        getRowId={(row) => row.roomId || row.id || 0}
+      />
+
+      <AdminFormDialog
+        open={openForm}
+        onClose={() => setOpenForm(false)}
+        title={editingRoom ? 'Edit Room' : 'Create Room'}
+        maxWidth="md"
+      >
+        <RoomForm
+          roomId={editingRoom}
+          onSubmit={async (data) => {
+            if (editingRoom) {
+              await updateRoom({ id: editingRoom, data }).unwrap()
+            } else {
+              await createRoom(data).unwrap()
+            }
+            setOpenForm(false)
+            setEditingRoom(null)
+          }}
+          onCancel={() => {
+            setOpenForm(false)
+            setEditingRoom(null)
+          }}
+        />
+      </AdminFormDialog>
 
       <DeleteConfirmDialog
         open={deleteId !== null}

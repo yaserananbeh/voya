@@ -1,7 +1,4 @@
-import { Box, Button, TextField, Paper, InputAdornment, IconButton } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
-import ClearIcon from '@mui/icons-material/Clear'
-import RefreshIcon from '@mui/icons-material/Refresh'
+import { Paper, Box } from '@mui/material'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
@@ -10,7 +7,8 @@ import { selectSearchParams, setSearchParams, clearSearchParams } from '@/store/
 import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from './GuestRoomSelector'
 import { useTranslation } from 'react-i18next'
-import { ROUTES } from '@/constants'
+import { ROUTES, UI } from '@/constants'
+import { SearchCityField, SearchDateField, SearchActionButtons } from '@/components/atomic'
 
 type SearchValues = {
   city: string
@@ -22,7 +20,8 @@ type SearchValues = {
 }
 
 export function HomeSearchBar() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isRTL = i18n.language === 'ar'
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const stored = useAppSelector(selectSearchParams)
@@ -41,9 +40,9 @@ export function HomeSearchBar() {
         if (!checkInDate || !value) return true
         return new Date(value) > new Date(checkInDate)
       }),
-    adults: yup.number().min(1).required(),
-    children: yup.number().min(0).required(),
-    rooms: yup.number().min(1).required(),
+    adults: yup.number().min(1, t('validation.adultsMin')).required(t('validation.required')),
+    children: yup.number().min(0, t('validation.childrenMin')).required(t('validation.required')),
+    rooms: yup.number().min(1, t('validation.roomsMin')).required(t('validation.required')),
   })
 
   const formik = useFormik<SearchValues>({
@@ -52,13 +51,12 @@ export function HomeSearchBar() {
       city: stored.city || '',
       checkInDate: stored.checkInDate || formatDateForApi(today),
       checkOutDate: stored.checkOutDate || formatDateForApi(tomorrow),
-      adults: stored.adults ?? 1,
+      adults: stored.adults ?? 2,
       children: stored.children ?? 0,
       rooms: stored.rooms ?? 1,
     },
     validationSchema,
     onSubmit(values) {
-      // Store both city and searchQuery for backward compatibility
       dispatch(setSearchParams({ ...values, searchQuery: values.city }))
 
       void navigate(ROUTES.SEARCH)
@@ -78,65 +76,43 @@ export function HomeSearchBar() {
       component="form"
       onSubmit={formik.handleSubmit}
     >
-      <TextField
-        name="city"
-        label={t('home.whereGoing')}
-        placeholder={t('home.whereGoingPlaceholder')}
-        size="small"
+      <SearchCityField
         value={formik.values.city}
-        onChange={formik.handleChange}
+        onChange={(value) => void formik.setFieldValue('city', value)}
         onBlur={formik.handleBlur}
         error={formik.touched.city && Boolean(formik.errors.city)}
-        sx={{ flex: 2, minWidth: 180 }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-          endAdornment: formik.values.city ? (
-            <InputAdornment position="end">
-              <IconButton
-                size="small"
-                onClick={() => {
-                  void formik.setFieldValue('city', '')
-                }}
-                edge="end"
-                aria-label="clear"
-              >
-                <ClearIcon fontSize="small" />
-              </IconButton>
-            </InputAdornment>
-          ) : undefined,
-        }}
+        helperText={formik.touched.city && formik.errors.city}
+        sx={{ flex: UI.SEARCH_BAR.CITY_FLEX, minWidth: UI.SEARCH_BAR.CITY_MIN_WIDTH }}
       />
 
-      <TextField
-        name="checkInDate"
-        label={t('home.checkIn')}
-        type="date"
-        size="small"
-        value={formik.values.checkInDate}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        InputLabelProps={{ shrink: true }}
-        sx={{ flex: 1, minWidth: 150 }}
-      />
+      <Box sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}>
+        <SearchDateField
+          name="checkInDate"
+          label={t('home.checkIn')}
+          value={formik.values.checkInDate}
+          onChange={(value) => void formik.setFieldValue('checkInDate', value)}
+          onBlur={formik.handleBlur}
+          error={formik.touched.checkInDate && Boolean(formik.errors.checkInDate)}
+          helperText={formik.touched.checkInDate && formik.errors.checkInDate}
+          isRTL={isRTL}
+          sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
+        />
+      </Box>
 
-      <TextField
-        name="checkOutDate"
-        label={t('home.checkOut')}
-        type="date"
-        size="small"
-        value={formik.values.checkOutDate}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        InputLabelProps={{ shrink: true }}
-        sx={{ flex: 1, minWidth: 150 }}
-        inputProps={{
-          min: formik.values.checkInDate,
-        }}
-      />
+      <Box sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}>
+        <SearchDateField
+          name="checkOutDate"
+          label={t('home.checkOut')}
+          value={formik.values.checkOutDate}
+          onChange={(value) => void formik.setFieldValue('checkOutDate', value)}
+          onBlur={formik.handleBlur}
+          error={formik.touched.checkOutDate && Boolean(formik.errors.checkOutDate)}
+          helperText={formik.touched.checkOutDate && formik.errors.checkOutDate}
+          min={formik.values.checkInDate}
+          isRTL={isRTL}
+          sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
+        />
+      </Box>
 
       <GuestRoomSelector
         adults={formik.values.adults}
@@ -149,39 +125,21 @@ export function HomeSearchBar() {
         }}
       />
 
-      <Box sx={{ flexShrink: 0, display: 'flex', gap: 1 }}>
-        <Button
-          type="button"
-          variant="outlined"
-          color="primary"
-          size="large"
-          startIcon={<RefreshIcon />}
-          onClick={() => {
-            dispatch(clearSearchParams())
-            void formik.resetForm({
-              values: {
-                city: '',
-                checkInDate: formatDateForApi(today),
-                checkOutDate: formatDateForApi(tomorrow),
-                adults: 1,
-                children: 0,
-                rooms: 1,
-              },
-            })
-          }}
-        >
-          {t('common.clear')}
-        </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          size="large"
-          startIcon={<SearchIcon />}
-        >
-          {t('common.search')}
-        </Button>
-      </Box>
+      <SearchActionButtons
+        onClear={() => {
+          dispatch(clearSearchParams())
+          void formik.resetForm({
+            values: {
+              city: '',
+              checkInDate: formatDateForApi(today),
+              checkOutDate: formatDateForApi(tomorrow),
+              adults: 2,
+              children: 0,
+              rooms: 1,
+            },
+          })
+        }}
+      />
     </Paper>
   )
 }

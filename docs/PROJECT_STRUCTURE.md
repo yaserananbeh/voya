@@ -32,15 +32,15 @@ Voya
 ├── docs
 │   ├── CONTRIBUTING.md
 │   ├── Helpful_commands_Dev.md
-│   ├── PROJECT_STRUCTURE.md
-│   └── REQUIREMENTS_COVERAGE.md
+│   └── PROJECT_STRUCTURE.md
 ├── eslint.config.js
 ├── index.html
 ├── package.json
 ├── pnpm-lock.yaml
 ├── public
 │   ├── _redirects
-│   └── favicon.svg
+│   ├── favicon.svg
+│   └── robots.txt
 ├── setupTests.ts
 ├── src
 │   ├── App.tsx
@@ -68,7 +68,10 @@ Voya
 │   │   │   ├── RedirectIfAuthenticated.tsx
 │   │   │   └── index.ts
 │   │   ├── common
+│   │   │   ├── AriaLiveRegion.tsx
+│   │   │   ├── SEO.tsx
 │   │   │   ├── SafeImage.tsx
+│   │   │   ├── SkipLink.tsx
 │   │   │   ├── VoyaLoader.tsx
 │   │   │   └── index.ts
 │   │   ├── filters
@@ -106,6 +109,7 @@ Voya
 │   ├── hooks
 │   │   ├── index.ts
 │   │   ├── useNotification.ts
+│   │   ├── usePageTitle.ts
 │   │   └── useRTL.ts
 │   ├── i18n
 │   │   ├── config.ts
@@ -131,14 +135,10 @@ Voya
 │   │   │   │   │   ├── CityForm.presentational.tsx
 │   │   │   │   │   ├── CityForm.tsx
 │   │   │   │   │   └── DeleteConfirmDialog.tsx
-│   │   │   │   ├── ducks
-│   │   │   │   │   └── readme.md
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
 │   │   │   ├── Dashboard
 │   │   │   │   ├── Dashboard.tsx
-│   │   │   │   ├── ducks
-│   │   │   │   │   └── readme.md
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
 │   │   │   ├── Hotels
@@ -146,8 +146,6 @@ Voya
 │   │   │   │   ├── components
 │   │   │   │   │   ├── DeleteConfirmDialog.tsx
 │   │   │   │   │   └── HotelForm.tsx
-│   │   │   │   ├── ducks
-│   │   │   │   │   └── readme.md
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
 │   │   │   ├── Rooms
@@ -155,20 +153,14 @@ Voya
 │   │   │   │   ├── components
 │   │   │   │   │   ├── DeleteConfirmDialog.tsx
 │   │   │   │   │   └── RoomForm.tsx
-│   │   │   │   ├── ducks
-│   │   │   │   │   └── readme.md
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
-│   │   │   ├── ducks
-│   │   │   │   └── readme.md
 │   │   │   └── styles.module.css
 │   │   ├── Checkout
 │   │   │   ├── Checkout.tsx
 │   │   │   ├── Confirmation
 │   │   │   │   ├── Confirmation.tsx
 │   │   │   │   ├── confirmation.module.css
-│   │   │   │   ├── ducks
-│   │   │   │   │   └── readme.md
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
 │   │   │   ├── components
@@ -190,6 +182,9 @@ Voya
 │   │   │   ├── ErrorPage.tsx
 │   │   │   ├── RouteError.tsx
 │   │   │   └── index.ts
+│   │   ├── Forbidden
+│   │   │   ├── Forbidden.tsx
+│   │   │   └── index.ts
 │   │   ├── Home
 │   │   │   ├── Home.tsx
 │   │   │   ├── components
@@ -210,6 +205,7 @@ Voya
 │   │   │   ├── Hotel.presentational.tsx
 │   │   │   ├── Hotel.tsx
 │   │   │   ├── components
+│   │   │   │   ├── DateSelectionDialog.tsx
 │   │   │   │   ├── HotelAmenities.tsx
 │   │   │   │   ├── HotelGallery.tsx
 │   │   │   │   ├── HotelMap.tsx
@@ -233,6 +229,7 @@ Voya
 │   │       ├── SearchResults.tsx
 │   │       ├── components
 │   │       │   ├── AmenitiesFilter.tsx
+│   │       │   ├── EditableSearchBar.tsx
 │   │       │   ├── FiltersSidebar.tsx
 │   │       │   ├── HotelResultCard.tsx
 │   │       │   ├── HotelTypeFilter.tsx
