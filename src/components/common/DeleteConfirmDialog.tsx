@@ -7,7 +7,7 @@ import {
   Button,
 } from '@mui/material'
 
-type Props = {
+interface DeleteConfirmDialogProps {
   open: boolean
   onClose: () => void
   onConfirm: () => void
@@ -15,7 +15,13 @@ type Props = {
   message: string
 }
 
-export function DeleteConfirmDialog({ open, onClose, onConfirm, title, message }: Props) {
+export function DeleteConfirmDialog({
+  open,
+  onClose,
+  onConfirm,
+  title,
+  message,
+}: DeleteConfirmDialogProps) {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>{title}</DialogTitle>

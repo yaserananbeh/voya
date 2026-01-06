@@ -1,19 +1,6 @@
 import { useState } from 'react'
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  IconButton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  InputAdornment,
-} from '@mui/material'
-import ClearIcon from '@mui/icons-material/Clear'
-import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
+import { Box } from '@mui/material'
+import { type GridColDef } from '@mui/x-data-grid'
 import AddIcon from '@mui/icons-material/Add'
 import {
   useGetCitiesQuery,
@@ -23,10 +10,16 @@ import {
 } from '@/api/admin'
 import type { CityDto } from '@/types'
 import { CityForm } from './components/CityForm'
-import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
+import {
+  DeleteConfirmDialog,
+  PageHeader,
+  SearchBar,
+  DataGridActions,
+  AdminDataGrid,
+  AdminFormDialog,
+} from '@/components'
 import { useNotification, usePageTitle } from '@/hooks'
-
-import { getInitialPaginationModel, PAGINATION } from '@/constants'
+import { getInitialPaginationModel } from '@/constants'
 
 export default function Cities() {
   usePageTitle('pages.adminCities')
@@ -60,21 +53,14 @@ export default function Cities() {
       headerName: 'Actions',
       width: 120,
       sortable: false,
-      renderCell: (params: GridRenderCellParams<CityDto>) => (
-        <>
-          <IconButton
-            size="small"
-            onClick={() => {
-              setEditingCity(params.row.id)
-              setOpenForm(true)
-            }}
-          >
-            <EditIcon />
-          </IconButton>
-          <IconButton size="small" onClick={() => setDeleteId(params.row.id)} color="error">
-            <DeleteIcon />
-          </IconButton>
-        </>
+      renderCell: (params) => (
+        <DataGridActions
+          onEdit={() => {
+            setEditingCity(params.row.id)
+            setOpenForm(true)
+          }}
+          onDelete={() => setDeleteId(params.row.id)}
+        />
       ),
     },
   ]
@@ -103,103 +89,49 @@ export default function Cities() {
   )
   return (
     <Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-          justifyContent: 'space-between',
-          alignItems: { xs: 'flex-start', sm: 'center' },
-          gap: { xs: 2, sm: 0 },
-          mb: 2,
-        }}
-      >
-        <Typography
-          variant="h5"
-          sx={{
-            fontSize: { xs: '1.25rem', sm: '1.5rem' },
-          }}
-        >
-          Cities
-        </Typography>
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={handleCreate}
-          sx={{
-            width: { xs: '100%', sm: 'auto' },
-          }}
-        >
-          Add City
-        </Button>
-      </Box>
-
-      <TextField
-        fullWidth
-        label="Search"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        sx={{ mb: 2 }}
-        InputProps={{
-          endAdornment: searchQuery ? (
-            <InputAdornment position="end">
-              <IconButton
-                size="small"
-                onClick={() => setSearchQuery('')}
-                edge="end"
-                aria-label="clear"
-              >
-                <ClearIcon fontSize="small" />
-              </IconButton>
-            </InputAdornment>
-          ) : undefined,
-        }}
+      <PageHeader
+        title="Cities"
+        actionLabel="Add City"
+        actionIcon={<AddIcon />}
+        onAction={handleCreate}
       />
 
-      <Box sx={{ width: '100%', overflow: 'auto' }}>
-        <DataGrid<CityDto>
-          rows={filteredCities}
-          columns={columns}
-          loading={isLoading}
-          paginationModel={paginationModel}
-          onPaginationModelChange={setPaginationModel}
-          pageSizeOptions={PAGINATION.PAGE_SIZE_OPTIONS}
-          getRowId={(row) => row.id}
-          disableRowSelectionOnClick
-          sx={{
-            '& .MuiDataGrid-cell': {
-              fontSize: { xs: '0.75rem', sm: '0.875rem' },
-            },
-            '& .MuiDataGrid-columnHeader': {
-              fontSize: { xs: '0.75rem', sm: '0.875rem' },
-            },
-          }}
-          autoHeight
-        />
-      </Box>
+      <SearchBar value={searchQuery} onChange={setSearchQuery} />
 
-      <Dialog open={openForm} onClose={() => setOpenForm(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>{editingCity ? 'Edit City' : 'Create City'}</DialogTitle>
-        <DialogContent>
-          <CityForm
-            cityId={editingCity}
-            onSubmit={async (data) => {
-              if (editingCity) {
-                await updateCity({ id: editingCity, data }).unwrap()
-                showSuccess('City updated successfully')
-              } else {
-                await createCity(data).unwrap()
-                showSuccess('City created successfully')
-              }
-              setOpenForm(false)
-              setEditingCity(null)
-            }}
-            onCancel={() => {
-              setOpenForm(false)
-              setEditingCity(null)
-            }}
-          />
-        </DialogContent>
-      </Dialog>
+      <AdminDataGrid<CityDto>
+        rows={filteredCities}
+        columns={columns}
+        loading={isLoading}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
+        getRowId={(row) => row.id}
+      />
+
+      <AdminFormDialog
+        open={openForm}
+        onClose={() => setOpenForm(false)}
+        title={editingCity ? 'Edit City' : 'Create City'}
+        maxWidth="sm"
+      >
+        <CityForm
+          cityId={editingCity}
+          onSubmit={async (data) => {
+            if (editingCity) {
+              await updateCity({ id: editingCity, data }).unwrap()
+              showSuccess('City updated successfully')
+            } else {
+              await createCity(data).unwrap()
+              showSuccess('City created successfully')
+            }
+            setOpenForm(false)
+            setEditingCity(null)
+          }}
+          onCancel={() => {
+            setOpenForm(false)
+            setEditingCity(null)
+          }}
+        />
+      </AdminFormDialog>
 
       <DeleteConfirmDialog
         open={deleteId !== null}
