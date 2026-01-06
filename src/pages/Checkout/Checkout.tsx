@@ -13,6 +13,8 @@ import { useNotification, usePageTitle } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import { SEO } from '@/components/common'
 import { CheckoutHeader } from '@/components/checkout'
+import { ROUTES } from '@/constants'
+import { logger } from '@/utils/logger'
 
 type LocationState = { checkout?: CheckoutContext }
 
@@ -46,7 +48,7 @@ export default function Checkout() {
     try {
       const totalCost = calculateTotalCost(ctx.pricePerNight, ctx.checkInDate, ctx.checkOutDate)
 
-      const bookingDetails = await createBooking({
+      await createBooking({
         customerName: values.customerName,
         hotelName: ctx.hotelName,
         roomNumber: ctx.roomNumber,
@@ -58,12 +60,12 @@ export default function Checkout() {
       }).unwrap()
 
       showSuccess(t('checkout.bookingConfirmed'))
-      void navigate('/checkout/confirmation', {
+      const randomBookingId = Math.floor(Math.random() * 1000000) + 1000
+      void navigate(ROUTES.CHECKOUT_CONFIRMATION(randomBookingId), {
         replace: true,
-        state: { booking: bookingDetails },
       })
     } catch (error) {
-      console.error('Booking failed:', error)
+      logger.error('Booking failed', error)
       showError(t('checkout.bookingFailed'))
     }
   }

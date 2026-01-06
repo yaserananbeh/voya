@@ -11,8 +11,8 @@ import {
   Container,
   Grid,
 } from '@mui/material'
-import { useParams, useLocation } from 'react-router-dom'
-import { useGetBookingByIdQuery, type BookingDetailsDto } from '@/api/checkout'
+import { useParams } from 'react-router-dom'
+import { useGetBookingByIdQuery } from '@/api/checkout'
 import { useTranslation } from 'react-i18next'
 import { VoyaLoader } from '@/components/common/VoyaLoader'
 import PrintIcon from '@mui/icons-material/Print'
@@ -24,40 +24,32 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber'
 import RoomIcon from '@mui/icons-material/Bed'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
-import { useRef } from 'react'
 import { alpha, useTheme } from '@mui/material/styles'
 import styles from './confirmation.module.css'
 import { usePageTitle } from '@/hooks'
 import { SEO } from '@/components/common'
 
-type LocationState = { booking?: BookingDetailsDto }
-
 export default function Confirmation() {
   const { t } = useTranslation()
   usePageTitle('pages.confirmation')
   const theme = useTheme()
-  const location = useLocation()
-  const { bookingId } = useParams()
-  const printRef = useRef<HTMLDivElement>(null)
+  const { bookingId } = useParams<{ bookingId: string }>()
 
-  const bookingFromState = (location.state as LocationState | null)?.booking
-  const id = bookingId ? Number(bookingId) : null
+  const id = Number(bookingId)
 
   const {
-    data: bookingFromApi,
+    data: bookingData,
     isLoading,
     isError,
-  } = useGetBookingByIdQuery(id!, {
-    skip: !id || !Number.isFinite(id),
+  } = useGetBookingByIdQuery(id, {
+    skip: !Number.isFinite(id),
   })
-
-  const data = bookingFromState || bookingFromApi
 
   const handlePrint = () => {
     window.print()
   }
 
-  if (isLoading && !bookingFromState) {
+  if (isLoading) {
     return (
       <Box
         sx={{
@@ -72,11 +64,7 @@ export default function Confirmation() {
     )
   }
 
-  if ((isError || !data) && !bookingFromState) {
-    return <Typography variant="h6">{t('confirmation.failedToLoadBooking')}</Typography>
-  }
-
-  if (!data) {
+  if (isError || !bookingData) {
     return <Typography variant="h6">{t('confirmation.failedToLoadBooking')}</Typography>
   }
 
@@ -119,7 +107,7 @@ export default function Confirmation() {
         noindex={true}
       />
       <Container maxWidth="md" className="print-container" sx={{ py: { xs: 3, sm: 4 } }}>
-        <Box ref={printRef}>
+        <Box>
           <Paper
             elevation={0}
             sx={{
@@ -156,12 +144,12 @@ export default function Confirmation() {
                     {t('confirmation.confirmationNumber')}
                   </Typography>
                   <Typography variant="h5" fontWeight="bold" color="primary">
-                    {data.confirmationNumber ?? t('confirmation.pendingConfirmation')}
+                    {bookingData.confirmationNumber ?? t('confirmation.pendingConfirmation')}
                   </Typography>
                 </Box>
                 <Chip
-                  label={translateBookingStatus(data.bookingStatus)}
-                  color={getStatusColor(data.bookingStatus)}
+                  label={translateBookingStatus(bookingData.bookingStatus)}
+                  color={getStatusColor(bookingData.bookingStatus)}
                   sx={{ fontWeight: 600 }}
                 />
               </Stack>
@@ -185,7 +173,7 @@ export default function Confirmation() {
                         {t('confirmation.name')}
                       </Typography>
                       <Typography variant="body1" fontWeight="500">
-                        {data.customerName ?? '-'}
+                        {bookingData.customerName ?? '-'}
                       </Typography>
                     </Box>
                   </Stack>
@@ -209,7 +197,7 @@ export default function Confirmation() {
                         {t('confirmation.bookedAt')}
                       </Typography>
                       <Typography variant="body1" fontWeight="500">
-                        {new Date(data.bookingDateTime).toLocaleString()}
+                        {new Date(bookingData.bookingDateTime).toLocaleString()}
                       </Typography>
                     </Box>
                   </Stack>
@@ -233,7 +221,7 @@ export default function Confirmation() {
                         {t('confirmation.hotel')}
                       </Typography>
                       <Typography variant="body1" fontWeight="500">
-                        {data.hotelName ?? '-'}
+                        {bookingData.hotelName ?? '-'}
                       </Typography>
                     </Box>
                     <Box>
@@ -243,7 +231,7 @@ export default function Confirmation() {
                       <Stack direction="row" spacing={1} alignItems="center">
                         <RoomIcon fontSize="small" color="action" />
                         <Typography variant="body1" fontWeight="500">
-                          {data.roomType ?? '-'} (#{data.roomNumber ?? '-'})
+                          {bookingData.roomType ?? '-'} (#{bookingData.roomNumber ?? '-'})
                         </Typography>
                       </Stack>
                     </Box>
@@ -268,7 +256,7 @@ export default function Confirmation() {
                         {t('confirmation.payment')}
                       </Typography>
                       <Typography variant="body1" fontWeight="500">
-                        {translatePaymentMethod(data.paymentMethod)}
+                        {translatePaymentMethod(bookingData.paymentMethod)}
                       </Typography>
                     </Box>
                     <Box>
@@ -278,7 +266,7 @@ export default function Confirmation() {
                       <Stack direction="row" spacing={1} alignItems="center">
                         <AttachMoneyIcon fontSize="small" color="success" />
                         <Typography variant="h5" fontWeight="bold" color="success.main">
-                          ${Number(data.totalCost).toFixed(2)}
+                          ${Number(bookingData.totalCost).toFixed(2)}
                         </Typography>
                       </Stack>
                     </Box>
