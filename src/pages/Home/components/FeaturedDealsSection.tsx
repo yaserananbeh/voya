@@ -12,7 +12,6 @@ import { Link as RouterLink } from 'react-router-dom'
 import { useFeaturedDealsQuery } from '@/api/home'
 import { SafeImage } from '@/components/common/SafeImage'
 import { VoyaLoader } from '@/components'
-import styles from '../styles.module.css'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useTranslation } from 'react-i18next'
 
@@ -44,7 +43,18 @@ export function FeaturedDealsSection() {
   }
 
   return (
-    <Box className={styles.cardsGrid}>
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: {
+          xs: '1fr',
+          sm: 'repeat(2, 1fr)',
+          md: 'repeat(3, 1fr)',
+          lg: 'repeat(auto-fill, minmax(260px, 1fr))',
+        },
+        gap: 3,
+      }}
+    >
       {data.map((deal) => (
         <Card key={deal.hotelId} sx={{ display: 'flex', flexDirection: 'column' }}>
           <SafeImage

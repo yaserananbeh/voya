@@ -23,6 +23,7 @@ import ClearIcon from '@mui/icons-material/Clear'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import { formatDateForDisplay, startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from '@/pages/Home/components/GuestRoomSelector'
+import { UI } from '@/constants'
 
 export function EditableSearchBar() {
   const { t, i18n } = useTranslation()
@@ -235,7 +236,7 @@ export function EditableSearchBar() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.city && Boolean(formik.errors.city)}
-              sx={{ flex: 2, minWidth: 180 }}
+              sx={{ flex: UI.SEARCH_BAR.CITY_FLEX, minWidth: UI.SEARCH_BAR.CITY_MIN_WIDTH }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -270,7 +271,7 @@ export function EditableSearchBar() {
               error={formik.touched.checkInDate && Boolean(formik.errors.checkInDate)}
               helperText={formik.touched.checkInDate && formik.errors.checkInDate}
               InputLabelProps={{ shrink: true }}
-              sx={{ flex: 1, minWidth: 150 }}
+              sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
               inputProps={{
                 dir: isRTL ? 'rtl' : 'ltr',
               }}
@@ -287,7 +288,7 @@ export function EditableSearchBar() {
               error={formik.touched.checkOutDate && Boolean(formik.errors.checkOutDate)}
               helperText={formik.touched.checkOutDate && formik.errors.checkOutDate}
               InputLabelProps={{ shrink: true }}
-              sx={{ flex: 1, minWidth: 150 }}
+              sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
               inputProps={{
                 min: formik.values.checkInDate,
                 dir: isRTL ? 'rtl' : 'ltr',

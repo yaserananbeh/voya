@@ -10,7 +10,7 @@ import { selectSearchParams, setSearchParams, clearSearchParams } from '@/store/
 import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from './GuestRoomSelector'
 import { useTranslation } from 'react-i18next'
-import { ROUTES } from '@/constants'
+import { ROUTES, UI } from '@/constants'
 
 type SearchValues = {
   city: string
@@ -87,7 +87,7 @@ export function HomeSearchBar() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched.city && Boolean(formik.errors.city)}
-        sx={{ flex: 2, minWidth: 180 }}
+        sx={{ flex: UI.SEARCH_BAR.CITY_FLEX, minWidth: UI.SEARCH_BAR.CITY_MIN_WIDTH }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -120,7 +120,7 @@ export function HomeSearchBar() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         InputLabelProps={{ shrink: true }}
-        sx={{ flex: 1, minWidth: 150 }}
+        sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
         inputProps={{
           dir: isRTL ? 'rtl' : 'ltr',
         }}
@@ -135,7 +135,7 @@ export function HomeSearchBar() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         InputLabelProps={{ shrink: true }}
-        sx={{ flex: 1, minWidth: 150 }}
+        sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
         inputProps={{
           min: formik.values.checkInDate,
           dir: isRTL ? 'rtl' : 'ltr',

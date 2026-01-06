@@ -12,7 +12,6 @@ import { Link as RouterLink } from 'react-router-dom'
 import { useRecentHotelsQuery } from '@/api/home'
 import { SafeImage } from '@/components/common/SafeImage'
 import { VoyaLoader } from '@/components'
-import styles from '../styles.module.css'
 import { formatDistanceToNow } from '@/utils/date'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useTranslation } from 'react-i18next'
@@ -52,7 +51,18 @@ export function RecentHotelsSection() {
   }
 
   return (
-    <Box className={styles.cardsGrid}>
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: {
+          xs: '1fr',
+          sm: 'repeat(2, 1fr)',
+          md: 'repeat(3, 1fr)',
+          lg: 'repeat(auto-fill, minmax(260px, 1fr))',
+        },
+        gap: 3,
+      }}
+    >
       {data.map((hotel) => (
         <Card key={hotel.hotelId} sx={{ display: 'flex', flexDirection: 'column' }}>
           <SafeImage src={hotel.thumbnailUrl} alt={hotel.hotelName ?? 'Hotel'} height={140} />
