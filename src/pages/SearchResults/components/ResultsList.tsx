@@ -1,10 +1,10 @@
-import { Stack, Typography, Box, Button } from '@mui/material'
+import { Stack, Typography, Button } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectSearchFilters, selectSearchQuery } from '@/store/searchSlice'
 import { useEffect, useMemo, useState } from 'react'
 import { useGetHotelsQuery, type HotelDto } from '@/api/hotels'
 import { HotelResultCard } from './HotelResultCard'
-import { VoyaLoader } from '@/components'
+import { LoadingState, ErrorState } from '@/components/common'
 import { PAGINATION } from '@/constants'
 import { useTranslation } from 'react-i18next'
 
@@ -63,22 +63,11 @@ export function ResultsList() {
   )
 
   if (isLoading && allHotels.length === 0) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: 'calc(100vh - 200px)',
-        }}
-      >
-        <VoyaLoader size="small" />
-      </Box>
-    )
+    return <LoadingState minHeight="calc(100vh - 200px)" />
   }
 
   if (isError) {
-    return <Typography color="error">{t('search.failedToLoadHotels')}</Typography>
+    return <ErrorState message={t('search.failedToLoadHotels')} variant="typography" />
   }
 
   return (

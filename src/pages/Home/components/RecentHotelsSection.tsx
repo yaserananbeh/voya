@@ -1,19 +1,8 @@
-import {
-  Alert,
-  Box,
-  Card,
-  CardContent,
-  Rating,
-  Typography,
-  Button,
-  CardActions,
-} from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import { Box } from '@mui/material'
 import { useRecentHotelsQuery } from '@/api/home'
-import { SafeImage } from '@/components/common/SafeImage'
-import { VoyaLoader } from '@/components'
+import { LoadingState, ErrorState, EmptyState } from '@/components/common'
+import { HotelCard } from '@/components/hotel'
 import { formatDistanceToNow } from '@/utils/date'
-import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useTranslation } from 'react-i18next'
 import { USER } from '@/constants'
 
@@ -24,30 +13,15 @@ export function RecentHotelsSection() {
   })
 
   if (isLoading) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '300px',
-        }}
-      >
-        <VoyaLoader size="small" />
-      </Box>
-    )
+    return <LoadingState />
   }
 
   if (isError) {
-    return <Alert severity="error">{t('home.recentHotelsError')}</Alert>
+    return <ErrorState message={t('home.recentHotelsError')} />
   }
 
   if (!data || data.length === 0) {
-    return (
-      <Typography variant="body2" color="text.secondary">
-        {t('home.noRecentHotels')}
-      </Typography>
-    )
+    return <EmptyState message={t('home.noRecentHotels')} />
   }
 
   return (
@@ -64,38 +38,19 @@ export function RecentHotelsSection() {
       }}
     >
       {data.map((hotel) => (
-        <Card key={hotel.hotelId} sx={{ display: 'flex', flexDirection: 'column' }}>
-          <SafeImage src={hotel.thumbnailUrl} alt={hotel.hotelName ?? 'Hotel'} height={140} />
-          <CardContent sx={{ flexGrow: 1 }}>
-            <Typography variant="h6">{hotel.hotelName}</Typography>
-            <Typography variant="body2" color="text.secondary">
-              {hotel.cityName}
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, mb: 1 }}>
-              <Rating value={hotel.starRating} readOnly size="small" max={5} />
-              <Typography variant="body2" sx={{ ml: 1 }}>
-                {hotel.starRating} {t('hotel.starHotel')}
-              </Typography>
-            </Box>
-            <Typography variant="body2" color="text.secondary">
-              {t('hotel.visited')}{' '}
-              {formatDistanceToNow(new Date(hotel.visitDate), {
-                addSuffix: true,
-              })}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button
-              component={RouterLink}
-              to={`/hotel/${hotel.hotelId}`}
-              variant="contained"
-              fullWidth
-              startIcon={<VisibilityIcon />}
-            >
-              {t('common.viewDetails')}
-            </Button>
-          </CardActions>
-        </Card>
+        <HotelCard
+          key={hotel.hotelId}
+          hotel={{
+            hotelId: hotel.hotelId,
+            hotelName: hotel.hotelName ?? '',
+            cityName: hotel.cityName ?? undefined,
+            starRating: hotel.starRating,
+            imageUrl: hotel.thumbnailUrl ?? undefined,
+            visitedDate: formatDistanceToNow(new Date(hotel.visitDate), {
+              addSuffix: true,
+            }),
+          }}
+        />
       ))}
     </Box>
   )
