@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
@@ -55,9 +55,15 @@ describe('HomeSearchBar', () => {
 
     await user.click(guestButton)
 
-    expect(await screen.findByText(/adults/i)).toBeVisible()
-    // Query for "Rooms" - there may be multiple (title contains "Rooms" and label says "Rooms")
-    // Using getAllByText since we expect multiple matches
-    expect(screen.getAllByText(/rooms/i).length).toBeGreaterThan(0)
+    const popover = await screen.findByRole('dialog')
+    expect(popover).toBeVisible()
+
+    const popoverContent = within(popover)
+    // Check for the title
+    expect(popoverContent.getByText(/select guests/i)).toBeInTheDocument()
+    // Check that adults label exists (may appear in button summary too, so use getAllByText)
+    expect(popoverContent.getAllByText(/adults/i).length).toBeGreaterThan(0)
+    // Check that rooms label exists (title contains "Rooms" too, so use getAllByText)
+    expect(popoverContent.getAllByText(/rooms/i).length).toBeGreaterThan(0)
   })
 })
