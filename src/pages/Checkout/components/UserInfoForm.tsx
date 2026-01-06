@@ -1,4 +1,4 @@
-import { Button, Stack, Typography, Box, alpha, useTheme } from '@mui/material'
+import { Stack, Typography, Box } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person'
 import PaymentIcon from '@mui/icons-material/Payment'
 import NotesIcon from '@mui/icons-material/Notes'
@@ -6,7 +6,7 @@ import { useFormik } from 'formik'
 import { createBookingSchema } from './bookingSchema'
 import { useTranslation } from 'react-i18next'
 import { PAYMENT_METHOD_OPTIONS, UI } from '@/constants'
-import { FormTextField, FormSelectField } from '@/components/atomic'
+import { FormTextField, FormSelectField, SubmitButton } from '@/components/atomic'
 
 export type UserInfoValues = {
   customerName: string
@@ -24,7 +24,6 @@ export function UserInfoForm({
   submitting: boolean
 }) {
   const { t } = useTranslation()
-  const theme = useTheme()
 
   const formik = useFormik<UserInfoValues>({
     initialValues,
@@ -130,31 +129,15 @@ export function UserInfoForm({
           </Box>
         )}
 
-        <Button
-          type="submit"
-          variant="contained"
+        <SubmitButton
           disabled={submitting}
-          size="large"
-          fullWidth
+          loading={submitting}
+          loadingText={t('checkout.processing')}
           aria-label={submitting ? t('checkout.processing') : t('checkout.confirmBooking')}
-          sx={{
-            mt: 2,
-            py: 1.5,
-            borderRadius: 2,
-            background: `linear-gradient(135deg, ${theme.palette.primary.main} 30%, ${theme.palette.primary.main} 90%)`,
-            fontWeight: 700,
-            fontSize: '1rem',
-            textTransform: 'none',
-            '&:hover': {
-              background: `linear-gradient(135deg, ${theme.palette.primary.dark} 30%, ${theme.palette.primary.light} 90%)`,
-            },
-            '&:disabled': {
-              background: alpha(theme.palette.primary.main, 0.5),
-            },
-          }}
+          sx={{ mt: 2 }}
         >
           {t('checkout.confirmBooking')}
-        </Button>
+        </SubmitButton>
       </Stack>
     </form>
   )
