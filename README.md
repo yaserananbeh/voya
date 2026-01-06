@@ -664,9 +664,6 @@ All API endpoints are defined using RTK Query's `injectEndpoints`:
 - `POST /bookings` - Create booking
 - `GET /bookings/:id` - Get booking details
 
-#### Upload
-- `POST /photos` - Upload photo (used in admin for city, hotel, and room images)
-
 #### Admin
 - `GET /cities` - Get cities list
 - `POST /cities` - Create city

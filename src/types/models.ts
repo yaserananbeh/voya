@@ -198,13 +198,6 @@ export interface HotelForCreationDto {
   starRating: number
 }
 
-export interface PhotoDto {
-  id: number
-  hotelId?: number
-  roomId?: number
-  imageUrl: string
-  thumbnailUrl?: string | null
-}
 export interface HotelDto {
   id: number
   hotelName?: string

@@ -61,8 +61,6 @@ Voya
 │   │   │   └── index.ts
 │   │   ├── searchResults
 │   │   │   └── index.ts
-│   │   └── upload
-│   │       └── index.ts
 │   ├── components
 │   │   ├── ScrollToTop.tsx
 │   │   ├── admin

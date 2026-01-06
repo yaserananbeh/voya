@@ -9,7 +9,6 @@ export const API_ENDPOINTS = {
   HOTEL_GALLERY: (id: number) => `/hotels/${id}/gallery`,
   HOTEL_ROOMS: (id: number) => `/hotels/${id}/rooms`,
   HOTEL_REVIEWS: (id: number) => `/hotels/${id}/reviews`,
-  HOTEL_AVAILABLE_ROOMS: (id: number) => `/hotels/${id}/available-rooms`,
 
   ROOMS: '/rooms',
   ROOM_BY_ID: (id: number) => `/rooms/${id}`,
@@ -25,8 +24,6 @@ export const API_ENDPOINTS = {
   SEARCH_AMENITIES: '/search-results/amenities',
 
   ADMIN_DASHBOARD: '/admin/dashboard',
-
-  UPLOAD_PHOTO: '/photos',
 } as const
 
 export const API_TAG_TYPES = [
@@ -38,7 +35,6 @@ export const API_TAG_TYPES = [
   'Amenities',
   'Booking',
   'Admin',
-  'Photos',
 ] as const
 
 export const AUTH_HEADER_PREFIX = 'Bearer' as const
