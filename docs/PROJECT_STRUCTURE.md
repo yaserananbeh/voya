@@ -40,7 +40,10 @@ Voya
 ├── public
 │   ├── _redirects
 │   ├── favicon.svg
-│   └── robots.txt
+│   ├── robots.txt
+│   └── sitemap.xml
+├── scripts
+│   └── generate-sitemap.js
 ├── setupTests.ts
 ├── src
 │   ├── App.tsx
@@ -153,11 +156,9 @@ Voya
 │   │   └── readme.md
 │   ├── constants
 │   │   ├── api.ts
-│   │   ├── colors.ts
 │   │   ├── hotel.ts
 │   │   ├── index.ts
 │   │   ├── map.ts
-│   │   ├── messages.ts
 │   │   ├── pagination.ts
 │   │   ├── payment.ts
 │   │   ├── routes.ts
@@ -320,8 +321,7 @@ Voya
 │   ├── types
 │   │   ├── index.ts
 │   │   ├── models.ts
-│   │   ├── mui.d.ts
-│   │   └── swagger.json
+│   │   └── mui.d.ts
 │   └── utils
 │       ├── date.ts
 │       ├── globalErrors.ts

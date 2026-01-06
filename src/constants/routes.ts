@@ -5,7 +5,7 @@ export const ROUTES = {
   HOTEL: (hotelId: string | number) => `/hotel/${hotelId}`,
 
   CHECKOUT: '/checkout',
-  CHECKOUT_CONFIRMATION: '/checkout/confirmation',
+  CHECKOUT_CONFIRMATION: (bookingId: string | number) => `/checkout/confirmation/${bookingId}`,
 
   ADMIN: '/admin',
   ADMIN_DASHBOARD: '/admin/dashboard',

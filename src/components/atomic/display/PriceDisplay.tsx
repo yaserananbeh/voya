@@ -1,4 +1,5 @@
 import { Typography, Box } from '@mui/material'
+import { DiscountBadge } from './DiscountBadge'
 
 type PriceDisplayProps = {
   price: number
@@ -36,9 +37,7 @@ export function PriceDisplay({
             {currency}
             {originalPrice.toFixed(2)}
           </Typography>
-          <Typography component="span" color="success.main" variant="body2">
-            -{Math.round(discount * 100)}%
-          </Typography>
+          <DiscountBadge discount={discount} />
         </>
       )}
     </Box>
