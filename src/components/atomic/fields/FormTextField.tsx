@@ -54,6 +54,7 @@ export function FormTextField({
       multiline={multiline}
       rows={rows}
       autoComplete={autoComplete}
+      required={ariaRequired}
       InputProps={{
         ...(startAdornment
           ? {
@@ -62,9 +63,10 @@ export function FormTextField({
           : {}),
         readOnly,
       }}
-      aria-label={ariaLabel}
-      aria-required={ariaRequired}
-      aria-invalid={ariaInvalid}
+      inputProps={{
+        'aria-label': ariaLabel,
+        'aria-invalid': ariaInvalid,
+      }}
       sx={{
         '& .MuiOutlinedInput-root': {
           borderRadius: 2,

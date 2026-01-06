@@ -180,8 +180,7 @@ export default function Login() {
                   onBlur={formik.handleBlur}
                   error={formik.touched.userName && Boolean(formik.errors.userName)}
                   helperText={formik.touched.userName && formik.errors.userName}
-                  aria-required="true"
-                  aria-invalid={formik.touched.userName && Boolean(formik.errors.userName)}
+                  required
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -196,6 +195,9 @@ export default function Login() {
                         />
                       </InputAdornment>
                     ),
+                  }}
+                  inputProps={{
+                    'aria-invalid': formik.touched.userName && Boolean(formik.errors.userName),
                   }}
                   sx={{
                     '& .MuiOutlinedInput-root': {
@@ -258,8 +260,7 @@ export default function Login() {
                   onBlur={formik.handleBlur}
                   error={formik.touched.password && Boolean(formik.errors.password)}
                   helperText={formik.touched.password && formik.errors.password}
-                  aria-required="true"
-                  aria-invalid={formik.touched.password && Boolean(formik.errors.password)}
+                  required
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -274,6 +275,9 @@ export default function Login() {
                         />
                       </InputAdornment>
                     ),
+                  }}
+                  inputProps={{
+                    'aria-invalid': formik.touched.password && Boolean(formik.errors.password),
                   }}
                   sx={{
                     '& .MuiOutlinedInput-root': {

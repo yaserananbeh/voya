@@ -52,7 +52,7 @@ export function TrendingDestinationsSection() {
         <Card key={dest.cityId}>
           <SafeImage src={dest.thumbnailUrl} alt={dest.cityName ?? 'Destination'} height={140} />
           <CardContent>
-            <Typography variant="h6">
+            <Typography variant="h3" component="h3">
               {dest.cityName}, {dest.countryName}
             </Typography>
             {dest.description && (

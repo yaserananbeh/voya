@@ -54,6 +54,7 @@ export function HeroSection() {
         <Stack spacing={1}>
           <Typography
             variant="h3"
+            component="h1"
             fontWeight={700}
             lineHeight={1.1}
             sx={{
@@ -63,8 +64,9 @@ export function HeroSection() {
             {t('home.heroTitle')}
           </Typography>
           <Typography
-            variant="h6"
+            variant="body1"
             color="text.secondary"
+            component="p"
             sx={{
               maxWidth: { xs: '100%', sm: '640px' },
               fontSize: { xs: '1rem', sm: '1.25rem' },

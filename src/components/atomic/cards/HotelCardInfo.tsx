@@ -21,7 +21,8 @@ export function HotelCardInfo({
   return (
     <>
       <Typography
-        variant="h6"
+        variant="h3"
+        component="h3"
         sx={{
           fontSize: { xs: '1.1rem', sm: '1.25rem' },
           overflow: { xs: 'visible', sm: 'hidden' },

@@ -9,7 +9,9 @@ export function HotelReviews({ reviews }: Props) {
   if (reviews.length === 0) {
     return (
       <div>
-        <Typography variant="h6">Reviews</Typography>
+        <Typography variant="h6" component="h2">
+          Reviews
+        </Typography>
         <Typography color="text.secondary">No reviews yet.</Typography>
       </div>
     )
@@ -21,7 +23,9 @@ export function HotelReviews({ reviews }: Props) {
   return (
     <div>
       <Stack spacing={1} mb={2}>
-        <Typography variant="h6">Guest Reviews</Typography>
+        <Typography variant="h6" component="h2">
+          Guest Reviews
+        </Typography>
         <Stack direction="row" spacing={1} alignItems="center">
           <Rating value={average} precision={0.1} readOnly />
           <Typography fontWeight="bold">{average}</Typography>

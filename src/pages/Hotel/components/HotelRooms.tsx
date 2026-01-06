@@ -83,7 +83,7 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" component="h2" gutterBottom>
         {t('hotel.availableRooms')}
       </Typography>
 
@@ -111,7 +111,7 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
             <RoomCardImage imageUrl={room.roomPhotoUrl} alt={room.roomType} />
 
             <CardContent sx={{ flexGrow: 1 }}>
-              <RoomCardInfo room={room} />
+              <RoomCardInfo room={room} isAvailable={room.availability ?? false} />
             </CardContent>
 
             <RoomCardActions

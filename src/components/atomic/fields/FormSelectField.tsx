@@ -51,9 +51,7 @@ export function FormSelectField({
       helperText={helperText}
       fullWidth={fullWidth}
       autoComplete={autoComplete}
-      aria-label={ariaLabel}
-      aria-required={ariaRequired}
-      aria-invalid={ariaInvalid}
+      required={ariaRequired}
       InputProps={
         startAdornment
           ? {
@@ -61,6 +59,10 @@ export function FormSelectField({
             }
           : undefined
       }
+      inputProps={{
+        'aria-label': ariaLabel,
+        'aria-invalid': ariaInvalid,
+      }}
       sx={{
         '& .MuiOutlinedInput-root': {
           borderRadius: 2,

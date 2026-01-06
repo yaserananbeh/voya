@@ -105,7 +105,7 @@ export function EditableSearchBar() {
         }}
       >
         <Box sx={{ flex: 1, minWidth: 200 }}>
-          <Typography variant="caption" color="text.secondary" sx={{ mb: 1, display: 'block' }}>
+          <Typography variant="caption" sx={{ mb: 1, display: 'block', color: 'text.primary' }}>
             {t('search.currentSearch')}
           </Typography>
           <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
@@ -181,8 +181,9 @@ export function EditableSearchBar() {
           <Button
             variant="outlined"
             size="small"
-            color="secondary"
+            color="primary"
             startIcon={<RefreshIcon />}
+            aria-label={t('common.clear') || 'Clear search'}
             onClick={() => {
               dispatch(clearSearchParams())
               void formik.resetForm({

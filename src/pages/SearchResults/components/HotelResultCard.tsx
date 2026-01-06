@@ -49,6 +49,7 @@ export function HotelResultCard({ hotel }: { hotel: HotelDto }) {
             price={price}
             onViewHotel={() => void navigate(`/hotel/${hotel.id}`)}
             isRTL={isRTL}
+            hotelName={hotel.name}
           />
         </Stack>
       </CardContent>

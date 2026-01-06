@@ -59,7 +59,7 @@ export function BookingSummary({ ctx }: { ctx: CheckoutContext }) {
           >
             <HotelIcon sx={{ color: 'white', fontSize: 20 }} />
           </Box>
-          <Typography variant="h6" fontWeight={700}>
+          <Typography variant="h6" component="h2" fontWeight={700}>
             {t('checkout.bookingSummary')}
           </Typography>
         </Box>

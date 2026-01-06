@@ -12,6 +12,7 @@ export function FooterBrand() {
       <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 2 }}>
         <FlightTakeoffIcon sx={{ fontSize: 32, color: 'primary.main' }} />
         <Typography
+          component="span"
           variant="h5"
           fontWeight={700}
           sx={{
