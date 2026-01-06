@@ -86,6 +86,30 @@ export default function Confirmation() {
     return 'default'
   }
 
+  const translateBookingStatus = (status: string | null): string => {
+    if (!status) return '-'
+    // Normalize status: capitalize first letter, lowercase rest
+    const normalized = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()
+    // Handle both "Cancelled" and "Canceled"
+    const key = normalized === 'Canceled' ? 'Cancelled' : normalized
+    const translationKey = `confirmation.bookingStatus.${key}` as
+      | 'confirmation.bookingStatus.Confirmed'
+      | 'confirmation.bookingStatus.Pending'
+      | 'confirmation.bookingStatus.Cancelled'
+    return t(translationKey, { defaultValue: status })
+  }
+
+  const translatePaymentMethod = (method: string | null): string => {
+    if (!method) return '-'
+    // Normalize payment method: capitalize first letter, lowercase rest
+    const normalized = method.charAt(0).toUpperCase() + method.slice(1).toLowerCase()
+    const translationKey = `checkout.paymentMethods.${normalized}` as
+      | 'checkout.paymentMethods.Cash'
+      | 'checkout.paymentMethods.Card'
+      | 'checkout.paymentMethods.PayPal'
+    return t(translationKey, { defaultValue: method })
+  }
+
   return (
     <Container maxWidth="md" className="print-container" sx={{ py: { xs: 3, sm: 4 } }}>
       <Box ref={printRef}>
@@ -129,7 +153,7 @@ export default function Confirmation() {
                 </Typography>
               </Box>
               <Chip
-                label={data.bookingStatus ?? '-'}
+                label={translateBookingStatus(data.bookingStatus)}
                 color={getStatusColor(data.bookingStatus)}
                 sx={{ fontWeight: 600 }}
               />
@@ -237,7 +261,7 @@ export default function Confirmation() {
                       {t('confirmation.payment')}
                     </Typography>
                     <Typography variant="body1" fontWeight="500">
-                      {data.paymentMethod ?? '-'}
+                      {translatePaymentMethod(data.paymentMethod)}
                     </Typography>
                   </Box>
                   <Box>

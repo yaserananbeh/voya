@@ -20,8 +20,9 @@ import { calculateTotalCost, nightsBetween } from '../utils/price'
 import { useTranslation } from 'react-i18next'
 
 export function BookingSummary({ ctx }: { ctx: CheckoutContext }) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const theme = useTheme()
+  const isRTL = i18n.language === 'ar'
   const nights = nightsBetween(ctx.checkInDate, ctx.checkOutDate)
   const total = calculateTotalCost(ctx.pricePerNight, ctx.checkInDate, ctx.checkOutDate)
 
@@ -125,7 +126,7 @@ export function BookingSummary({ ctx }: { ctx: CheckoutContext }) {
                   icon={<CalendarTodayIcon sx={{ fontSize: 16 }} />}
                 />
                 <Typography variant="body2" sx={{ alignSelf: 'center' }}>
-                  →
+                  {isRTL ? '←' : '→'}
                 </Typography>
                 <Chip
                   label={ctx.checkOutDate}
