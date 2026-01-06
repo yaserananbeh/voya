@@ -25,11 +25,6 @@ import { useNotification } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import { STORAGE_KEYS, ROUTES } from '@/constants'
 
-const validationSchema = yup.object({
-  userName: yup.string().required('Username is required'),
-  password: yup.string().required('Password is required'),
-})
-
 type LoginValues = {
   userName: string
   password: string
@@ -44,6 +39,11 @@ export default function Login() {
   const { showSuccess, showError } = useNotification()
 
   const from = (location.state as { from?: Location })?.from?.pathname || null
+
+  const validationSchema = yup.object({
+    userName: yup.string().required(t('validation.usernameRequired')),
+    password: yup.string().required(t('validation.passwordRequired')),
+  })
 
   const formik = useFormik<LoginValues>({
     initialValues: { userName: '', password: '' },
@@ -154,7 +154,7 @@ export default function Login() {
               align="center"
               sx={{ maxWidth: 280 }}
             >
-              Welcome back! Please sign in to your account
+              {t('auth.welcomeBack')}
             </Typography>
           </Stack>
 
@@ -332,7 +332,7 @@ export default function Login() {
                   },
                 }}
               >
-                {isLoading ? 'Logging in...' : t('common.login')}
+                {isLoading ? t('auth.loggingIn') : t('common.login')}
               </Button>
             </Stack>
           </form>

@@ -13,7 +13,7 @@ import PersonIcon from '@mui/icons-material/Person'
 import PaymentIcon from '@mui/icons-material/Payment'
 import NotesIcon from '@mui/icons-material/Notes'
 import { useFormik } from 'formik'
-import { bookingSchema } from './bookingSchema'
+import { createBookingSchema } from './bookingSchema'
 import { useTranslation } from 'react-i18next'
 import { PAYMENT_METHOD_OPTIONS, UI } from '@/constants'
 
@@ -37,7 +37,7 @@ export function UserInfoForm({
 
   const formik = useFormik<UserInfoValues>({
     initialValues,
-    validationSchema: bookingSchema,
+    validationSchema: createBookingSchema(t),
     onSubmit: async (values, helpers) => {
       try {
         await onSubmit(values)
@@ -119,7 +119,7 @@ export function UserInfoForm({
         >
           {PAYMENT_METHOD_OPTIONS.map((method) => (
             <MenuItem key={method} value={method}>
-              {method}
+              {t(`checkout.paymentMethods.${method}`, { defaultValue: method })}
             </MenuItem>
           ))}
         </TextField>

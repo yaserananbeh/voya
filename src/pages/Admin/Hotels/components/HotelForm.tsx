@@ -10,26 +10,11 @@ import {
   InputLabel,
   Box,
 } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 import { useGetAdminHotelsQuery, useGetCitiesQuery } from '@/api/admin'
 import type { HotelForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
 import { HOTEL, VALIDATION } from '@/constants'
-
-const validationSchema = yup.object({
-  name: yup.string().required('Name is required'),
-  cityId: yup.number().required('City is required'),
-  description: yup.string(),
-  hotelType: yup.string(),
-  starRating: yup
-    .number()
-    .min(VALIDATION.HOTEL.STAR_RATING_MIN)
-    .max(VALIDATION.HOTEL.STAR_RATING_MAX)
-    .required('Star rating is required'),
-  location: yup.string(),
-  latitude: yup.number(),
-  longitude: yup.number(),
-  imageUrl: yup.string().url('Must be a valid URL'),
-})
 
 type Props = {
   hotelId: number | null
@@ -38,9 +23,32 @@ type Props = {
 }
 
 export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
+  const { t } = useTranslation()
   const { data: hotels, isLoading: hotelsLoading } = useGetAdminHotelsQuery()
   const { data: cities = [], isLoading: citiesLoading } = useGetCitiesQuery()
   const hotel = hotelId ? hotels?.find((h) => h.id === hotelId) : null
+
+  const validationSchema = yup.object({
+    name: yup.string().required(t('validation.nameRequired')),
+    cityId: yup.number().required(t('validation.cityRequired')),
+    description: yup.string(),
+    hotelType: yup.string(),
+    starRating: yup
+      .number()
+      .min(
+        VALIDATION.HOTEL.STAR_RATING_MIN,
+        t('validation.starRatingMin', { min: VALIDATION.HOTEL.STAR_RATING_MIN }),
+      )
+      .max(
+        VALIDATION.HOTEL.STAR_RATING_MAX,
+        t('validation.starRatingMax', { max: VALIDATION.HOTEL.STAR_RATING_MAX }),
+      )
+      .required(t('validation.starRatingRequired')),
+    location: yup.string(),
+    latitude: yup.number(),
+    longitude: yup.number(),
+    imageUrl: yup.string().url(t('validation.invalidUrl')),
+  })
 
   const formik = useFormik<
     HotelForCreationDto & {

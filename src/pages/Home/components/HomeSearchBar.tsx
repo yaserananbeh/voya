@@ -22,7 +22,8 @@ type SearchValues = {
 }
 
 export function HomeSearchBar() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isRTL = i18n.language === 'ar'
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const stored = useAppSelector(selectSearchParams)
@@ -41,9 +42,9 @@ export function HomeSearchBar() {
         if (!checkInDate || !value) return true
         return new Date(value) > new Date(checkInDate)
       }),
-    adults: yup.number().min(1).required(),
-    children: yup.number().min(0).required(),
-    rooms: yup.number().min(1).required(),
+    adults: yup.number().min(1, t('validation.adultsMin')).required(t('validation.required')),
+    children: yup.number().min(0, t('validation.childrenMin')).required(t('validation.required')),
+    rooms: yup.number().min(1, t('validation.roomsMin')).required(t('validation.required')),
   })
 
   const formik = useFormik<SearchValues>({
@@ -121,6 +122,9 @@ export function HomeSearchBar() {
         onBlur={formik.handleBlur}
         InputLabelProps={{ shrink: true }}
         sx={{ flex: 1, minWidth: 150 }}
+        inputProps={{
+          dir: isRTL ? 'rtl' : 'ltr',
+        }}
       />
 
       <TextField
@@ -135,6 +139,7 @@ export function HomeSearchBar() {
         sx={{ flex: 1, minWidth: 150 }}
         inputProps={{
           min: formik.values.checkInDate,
+          dir: isRTL ? 'rtl' : 'ltr',
         }}
       />
 

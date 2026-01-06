@@ -1,15 +1,11 @@
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { Box } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 import { useGetCitiesQuery } from '@/api/admin'
 import type { CityForCreationDto } from '@/types'
 import { CityFormPresentational } from './CityForm.presentational'
 import { VoyaLoader } from '@/components'
-
-const validationSchema = yup.object({
-  name: yup.string().required('Name is required'),
-  description: yup.string(),
-})
 
 type Props = {
   cityId: number | null
@@ -18,8 +14,14 @@ type Props = {
 }
 
 export function CityFormContainer({ cityId, onSubmit, onCancel }: Props) {
+  const { t } = useTranslation()
   const { data: cities, isLoading } = useGetCitiesQuery()
   const city = cityId ? cities?.find((c) => c.id === cityId) : null
+
+  const validationSchema = yup.object({
+    name: yup.string().required(t('validation.nameRequired')),
+    description: yup.string(),
+  })
 
   const formik = useFormik<CityForCreationDto>({
     initialValues: {

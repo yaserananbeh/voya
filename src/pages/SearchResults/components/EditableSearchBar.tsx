@@ -25,7 +25,8 @@ import { formatDateForDisplay, startOfToday, addDays, formatDateForApi } from '@
 import { GuestRoomSelector } from '@/pages/Home/components/GuestRoomSelector'
 
 export function EditableSearchBar() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isRTL = i18n.language === 'ar'
   const dispatch = useAppDispatch()
   const stored = useAppSelector(selectSearchParams)
   const [isExpanded, setIsExpanded] = useState(false)
@@ -44,9 +45,9 @@ export function EditableSearchBar() {
         if (!checkInDate || !value) return true
         return new Date(value) > new Date(checkInDate)
       }),
-    adults: yup.number().min(1).required(),
-    children: yup.number().min(0).required(),
-    rooms: yup.number().min(1).required(),
+    adults: yup.number().min(1, t('validation.adultsMin')).required(t('validation.required')),
+    children: yup.number().min(0, t('validation.childrenMin')).required(t('validation.required')),
+    rooms: yup.number().min(1, t('validation.roomsMin')).required(t('validation.required')),
   })
 
   const formik = useFormik({
@@ -277,6 +278,9 @@ export function EditableSearchBar() {
               helperText={formik.touched.checkInDate && formik.errors.checkInDate}
               InputLabelProps={{ shrink: true }}
               sx={{ flex: 1, minWidth: 150 }}
+              inputProps={{
+                dir: isRTL ? 'rtl' : 'ltr',
+              }}
             />
 
             <TextField
@@ -293,6 +297,7 @@ export function EditableSearchBar() {
               sx={{ flex: 1, minWidth: 150 }}
               inputProps={{
                 min: formik.values.checkInDate,
+                dir: isRTL ? 'rtl' : 'ltr',
               }}
             />
 

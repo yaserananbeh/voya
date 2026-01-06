@@ -22,7 +22,8 @@ type DateSelectionDialogProps = {
 }
 
 export function DateSelectionDialog({ open, onClose, onConfirm }: DateSelectionDialogProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isRTL = i18n.language === 'ar'
   const dispatch = useAppDispatch()
   const stored = useAppSelector(selectSearchParams)
 
@@ -78,6 +79,9 @@ export function DateSelectionDialog({ open, onClose, onConfirm }: DateSelectionD
               error={formik.touched.checkInDate && Boolean(formik.errors.checkInDate)}
               helperText={formik.touched.checkInDate && formik.errors.checkInDate}
               InputLabelProps={{ shrink: true }}
+              inputProps={{
+                dir: isRTL ? 'rtl' : 'ltr',
+              }}
             />
             <TextField
               name="checkOutDate"
@@ -92,6 +96,7 @@ export function DateSelectionDialog({ open, onClose, onConfirm }: DateSelectionD
               InputLabelProps={{ shrink: true }}
               inputProps={{
                 min: formik.values.checkInDate,
+                dir: isRTL ? 'rtl' : 'ltr',
               }}
             />
           </Box>
