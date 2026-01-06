@@ -27,11 +27,13 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import { useRef } from 'react'
 import { alpha, useTheme } from '@mui/material/styles'
 import styles from './confirmation.module.css'
+import { usePageTitle } from '@/hooks'
 
 type LocationState = { booking?: BookingDetailsDto }
 
 export default function Confirmation() {
   const { t } = useTranslation()
+  usePageTitle('pages.confirmation')
   const theme = useTheme()
   const location = useLocation()
   const { bookingId } = useParams()

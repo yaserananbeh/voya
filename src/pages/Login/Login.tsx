@@ -24,6 +24,7 @@ import styles from './styles.module.css'
 import { useNotification } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import { STORAGE_KEYS, ROUTES } from '@/constants'
+import { usePageTitle } from '@/hooks'
 
 type LoginValues = {
   userName: string
@@ -32,6 +33,7 @@ type LoginValues = {
 
 export default function Login() {
   const { t } = useTranslation()
+  usePageTitle('pages.login')
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()

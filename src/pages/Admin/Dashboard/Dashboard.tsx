@@ -9,8 +9,10 @@ import {
   CheckCircle as AvailableIcon,
 } from '@mui/icons-material'
 import { useGetCitiesQuery, useGetAdminHotelsQuery, useGetRoomsAdminQuery } from '@/api/admin'
+import { usePageTitle } from '@/hooks'
 
 export default function Dashboard() {
+  usePageTitle('pages.adminDashboard')
   const { data: cities = [], isLoading: citiesLoading } = useGetCitiesQuery()
   const { data: hotels = [], isLoading: hotelsLoading } = useGetAdminHotelsQuery()
   const { data: rooms = [], isLoading: roomsLoading } = useGetRoomsAdminQuery()

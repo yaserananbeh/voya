@@ -6,11 +6,13 @@ import { FiltersSidebar } from './components/FiltersSidebar'
 import { ResultsList } from './components/ResultsList'
 import { SelectedFiltersBar } from './components/SelectedFiltersBar'
 import { EditableSearchBar } from './components/EditableSearchBar'
+import { usePageTitle } from '@/hooks'
 
 export default function SearchResults() {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  usePageTitle('pages.search')
 
   const handleFiltersToggle = () => {
     setMobileFiltersOpen(!mobileFiltersOpen)

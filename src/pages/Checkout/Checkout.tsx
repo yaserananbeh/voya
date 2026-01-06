@@ -10,13 +10,14 @@ import { CheckoutActions } from './components/CheckoutActions'
 import { calculateTotalCost } from './utils/price'
 import { loadCheckoutContext, saveCheckoutContext } from './utils/checkoutStorage'
 import { useCreateBookingMutation } from '@/api/checkout'
-import { useNotification } from '@/hooks'
+import { useNotification, usePageTitle } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 
 type LocationState = { checkout?: CheckoutContext }
 
 export default function Checkout() {
   const { t } = useTranslation()
+  usePageTitle('pages.checkout')
   const theme = useTheme()
   const location = useLocation()
   const navigate = useNavigate()

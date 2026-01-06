@@ -7,9 +7,11 @@ import { TrendingDestinationsSection } from './components/TrendingDestinationsSe
 import { HeroSection } from './components/HeroSection'
 import styles from './styles.module.css'
 import { useTranslation } from 'react-i18next'
+import { usePageTitle } from '@/hooks'
 
 export default function Home() {
   const { t } = useTranslation()
+  usePageTitle('pages.home')
 
   return (
     <PageContainer>

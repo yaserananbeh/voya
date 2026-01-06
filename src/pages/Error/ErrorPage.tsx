@@ -5,6 +5,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES, UI } from '@/constants'
+import { usePageTitle } from '@/hooks'
 
 interface ErrorPageProps {
   error?: Error | null
@@ -25,6 +26,9 @@ export function ErrorPage({
 }: ErrorPageProps) {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  // Set page title based on error title or default error page title
+  usePageTitle('pages.error', title)
 
   const handleReload = () => {
     if (resetError) {

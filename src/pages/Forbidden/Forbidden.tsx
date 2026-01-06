@@ -5,10 +5,12 @@ import HomeIcon from '@mui/icons-material/Home'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import LockIcon from '@mui/icons-material/Lock'
 import { ROUTES } from '@/constants'
+import { usePageTitle } from '@/hooks'
 
 export default function ForbiddenPage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  usePageTitle('pages.forbidden')
   const theme = useTheme()
 
   const goHome = () => {

@@ -24,10 +24,12 @@ import {
 import type { RoomDto } from '@/types'
 import { RoomForm } from './components/RoomForm'
 import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
+import { usePageTitle } from '@/hooks'
 
 import { getInitialPaginationModel, PAGINATION } from '@/constants'
 
 export default function Rooms() {
+  usePageTitle('pages.adminRooms')
   const [searchQuery, setSearchQuery] = useState('')
   const [paginationModel, setPaginationModel] = useState(getInitialPaginationModel())
   const [openForm, setOpenForm] = useState(false)

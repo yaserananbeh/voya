@@ -24,11 +24,12 @@ import {
 import type { CityDto } from '@/types'
 import { CityForm } from './components/CityForm'
 import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
-import { useNotification } from '@/hooks/useNotification'
+import { useNotification, usePageTitle } from '@/hooks'
 
 import { getInitialPaginationModel, PAGINATION } from '@/constants'
 
 export default function Cities() {
+  usePageTitle('pages.adminCities')
   const [searchQuery, setSearchQuery] = useState('')
   const [paginationModel, setPaginationModel] = useState(getInitialPaginationModel())
   const [openForm, setOpenForm] = useState(false)

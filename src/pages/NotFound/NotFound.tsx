@@ -6,10 +6,12 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import SearchIcon from '@mui/icons-material/Search'
 import ExploreIcon from '@mui/icons-material/Explore'
 import { ROUTES } from '@/constants'
+import { usePageTitle } from '@/hooks'
 
 export default function NotFoundPage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  usePageTitle('pages.notFound')
   const theme = useTheme()
 
   const goHome = () => {

@@ -24,10 +24,12 @@ import {
 import type { HotelDto } from '@/types'
 import { HotelForm } from './components/HotelForm'
 import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
+import { usePageTitle } from '@/hooks'
 
 import { getInitialPaginationModel, PAGINATION } from '@/constants'
 
 export default function Hotels() {
+  usePageTitle('pages.adminHotels')
   const [searchQuery, setSearchQuery] = useState('')
   const [paginationModel, setPaginationModel] = useState(getInitialPaginationModel())
   const [openForm, setOpenForm] = useState(false)
