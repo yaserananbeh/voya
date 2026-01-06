@@ -34,7 +34,8 @@ export function MainFooter() {
                   variant="h5"
                   fontWeight={700}
                   sx={{
-                    background: 'linear-gradient(135deg, #42a5f5 0%, #90caf9 100%)',
+                    background: (theme) =>
+                      `linear-gradient(135deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.main} 100%)`,
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',

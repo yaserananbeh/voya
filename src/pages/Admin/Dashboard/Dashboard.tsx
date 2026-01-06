@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Box, Card, CardContent, Typography } from '@mui/material'
+import { Box, Card, CardContent, Typography, useTheme } from '@mui/material'
 import { VoyaLoader } from '@/components'
 import {
   LocationCity as CityIcon,
@@ -13,6 +13,7 @@ import { usePageTitle } from '@/hooks'
 
 export default function Dashboard() {
   usePageTitle('pages.adminDashboard')
+  const theme = useTheme()
   const { data: cities = [], isLoading: citiesLoading } = useGetCitiesQuery()
   const { data: hotels = [], isLoading: hotelsLoading } = useGetAdminHotelsQuery()
   const { data: rooms = [], isLoading: roomsLoading } = useGetRoomsAdminQuery()
@@ -66,25 +67,25 @@ export default function Dashboard() {
       title: 'Total Cities',
       value: stats.totalCities,
       icon: <CityIcon sx={{ fontSize: 40 }} />,
-      color: '#1976d2',
+      color: theme.palette.primary.main,
     },
     {
       title: 'Total Hotels',
       value: stats.totalHotels,
       icon: <HotelIcon sx={{ fontSize: 40 }} />,
-      color: '#2e7d32',
+      color: theme.palette.success.main,
     },
     {
       title: 'Total Rooms',
       value: stats.totalRooms,
       icon: <BedIcon sx={{ fontSize: 40 }} />,
-      color: '#ed6c02',
+      color: theme.palette.warning.main,
     },
     {
       title: 'Available Rooms',
       value: stats.totalAvailableRooms,
       icon: <AvailableIcon sx={{ fontSize: 40 }} />,
-      color: '#0288d1',
+      color: theme.palette.primary.light,
     },
   ]
 
@@ -165,7 +166,7 @@ export default function Dashboard() {
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                   <Typography color="text.secondary">Average Star Rating</Typography>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <StarIcon sx={{ color: '#ffc107' }} />
+                    <StarIcon sx={{ color: 'warning.main' }} />
                     <Typography variant="h6" fontWeight="bold">
                       {stats.averageStarRating}
                     </Typography>

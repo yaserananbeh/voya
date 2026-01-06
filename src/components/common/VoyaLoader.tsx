@@ -85,7 +85,8 @@ export function VoyaLoader({ size = 'medium', fullScreen = false, message }: Voy
       <Typography
         variant={size === 'large' ? 'h5' : size === 'medium' ? 'h6' : 'body1'}
         sx={{
-          background: 'linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)',
+          background: (theme) =>
+            `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',

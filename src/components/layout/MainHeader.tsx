@@ -85,7 +85,8 @@ export default function MainHeader() {
             sx={{
               fontSize: { xs: '1.25rem', sm: '1.5rem' },
               fontWeight: 700,
-              background: 'linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)',
+              background: (theme) =>
+                `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',

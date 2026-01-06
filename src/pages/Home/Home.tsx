@@ -5,7 +5,6 @@ import { FeaturedDealsSection } from './components/FeaturedDealsSection'
 import { RecentHotelsSection } from './components/RecentHotelsSection'
 import { TrendingDestinationsSection } from './components/TrendingDestinationsSection'
 import { HeroSection } from './components/HeroSection'
-import styles from './styles.module.css'
 import { useTranslation } from 'react-i18next'
 import { usePageTitle } from '@/hooks'
 import { SEO } from '@/components/common'
@@ -26,7 +25,7 @@ export default function Home() {
         <HeroSection />
 
         <Container maxWidth="lg">
-          <Section className={styles.searchSection}>
+          <Section sx={{ mb: 4 }}>
             <Typography variant="h5" sx={{ mb: 2 }}>
               {t('home.searchStays')}
             </Typography>
@@ -37,7 +36,7 @@ export default function Home() {
             id="featured-deals"
             title={t('home.featuredDeals')}
             subtitle={t('home.featuredDealsSubtitle')}
-            className={styles.section}
+            sx={{ mt: 4, mb: 4 }}
           >
             <FeaturedDealsSection />
           </Section>
@@ -45,7 +44,7 @@ export default function Home() {
           <Section
             title={t('home.recentHotels')}
             subtitle={t('home.recentHotelsSubtitle')}
-            className={styles.section}
+            sx={{ mt: 4, mb: 4 }}
           >
             <RecentHotelsSection />
           </Section>
@@ -53,7 +52,7 @@ export default function Home() {
           <Section
             title={t('home.trendingDestinations')}
             subtitle={t('home.trendingDestinationsSubtitle')}
-            className={styles.section}
+            sx={{ mt: 4, mb: 4 }}
           >
             <TrendingDestinationsSection />
           </Section>
