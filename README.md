@@ -30,7 +30,14 @@ A modern, full-featured travel and accommodation booking platform built with Rea
 - [State Management](#-state-management)
 - [Internationalization](#-internationalization)
 - [Testing](#-testing)
+- [Custom Hooks](#-custom-hooks)
+- [Utilities & Constants](#-utilities--constants)
 - [API Integration](#-api-integration)
+- [Providers & Context](#-providers--context)
+- [UI/UX Features](#-uiux-features)
+- [Security](#-security)
+- [Performance Optimizations](#-performance-optimizations)
+- [Troubleshooting](#-troubleshooting)
 - [Documentation](#-documentation)
 - [Contributing](#-contributing)
 - [License](#-license)
@@ -44,7 +51,9 @@ A modern, full-featured travel and accommodation booking platform built with Rea
 ### Key Highlights
 
 - ✨ **Modern Stack**: Built with React 19, TypeScript, and Redux Toolkit
+- 🚀 **React Compiler**: Optimized with Babel React Compiler for automatic memoization
 - 🎨 **Beautiful UI**: Material-UI components with custom theming
+- 🧩 **Atomic Design**: Component architecture following atomic design principles
 - 🌍 **Internationalization**: Full support for English and Arabic (RTL)
 - 🔒 **Type Safety**: End-to-end TypeScript coverage
 - ⚡ **Performance**: Code splitting, lazy loading, and optimized caching
@@ -129,9 +138,14 @@ A modern, full-featured travel and accommodation booking platform built with Rea
   - Dates and total price
   - Payment method confirmation
 
+#### 6. **Error Pages**
+- **404 Not Found**: Custom 404 page for invalid routes
+- **403 Forbidden**: Access denied page for unauthorized access
+- **Route Error**: Error boundary for route-level errors
+
 ### 🛠 Admin Features
 
-#### 6. **Admin Dashboard**
+#### 1. **Admin Dashboard**
 - **Functional Left Navigation**
   - Collapsible sidebar with links to:
     - Dashboard (overview statistics)
@@ -140,33 +154,43 @@ A modern, full-featured travel and accommodation booking platform built with Rea
     - Rooms Management
   - Responsive mobile drawer
 
-#### 7. **Admin Search Bar**
+- **Dashboard Overview**
+  - Statistics cards showing key metrics
+  - Quick overview of system status
+  - Visual data representation
+
+#### 2. **Admin Search Bar**
 - Global search functionality
 - Filters for all admin grids
+- Real-time search across entities
 
-#### 8. **Detailed Grids**
+#### 3. **Detailed Grids**
 
 **Cities Grid:**
 - Name, description
 - Search and filter capabilities
 - Create, update, and delete operations
+- Photo upload support
 
 **Hotels Grid:**
 - Name, star rating, number of rooms
 - Search and filter capabilities
 - Create, update, and delete operations
+- Photo upload support
 
 **Rooms Grid:**
 - Room number, availability status
 - Adult and children capacity
 - Search and filter capabilities
 - Create, update, and delete operations
+- Photo upload support
 
-#### 9. **Entity Management Forms**
+#### 4. **Entity Management Forms**
 - **Create Button**: Opens modal form for creating new entities
 - **Update Form**: Accessible by clicking on grid rows
-- **Delete Confirmation**: Safe deletion with confirmation dialogs
-- **Photo Upload**: Support for image uploads
+- **Delete Confirmation**: Safe deletion with confirmation dialogs (`DeleteConfirmDialog`)
+- **Photo Upload**: Support for image uploads via upload API
+- **Form Validation**: Yup schema validation for all forms
 
 ---
 
@@ -225,6 +249,7 @@ A modern, full-featured travel and accommodation booking platform built with Rea
 - **Vitest 4.0.13** - Unit testing
 - **React Testing Library 16.3.0** - Component testing
 - **MSW 2.12.4** - API mocking for tests
+- **Babel React Compiler 1.0.0** - Automatic React optimization and memoization
 
 ---
 
@@ -358,57 +383,15 @@ pnpm verify:stage
 
 ## 📁 Project Structure
 
-```
-Voya/
-├── public/                 # Static assets
-├── src/
-│   ├── api/                # RTK Query API endpoints
-│   │   ├── admin/         # Admin API endpoints
-│   │   ├── auth/          # Authentication API
-│   │   ├── baseApi.ts     # Base API configuration
-│   │   ├── checkout/       # Booking API
-│   │   ├── home/          # Home page API
-│   │   ├── hotels/        # Hotels API
-│   │   ├── searchResults/ # Search API
-│   │   └── upload/        # Photo upload API
-│   ├── components/        # Reusable components
-│   │   ├── auth/         # Auth-related components
-│   │   ├── common/       # Common components
-│   │   └── layout/      # Layout components
-│   ├── constants/        # App constants
-│   ├── hooks/            # Custom React hooks
-│   ├── i18n/            # Internationalization
-│   │   └── locales/     # Translation files
-│   ├── layouts/         # Page layouts
-│   │   ├── AdminLayout/ # Admin layout
-│   │   └── MainLayout/  # Main layout
-│   ├── pages/           # Page components
-│   │   ├── Admin/       # Admin pages
-│   │   ├── Checkout/   # Checkout flow
-│   │   ├── Home/       # Home page
-│   │   ├── Hotel/      # Hotel details
-│   │   ├── Login/      # Login page
-│   │   ├── SearchResults/ # Search results
-│   │   └── Error/      # Error pages
-│   ├── providers/      # Context providers
-│   ├── routes/         # Route configuration
-│   ├── store/          # Redux store
-│   │   ├── authSlice.ts    # Auth state
-│   │   ├── searchSlice.ts  # Search state
-│   │   └── index.ts        # Store configuration
-│   ├── theme/          # MUI theme configuration
-│   ├── types/           # TypeScript type definitions
-│   ├── utils/           # Utility functions
-│   ├── App.tsx          # Root component
-│   └── main.tsx         # Entry point
-├── docs/                # Documentation
-├── .env.example         # Environment variables template
-├── package.json         # Dependencies and scripts
-├── tsconfig.json        # TypeScript configuration
-└── vite.config.ts       # Vite configuration
-```
+For a detailed and up-to-date project structure, see [PROJECT_STRUCTURE.md](./docs/PROJECT_STRUCTURE.md).
 
-For detailed structure, see [PROJECT_STRUCTURE.md](./docs/PROJECT_STRUCTURE.md).
+The project follows a well-organized structure with:
+- **API layer** (`src/api/`) - RTK Query endpoints organized by feature
+- **Components** (`src/components/`) - Reusable components following atomic design principles
+- **Pages** (`src/pages/`) - Page-level components organized by feature
+- **State management** (`src/store/`) - Redux slices and store configuration
+- **Utilities** (`src/utils/`, `src/constants/`) - Helper functions and constants
+- **Configuration** (`src/i18n/`, `src/theme/`, `src/routes/`) - App-wide configuration
 
 ---
 
@@ -535,10 +518,21 @@ src/
   │           ├── Checkout.test.tsx
   │           ├── Confirmation.test.tsx
   │           └── UserInfoForm.test.tsx
+  ├── tests/
+  │   └── msw/          # MSW handlers for API mocking
+  │       ├── handlers.ts
+  │       └── server.ts
   └── utils/
       └── tests/
           └── logger.test.ts
 ```
+
+### MSW (Mock Service Worker)
+
+The project uses MSW for API mocking in tests:
+- Handlers defined in `src/tests/msw/handlers.ts`
+- Server setup in `src/tests/msw/server.ts`
+- Enables realistic API testing without actual network calls
 
 ### Testing Tools
 
@@ -574,10 +568,12 @@ The project includes several custom React hooks for common functionality:
 
 - **`useNotification`**: Hook for displaying toast notifications
   - Wraps notistack functionality
+  - Provides `showSuccess`, `showError`, `showWarning`, `showInfo` methods
   - Located in `src/hooks/useNotification.ts`
 
 - **`useRTL`**: Hook for managing RTL (Right-to-Left) layout direction
   - Automatically adjusts based on current language
+  - Returns direction value for MUI components
   - Located in `src/hooks/useRTL.ts`
 
 - **`useAppDispatch`** and **`useAppSelector`**: Typed Redux hooks
@@ -587,18 +583,58 @@ The project includes several custom React hooks for common functionality:
 ### Usage Example
 
 ```typescript
-import { usePageTitle, useNotification } from '@/hooks'
+import { usePageTitle, useNotification, useRTL } from '@/hooks'
 
 function MyComponent() {
-  const { showSuccess } = useNotification()
+  const { showSuccess, showError } = useNotification()
+  const direction = useRTL()
   usePageTitle('pages.myPage.title')
   
   const handleClick = () => {
     showSuccess('Operation completed!')
   }
   
-  return <button onClick={handleClick}>Click me</button>
+  return (
+    <Box dir={direction}>
+      <button onClick={handleClick}>Click me</button>
+    </Box>
+  )
 }
+```
+
+---
+
+## 🛠 Utilities & Constants
+
+### Utility Functions
+
+Located in `src/utils/`:
+
+- **`date.ts`**: Date manipulation and formatting utilities
+- **`logger.ts`**: Centralized logging utility
+- **`globalErrors.ts`**: Global error handling utilities
+
+### Constants
+
+The project uses a centralized constants system in `src/constants/`:
+
+- **`api.ts`**: API-related constants (endpoints, headers, prefixes)
+- **`colors.ts`**: Color palette constants
+- **`hotel.ts`**: Hotel-related constants
+- **`map.ts`**: Map configuration constants
+- **`messages.ts`**: Application messages
+- **`pagination.ts`**: Pagination defaults
+- **`payment.ts`**: Payment method constants
+- **`routes.ts`**: Route path constants
+- **`storage.ts`**: LocalStorage key constants
+- **`ui.ts`**: UI-related constants
+- **`user.ts`**: User-related constants
+- **`validation.ts`**: Validation rules and schemas
+
+All constants are exported from `src/constants/index.ts` for easy importing:
+
+```typescript
+import { ROUTES, STORAGE_KEYS, AUTH_HEADER_PREFIX } from '@/constants'
 ```
 
 ---
@@ -714,6 +750,25 @@ This project uses Husky and lint-staged to ensure code quality:
 
 ## 🎨 UI/UX Features
 
+### Atomic Design System
+
+The project follows an **atomic design methodology** for component organization, ensuring consistency and reusability:
+
+- **Atoms** (`components/atomic/`): Basic building blocks
+  - **Buttons**: `CounterButton`, `SearchActionButtons`, `SubmitButton`, `ViewDetailsButton`
+  - **Fields**: `FormTextField`, `FormSelectField`, `SearchCityField`, `SearchDateField`
+  - **Display**: `PriceDisplay`, `StarRatingDisplay`, `DiscountBadge`, `TotalPrice`, `PriceBreakdown`, `SummarySection`, `GuestRoomRow`
+  - **Cards**: `HotelCardImage`, `HotelCardInfo`, `HotelCardPrice`, `RoomCardImage`, `RoomCardInfo`, `RoomCardActions`
+
+- **Molecules** (`components/common/`, `components/forms/`, etc.): Composed components
+  - Common components: `SafeImage`, `VoyaLoader`, `SEO`, `SkipLink`, `AriaLiveRegion`
+  - Form components: `FormField`, `FormActions`
+  - State components: `LoadingState`, `ErrorState`, `EmptyState`
+
+- **Organisms** (`components/layout/`, `components/admin/`): Complex UI sections
+  - Layout components: `MainHeader`, `MainFooter`, `NavigationMenu`
+  - Admin components: `AdminDataGrid`, `AdminFormDialog`, `PageHeader`
+
 ### Material-UI Theme
 
 The application uses a custom Material-UI theme with:
@@ -735,6 +790,28 @@ The application uses a custom Material-UI theme with:
 - Keyboard navigation support
 - Screen reader friendly
 - Semantic HTML structure
+- `AriaLiveRegion` component for dynamic content announcements
+- `SkipLink` component for keyboard navigation
+
+---
+
+## 🔧 Providers & Context
+
+The application uses several context providers for global state management:
+
+- **`ErrorBoundary`**: Catches React errors and displays fallback UI
+- **`LoadingProvider`**: Manages global loading states
+- **`NotificationProvider`**: Provides toast notification functionality (notistack)
+- **`ThemeContext`**: Manages theme (light/dark mode) state
+
+All providers are wrapped in `src/providers/index.tsx` and applied at the root level in `App.tsx`.
+
+### Error Handling
+
+- **Error Boundary**: Catches component tree errors
+- **Route Error**: Handles route-level errors
+- **Error State Component**: Reusable error display component
+- **Global Error Handler**: Centralized error logging and handling
 
 ---
 
@@ -746,13 +823,15 @@ The application uses a custom Material-UI theme with:
 - Tokens stored in localStorage
 - Automatic token injection in API requests
 - Protected routes for authenticated users
+- Role-based access control (User/Admin)
 
 ### Best Practices
 
 - Environment variables for sensitive data
 - No hardcoded API keys or secrets
-- Input validation on all forms
+- Input validation on all forms (Yup schemas)
 - XSS protection through React's built-in escaping
+- Type-safe API calls with TypeScript
 
 ---
 
