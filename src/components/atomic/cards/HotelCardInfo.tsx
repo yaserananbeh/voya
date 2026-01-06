@@ -1,4 +1,5 @@
-import { Typography, Stack, Rating } from '@mui/material'
+import { Typography, Box } from '@mui/material'
+import { StarRatingDisplay } from '../display/StarRatingDisplay'
 
 type HotelCardInfoProps = {
   name: string
@@ -47,9 +48,9 @@ export function HotelCardInfo({
       )}
 
       {starRating !== null && starRating !== undefined && (
-        <Stack direction="row" spacing={1} alignItems="center" sx={{ mt: 1 }}>
-          <Rating value={starRating} readOnly size="small" />
-        </Stack>
+        <Box sx={{ mt: 1 }}>
+          <StarRatingDisplay rating={starRating} />
+        </Box>
       )}
 
       {showDescription && description && (
