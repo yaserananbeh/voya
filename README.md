@@ -58,7 +58,7 @@ A modern, full-featured travel and accommodation booking platform built with Rea
 - 🔒 **Type Safety**: End-to-end TypeScript coverage
 - ⚡ **Performance**: Code splitting, lazy loading, and optimized caching
 - 🧪 **Tested**: Unit tests with Vitest and React Testing Library
-- 📱 **Responsive**: Mobile-first design approach
+- 📱 **Responsive**: Fully responsive design
 
 ---
 
@@ -76,15 +76,15 @@ A modern, full-featured travel and accommodation booking platform built with Rea
   - Search bar for hotels and cities
   - Interactive calendar for check-in/check-out dates
   - Guest and room selection controls
-  - Default values (today/tomorrow, 1 adult, 0 children, 1 room)
+  - Default values (today/tomorrow, 2 adult, 0 children, 1 room)
 
 - **Featured Deals Section**
-  - Showcases 3-5 hotels with special offers
+  - Showcases 3 hotels with special offers
   - Displays original and discounted prices
   - Hotel thumbnails and location information
 
 - **Recently Visited Hotels**
-  - Personalized display of last 3-5 visited hotels
+  - Personalized display of last 3 visited hotels
   - Includes thumbnail, name, city, star rating, and pricing
 
 - **Trending Destinations**
@@ -100,7 +100,7 @@ A modern, full-featured travel and accommodation booking platform built with Rea
   - Responsive sidebar (drawer on mobile)
 
 - **Hotel Listings**
-  - Infinite scroll pagination
+  - Load more infinite scroll pagination
   - Hotel cards with thumbnails, ratings, and prices
   - Brief descriptions
   - Direct navigation to hotel details
@@ -115,7 +115,6 @@ A modern, full-featured travel and accommodation booking platform built with Rea
   - Hotel name, star rating, and description
   - Guest reviews and ratings
   - Interactive map showing hotel location
-  - Nearby attractions display
 
 - **Room Availability & Selection**
   - List of available room types
@@ -147,7 +146,7 @@ A modern, full-featured travel and accommodation booking platform built with Rea
 
 #### 1. **Admin Dashboard**
 - **Functional Left Navigation**
-  - Collapsible sidebar with links to:
+  - Sidebar with links to:
     - Dashboard (overview statistics)
     - Cities Management
     - Hotels Management
@@ -160,7 +159,7 @@ A modern, full-featured travel and accommodation booking platform built with Rea
   - Visual data representation
 
 #### 2. **Admin Search Bar**
-- Global search functionality
+- Entities search functionality
 - Filters for all admin grids
 - Real-time search across entities
 
@@ -170,26 +169,25 @@ A modern, full-featured travel and accommodation booking platform built with Rea
 - Name, description
 - Search and filter capabilities
 - Create, update, and delete operations
-- Photo upload support
+
 
 **Hotels Grid:**
 - Name, star rating, number of rooms
 - Search and filter capabilities
 - Create, update, and delete operations
-- Photo upload support
+
 
 **Rooms Grid:**
 - Room number, availability status
 - Adult and children capacity
 - Search and filter capabilities
 - Create, update, and delete operations
-- Photo upload support
+
 
 #### 4. **Entity Management Forms**
 - **Create Button**: Opens modal form for creating new entities
 - **Update Form**: Accessible by clicking on grid rows
 - **Delete Confirmation**: Safe deletion with confirmation dialogs (`DeleteConfirmDialog`)
-- **Photo Upload**: Support for image uploads via upload API
 - **Form Validation**: Yup schema validation for all forms
 
 ---
@@ -280,12 +278,6 @@ Using pnpm (recommended):
 pnpm install
 ```
 
-Or using npm:
-
-```bash
-npm install
-```
-
 ### 3. Environment Configuration
 
 Create a `.env` file in the root directory:
@@ -330,8 +322,6 @@ The project uses RTK Query for API integration. All API endpoints are configured
 
 - `src/api/baseApi.ts` - Base API configuration
 - `src/api/*/index.ts` - Feature-specific endpoints
-
-See [API Integration](#-api-integration) for more details.
 
 ---
 
@@ -619,10 +609,8 @@ Located in `src/utils/`:
 The project uses a centralized constants system in `src/constants/`:
 
 - **`api.ts`**: API-related constants (endpoints, headers, prefixes)
-- **`colors.ts`**: Color palette constants
 - **`hotel.ts`**: Hotel-related constants
 - **`map.ts`**: Map configuration constants
-- **`messages.ts`**: Application messages
 - **`pagination.ts`**: Pagination defaults
 - **`payment.ts`**: Payment method constants
 - **`routes.ts`**: Route path constants
@@ -665,7 +653,6 @@ All API endpoints are defined using RTK Query's `injectEndpoints`:
 
 #### Search
 - `GET /hotels` - Get hotels list with search query parameters (used for search results page)
-- `GET /home/search` - Search hotels with filters (used for home page search)
 - `GET /search-results/amenities` - Get available amenities for filtering
 
 #### Home Page
