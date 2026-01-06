@@ -54,9 +54,11 @@ export function GuestRoomSelector({ adults, children, rooms, onChange }: GuestRo
     <>
       <Button
         aria-describedby={id}
+        aria-expanded={open}
+        aria-haspopup="true"
         variant="outlined"
         size="small"
-        startIcon={<PeopleIcon />}
+        startIcon={<PeopleIcon aria-hidden="true" />}
         onClick={handleOpen}
         sx={{ minWidth: 220, justifyContent: 'flex-start' }}
       >
@@ -69,8 +71,13 @@ export function GuestRoomSelector({ adults, children, rooms, onChange }: GuestRo
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        role="dialog"
+        aria-labelledby="guest-room-title"
       >
         <Box sx={{ p: 2, minWidth: 260 }}>
+          <Typography id="guest-room-title" variant="subtitle2" fontWeight={600} sx={{ mb: 1.5 }}>
+            {t('guestRoom.selectGuests') || 'Select Guests & Rooms'}
+          </Typography>
           <Row
             label={t('guestRoom.adults')}
             subtitle={t('guestRoom.adultsAges')}
@@ -129,14 +136,19 @@ function Row({ label, subtitle, value, onDec, onInc }: RowProps) {
         )}
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <IconButton size="small" onClick={onDec} disabled={disabled}>
-          <RemoveIcon fontSize="small" />
+        <IconButton
+          size="small"
+          onClick={onDec}
+          disabled={disabled}
+          aria-label={`Decrease ${label}`}
+        >
+          <RemoveIcon fontSize="small" aria-hidden="true" />
         </IconButton>
-        <Typography minWidth={24} textAlign="center">
+        <Typography minWidth={24} textAlign="center" aria-label={`${label}: ${value}`}>
           {value}
         </Typography>
-        <IconButton size="small" onClick={onInc}>
-          <AddIcon fontSize="small" />
+        <IconButton size="small" onClick={onInc} aria-label={`Increase ${label}`}>
+          <AddIcon fontSize="small" aria-hidden="true" />
         </IconButton>
       </Box>
     </Box>

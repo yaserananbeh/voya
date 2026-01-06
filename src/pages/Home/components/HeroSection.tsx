@@ -44,7 +44,7 @@ export function HeroSection() {
 
       <Stack spacing={3} sx={{ position: 'relative' }}>
         <Chip
-          icon={<FlightTakeoffIcon />}
+          icon={<FlightTakeoffIcon aria-hidden="true" />}
           label={t('home.heroChip')}
           color="primary"
           variant="outlined"
@@ -78,9 +78,10 @@ export function HeroSection() {
           <Button
             variant="contained"
             size="large"
-            endIcon={<ArrowForwardIcon />}
+            endIcon={<ArrowForwardIcon aria-hidden="true" />}
             component={RouterLink}
             to={ROUTES.SEARCH}
+            aria-label={t('home.startExploring') || 'Start exploring hotels'}
             sx={{
               px: { xs: 2, sm: 3 },
               py: { xs: 1, sm: 1.2 },
@@ -95,6 +96,7 @@ export function HeroSection() {
             variant="text"
             size="large"
             onClick={scrollToFeatured}
+            aria-label={t('home.viewFeaturedDeals') || 'View featured deals'}
             sx={{
               fontSize: { xs: '0.875rem', sm: '1rem' },
             }}

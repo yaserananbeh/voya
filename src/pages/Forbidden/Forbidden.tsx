@@ -109,9 +109,10 @@ export default function ForbiddenPage() {
               <Button
                 variant="contained"
                 size="large"
-                startIcon={<HomeIcon />}
+                startIcon={<HomeIcon aria-hidden="true" />}
                 onClick={goHome}
                 fullWidth
+                aria-label={t('errors.goHome') || 'Go to home page'}
                 sx={{
                   py: 1.5,
                   background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.main} 100%)`,
@@ -125,9 +126,10 @@ export default function ForbiddenPage() {
               <Button
                 variant="outlined"
                 size="large"
-                startIcon={<ArrowBackIcon />}
+                startIcon={<ArrowBackIcon aria-hidden="true" />}
                 onClick={goBack}
                 fullWidth
+                aria-label={t('common.back') || 'Go back'}
                 sx={{ py: 1.5 }}
               >
                 {t('common.back')}

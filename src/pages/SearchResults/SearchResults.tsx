@@ -33,9 +33,12 @@ export default function SearchResults() {
           <IconButton
             onClick={handleFiltersToggle}
             color="primary"
+            aria-label={t('common.toggleFilters') || 'Toggle filters'}
+            aria-expanded={mobileFiltersOpen}
+            aria-controls="filters-drawer"
             sx={{ border: 1, borderColor: 'divider' }}
           >
-            <FilterListIcon />
+            <FilterListIcon aria-hidden="true" />
           </IconButton>
         </Box>
       )}
@@ -44,6 +47,8 @@ export default function SearchResults() {
         anchor="left"
         open={isMobile ? mobileFiltersOpen : false}
         onClose={handleFiltersToggle}
+        id="filters-drawer"
+        aria-labelledby="filters-drawer-title"
         ModalProps={{
           keepMounted: true,
         }}
