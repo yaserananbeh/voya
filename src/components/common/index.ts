@@ -1,3 +1,5 @@
 export { SafeImage } from './SafeImage'
 export { VoyaLoader } from './VoyaLoader'
 export { SEO } from './SEO'
+export { SkipLink } from './SkipLink'
+export { AriaLiveRegion } from './AriaLiveRegion'
