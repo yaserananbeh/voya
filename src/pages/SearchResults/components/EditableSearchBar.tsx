@@ -315,6 +315,7 @@ export function EditableSearchBar() {
             <Box
               sx={{
                 flexShrink: { xs: 0, md: 1 },
+                width: { xs: '100%', md: 'auto' },
                 minWidth: { xs: '100%', md: 220 },
                 maxWidth: { xs: '100%', md: 'none' },
                 mt: { xs: 0, md: 2 },
