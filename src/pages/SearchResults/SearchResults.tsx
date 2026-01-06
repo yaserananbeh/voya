@@ -7,8 +7,11 @@ import { ResultsList } from './components/ResultsList'
 import { SelectedFiltersBar } from './components/SelectedFiltersBar'
 import { EditableSearchBar } from './components/EditableSearchBar'
 import { usePageTitle } from '@/hooks'
+import { SEO } from '@/components/common'
+import { useTranslation } from 'react-i18next'
 
 export default function SearchResults() {
+  const { t } = useTranslation()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
@@ -20,6 +23,11 @@ export default function SearchResults() {
 
   return (
     <>
+      <SEO
+        title={t('seo.search.title')}
+        description={t('seo.search.description')}
+        keywords={t('seo.search.keywords')}
+      />
       {isMobile && (
         <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
           <IconButton

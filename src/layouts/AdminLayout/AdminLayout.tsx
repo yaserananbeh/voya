@@ -23,8 +23,11 @@ import { LogoutBtn } from '@/components/layout'
 import { Outlet } from 'react-router-dom'
 import { ScrollToTop } from '@/components/ScrollToTop'
 import { UI, ROUTES } from '@/constants'
+import { SEO } from '@/components/common'
+import { useTranslation } from 'react-i18next'
 
 export default function AdminLayout() {
+  const { t } = useTranslation()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -69,6 +72,12 @@ export default function AdminLayout() {
 
   return (
     <Box sx={{ display: 'flex' }}>
+      <SEO
+        title={t('pages.adminDashboard')}
+        description="Admin dashboard for managing hotels, cities, and rooms"
+        noindex={true}
+        nofollow={true}
+      />
       <ScrollToTop />
       <AppBar
         position="fixed"
