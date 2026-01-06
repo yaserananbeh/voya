@@ -745,7 +745,7 @@ The project follows an **atomic design methodology** for component organization,
   - **Cards**: `HotelCardImage`, `HotelCardInfo`, `HotelCardPrice`, `RoomCardImage`, `RoomCardInfo`, `RoomCardActions`
 
 - **Molecules** (`components/common/`, `components/forms/`, etc.): Composed components
-  - Common components: `SafeImage`, `VoyaLoader`, `SEO`, `SkipLink`, `AriaLiveRegion`
+  - Common components: `SafeImage`, `VoyaLoader`, `SEO`, `SkipLink`
   - Form components: `FormField`, `FormActions`
   - State components: `LoadingState`, `ErrorState`, `EmptyState`
 
@@ -774,7 +774,6 @@ The application uses a custom Material-UI theme with:
 - Keyboard navigation support
 - Screen reader friendly
 - Semantic HTML structure
-- `AriaLiveRegion` component for dynamic content announcements
 - `SkipLink` component for keyboard navigation
 
 ---

@@ -110,7 +110,6 @@ Voya
 │   │   │   ├── CheckoutHeader.tsx
 │   │   │   └── index.ts
 │   │   ├── common
-│   │   │   ├── AriaLiveRegion.tsx
 │   │   │   ├── DeleteConfirmDialog.tsx
 │   │   │   ├── EmptyState.tsx
 │   │   │   ├── ErrorState.tsx
