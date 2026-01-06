@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
 export function LanguageSwitcher() {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -24,7 +24,7 @@ export function LanguageSwitcher() {
 
   return (
     <>
-      <Tooltip title="Change language">
+      <Tooltip title={t('common.changeLanguage')}>
         <IconButton onClick={handleMenuOpen} color="inherit" aria-label="change language">
           <LanguageIcon />
         </IconButton>

@@ -2,14 +2,17 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import LoginIcon from '@mui/icons-material/Login'
 import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAppSelector, useAppDispatch } from '@/hooks'
 import { selectIsAuthenticated, logout } from '@/store/authSlice'
 import { STORAGE_KEYS, ROUTES } from '@/constants'
 
 export default function LogoutBtn() {
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const isAuthenticated = useAppSelector(selectIsAuthenticated)
+  const isRTL = i18n.language === 'ar'
 
   const handleClick = () => {
     if (isAuthenticated) {
@@ -28,9 +31,9 @@ export default function LogoutBtn() {
       variant="contained"
       color={isAuthenticated ? 'info' : 'primary'}
       startIcon={isAuthenticated ? <LogoutIcon /> : <LoginIcon />}
-      sx={{ ml: 2 }}
+      sx={{ [isRTL ? 'mr' : 'ml']: 2 }}
     >
-      {isAuthenticated ? 'Logout' : 'Login'}
+      {isAuthenticated ? t('common.logout') : t('common.login')}
     </Button>
   )
 }

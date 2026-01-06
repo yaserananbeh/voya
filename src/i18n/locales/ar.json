@@ -19,16 +19,21 @@
     "next": "التالي",
     "previous": "السابق",
     "viewDetails": "عرض التفاصيل",
-    "clear": "مسح"
+    "clear": "مسح",
+    "changeLanguage": "تغيير اللغة",
+    "switchToDarkMode": "التبديل إلى الوضع الداكن",
+    "switchToLightMode": "التبديل إلى الوضع الفاتح"
   },
   "auth": {
     "loginTitle": "تسجيل الدخول إلى Voya",
+    "welcomeBack": "مرحباً بعودتك! يرجى تسجيل الدخول إلى حسابك",
     "username": "اسم المستخدم",
     "password": "كلمة المرور",
     "usernameRequired": "اسم المستخدم مطلوب",
     "passwordRequired": "كلمة المرور مطلوبة",
     "loginSuccess": "تم تسجيل الدخول بنجاح!",
-    "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد."
+    "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد.",
+    "loggingIn": "جاري تسجيل الدخول..."
   },
   "home": {
     "heroTitle": "اكتشف أماكن الإقامة التي تناسب طريقة سفرك.",
@@ -87,7 +92,13 @@
     "currentSearch": "معاملات البحث الحالية",
     "searchQuery": "بحث",
     "editSearch": "تعديل البحث",
-    "collapseSearch": "طي"
+    "collapseSearch": "طي",
+    "loadMore": "تحميل المزيد",
+    "loading": "جاري التحميل…",
+    "noMatchesTryLoadMore": "لا توجد نتائج مطابقة في النتائج المحملة — جرب 'تحميل المزيد'.",
+    "noResultsFound": "لم يتم العثور على نتائج",
+    "reachedEnd": "وصلت إلى النهاية",
+    "failedToLoadHotels": "فشل تحميل الفنادق"
   },
   "hotel": {
     "availableRooms": "الغرف المتاحة",
@@ -126,7 +137,12 @@
     "specialRequests": "طلبات خاصة أو ملاحظات",
     "specialRequestsHelper": "اختياري: أي طلبات خاصة أو معلومات إضافية",
     "specialRequestsPlaceholder": "مثال: تسجيل متأخر، متطلبات غذائية، تفضيلات الغرفة...",
-    "unexpectedError": "حدث خطأ غير متوقع"
+    "unexpectedError": "حدث خطأ غير متوقع",
+    "paymentMethods": {
+      "Cash": "نقد",
+      "Card": "بطاقة",
+      "PayPal": "باي بال"
+    }
   },
   "confirmation": {
     "bookingConfirmed": "تم تأكيد الحجز",
@@ -147,7 +163,13 @@
     "customerInfo": "معلومات العميل",
     "bookingDetails": "تفاصيل الحجز",
     "accommodation": "الإقامة",
-    "paymentInfo": "معلومات الدفع"
+    "paymentInfo": "معلومات الدفع",
+    "bookingStatus": {
+      "Confirmed": "مؤكد",
+      "Pending": "قيد الانتظار",
+      "Cancelled": "ملغى",
+      "Canceled": "ملغى"
+    }
   },
   "footer": {
     "tagline": "اكتشف إقامتك المثالية. احجز بثقة وسافر بسهولة.",
@@ -199,6 +221,33 @@
     "name": "الاسم",
     "description": "الوصف",
     "actions": "الإجراءات"
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "nameRequired": "الاسم مطلوب",
+    "roomNumberRequired": "رقم الغرفة مطلوب",
+    "hotelRequired": "الفندق مطلوب",
+    "cityRequired": "المدينة مطلوبة",
+    "roomTypeRequired": "نوع الغرفة مطلوب",
+    "adultCapacityRequired": "سعة البالغين مطلوبة",
+    "childrenCapacityRequired": "سعة الأطفال مطلوبة",
+    "priceRequired": "السعر مطلوب",
+    "starRatingRequired": "التقييم بالنجوم مطلوب",
+    "customerNameRequired": "اسم العميل مطلوب",
+    "paymentMethodRequired": "طريقة الدفع مطلوبة",
+    "usernameRequired": "اسم المستخدم مطلوب",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "invalidUrl": "يجب أن يكون رابطاً صالحاً",
+    "specialRequestsMaxLength": "يجب أن تكون الطلبات الخاصة أقل من {max} حرفاً",
+    "minValue": "يجب أن يكون هذا الحقل على الأقل {min}",
+    "adultsMin": "يجب أن يكون هناك بالغ واحد على الأقل",
+    "childrenMin": "لا يمكن أن يكون عدد الأطفال سالباً",
+    "roomsMin": "يجب أن تكون هناك غرفة واحدة على الأقل",
+    "adultCapacityMin": "يجب أن تكون سعة البالغين على الأقل 1",
+    "childrenCapacityMin": "لا يمكن أن تكون سعة الأطفال سالبة",
+    "priceMin": "لا يمكن أن يكون السعر سالباً",
+    "starRatingMin": "يجب أن يكون التقييم بالنجوم على الأقل {min}",
+    "starRatingMax": "يجب أن يكون التقييم بالنجوم على الأكثر {max}"
   },
   "errors": {
     "generic": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",

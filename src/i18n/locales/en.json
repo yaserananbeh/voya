@@ -19,16 +19,21 @@
     "next": "Next",
     "previous": "Previous",
     "viewDetails": "View Details",
-    "clear": "Clear"
+    "clear": "Clear",
+    "changeLanguage": "Change language",
+    "switchToDarkMode": "Switch to dark mode",
+    "switchToLightMode": "Switch to light mode"
   },
   "auth": {
     "loginTitle": "Login to Voya",
+    "welcomeBack": "Welcome back! Please sign in to your account",
     "username": "Username",
     "password": "Password",
     "usernameRequired": "Username is required",
     "passwordRequired": "Password is required",
     "loginSuccess": "Login successful!",
-    "loginFailed": "Login failed. Please check your credentials."
+    "loginFailed": "Login failed. Please check your credentials.",
+    "loggingIn": "Logging in..."
   },
   "home": {
     "heroTitle": "Discover stays that fit how you travel.",
@@ -87,7 +92,13 @@
     "currentSearch": "Current search parameters",
     "searchQuery": "Search",
     "editSearch": "Edit search",
-    "collapseSearch": "Collapse"
+    "collapseSearch": "Collapse",
+    "loadMore": "Load more",
+    "loading": "Loading…",
+    "noMatchesTryLoadMore": "No matches in loaded results — try 'Load more'.",
+    "noResultsFound": "No results found",
+    "reachedEnd": "You reached the end",
+    "failedToLoadHotels": "Failed to load hotels"
   },
   "hotel": {
     "availableRooms": "Available Rooms",
@@ -126,7 +137,12 @@
     "specialRequests": "Special requests or remarks",
     "specialRequestsHelper": "Optional: Any special requests or additional information",
     "specialRequestsPlaceholder": "e.g., Late check-in, dietary requirements, room preferences...",
-    "unexpectedError": "Unexpected error occurred"
+    "unexpectedError": "Unexpected error occurred",
+    "paymentMethods": {
+      "Cash": "Cash",
+      "Card": "Card",
+      "PayPal": "PayPal"
+    }
   },
   "confirmation": {
     "bookingConfirmed": "Booking confirmed",
@@ -147,7 +163,13 @@
     "customerInfo": "Customer Information",
     "bookingDetails": "Booking Details",
     "accommodation": "Accommodation",
-    "paymentInfo": "Payment Information"
+    "paymentInfo": "Payment Information",
+    "bookingStatus": {
+      "Confirmed": "Confirmed",
+      "Pending": "Pending",
+      "Cancelled": "Cancelled",
+      "Canceled": "Cancelled"
+    }
   },
   "footer": {
     "tagline": "Discover your perfect stay. Book with confidence and travel with ease.",
@@ -199,6 +221,33 @@
     "name": "Name",
     "description": "Description",
     "actions": "Actions"
+  },
+  "validation": {
+    "required": "This field is required",
+    "nameRequired": "Name is required",
+    "roomNumberRequired": "Room number is required",
+    "hotelRequired": "Hotel is required",
+    "cityRequired": "City is required",
+    "roomTypeRequired": "Room type is required",
+    "adultCapacityRequired": "Adult capacity is required",
+    "childrenCapacityRequired": "Children capacity is required",
+    "priceRequired": "Price is required",
+    "starRatingRequired": "Star rating is required",
+    "customerNameRequired": "Customer name is required",
+    "paymentMethodRequired": "Payment method is required",
+    "usernameRequired": "Username is required",
+    "passwordRequired": "Password is required",
+    "invalidUrl": "Must be a valid URL",
+    "specialRequestsMaxLength": "Special requests must be less than {max} characters",
+    "minValue": "This field must be at least {min}",
+    "adultsMin": "At least 1 adult is required",
+    "childrenMin": "Number of children cannot be negative",
+    "roomsMin": "At least 1 room is required",
+    "adultCapacityMin": "Adult capacity must be at least 1",
+    "childrenCapacityMin": "Children capacity cannot be negative",
+    "priceMin": "Price cannot be negative",
+    "starRatingMin": "Star rating must be at least {min}",
+    "starRatingMax": "Star rating must be at most {max}"
   },
   "errors": {
     "generic": "Something went wrong. Please try again.",
