@@ -16,7 +16,8 @@
     "gen:api": "openapi-typescript http://localhost:5000/swagger.json -o src/types/api.ts",
     "typecheck": "tsc -p tsconfig.app.json --noEmit",
     "verify": "pnpm typecheck && pnpm lint && pnpm test && pnpm build",
-    "verify:stage": "git add . && pnpm verify"
+    "verify:stage": "git add . && pnpm verify",
+    "generate:sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

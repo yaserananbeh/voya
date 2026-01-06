@@ -13,6 +13,6 @@ Allow: /search
 Allow: /hotel/
 Allow: /login
 
-# Sitemap location (if you add one later)
-# Sitemap: https://yourdomain.com/sitemap.xml
+# Sitemap location
+Sitemap: https://ya-voya.netlify.app/sitemap.xml
 
