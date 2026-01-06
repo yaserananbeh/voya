@@ -76,9 +76,19 @@ Example folder structure:
 
 ```
 src/pages/Home/tests/
-src/hooks/tests/
+src/pages/Login/tests/
+src/pages/Hotel/tests/
+src/pages/Checkout/tests/
 src/utils/tests/
 ```
+
+**Note**: Tests are co-located with their components. Currently, tests exist for:
+
+- Home page components
+- Login page
+- Hotel page
+- Checkout flow (Checkout, Confirmation, UserInfoForm)
+- Utility functions (logger)
 
 ---
 
@@ -148,6 +158,7 @@ Documentation goes inside:
 docs/
   ├── CONTRIBUTING.md
   ├── PROJECT_STRUCTURE.md
+  └── Helpful_commands_Dev.md
 ```
 
 ---
