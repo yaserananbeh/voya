@@ -267,5 +267,20 @@
     "forbidden": "Access Forbidden",
     "forbiddenMessage": "You don't have permission to access this page. This area is restricted to authorized users only.",
     "forbiddenHelpText": "If you believe this is an error, please contact support or return to the home page."
+  },
+  "pages": {
+    "home": "Home",
+    "search": "Search Results",
+    "login": "Login",
+    "hotel": "Hotel Details",
+    "checkout": "Checkout",
+    "confirmation": "Booking Confirmation",
+    "notFound": "Page Not Found",
+    "forbidden": "Access Forbidden",
+    "error": "Error",
+    "adminDashboard": "Admin Dashboard",
+    "adminCities": "Manage Cities",
+    "adminHotels": "Manage Hotels",
+    "adminRooms": "Manage Rooms"
   }
 }
