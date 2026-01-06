@@ -22,7 +22,12 @@
     "clear": "مسح",
     "changeLanguage": "تغيير اللغة",
     "switchToDarkMode": "التبديل إلى الوضع الداكن",
-    "switchToLightMode": "التبديل إلى الوضع الفاتح"
+    "switchToLightMode": "التبديل إلى الوضع الفاتح",
+    "skipToContent": "تخطي إلى المحتوى الرئيسي",
+    "menu": "القائمة",
+    "mainNavigation": "التنقل الرئيسي",
+    "selectLanguage": "اختر اللغة",
+    "toggleFilters": "تبديل المرشحات"
   },
   "auth": {
     "loginTitle": "تسجيل الدخول إلى Voya",
@@ -75,7 +80,8 @@
     "child": "طفل",
     "childrenPlural": "أطفال",
     "room": "غرفة",
-    "roomsPlural": "غرف"
+    "roomsPlural": "غرف",
+    "selectGuests": "اختر الضيوف والغرف"
   },
   "search": {
     "filters": "المرشحات",

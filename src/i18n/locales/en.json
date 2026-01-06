@@ -22,7 +22,12 @@
     "clear": "Clear",
     "changeLanguage": "Change language",
     "switchToDarkMode": "Switch to dark mode",
-    "switchToLightMode": "Switch to light mode"
+    "switchToLightMode": "Switch to light mode",
+    "skipToContent": "Skip to main content",
+    "menu": "Menu",
+    "mainNavigation": "Main navigation",
+    "selectLanguage": "Select language",
+    "toggleFilters": "Toggle filters"
   },
   "auth": {
     "loginTitle": "Login to Voya",
@@ -75,7 +80,8 @@
     "child": "child",
     "childrenPlural": "children",
     "room": "room",
-    "roomsPlural": "rooms"
+    "roomsPlural": "rooms",
+    "selectGuests": "Select Guests and Rooms"
   },
   "search": {
     "filters": "Filters",
@@ -138,6 +144,8 @@
     "specialRequestsHelper": "Optional: Any special requests or additional information",
     "specialRequestsPlaceholder": "e.g., Late check-in, dietary requirements, room preferences...",
     "unexpectedError": "Unexpected error occurred",
+    "error": "Error",
+    "processing": "Processing booking...",
     "paymentMethods": {
       "Cash": "Cash",
       "Card": "Card",
