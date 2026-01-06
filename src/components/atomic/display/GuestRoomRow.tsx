@@ -18,8 +18,6 @@ export function GuestRoomRow({
   onDecrement,
   min = 0,
 }: GuestRoomRowProps) {
-  const disabled = value <= min
-
   return (
     <Box
       sx={{
@@ -43,7 +41,6 @@ export function GuestRoomRow({
           onDecrement={onDecrement}
           value={value}
           min={min}
-          disabled={disabled}
           aria-label={label}
         />
       </Box>
