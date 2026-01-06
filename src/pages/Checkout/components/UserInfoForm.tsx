@@ -52,9 +52,9 @@ export function UserInfoForm({
   })
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit} noValidate>
       <Box sx={{ mb: 3 }}>
-        <Typography variant="h6" fontWeight={700} gutterBottom>
+        <Typography variant="h6" fontWeight={700} gutterBottom component="h2">
           {t('checkout.customerInfo') || 'Customer Information'}
         </Typography>
         <Typography variant="body2" color="text.secondary">
@@ -76,10 +76,13 @@ export function UserInfoForm({
               : ' '
           }
           fullWidth
+          autoComplete="name"
+          aria-required="true"
+          aria-invalid={Boolean(formik.touched.customerName && formik.errors.customerName)}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <PersonIcon sx={{ color: 'text.secondary' }} />
+                <PersonIcon sx={{ color: 'text.secondary' }} aria-hidden="true" />
               </InputAdornment>
             ),
           }}
@@ -104,10 +107,13 @@ export function UserInfoForm({
               : ' '
           }
           fullWidth
+          autoComplete="payment-method"
+          aria-required="true"
+          aria-invalid={Boolean(formik.touched.paymentMethod && formik.errors.paymentMethod)}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <PaymentIcon sx={{ color: 'text.secondary' }} />
+                <PaymentIcon sx={{ color: 'text.secondary' }} aria-hidden="true" />
               </InputAdornment>
             ),
           }}
@@ -143,7 +149,7 @@ export function UserInfoForm({
           InputProps={{
             startAdornment: (
               <InputAdornment position="start" sx={{ alignSelf: 'flex-start', mt: 1.5 }}>
-                <NotesIcon sx={{ color: 'text.secondary' }} />
+                <NotesIcon sx={{ color: 'text.secondary' }} aria-hidden="true" />
               </InputAdornment>
             ),
           }}
@@ -155,7 +161,15 @@ export function UserInfoForm({
         />
 
         {typeof formik.status === 'string' && (
-          <TextField value={formik.status} error fullWidth InputProps={{ readOnly: true }} />
+          <Box role="alert" aria-live="assertive">
+            <TextField
+              value={formik.status}
+              error
+              fullWidth
+              InputProps={{ readOnly: true }}
+              aria-label={t('checkout.error') || 'Error message'}
+            />
+          </Box>
         )}
 
         <Button
@@ -164,6 +178,7 @@ export function UserInfoForm({
           disabled={submitting}
           size="large"
           fullWidth
+          aria-label={submitting ? t('checkout.processing') : t('checkout.confirmBooking')}
           sx={{
             mt: 2,
             py: 1.5,

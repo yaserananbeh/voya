@@ -167,17 +167,21 @@ export default function Login() {
               </Typography>
             </Stack>
 
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} noValidate>
               <Stack spacing={3}>
                 <TextField
                   fullWidth
                   label={t('auth.username')}
                   name="userName"
+                  type="text"
+                  autoComplete="username"
                   value={formik.values.userName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   error={formik.touched.userName && Boolean(formik.errors.userName)}
                   helperText={formik.touched.userName && formik.errors.userName}
+                  aria-required="true"
+                  aria-invalid={formik.touched.userName && Boolean(formik.errors.userName)}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -188,6 +192,7 @@ export default function Login() {
                                 ? theme.palette.error.main
                                 : theme.palette.primary.main,
                           }}
+                          aria-hidden="true"
                         />
                       </InputAdornment>
                     ),
@@ -247,11 +252,14 @@ export default function Login() {
                   type="password"
                   label={t('auth.password')}
                   name="password"
+                  autoComplete="current-password"
                   value={formik.values.password}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   error={formik.touched.password && Boolean(formik.errors.password)}
                   helperText={formik.touched.password && formik.errors.password}
+                  aria-required="true"
+                  aria-invalid={formik.touched.password && Boolean(formik.errors.password)}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -262,6 +270,7 @@ export default function Login() {
                                 ? theme.palette.error.main
                                 : theme.palette.primary.main,
                           }}
+                          aria-hidden="true"
                         />
                       </InputAdornment>
                     ),
@@ -322,8 +331,13 @@ export default function Login() {
                   variant="contained"
                   size="large"
                   disabled={isLoading}
+                  aria-label={isLoading ? t('auth.loggingIn') : t('common.login')}
                   startIcon={
-                    isLoading ? <CircularProgress size={20} color="inherit" /> : <LoginIcon />
+                    isLoading ? (
+                      <CircularProgress size={20} color="inherit" aria-hidden="true" />
+                    ) : (
+                      <LoginIcon aria-hidden="true" />
+                    )
                   }
                   sx={{
                     mt: 1,

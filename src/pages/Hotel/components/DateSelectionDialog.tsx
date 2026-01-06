@@ -60,11 +60,23 @@ export function DateSelectionDialog({ open, onClose, onConfirm }: DateSelectionD
   })
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle>{t('hotel.selectDates')}</DialogTitle>
-      <form onSubmit={formik.handleSubmit}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="sm"
+      fullWidth
+      aria-labelledby="date-selection-dialog-title"
+      aria-describedby="date-selection-dialog-description"
+    >
+      <DialogTitle id="date-selection-dialog-title">{t('hotel.selectDates')}</DialogTitle>
+      <form onSubmit={formik.handleSubmit} noValidate>
         <DialogContent>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+          <Typography
+            id="date-selection-dialog-description"
+            variant="body2"
+            color="text.secondary"
+            sx={{ mb: 2 }}
+          >
             {t('hotel.selectDatesMessage')}
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -79,6 +91,8 @@ export function DateSelectionDialog({ open, onClose, onConfirm }: DateSelectionD
               error={formik.touched.checkInDate && Boolean(formik.errors.checkInDate)}
               helperText={formik.touched.checkInDate && formik.errors.checkInDate}
               InputLabelProps={{ shrink: true }}
+              aria-required="true"
+              aria-invalid={formik.touched.checkInDate && Boolean(formik.errors.checkInDate)}
               inputProps={{
                 dir: isRTL ? 'rtl' : 'ltr',
               }}
@@ -94,6 +108,8 @@ export function DateSelectionDialog({ open, onClose, onConfirm }: DateSelectionD
               error={formik.touched.checkOutDate && Boolean(formik.errors.checkOutDate)}
               helperText={formik.touched.checkOutDate && formik.errors.checkOutDate}
               InputLabelProps={{ shrink: true }}
+              aria-required="true"
+              aria-invalid={formik.touched.checkOutDate && Boolean(formik.errors.checkOutDate)}
               inputProps={{
                 min: formik.values.checkInDate,
                 dir: isRTL ? 'rtl' : 'ltr',
@@ -102,8 +118,10 @@ export function DateSelectionDialog({ open, onClose, onConfirm }: DateSelectionD
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose}>{t('common.cancel')}</Button>
-          <Button type="submit" variant="contained">
+          <Button onClick={onClose} aria-label={t('common.cancel') || 'Cancel'}>
+            {t('common.cancel')}
+          </Button>
+          <Button type="submit" variant="contained" aria-label={t('common.confirm') || 'Confirm'}>
             {t('common.confirm')}
           </Button>
         </DialogActions>

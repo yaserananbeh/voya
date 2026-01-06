@@ -92,7 +92,7 @@ export function HomeSearchBar() {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SearchIcon />
+              <SearchIcon aria-hidden="true" />
             </InputAdornment>
           ),
           endAdornment: formik.values.city ? (
@@ -103,9 +103,9 @@ export function HomeSearchBar() {
                   void formik.setFieldValue('city', '')
                 }}
                 edge="end"
-                aria-label="clear"
+                aria-label={t('common.clear') || 'Clear city field'}
               >
-                <ClearIcon fontSize="small" />
+                <ClearIcon fontSize="small" aria-hidden="true" />
               </IconButton>
             </InputAdornment>
           ) : undefined,
@@ -160,7 +160,8 @@ export function HomeSearchBar() {
           variant="outlined"
           color="primary"
           size="large"
-          startIcon={<RefreshIcon />}
+          startIcon={<RefreshIcon aria-hidden="true" />}
+          aria-label={t('common.clear') || 'Clear search form'}
           onClick={() => {
             dispatch(clearSearchParams())
             void formik.resetForm({
@@ -182,7 +183,8 @@ export function HomeSearchBar() {
           variant="contained"
           color="primary"
           size="large"
-          startIcon={<SearchIcon />}
+          startIcon={<SearchIcon aria-hidden="true" />}
+          aria-label={t('common.search') || 'Search hotels'}
         >
           {t('common.search')}
         </Button>
