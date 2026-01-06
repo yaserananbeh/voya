@@ -1,8 +1,7 @@
-import { Card, CardContent, CardActions, Typography, Box, Button, Rating } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import { Card, CardContent, CardActions, Typography, Box } from '@mui/material'
 import { SafeImage } from '@/components/common/SafeImage'
 import { useTranslation } from 'react-i18next'
-import VisibilityIcon from '@mui/icons-material/Visibility'
+import { PriceDisplay, StarRatingDisplay, ViewDetailsButton } from '@/components/atomic'
 
 export type HotelCardData = {
   hotelId: number
@@ -63,44 +62,23 @@ export function HotelCard({ hotel, variant = 'vertical', onViewDetails }: HotelC
               {hotel.cityName}
             </Typography>
           )}
-          <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-            <Rating value={hotel.starRating} readOnly size="small" />
-            <Typography variant="body2" sx={{ ml: 1 }}>
-              {hotel.starRating} {t('hotel.starHotel')}
-            </Typography>
+          <Box sx={{ mt: 1 }}>
+            <StarRatingDisplay rating={hotel.starRating} />
           </Box>
           {hotel.price !== undefined && (
-            <Typography variant="h6" sx={{ mt: 1 }}>
-              ${hotel.price}
-              {hotel.showDiscount && hotel.originalPrice && hotel.discount && (
-                <>
-                  {' '}
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ textDecoration: 'line-through', ml: 1 }}
-                  >
-                    ${hotel.originalPrice}
-                  </Typography>{' '}
-                  <Typography component="span" color="success.main" variant="body2">
-                    -{Math.round(hotel.discount * 100)}%
-                  </Typography>
-                </>
-              )}
-            </Typography>
+            <Box sx={{ mt: 1 }}>
+              <PriceDisplay
+                price={hotel.price}
+                originalPrice={hotel.originalPrice}
+                discount={hotel.discount}
+                showDiscount={hotel.showDiscount}
+                variant="h6"
+              />
+            </Box>
           )}
         </CardContent>
         <CardActions sx={{ p: { xs: 1, sm: 2 } }}>
-          <Button
-            component={RouterLink}
-            to={`/hotel/${hotel.hotelId}`}
-            variant="contained"
-            onClick={handleViewDetails}
-            startIcon={<VisibilityIcon />}
-          >
-            {t('common.viewDetails')}
-          </Button>
+          <ViewDetailsButton hotelId={hotel.hotelId} onClick={handleViewDetails} />
         </CardActions>
       </Card>
     )
@@ -116,11 +94,8 @@ export function HotelCard({ hotel, variant = 'vertical', onViewDetails }: HotelC
             {hotel.cityName}
           </Typography>
         )}
-        <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, mb: 1 }}>
-          <Rating value={hotel.starRating} readOnly size="small" max={5} />
-          <Typography variant="body2" sx={{ ml: 1 }}>
-            {hotel.starRating} {t('hotel.starHotel')}
-          </Typography>
+        <Box sx={{ mt: 1, mb: 1 }}>
+          <StarRatingDisplay rating={hotel.starRating} />
         </Box>
         {hotel.visitedDate && (
           <Typography variant="body2" color="text.secondary">
@@ -128,38 +103,19 @@ export function HotelCard({ hotel, variant = 'vertical', onViewDetails }: HotelC
           </Typography>
         )}
         {hotel.price !== undefined && (
-          <Typography variant="body2" sx={{ mt: 1 }}>
-            <strong>${hotel.price.toFixed(2)}</strong>
-            {hotel.showDiscount && hotel.originalPrice && hotel.discount && (
-              <>
-                {' '}
-                <Typography
-                  component="span"
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{ textDecoration: 'line-through', ml: 1 }}
-                >
-                  ${hotel.originalPrice.toFixed(2)}
-                </Typography>{' '}
-                <Typography component="span" color="success.main" variant="body2">
-                  -{Math.round(hotel.discount * 100)}%
-                </Typography>
-              </>
-            )}
-          </Typography>
+          <Box sx={{ mt: 1 }}>
+            <PriceDisplay
+              price={hotel.price}
+              originalPrice={hotel.originalPrice}
+              discount={hotel.discount}
+              showDiscount={hotel.showDiscount}
+              variant="body2"
+            />
+          </Box>
         )}
       </CardContent>
       <CardActions>
-        <Button
-          component={RouterLink}
-          to={`/hotel/${hotel.hotelId}`}
-          variant="contained"
-          fullWidth
-          onClick={handleViewDetails}
-          startIcon={<VisibilityIcon />}
-        >
-          {t('common.viewDetails')}
-        </Button>
+        <ViewDetailsButton hotelId={hotel.hotelId} onClick={handleViewDetails} fullWidth />
       </CardActions>
     </Card>
   )
