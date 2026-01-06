@@ -72,7 +72,7 @@ export function HomeSearchBar() {
         flexDirection: { xs: 'column', md: 'row' },
         flexWrap: { xs: 'nowrap', md: 'wrap' },
         gap: 2,
-        alignItems: 'center',
+        alignItems: { xs: 'stretch', md: 'center' },
       }}
       component="form"
       onSubmit={formik.handleSubmit}
@@ -134,6 +134,7 @@ export function HomeSearchBar() {
       <Box
         sx={{
           flexShrink: { xs: 0, md: 1 },
+          width: { xs: '100%', md: 'auto' },
           minWidth: { xs: '100%', md: 220 },
           maxWidth: { xs: '100%', md: 'none' },
         }}
@@ -153,6 +154,7 @@ export function HomeSearchBar() {
       <Box
         sx={{
           flexShrink: { xs: 0, md: 1 },
+          width: { xs: '100%', md: 'auto' },
           minWidth: { xs: '100%', md: 200 },
           maxWidth: { xs: '100%', md: 'none' },
         }}

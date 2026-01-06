@@ -59,7 +59,11 @@ export function GuestRoomSelector({ adults, children, rooms, onChange }: GuestRo
         size="small"
         startIcon={<PeopleIcon aria-hidden="true" />}
         onClick={handleOpen}
-        sx={{ minWidth: 220, justifyContent: 'flex-start' }}
+        sx={{
+          minWidth: { xs: '100%', md: 220 },
+          width: { xs: '100%', md: 'auto' },
+          justifyContent: 'flex-start',
+        }}
       >
         {summary}
       </Button>
