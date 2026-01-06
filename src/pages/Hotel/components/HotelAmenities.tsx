@@ -11,8 +11,10 @@ export function HotelAmenities({ amenities }: Props) {
 
   return (
     <div>
-      <Typography variant="h6">{t('search.amenities')}</Typography>
-      <Stack direction="row" spacing={1} flexWrap="wrap">
+      <Typography variant="h6" component="h2">
+        {t('search.amenities')}
+      </Typography>
+      <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mt: 1 }}>
         {amenities.map((a) => (
           <Chip key={a.id} label={a.name} />
         ))}

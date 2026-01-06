@@ -14,15 +14,30 @@ export function PriceFilter() {
     dispatch(setSearchFilters({ priceRange: value as [number, number] }))
   }
 
+  const getAriaLabel = (index: number) => {
+    return index === 0
+      ? t('search.priceRangeMin', { defaultValue: 'Minimum price' })
+      : t('search.priceRangeMax', { defaultValue: 'Maximum price' })
+  }
+
+  const getAriaValueText = (value: number) => {
+    return `$${value}`
+  }
+
   return (
     <Stack spacing={1}>
-      <Typography variant="subtitle1">{t('search.priceRange')}</Typography>
+      <Typography variant="subtitle1" component="label" id="price-range-label">
+        {t('search.priceRange')}
+      </Typography>
       <Slider
         value={priceRange}
         min={HOTEL.PRICE_RANGE.MIN}
         max={HOTEL.PRICE_RANGE.MAX}
         onChange={handleChange}
         valueLabelDisplay="auto"
+        getAriaLabel={getAriaLabel}
+        getAriaValueText={getAriaValueText}
+        aria-labelledby="price-range-label"
         sx={{
           direction: isRTL ? 'rtl' : 'ltr',
         }}

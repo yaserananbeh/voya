@@ -1,4 +1,4 @@
-`text
+```text
 Voya
 ├── .editorconfig
 ├── .env
@@ -62,17 +62,67 @@ Voya
 │   │       └── index.ts
 │   ├── components
 │   │   ├── ScrollToTop.tsx
+│   │   ├── admin
+│   │   │   ├── AdminDataGrid.tsx
+│   │   │   ├── AdminFormDialog.tsx
+│   │   │   ├── DataGridActions.tsx
+│   │   │   ├── PageHeader.tsx
+│   │   │   ├── SearchBar.tsx
+│   │   │   └── index.ts
+│   │   ├── atomic
+│   │   │   ├── buttons
+│   │   │   │   ├── CounterButton.tsx
+│   │   │   │   ├── SearchActionButtons.tsx
+│   │   │   │   ├── SubmitButton.tsx
+│   │   │   │   ├── ViewDetailsButton.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── cards
+│   │   │   │   ├── HotelCardImage.tsx
+│   │   │   │   ├── HotelCardInfo.tsx
+│   │   │   │   ├── HotelCardPrice.tsx
+│   │   │   │   ├── RoomCardActions.tsx
+│   │   │   │   ├── RoomCardImage.tsx
+│   │   │   │   ├── RoomCardInfo.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── display
+│   │   │   │   ├── DiscountBadge.tsx
+│   │   │   │   ├── GuestRoomRow.tsx
+│   │   │   │   ├── PriceBreakdown.tsx
+│   │   │   │   ├── PriceDisplay.tsx
+│   │   │   │   ├── StarRatingDisplay.tsx
+│   │   │   │   ├── SummarySection.tsx
+│   │   │   │   ├── TotalPrice.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── fields
+│   │   │   │   ├── FormSelectField.tsx
+│   │   │   │   ├── FormTextField.tsx
+│   │   │   │   ├── SearchCityField.tsx
+│   │   │   │   ├── SearchDateField.tsx
+│   │   │   │   └── index.ts
+│   │   │   └── index.ts
 │   │   ├── auth
 │   │   │   ├── AdminRoute.tsx
 │   │   │   ├── ProtectedRoute.tsx
 │   │   │   ├── RedirectIfAuthenticated.tsx
 │   │   │   └── index.ts
+│   │   ├── checkout
+│   │   │   ├── CheckoutHeader.tsx
+│   │   │   └── index.ts
 │   │   ├── common
 │   │   │   ├── AriaLiveRegion.tsx
+│   │   │   ├── DeleteConfirmDialog.tsx
+│   │   │   ├── EmptyState.tsx
+│   │   │   ├── ErrorState.tsx
+│   │   │   ├── LoadingState.tsx
 │   │   │   ├── SEO.tsx
 │   │   │   ├── SafeImage.tsx
 │   │   │   ├── SkipLink.tsx
 │   │   │   ├── VoyaLoader.tsx
+│   │   │   └── index.ts
+│   │   ├── dashboard
+│   │   │   ├── QuickOverviewCard.tsx
+│   │   │   ├── StatCard.tsx
+│   │   │   ├── StatisticCard.tsx
 │   │   │   └── index.ts
 │   │   ├── filters
 │   │   │   ├── FilterContainer.tsx
@@ -81,12 +131,21 @@ Voya
 │   │   │   ├── FormActions.tsx
 │   │   │   ├── FormField.tsx
 │   │   │   └── index.ts
+│   │   ├── hotel
+│   │   │   ├── HotelCard.tsx
+│   │   │   └── index.ts
 │   │   ├── index.ts
 │   │   ├── layout
+│   │   │   ├── FooterBrand.tsx
+│   │   │   ├── FooterContact.tsx
+│   │   │   ├── FooterSection.tsx
 │   │   │   ├── LanguageSwitcher.tsx
+│   │   │   ├── Logo.tsx
 │   │   │   ├── LogoutBtn.tsx
 │   │   │   ├── MainFooter.tsx
 │   │   │   ├── MainHeader.tsx
+│   │   │   ├── NavigationLinks.tsx
+│   │   │   ├── NavigationMenu.tsx
 │   │   │   ├── PageContainer.tsx
 │   │   │   ├── Section.tsx
 │   │   │   ├── ThemeToggle.tsx
@@ -133,8 +192,7 @@ Voya
 │   │   │   │   ├── components
 │   │   │   │   │   ├── CityForm.container.tsx
 │   │   │   │   │   ├── CityForm.presentational.tsx
-│   │   │   │   │   ├── CityForm.tsx
-│   │   │   │   │   └── DeleteConfirmDialog.tsx
+│   │   │   │   │   └── CityForm.tsx
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
 │   │   │   ├── Dashboard
@@ -144,14 +202,12 @@ Voya
 │   │   │   ├── Hotels
 │   │   │   │   ├── Hotels.tsx
 │   │   │   │   ├── components
-│   │   │   │   │   ├── DeleteConfirmDialog.tsx
 │   │   │   │   │   └── HotelForm.tsx
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
 │   │   │   ├── Rooms
 │   │   │   │   ├── Rooms.tsx
 │   │   │   │   ├── components
-│   │   │   │   │   ├── DeleteConfirmDialog.tsx
 │   │   │   │   │   └── RoomForm.tsx
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
@@ -197,7 +253,6 @@ Voya
 │   │   │   │   ├── RecentHotelsSkeleton.tsx
 │   │   │   │   └── TrendingDestinationsSection.tsx
 │   │   │   ├── index.ts
-│   │   │   ├── styles.module.css
 │   │   │   └── tests
 │   │   │       └── HomeSearchBar.test.tsx
 │   │   ├── Hotel
@@ -279,4 +334,4 @@ Voya
 ├── tsconfig.node.json
 ├── tsconfig.test.json
 └── vite.config.ts
-`
+```

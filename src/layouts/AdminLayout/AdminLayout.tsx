@@ -2,6 +2,7 @@ import { useState } from 'react'
 import {
   Drawer,
   List,
+  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -57,14 +58,15 @@ export default function AdminLayout() {
       <Toolbar />
       <List>
         {menuItems.map((item) => (
-          <ListItemButton
-            key={item.path}
-            selected={location.pathname === item.path}
-            onClick={() => handleNavigation(item.path)}
-          >
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.label} />
-          </ListItemButton>
+          <ListItem key={item.path} disablePadding>
+            <ListItemButton
+              selected={location.pathname === item.path}
+              onClick={() => handleNavigation(item.path)}
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.label} />
+            </ListItemButton>
+          </ListItem>
         ))}
       </List>
     </Box>
@@ -87,8 +89,16 @@ export default function AdminLayout() {
       >
         <Toolbar>
           {isMobile && (
-            <IconButton color="inherit" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
-              <MenuIcon />
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2 }}
+              aria-label={t('common.menu') || 'Toggle navigation menu'}
+              aria-expanded={mobileOpen}
+              aria-controls="admin-drawer"
+            >
+              <MenuIcon aria-hidden="true" />
             </IconButton>
           )}
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
@@ -103,6 +113,7 @@ export default function AdminLayout() {
         sx={{ width: { md: UI.ADMIN_LAYOUT.DRAWER_WIDTH }, flexShrink: { md: 0 } }}
       >
         <Drawer
+          id="admin-drawer"
           variant={isMobile ? 'temporary' : 'permanent'}
           open={isMobile ? mobileOpen : true}
           onClose={handleDrawerToggle}

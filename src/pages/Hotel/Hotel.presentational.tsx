@@ -78,7 +78,10 @@ export function HotelPresentational({
           </Stack>
         </div>
 
-        <HotelGallery images={gallery ?? (hotel.imageUrl ? [hotel.imageUrl] : [])} />
+        <HotelGallery
+          images={gallery ?? (hotel.imageUrl ? [hotel.imageUrl] : [])}
+          hotelName={hotel.hotelName ?? hotel.name}
+        />
 
         <Typography>{hotel.description}</Typography>
 

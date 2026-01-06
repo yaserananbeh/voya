@@ -6,6 +6,7 @@ type HotelCardPriceProps = {
   onViewHotel: () => void
   isRTL?: boolean
   buttonLabel?: string
+  hotelName?: string
 }
 
 export function HotelCardPrice({
@@ -13,8 +14,11 @@ export function HotelCardPrice({
   onViewHotel,
   isRTL = false,
   buttonLabel,
+  hotelName,
 }: HotelCardPriceProps) {
   const { t } = useTranslation()
+  const buttonText = buttonLabel || t('search.viewHotel')
+  const ariaLabel = hotelName ? `${buttonText} ${hotelName}` : buttonText
 
   return (
     <Stack
@@ -23,9 +27,11 @@ export function HotelCardPrice({
       sx={{ minWidth: { xs: '100%', sm: 'auto' } }}
     >
       <Typography
-        variant="h6"
+        variant="body1"
+        component="p"
         sx={{
           fontSize: { xs: '1.1rem', sm: '1.25rem' },
+          fontWeight: 600,
         }}
       >
         {price !== null ? `$${price}${t('hotel.perNight')}` : '-'}
@@ -34,13 +40,14 @@ export function HotelCardPrice({
         variant="contained"
         onClick={onViewHotel}
         fullWidth
+        aria-label={ariaLabel}
         sx={{
           minWidth: { xs: '100%', sm: 'auto' },
           width: { xs: '100%', sm: 'auto' },
           flexDirection: isRTL ? 'row-reverse' : 'row',
         }}
       >
-        {buttonLabel || t('search.viewHotel')}
+        {buttonText}
       </Button>
     </Stack>
   )

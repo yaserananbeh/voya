@@ -26,7 +26,7 @@ export default function Home() {
 
         <Container maxWidth="lg">
           <Section sx={{ mb: 4 }}>
-            <Typography variant="h5" sx={{ mb: 2 }}>
+            <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
               {t('home.searchStays')}
             </Typography>
             <HomeSearchBar />

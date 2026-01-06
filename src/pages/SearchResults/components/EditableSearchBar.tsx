@@ -105,7 +105,7 @@ export function EditableSearchBar() {
         }}
       >
         <Box sx={{ flex: 1, minWidth: 200 }}>
-          <Typography variant="caption" color="text.secondary" sx={{ mb: 1, display: 'block' }}>
+          <Typography variant="caption" sx={{ mb: 1, display: 'block', color: 'text.primary' }}>
             {t('search.currentSearch')}
           </Typography>
           <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
@@ -181,8 +181,9 @@ export function EditableSearchBar() {
           <Button
             variant="outlined"
             size="small"
-            color="secondary"
+            color="primary"
             startIcon={<RefreshIcon />}
+            aria-label={t('common.clear') || 'Clear search'}
             onClick={() => {
               dispatch(clearSearchParams())
               void formik.resetForm({
@@ -225,7 +226,11 @@ export function EditableSearchBar() {
           <Stack
             direction={{ xs: 'column', md: 'row' }}
             spacing={2}
-            sx={{ alignItems: { xs: 'stretch', md: 'center' } }}
+            useFlexGap
+            sx={{
+              alignItems: { xs: 'stretch', md: 'center' },
+              flexWrap: { xs: 'nowrap', md: 'wrap' },
+            }}
           >
             <TextField
               name="city"
@@ -236,7 +241,11 @@ export function EditableSearchBar() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.city && Boolean(formik.errors.city)}
-              sx={{ flex: UI.SEARCH_BAR.CITY_FLEX, minWidth: UI.SEARCH_BAR.CITY_MIN_WIDTH }}
+              sx={{
+                flex: UI.SEARCH_BAR.CITY_FLEX,
+                minWidth: { xs: 0, md: UI.SEARCH_BAR.CITY_MIN_WIDTH },
+                maxWidth: { xs: '100%', md: 'none' },
+              }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -271,7 +280,11 @@ export function EditableSearchBar() {
               error={formik.touched.checkInDate && Boolean(formik.errors.checkInDate)}
               helperText={formik.touched.checkInDate && formik.errors.checkInDate}
               InputLabelProps={{ shrink: true }}
-              sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
+              sx={{
+                flex: UI.SEARCH_BAR.DATE_FLEX,
+                minWidth: { xs: 0, md: UI.SEARCH_BAR.DATE_MIN_WIDTH },
+                maxWidth: { xs: '100%', md: 'none' },
+              }}
               inputProps={{
                 dir: isRTL ? 'rtl' : 'ltr',
               }}
@@ -288,25 +301,48 @@ export function EditableSearchBar() {
               error={formik.touched.checkOutDate && Boolean(formik.errors.checkOutDate)}
               helperText={formik.touched.checkOutDate && formik.errors.checkOutDate}
               InputLabelProps={{ shrink: true }}
-              sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
+              sx={{
+                flex: UI.SEARCH_BAR.DATE_FLEX,
+                minWidth: { xs: 0, md: UI.SEARCH_BAR.DATE_MIN_WIDTH },
+                maxWidth: { xs: '100%', md: 'none' },
+              }}
               inputProps={{
                 min: formik.values.checkInDate,
                 dir: isRTL ? 'rtl' : 'ltr',
               }}
             />
 
-            <GuestRoomSelector
-              adults={formik.values.adults}
-              children={formik.values.children}
-              rooms={formik.values.rooms}
-              onChange={(next) => {
-                void formik.setFieldValue('adults', next.adults)
-                void formik.setFieldValue('children', next.children)
-                void formik.setFieldValue('rooms', next.rooms)
+            <Box
+              sx={{
+                flexShrink: { xs: 0, md: 1 },
+                minWidth: { xs: '100%', md: 220 },
+                maxWidth: { xs: '100%', md: 'none' },
+                mt: { xs: 0, md: 2 },
               }}
-            />
+            >
+              <GuestRoomSelector
+                adults={formik.values.adults}
+                children={formik.values.children}
+                rooms={formik.values.rooms}
+                onChange={(next) => {
+                  void formik.setFieldValue('adults', next.adults)
+                  void formik.setFieldValue('children', next.children)
+                  void formik.setFieldValue('rooms', next.rooms)
+                }}
+              />
+            </Box>
 
-            <Box sx={{ flexShrink: 0, display: 'flex', gap: 1, width: { xs: '100%', md: 'auto' } }}>
+            <Box
+              sx={{
+                flexShrink: { xs: 0, md: 1 },
+                display: 'flex',
+                gap: 1,
+                width: { xs: '100%', md: 'auto' },
+                minWidth: { xs: '100%', md: 200 },
+                maxWidth: { xs: '100%', md: 'none' },
+                mt: { xs: 0, md: 2 },
+              }}
+            >
               <Button
                 type="button"
                 variant="outlined"

@@ -19,11 +19,12 @@ export function TotalPrice({ total, currency = '$', label }: TotalPriceProps) {
         borderTop: `2px solid ${theme.palette.divider}`,
       }}
     >
-      <Typography variant="h6" fontWeight={700}>
+      <Typography variant="h6" component="span" fontWeight={700}>
         {label || 'Total'}
       </Typography>
       <Typography
         variant="h5"
+        component="span"
         fontWeight={700}
         sx={{
           background: `linear-gradient(135deg, ${theme.palette.primary.main} 30%, ${theme.palette.primary.main} 90%)`,

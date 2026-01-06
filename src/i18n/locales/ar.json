@@ -89,6 +89,8 @@
     "viewHotel": "عرض الفندق",
     "perNight": "/ليلة",
     "priceRange": "نطاق السعر",
+    "priceRangeMin": "الحد الأدنى للسعر",
+    "priceRangeMax": "الحد الأقصى للسعر",
     "priceLabel": "السعر: {min} - {max}",
     "starRating": "التقييم بالنجوم",
     "amenities": "المرافق",

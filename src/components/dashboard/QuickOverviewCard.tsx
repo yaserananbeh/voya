@@ -14,7 +14,7 @@ export function QuickOverviewCard({ title = 'Quick Overview', items }: QuickOver
   return (
     <Card>
       <CardContent>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6" component="h2" gutterBottom>
           {title}
         </Typography>
         <Box
@@ -40,7 +40,9 @@ export function QuickOverviewCard({ title = 'Quick Overview', items }: QuickOver
               <Typography variant="body2" color="text.secondary">
                 {item.label}
               </Typography>
-              <Typography variant="h6">{item.value}</Typography>
+              <Typography variant="h6" component="span">
+                {item.value}
+              </Typography>
             </Box>
           ))}
         </Box>

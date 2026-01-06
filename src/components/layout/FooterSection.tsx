@@ -10,7 +10,7 @@ type FooterSectionProps = {
 export function FooterSection({ title, children }: FooterSectionProps) {
   return (
     <Box sx={{ flex: 1 }}>
-      <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
+      <Typography variant="h6" component="h2" fontWeight={600} sx={{ mb: 2 }}>
         {title}
       </Typography>
       {children}

@@ -29,7 +29,7 @@ export default function LogoutBtn() {
     <Button
       onClick={handleClick}
       variant="contained"
-      color={isAuthenticated ? 'info' : 'primary'}
+      color="primary"
       startIcon={
         isAuthenticated ? <LogoutIcon aria-hidden="true" /> : <LoginIcon aria-hidden="true" />
       }

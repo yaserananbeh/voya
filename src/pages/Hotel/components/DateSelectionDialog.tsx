@@ -90,10 +90,10 @@ export function DateSelectionDialog({ open, onClose, onConfirm }: DateSelectionD
               error={formik.touched.checkInDate && Boolean(formik.errors.checkInDate)}
               helperText={formik.touched.checkInDate && formik.errors.checkInDate}
               InputLabelProps={{ shrink: true }}
-              aria-required="true"
-              aria-invalid={formik.touched.checkInDate && Boolean(formik.errors.checkInDate)}
+              required
               inputProps={{
                 dir: isRTL ? 'rtl' : 'ltr',
+                'aria-invalid': formik.touched.checkInDate && Boolean(formik.errors.checkInDate),
               }}
             />
             <TextField
@@ -107,11 +107,11 @@ export function DateSelectionDialog({ open, onClose, onConfirm }: DateSelectionD
               error={formik.touched.checkOutDate && Boolean(formik.errors.checkOutDate)}
               helperText={formik.touched.checkOutDate && formik.errors.checkOutDate}
               InputLabelProps={{ shrink: true }}
-              aria-required="true"
-              aria-invalid={formik.touched.checkOutDate && Boolean(formik.errors.checkOutDate)}
+              required
               inputProps={{
                 min: formik.values.checkInDate,
                 dir: isRTL ? 'rtl' : 'ltr',
+                'aria-invalid': formik.touched.checkOutDate && Boolean(formik.errors.checkOutDate),
               }}
             />
           </Box>

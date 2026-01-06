@@ -89,6 +89,8 @@
     "viewHotel": "View Hotel",
     "perNight": "/night",
     "priceRange": "Price Range",
+    "priceRangeMin": "Minimum price",
+    "priceRangeMax": "Maximum price",
     "priceLabel": "Price: {min} - {max}",
     "starRating": "Star Rating",
     "amenities": "Amenities",

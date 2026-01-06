@@ -54,7 +54,11 @@ export function HotelCard({ hotel, variant = 'vertical', onViewDetails }: HotelC
           </Box>
         )}
         <CardContent sx={{ flex: 1, minWidth: 0, p: { xs: 1, sm: 2 } }}>
-          <Typography variant="h6" sx={{ fontSize: { xs: '1.1rem', sm: '1.25rem' } }}>
+          <Typography
+            variant="h3"
+            component="h3"
+            sx={{ fontSize: { xs: '1.1rem', sm: '1.25rem' } }}
+          >
             {hotel.hotelName}
           </Typography>
           {hotel.cityName && (
@@ -78,7 +82,11 @@ export function HotelCard({ hotel, variant = 'vertical', onViewDetails }: HotelC
           )}
         </CardContent>
         <CardActions sx={{ p: { xs: 1, sm: 2 } }}>
-          <ViewDetailsButton hotelId={hotel.hotelId} onClick={handleViewDetails} />
+          <ViewDetailsButton
+            hotelId={hotel.hotelId}
+            hotelName={hotel.hotelName}
+            onClick={handleViewDetails}
+          />
         </CardActions>
       </Card>
     )
@@ -88,7 +96,9 @@ export function HotelCard({ hotel, variant = 'vertical', onViewDetails }: HotelC
     <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {hotel.imageUrl && <SafeImage src={hotel.imageUrl} alt={hotel.hotelName} height={140} />}
       <CardContent sx={{ flexGrow: 1 }}>
-        <Typography variant="h6">{hotel.hotelName}</Typography>
+        <Typography variant="h3" component="h3">
+          {hotel.hotelName}
+        </Typography>
         {hotel.cityName && (
           <Typography variant="body2" color="text.secondary">
             {hotel.cityName}
@@ -115,7 +125,12 @@ export function HotelCard({ hotel, variant = 'vertical', onViewDetails }: HotelC
         )}
       </CardContent>
       <CardActions>
-        <ViewDetailsButton hotelId={hotel.hotelId} onClick={handleViewDetails} fullWidth />
+        <ViewDetailsButton
+          hotelId={hotel.hotelId}
+          hotelName={hotel.hotelName}
+          onClick={handleViewDetails}
+          fullWidth
+        />
       </CardActions>
     </Card>
   )

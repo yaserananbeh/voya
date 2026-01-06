@@ -4,9 +4,9 @@
 
 Generate the project structure tree:
 
-```bash
-(echo '`text'; npx tree-node-cli -a -I "node_modules|dist|.git"; echo '`') > docs/PROJECT_STRUCTURE.md
-```
+````bash
+(echo '```text'; npx tree-node-cli -a -I "node_modules|dist|.git"; echo '```') > docs/PROJECT_STRUCTURE.md
+````
 
 ## Create .gitkeep Files for Empty Directories
 
@@ -41,7 +41,7 @@ pnpm verify:stage
 When searching the codebase, you may want to exclude these patterns:
 
 ```
-.config.js, .gitignore, README.md, tsconfig.*, *md, \__, reset.css, api.ts, .env_, _.json, _.yaml, *.config.ts, .svg, *.yaml, *example, package*, *.config.ts, \_*
+.config.js,.gitignore, README.md, tsconfig.*, *md,\__, reset.css, api.ts,.env_,_.json,_.yaml, \*.config.ts,.svg,*.yaml,*example, package*,*.config.ts,\_\*,_redirects,*.txt
 ```
 
 ---

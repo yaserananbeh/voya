@@ -26,7 +26,7 @@ function StatisticItem({ label, value, icon, color = 'default' }: StatisticItemP
       <Typography color="text.secondary">{label}</Typography>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         {icon}
-        <Typography variant="h6" fontWeight="bold" color={colorMap[color]}>
+        <Typography variant="h6" component="span" fontWeight="bold" color={colorMap[color]}>
           {value}
         </Typography>
       </Box>
@@ -38,7 +38,7 @@ export function StatisticCard({ title, items }: StatisticCardProps) {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6" component="h2" gutterBottom>
           {title}
         </Typography>
         <Box sx={{ mt: 2 }}>
