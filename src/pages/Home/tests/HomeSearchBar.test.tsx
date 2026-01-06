@@ -59,11 +59,8 @@ describe('HomeSearchBar', () => {
     expect(popover).toBeVisible()
 
     const popoverContent = within(popover)
-    // Check for the title
     expect(popoverContent.getByText(/select guests/i)).toBeInTheDocument()
-    // Check that adults label exists (may appear in button summary too, so use getAllByText)
     expect(popoverContent.getAllByText(/adults/i).length).toBeGreaterThan(0)
-    // Check that rooms label exists (title contains "Rooms" too, so use getAllByText)
     expect(popoverContent.getAllByText(/rooms/i).length).toBeGreaterThan(0)
   })
 })
