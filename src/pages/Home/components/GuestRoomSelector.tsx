@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { Box, Button, IconButton, Popover, Typography } from '@mui/material'
+import { Box, Button, Popover, Typography } from '@mui/material'
 import PeopleIcon from '@mui/icons-material/People'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
 import { useTranslation } from 'react-i18next'
+import { GuestRoomRow } from '@/components/atomic'
 
 type GuestRoomSelectorProps = {
   adults: number
@@ -78,79 +77,31 @@ export function GuestRoomSelector({ adults, children, rooms, onChange }: GuestRo
           <Typography id="guest-room-title" variant="subtitle2" fontWeight={600} sx={{ mb: 1.5 }}>
             {t('guestRoom.selectGuests') || 'Select Guests & Rooms'}
           </Typography>
-          <Row
+          <GuestRoomRow
             label={t('guestRoom.adults')}
             subtitle={t('guestRoom.adultsAges')}
             value={adults}
-            onDec={() => handleDecrement('adults')}
-            onInc={() => handleIncrement('adults')}
+            onIncrement={() => handleIncrement('adults')}
+            onDecrement={() => handleDecrement('adults')}
+            min={1}
           />
-          <Row
+          <GuestRoomRow
             label={t('guestRoom.children')}
             subtitle={t('guestRoom.childrenAges')}
             value={children}
-            onDec={() => handleDecrement('children')}
-            onInc={() => handleIncrement('children')}
+            onIncrement={() => handleIncrement('children')}
+            onDecrement={() => handleDecrement('children')}
+            min={0}
           />
-          <Row
+          <GuestRoomRow
             label={t('guestRoom.rooms')}
             value={rooms}
-            onDec={() => handleDecrement('rooms')}
-            onInc={() => handleIncrement('rooms')}
+            onIncrement={() => handleIncrement('rooms')}
+            onDecrement={() => handleDecrement('rooms')}
+            min={1}
           />
         </Box>
       </Popover>
     </>
-  )
-}
-
-type RowProps = {
-  label: string
-  subtitle?: string
-  value: number
-  onDec: () => void
-  onInc: () => void
-}
-
-function Row({ label, subtitle, value, onDec, onInc }: RowProps) {
-  const disabled =
-    ((label.includes('Adults') || label.includes('بالغين')) && value <= 1) ||
-    ((label.includes('Rooms') || label.includes('غرف')) && value <= 1) ||
-    ((label.includes('Children') || label.includes('أطفال')) && value <= 0)
-
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: subtitle ? 'flex-start' : 'center',
-        justifyContent: 'space-between',
-        mb: 1.5,
-      }}
-    >
-      <Box>
-        <Typography variant="subtitle1">{label}</Typography>
-        {subtitle && (
-          <Typography variant="body2" color="text.secondary">
-            {subtitle}
-          </Typography>
-        )}
-      </Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <IconButton
-          size="small"
-          onClick={onDec}
-          disabled={disabled}
-          aria-label={`Decrease ${label}`}
-        >
-          <RemoveIcon fontSize="small" aria-hidden="true" />
-        </IconButton>
-        <Typography minWidth={24} textAlign="center" aria-label={`${label}: ${value}`}>
-          {value}
-        </Typography>
-        <IconButton size="small" onClick={onInc} aria-label={`Increase ${label}`}>
-          <AddIcon fontSize="small" aria-hidden="true" />
-        </IconButton>
-      </Box>
-    </Box>
   )
 }

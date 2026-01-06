@@ -1,8 +1,8 @@
-import { Card, CardContent, CardMedia, Typography, Stack, Box, Button } from '@mui/material'
-import { Rating } from '@mui/material'
+import { Card, CardContent, Stack } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import type { HotelDto } from '@/api/hotels'
 import { useTranslation } from 'react-i18next'
+import { HotelCardImage, HotelCardInfo, HotelCardPrice } from '@/components/atomic'
 
 function getMinRoomPrice(hotel: HotelDto): number | null {
   const prices = (hotel.rooms ?? []).map((r) => r.price).filter((p) => typeof p === 'number')
@@ -11,7 +11,7 @@ function getMinRoomPrice(hotel: HotelDto): number | null {
 }
 
 export function HotelResultCard({ hotel }: { hotel: HotelDto }) {
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
   const navigate = useNavigate()
   const price = getMinRoomPrice(hotel)
   const isRTL = i18n.language === 'ar'
@@ -25,28 +25,7 @@ export function HotelResultCard({ hotel }: { hotel: HotelDto }) {
         p: { xs: 1.5, sm: 1 },
       }}
     >
-      {hotel.imageUrl ? (
-        <CardMedia
-          component="img"
-          image={hotel.imageUrl}
-          alt={hotel.name}
-          sx={{
-            width: { xs: '100%', sm: 160 },
-            height: { xs: 200, sm: 120 },
-            borderRadius: 1,
-            objectFit: 'cover',
-          }}
-        />
-      ) : (
-        <Box
-          sx={{
-            width: { xs: '100%', sm: 160 },
-            height: { xs: 200, sm: 120 },
-            borderRadius: 1,
-            bgcolor: 'action.hover',
-          }}
-        />
-      )}
+      <HotelCardImage imageUrl={hotel.imageUrl} alt={hotel.name} />
 
       <CardContent sx={{ flex: 1, minWidth: 0, p: { xs: 1, sm: 2 } }}>
         <Stack
@@ -55,77 +34,22 @@ export function HotelResultCard({ hotel }: { hotel: HotelDto }) {
           alignItems={{ xs: 'flex-start', sm: 'flex-start' }}
           spacing={2}
         >
-          <Box sx={{ minWidth: 0, flex: 1 }}>
-            <Typography
-              variant="h6"
-              sx={{
-                fontSize: { xs: '1.1rem', sm: '1.25rem' },
-                overflow: { xs: 'visible', sm: 'hidden' },
-                textOverflow: { xs: 'clip', sm: 'ellipsis' },
-                whiteSpace: { xs: 'normal', sm: 'nowrap' },
-              }}
-            >
-              {hotel.name}
-            </Typography>
-
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{
-                overflow: { xs: 'visible', sm: 'hidden' },
-                textOverflow: { xs: 'clip', sm: 'ellipsis' },
-                whiteSpace: { xs: 'normal', sm: 'nowrap' },
-                mt: 0.5,
-              }}
-            >
-              {hotel.location} • {hotel.hotelType}
-            </Typography>
-
-            <Stack direction="row" spacing={1} alignItems="center" sx={{ mt: 1 }}>
-              <Rating value={hotel.starRating} readOnly size="small" />
-            </Stack>
-
-            <Typography
-              variant="body2"
-              sx={{
-                mt: 1,
-                display: { xs: '-webkit-box', sm: 'none' },
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: 'vertical',
-              }}
-            >
-              {hotel.description}
-            </Typography>
-          </Box>
-
-          <Stack
-            alignItems={{ xs: 'flex-start', sm: 'flex-end' }}
-            spacing={1}
-            sx={{ minWidth: { xs: '100%', sm: 'auto' } }}
-          >
-            <Typography
-              variant="h6"
-              sx={{
-                fontSize: { xs: '1.1rem', sm: '1.25rem' },
-              }}
-            >
-              {price !== null ? `$${price}${t('hotel.perNight')}` : '-'}
-            </Typography>
-            <Button
-              variant="contained"
-              onClick={() => void navigate(`/hotel/${hotel.id}`)}
-              fullWidth
-              sx={{
-                minWidth: { xs: '100%', sm: 'auto' },
-                width: { xs: '100%', sm: 'auto' },
-                flexDirection: isRTL ? 'row-reverse' : 'row',
-              }}
-            >
-              {t('search.viewHotel')}
-            </Button>
+          <Stack sx={{ minWidth: 0, flex: 1 }}>
+            <HotelCardInfo
+              name={hotel.name}
+              location={hotel.location}
+              hotelType={hotel.hotelType}
+              starRating={hotel.starRating}
+              description={hotel.description}
+              showDescription
+            />
           </Stack>
+
+          <HotelCardPrice
+            price={price}
+            onViewHotel={() => void navigate(`/hotel/${hotel.id}`)}
+            isRTL={isRTL}
+          />
         </Stack>
       </CardContent>
     </Card>
