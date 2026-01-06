@@ -1,19 +1,6 @@
 import { useState, useMemo } from 'react'
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  IconButton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  InputAdornment,
-} from '@mui/material'
-import ClearIcon from '@mui/icons-material/Clear'
-import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
+import { Box } from '@mui/material'
+import { type GridColDef } from '@mui/x-data-grid'
 import AddIcon from '@mui/icons-material/Add'
 import {
   useGetAdminHotelsQuery,
@@ -23,10 +10,16 @@ import {
 } from '@/api/admin'
 import type { HotelDto } from '@/types'
 import { HotelForm } from './components/HotelForm'
-import { DeleteConfirmDialog } from './components/DeleteConfirmDialog'
+import {
+  DeleteConfirmDialog,
+  PageHeader,
+  SearchBar,
+  DataGridActions,
+  AdminDataGrid,
+  AdminFormDialog,
+} from '@/components'
 import { usePageTitle } from '@/hooks'
-
-import { getInitialPaginationModel, PAGINATION } from '@/constants'
+import { getInitialPaginationModel } from '@/constants'
 
 export default function Hotels() {
   usePageTitle('pages.adminHotels')
@@ -76,21 +69,14 @@ export default function Hotels() {
       width: 120,
       minWidth: 100,
       sortable: false,
-      renderCell: (params: GridRenderCellParams<HotelDto>) => (
-        <>
-          <IconButton
-            size="small"
-            onClick={() => {
-              setEditingHotel(params.row.id)
-              setOpenForm(true)
-            }}
-          >
-            <EditIcon />
-          </IconButton>
-          <IconButton size="small" onClick={() => setDeleteId(params.row.id)} color="error">
-            <DeleteIcon />
-          </IconButton>
-        </>
+      renderCell: (params) => (
+        <DataGridActions
+          onEdit={() => {
+            setEditingHotel(params.row.id)
+            setOpenForm(true)
+          }}
+          onDelete={() => setDeleteId(params.row.id)}
+        />
       ),
     },
   ]
@@ -121,113 +107,49 @@ export default function Hotels() {
 
   return (
     <Box sx={{ width: '100%', minWidth: 0, maxWidth: '100%', overflow: 'hidden' }}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-          justifyContent: 'space-between',
-          alignItems: { xs: 'flex-start', sm: 'center' },
-          gap: { xs: 2, sm: 0 },
-          mb: 2,
-        }}
-      >
-        <Typography
-          variant="h5"
-          sx={{
-            fontSize: { xs: '1.25rem', sm: '1.5rem' },
-          }}
-        >
-          Hotels
-        </Typography>
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={handleCreate}
-          sx={{
-            width: { xs: '100%', sm: 'auto' },
-          }}
-        >
-          Add Hotel
-        </Button>
-      </Box>
-
-      <TextField
-        fullWidth
-        label="Search"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        sx={{ mb: 2 }}
-        InputProps={{
-          endAdornment: searchQuery ? (
-            <InputAdornment position="end">
-              <IconButton
-                size="small"
-                onClick={() => setSearchQuery('')}
-                edge="end"
-                aria-label="clear"
-              >
-                <ClearIcon fontSize="small" />
-              </IconButton>
-            </InputAdornment>
-          ) : undefined,
-        }}
+      <PageHeader
+        title="Hotels"
+        actionLabel="Add Hotel"
+        actionIcon={<AddIcon />}
+        onAction={handleCreate}
       />
 
-      <Box
-        sx={{
-          width: '100%',
-          overflowX: 'auto',
-          overflowY: 'hidden',
-          minWidth: 0,
-          maxWidth: '100%',
-        }}
-      >
-        <DataGrid<HotelDto>
-          rows={hotels}
-          columns={columns}
-          loading={isLoading}
-          paginationMode="server"
-          paginationModel={paginationModel}
-          onPaginationModelChange={handlePaginationModelChange}
-          rowCount={rowCount}
-          pageSizeOptions={PAGINATION.PAGE_SIZE_OPTIONS}
-          getRowId={(row) => row.id}
-          disableRowSelectionOnClick
-          sx={{
-            minWidth: 600,
-            width: '100%',
-            '& .MuiDataGrid-cell': {
-              fontSize: { xs: '0.75rem', sm: '0.875rem' },
-            },
-            '& .MuiDataGrid-columnHeader': {
-              fontSize: { xs: '0.75rem', sm: '0.875rem' },
-            },
-          }}
-          autoHeight
-        />
-      </Box>
+      <SearchBar value={searchQuery} onChange={setSearchQuery} />
 
-      <Dialog open={openForm} onClose={() => setOpenForm(false)} maxWidth="md" fullWidth>
-        <DialogTitle>{editingHotel ? 'Edit Hotel' : 'Create Hotel'}</DialogTitle>
-        <DialogContent>
-          <HotelForm
-            hotelId={editingHotel}
-            onSubmit={async (data) => {
-              if (editingHotel) {
-                await updateHotel({ id: editingHotel, data }).unwrap()
-              } else {
-                await createHotel(data).unwrap()
-              }
-              setOpenForm(false)
-              setEditingHotel(null)
-            }}
-            onCancel={() => {
-              setOpenForm(false)
-              setEditingHotel(null)
-            }}
-          />
-        </DialogContent>
-      </Dialog>
+      <AdminDataGrid<HotelDto>
+        rows={hotels}
+        columns={columns}
+        loading={isLoading}
+        paginationMode="server"
+        paginationModel={paginationModel}
+        onPaginationModelChange={handlePaginationModelChange}
+        rowCount={rowCount}
+        getRowId={(row) => row.id}
+      />
+
+      <AdminFormDialog
+        open={openForm}
+        onClose={() => setOpenForm(false)}
+        title={editingHotel ? 'Edit Hotel' : 'Create Hotel'}
+        maxWidth="md"
+      >
+        <HotelForm
+          hotelId={editingHotel}
+          onSubmit={async (data) => {
+            if (editingHotel) {
+              await updateHotel({ id: editingHotel, data }).unwrap()
+            } else {
+              await createHotel(data).unwrap()
+            }
+            setOpenForm(false)
+            setEditingHotel(null)
+          }}
+          onCancel={() => {
+            setOpenForm(false)
+            setEditingHotel(null)
+          }}
+        />
+      </AdminFormDialog>
 
       <DeleteConfirmDialog
         open={deleteId !== null}
