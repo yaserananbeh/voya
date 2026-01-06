@@ -135,14 +135,10 @@ Voya
 │   │   │   │   │   ├── CityForm.presentational.tsx
 │   │   │   │   │   ├── CityForm.tsx
 │   │   │   │   │   └── DeleteConfirmDialog.tsx
-│   │   │   │   ├── ducks
-│   │   │   │   │   └── readme.md
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
 │   │   │   ├── Dashboard
 │   │   │   │   ├── Dashboard.tsx
-│   │   │   │   ├── ducks
-│   │   │   │   │   └── readme.md
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
 │   │   │   ├── Hotels
@@ -150,8 +146,6 @@ Voya
 │   │   │   │   ├── components
 │   │   │   │   │   ├── DeleteConfirmDialog.tsx
 │   │   │   │   │   └── HotelForm.tsx
-│   │   │   │   ├── ducks
-│   │   │   │   │   └── readme.md
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
 │   │   │   ├── Rooms
@@ -159,20 +153,14 @@ Voya
 │   │   │   │   ├── components
 │   │   │   │   │   ├── DeleteConfirmDialog.tsx
 │   │   │   │   │   └── RoomForm.tsx
-│   │   │   │   ├── ducks
-│   │   │   │   │   └── readme.md
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
-│   │   │   ├── ducks
-│   │   │   │   └── readme.md
 │   │   │   └── styles.module.css
 │   │   ├── Checkout
 │   │   │   ├── Checkout.tsx
 │   │   │   ├── Confirmation
 │   │   │   │   ├── Confirmation.tsx
 │   │   │   │   ├── confirmation.module.css
-│   │   │   │   ├── ducks
-│   │   │   │   │   └── readme.md
 │   │   │   │   ├── index.ts
 │   │   │   │   └── styles.module.css
 │   │   │   ├── components
