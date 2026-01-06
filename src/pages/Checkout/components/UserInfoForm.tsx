@@ -1,14 +1,4 @@
-import {
-  Button,
-  MenuItem,
-  Stack,
-  TextField,
-  Typography,
-  Box,
-  InputAdornment,
-  alpha,
-  useTheme,
-} from '@mui/material'
+import { Button, Stack, Typography, Box, alpha, useTheme } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person'
 import PaymentIcon from '@mui/icons-material/Payment'
 import NotesIcon from '@mui/icons-material/Notes'
@@ -16,6 +6,7 @@ import { useFormik } from 'formik'
 import { createBookingSchema } from './bookingSchema'
 import { useTranslation } from 'react-i18next'
 import { PAYMENT_METHOD_OPTIONS, UI } from '@/constants'
+import { FormTextField, FormSelectField } from '@/components/atomic'
 
 export type UserInfoValues = {
   customerName: string
@@ -63,11 +54,11 @@ export function UserInfoForm({
       </Box>
 
       <Stack spacing={3}>
-        <TextField
+        <FormTextField
           name="customerName"
           label={t('checkout.fullName')}
           value={formik.values.customerName}
-          onChange={formik.handleChange}
+          onChange={(value) => void formik.setFieldValue('customerName', value)}
           onBlur={formik.handleBlur}
           error={Boolean(formik.touched.customerName && formik.errors.customerName)}
           helperText={
@@ -75,30 +66,17 @@ export function UserInfoForm({
               ? formik.errors.customerName
               : ' '
           }
-          fullWidth
           autoComplete="name"
-          aria-required="true"
+          aria-required={true}
           aria-invalid={Boolean(formik.touched.customerName && formik.errors.customerName)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <PersonIcon sx={{ color: 'text.secondary' }} aria-hidden="true" />
-              </InputAdornment>
-            ),
-          }}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              borderRadius: 2,
-            },
-          }}
+          startAdornment={<PersonIcon sx={{ color: 'text.secondary' }} aria-hidden="true" />}
         />
 
-        <TextField
-          select
+        <FormSelectField
           name="paymentMethod"
           label={t('checkout.paymentMethod')}
           value={formik.values.paymentMethod}
-          onChange={formik.handleChange}
+          onChange={(value) => void formik.setFieldValue('paymentMethod', value)}
           onBlur={formik.handleBlur}
           error={Boolean(formik.touched.paymentMethod && formik.errors.paymentMethod)}
           helperText={
@@ -106,35 +84,21 @@ export function UserInfoForm({
               ? formik.errors.paymentMethod
               : ' '
           }
-          fullWidth
           autoComplete="payment-method"
-          aria-required="true"
+          aria-required={true}
           aria-invalid={Boolean(formik.touched.paymentMethod && formik.errors.paymentMethod)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <PaymentIcon sx={{ color: 'text.secondary' }} aria-hidden="true" />
-              </InputAdornment>
-            ),
-          }}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              borderRadius: 2,
-            },
-          }}
-        >
-          {PAYMENT_METHOD_OPTIONS.map((method) => (
-            <MenuItem key={method} value={method}>
-              {t(`checkout.paymentMethods.${method}`, { defaultValue: method })}
-            </MenuItem>
-          ))}
-        </TextField>
+          startAdornment={<PaymentIcon sx={{ color: 'text.secondary' }} aria-hidden="true" />}
+          options={PAYMENT_METHOD_OPTIONS.map((method) => ({
+            value: method,
+            label: t(`checkout.paymentMethods.${method}`, { defaultValue: method }),
+          }))}
+        />
 
-        <TextField
+        <FormTextField
           name="specialRequests"
           label={t('checkout.specialRequests')}
           value={formik.values.specialRequests || ''}
-          onChange={formik.handleChange}
+          onChange={(value) => void formik.setFieldValue('specialRequests', value)}
           onBlur={formik.handleBlur}
           error={Boolean(formik.touched.specialRequests && formik.errors.specialRequests)}
           helperText={
@@ -142,32 +106,26 @@ export function UserInfoForm({
               ? formik.errors.specialRequests
               : t('checkout.specialRequestsHelper')
           }
-          fullWidth
+          placeholder={t('checkout.specialRequestsPlaceholder')}
           multiline
           rows={UI.FORM.SPECIAL_REQUESTS_ROWS}
-          placeholder={t('checkout.specialRequestsPlaceholder')}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start" sx={{ alignSelf: 'flex-start', mt: 1.5 }}>
-                <NotesIcon sx={{ color: 'text.secondary' }} aria-hidden="true" />
-              </InputAdornment>
-            ),
-          }}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              borderRadius: 2,
-            },
-          }}
+          startAdornment={
+            <Box sx={{ alignSelf: 'flex-start', mt: 1.5 }}>
+              <NotesIcon sx={{ color: 'text.secondary' }} aria-hidden="true" />
+            </Box>
+          }
         />
 
         {typeof formik.status === 'string' && (
           <Box role="alert" aria-live="assertive">
-            <TextField
+            <FormTextField
+              name="error"
+              label=""
               value={formik.status}
+              onChange={() => {}}
               error
-              fullWidth
-              InputProps={{ readOnly: true }}
-              aria-label={t('checkout.error') || 'Error message'}
+              helperText={formik.status}
+              readOnly
             />
           </Box>
         )}
