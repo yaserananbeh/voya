@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import {
   Box,
   Button,
@@ -105,6 +105,24 @@ export default function Hotels() {
     setDeleteId(null)
   }
 
+  // Calculate rowCount for server-side pagination
+  // If we got a full page of results, assume there are more items
+  const rowCount = useMemo(() => {
+    const currentPageItems = hotels.length
+    const hasMore = currentPageItems === paginationModel.pageSize
+    return paginationModel.page * paginationModel.pageSize + currentPageItems + (hasMore ? 1 : 0)
+  }, [hotels.length, paginationModel.page, paginationModel.pageSize])
+
+  // Handle pagination model change - reset to page 0 if page size changes
+  const handlePaginationModelChange = (newModel: typeof paginationModel) => {
+    // If page size changed, reset to first page
+    if (newModel.pageSize !== paginationModel.pageSize) {
+      setPaginationModel({ ...newModel, page: 0 })
+    } else {
+      setPaginationModel(newModel)
+    }
+  }
+
   return (
     <Box sx={{ width: '100%', minWidth: 0, maxWidth: '100%', overflow: 'hidden' }}>
       <Box
@@ -172,8 +190,10 @@ export default function Hotels() {
           rows={hotels}
           columns={columns}
           loading={isLoading}
+          paginationMode="server"
           paginationModel={paginationModel}
-          onPaginationModelChange={setPaginationModel}
+          onPaginationModelChange={handlePaginationModelChange}
+          rowCount={rowCount}
           pageSizeOptions={PAGINATION.PAGE_SIZE_OPTIONS}
           getRowId={(row) => row.id}
           disableRowSelectionOnClick
