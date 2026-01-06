@@ -103,10 +103,20 @@ const getThemeOptions = (
   components: {
     MuiButton: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           borderRadius: 8,
           padding: '8px 20px',
-        },
+          ...(theme.direction === 'rtl' && {
+            '& .MuiButton-startIcon': {
+              marginLeft: '8px',
+              marginRight: 0,
+            },
+            '& .MuiButton-endIcon': {
+              marginRight: '8px',
+              marginLeft: 0,
+            },
+          }),
+        }),
       },
       defaultProps: {
         disableElevation: true,
@@ -183,11 +193,65 @@ const getThemeOptions = (
       },
     },
 
+    MuiInputLabel: {
+      styleOverrides: {
+        root: ({ theme }) => {
+          if (theme.direction === 'rtl') {
+            return {
+              right: 0,
+              left: 'auto',
+              transformOrigin: 'top right',
+              '&.MuiInputLabel-shrink': {
+                transform: 'translate(-14px, -9px) scale(0.75)',
+              },
+            }
+          }
+          return {}
+        },
+      },
+    },
+
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
           borderRadius: 8,
         },
+        input: ({ theme }) => ({
+          textAlign: theme.direction === 'rtl' ? 'right' : 'left',
+          '&[type="date"], &[type="date"]::-webkit-calendar-picker-indicator': {
+            textAlign: theme.direction === 'rtl' ? 'right' : 'left',
+            direction: theme.direction,
+          },
+        }),
+        notchedOutline: ({ theme }) => {
+          if (theme.direction === 'rtl') {
+            return {
+              '& legend': {
+                textAlign: 'right',
+                marginRight: '9px',
+                marginLeft: 0,
+              },
+            }
+          }
+          return {}
+        },
+      },
+    },
+
+    MuiChip: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          ...(theme.direction === 'rtl' && {
+            '& .MuiChip-icon': {
+              marginLeft: '4px',
+              marginRight: '-4px',
+            },
+            '& .MuiChip-deleteIcon': {
+              marginRight: '4px',
+              marginLeft: '-4px',
+            },
+          }),
+        }),
       },
     },
 

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, useMemo, type ReactNode } from 'react'
 import { createAppTheme } from '@/theme'
 import type { Theme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
@@ -22,7 +22,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   })
 
   const direction = i18n.language === 'ar' ? 'rtl' : 'ltr'
-  const theme = createAppTheme(mode, direction)
+  const theme = useMemo(() => createAppTheme(mode, direction), [mode, direction, i18n.language])
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.THEME_MODE, mode)
