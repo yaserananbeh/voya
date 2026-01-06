@@ -1,17 +1,13 @@
-import { Chip } from '@mui/material'
+import { Typography } from '@mui/material'
 
 type DiscountBadgeProps = {
   discount: number
-  size?: 'small' | 'medium'
 }
 
-export function DiscountBadge({ discount, size = 'small' }: DiscountBadgeProps) {
+export function DiscountBadge({ discount }: DiscountBadgeProps) {
   return (
-    <Chip
-      label={`-${Math.round(discount * 100)}%`}
-      size={size}
-      color="success"
-      sx={{ fontWeight: 600 }}
-    />
+    <Typography component="span" color="success.main" variant="body2">
+      -{discount}%
+    </Typography>
   )
 }
