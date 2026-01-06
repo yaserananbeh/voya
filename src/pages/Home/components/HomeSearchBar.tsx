@@ -70,6 +70,7 @@ export function HomeSearchBar() {
         p: 2,
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
+        flexWrap: { xs: 'nowrap', md: 'wrap' },
         gap: 2,
         alignItems: 'center',
       }}
@@ -82,10 +83,20 @@ export function HomeSearchBar() {
         onBlur={formik.handleBlur}
         error={formik.touched.city && Boolean(formik.errors.city)}
         helperText={formik.touched.city && formik.errors.city}
-        sx={{ flex: UI.SEARCH_BAR.CITY_FLEX, minWidth: UI.SEARCH_BAR.CITY_MIN_WIDTH }}
+        sx={{
+          flex: UI.SEARCH_BAR.CITY_FLEX,
+          minWidth: { xs: 0, md: UI.SEARCH_BAR.CITY_MIN_WIDTH },
+          maxWidth: { xs: '100%', md: 'none' },
+        }}
       />
 
-      <Box sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}>
+      <Box
+        sx={{
+          flex: UI.SEARCH_BAR.DATE_FLEX,
+          minWidth: { xs: 0, md: UI.SEARCH_BAR.DATE_MIN_WIDTH },
+          maxWidth: { xs: '100%', md: 'none' },
+        }}
+      >
         <SearchDateField
           name="checkInDate"
           label={t('home.checkIn')}
@@ -95,11 +106,17 @@ export function HomeSearchBar() {
           error={formik.touched.checkInDate && Boolean(formik.errors.checkInDate)}
           helperText={formik.touched.checkInDate && formik.errors.checkInDate}
           isRTL={isRTL}
-          sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
+          sx={{ width: '100%' }}
         />
       </Box>
 
-      <Box sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}>
+      <Box
+        sx={{
+          flex: UI.SEARCH_BAR.DATE_FLEX,
+          minWidth: { xs: 0, md: UI.SEARCH_BAR.DATE_MIN_WIDTH },
+          maxWidth: { xs: '100%', md: 'none' },
+        }}
+      >
         <SearchDateField
           name="checkOutDate"
           label={t('home.checkOut')}
@@ -110,36 +127,52 @@ export function HomeSearchBar() {
           helperText={formik.touched.checkOutDate && formik.errors.checkOutDate}
           min={formik.values.checkInDate}
           isRTL={isRTL}
-          sx={{ flex: UI.SEARCH_BAR.DATE_FLEX, minWidth: UI.SEARCH_BAR.DATE_MIN_WIDTH }}
+          sx={{ width: '100%' }}
         />
       </Box>
 
-      <GuestRoomSelector
-        adults={formik.values.adults}
-        children={formik.values.children}
-        rooms={formik.values.rooms}
-        onChange={(next) => {
-          void formik.setFieldValue('adults', next.adults)
-          void formik.setFieldValue('children', next.children)
-          void formik.setFieldValue('rooms', next.rooms)
+      <Box
+        sx={{
+          flexShrink: { xs: 0, md: 1 },
+          minWidth: { xs: '100%', md: 220 },
+          maxWidth: { xs: '100%', md: 'none' },
         }}
-      />
+      >
+        <GuestRoomSelector
+          adults={formik.values.adults}
+          children={formik.values.children}
+          rooms={formik.values.rooms}
+          onChange={(next) => {
+            void formik.setFieldValue('adults', next.adults)
+            void formik.setFieldValue('children', next.children)
+            void formik.setFieldValue('rooms', next.rooms)
+          }}
+        />
+      </Box>
 
-      <SearchActionButtons
-        onClear={() => {
-          dispatch(clearSearchParams())
-          void formik.resetForm({
-            values: {
-              city: '',
-              checkInDate: formatDateForApi(today),
-              checkOutDate: formatDateForApi(tomorrow),
-              adults: 2,
-              children: 0,
-              rooms: 1,
-            },
-          })
+      <Box
+        sx={{
+          flexShrink: { xs: 0, md: 1 },
+          minWidth: { xs: '100%', md: 200 },
+          maxWidth: { xs: '100%', md: 'none' },
         }}
-      />
+      >
+        <SearchActionButtons
+          onClear={() => {
+            dispatch(clearSearchParams())
+            void formik.resetForm({
+              values: {
+                city: '',
+                checkInDate: formatDateForApi(today),
+                checkOutDate: formatDateForApi(tomorrow),
+                adults: 2,
+                children: 0,
+                rooms: 1,
+              },
+            })
+          }}
+        />
+      </Box>
     </Paper>
   )
 }
