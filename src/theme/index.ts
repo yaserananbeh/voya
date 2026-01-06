@@ -39,8 +39,8 @@ const getThemeOptions = (
       contrastText: '#ffffff',
     },
     text: {
-      primary: mode === 'dark' ? '#E0E0E0' : '#1A1A1A', // Improved contrast: 15.8:1 on white (was 12.6:1)
-      secondary: mode === 'dark' ? '#B8B8B8' : '#595959', // Improved contrast: 7.1:1 on white (was 4.5:1)
+      primary: mode === 'dark' ? '#E0E0E0' : '#1A1A1A',
+      secondary: mode === 'dark' ? '#B8B8B8' : '#595959',
     },
     background: {
       default: mode === 'dark' ? '#121212' : '#F5F5F5',

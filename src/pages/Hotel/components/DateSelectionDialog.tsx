@@ -50,7 +50,6 @@ export function DateSelectionDialog({ open, onClose, onConfirm }: DateSelectionD
     },
     validationSchema,
     onSubmit(values) {
-      // Update search params with dates
       dispatch(
         setSearchParams({ checkInDate: values.checkInDate, checkOutDate: values.checkOutDate }),
       )

@@ -19,14 +19,12 @@ export function HotelContainer() {
 
   const { data: hotel, isLoading, isError } = useGetHotelQuery(id, { skip: Number.isNaN(id) })
 
-  // Set dynamic page title based on hotel name
   usePageTitle('pages.hotel', hotel?.hotelName || hotel?.name)
 
   const { data: gallery, isLoading: galleryLoading } = useGetHotelGalleryQuery(id, {
     skip: Number.isNaN(id),
   })
 
-  // Build dynamic SEO data
   const hotelName = hotel?.hotelName || hotel?.name || ''
   const hotelDescription = hotel?.description || ''
   const hotelImage = hotel?.imageUrl || gallery?.[0]?.url || ''

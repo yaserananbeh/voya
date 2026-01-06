@@ -1,6 +1,3 @@
-/**
- * localStorage keys
- */
 export const STORAGE_KEYS = {
   TOKEN: 'token',
   USER_TYPE: 'userType',

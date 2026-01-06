@@ -1,18 +1,11 @@
 import { Box } from '@mui/material'
 
 interface AriaLiveRegionProps {
-  /** The message to announce to screen readers */
   message: string
-  /** The politeness level: 'polite' (default) or 'assertive' */
   politeness?: 'polite' | 'assertive' | 'off'
-  /** Whether the region is currently active */
   active?: boolean
 }
 
-/**
- * ARIA live region component for announcing dynamic content updates to screen readers
- * Use this for important updates like form submissions, errors, or status changes
- */
 export function AriaLiveRegion({
   message,
   politeness = 'polite',

@@ -91,9 +91,7 @@ export default function Confirmation() {
 
   const translateBookingStatus = (status: string | null): string => {
     if (!status) return '-'
-    // Normalize status: capitalize first letter, lowercase rest
     const normalized = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()
-    // Handle both "Cancelled" and "Canceled"
     const key = normalized === 'Canceled' ? 'Cancelled' : normalized
     const translationKey = `confirmation.bookingStatus.${key}` as
       | 'confirmation.bookingStatus.Confirmed'
@@ -104,7 +102,6 @@ export default function Confirmation() {
 
   const translatePaymentMethod = (method: string | null): string => {
     if (!method) return '-'
-    // Normalize payment method: capitalize first letter, lowercase rest
     const normalized = method.charAt(0).toUpperCase() + method.slice(1).toLowerCase()
     const translationKey = `checkout.paymentMethods.${normalized}` as
       | 'checkout.paymentMethods.Cash'

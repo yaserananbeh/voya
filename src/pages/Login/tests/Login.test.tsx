@@ -58,7 +58,6 @@ describe('Login Form', () => {
     await user.click(submitButton)
 
     await waitFor(() => {
-      // Material-UI helper text is accessible, so we can query by role or use getAllByText
       const usernameErrors = screen.getAllByText(/username is required/i)
       const passwordErrors = screen.getAllByText(/password is required/i)
       expect(usernameErrors.length).toBeGreaterThan(0)

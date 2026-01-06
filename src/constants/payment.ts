@@ -1,6 +1,3 @@
-/**
- * Payment method constants
- */
 export const PAYMENT_METHODS = {
   CASH: 'Cash',
   CARD: 'Card',

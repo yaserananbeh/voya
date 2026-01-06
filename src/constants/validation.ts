@@ -1,15 +1,10 @@
-/**
- * Validation constraints and limits
- */
 export const VALIDATION = {
-  // Booking form
   BOOKING: {
     CUSTOMER_NAME_REQUIRED: true,
     PAYMENT_METHOD_REQUIRED: true,
     SPECIAL_REQUESTS_MAX_LENGTH: 500,
   },
 
-  // Room form
   ROOM: {
     ROOM_NUMBER_REQUIRED: true,
     HOTEL_ID_REQUIRED: true,
@@ -20,7 +15,6 @@ export const VALIDATION = {
     PRICE_STEP: 0.01,
   },
 
-  // Hotel form
   HOTEL: {
     NAME_REQUIRED: true,
     CITY_ID_REQUIRED: true,
@@ -28,7 +22,6 @@ export const VALIDATION = {
     STAR_RATING_MAX: 5,
   },
 
-  // City form
   CITY: {
     NAME_REQUIRED: true,
   },

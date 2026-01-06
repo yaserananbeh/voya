@@ -59,7 +59,6 @@ export function HomeSearchBar() {
     },
     validationSchema,
     onSubmit(values) {
-      // Store both city and searchQuery for backward compatibility
       dispatch(setSearchParams({ ...values, searchQuery: values.city }))
 
       void navigate(ROUTES.SEARCH)

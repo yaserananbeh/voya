@@ -62,10 +62,8 @@ export function EditableSearchBar() {
     },
     validationSchema,
     onSubmit(values) {
-      // Update search params and trigger new search
       dispatch(setSearchParams({ ...values, searchQuery: values.city }))
       setIsExpanded(false)
-      // The ResultsList component will automatically refetch due to searchQuery change
     },
   })
 
@@ -85,9 +83,6 @@ export function EditableSearchBar() {
   const children = stored.children ?? 0
   const rooms = stored.rooms ?? 0
 
-  // Show the search bar if there are any search parameters or if user is on search results page
-  // This allows users to explore all hotels by clearing the search
-
   return (
     <Paper
       elevation={1}
@@ -99,7 +94,6 @@ export function EditableSearchBar() {
         borderColor: 'divider',
       }}
     >
-      {/* Compact View */}
       <Box
         sx={{
           display: 'flex',
@@ -216,7 +210,6 @@ export function EditableSearchBar() {
         </Box>
       </Box>
 
-      {/* Expanded Edit Form */}
       <Collapse in={isExpanded}>
         <Box
           component="form"

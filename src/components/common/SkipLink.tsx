@@ -1,10 +1,6 @@
 import { Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
-/**
- * Skip navigation link for keyboard users
- * Allows users to skip directly to main content
- */
 export function SkipLink() {
   const { t } = useTranslation()
 

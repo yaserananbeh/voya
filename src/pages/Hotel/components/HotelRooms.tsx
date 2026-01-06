@@ -66,7 +66,6 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
 
   const handleBook = (room: HotelRoomDto) => {
     if (!searchParams.checkInDate || !searchParams.checkOutDate) {
-      // Open date selection dialog instead of blocking
       setPendingRoom(room)
       setDateDialogOpen(true)
       return

@@ -32,7 +32,6 @@ export function RouteError() {
     }
   }
 
-  // Set page title based on error type
   usePageTitle(pageTitleKey, errorTitle)
 
   return (

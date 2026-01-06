@@ -105,17 +105,13 @@ export default function Hotels() {
     setDeleteId(null)
   }
 
-  // Calculate rowCount for server-side pagination
-  // If we got a full page of results, assume there are more items
   const rowCount = useMemo(() => {
     const currentPageItems = hotels.length
     const hasMore = currentPageItems === paginationModel.pageSize
     return paginationModel.page * paginationModel.pageSize + currentPageItems + (hasMore ? 1 : 0)
   }, [hotels.length, paginationModel.page, paginationModel.pageSize])
 
-  // Handle pagination model change - reset to page 0 if page size changes
   const handlePaginationModelChange = (newModel: typeof paginationModel) => {
-    // If page size changed, reset to first page
     if (newModel.pageSize !== paginationModel.pageSize) {
       setPaginationModel({ ...newModel, page: 0 })
     } else {

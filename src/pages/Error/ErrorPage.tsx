@@ -27,7 +27,6 @@ export function ErrorPage({
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  // Set page title based on error title or default error page title
   usePageTitle('pages.error', title)
 
   const handleReload = () => {

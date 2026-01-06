@@ -46,13 +46,11 @@ export function SafeImage({
       return
     }
 
-    // Clear any existing timeout
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
       timeoutRef.current = undefined
     }
 
-    // Preload image using native Image object to reliably detect loading
     const img = new Image()
     let cancelled = false
 
@@ -78,47 +76,31 @@ export function SafeImage({
       setIsLoading(false)
     }
 
-    // Set up image load/error handlers BEFORE setting src
-    // This ensures we catch the load event even for cached images
     img.onload = handleImageLoad
     img.onerror = handleImageError
 
-    // Set src to start loading
     img.src = src
 
-    // Check if image is already cached/loaded (use setTimeout to ensure handlers are set)
-    // Some browsers need a microtask to properly detect cached images
     const checkCached = () => {
       if (cancelled || !isMountedRef.current) return
       if (img.complete) {
         if (img.naturalWidth === 0 || img.naturalHeight === 0) {
-          // Image failed to load
           handleImageError()
         } else {
-          // Image already loaded (cached) - handlers should fire, but ensure they do
           handleImageLoad()
         }
       }
     }
 
-    // Use requestAnimationFrame to check cached images after handlers are set
-    // This ensures we catch cached images reliably
     requestAnimationFrame(() => {
       if (!cancelled && isMountedRef.current) {
         checkCached()
       }
     })
 
-    // Set up timeout - but DON'T set error on timeout, only stop showing loading state
-    // Only show error if we get an explicit error event from the image
-    // This ensures valid images that load slowly won't be marked as failed
     timeoutRef.current = setTimeout(() => {
       if (cancelled || !isMountedRef.current) return
-      // If image hasn't loaded yet, just stop showing loading state
-      // But don't set error - let the image continue loading
       if (!hasLoadedRef.current) {
-        // Only hide loading skeleton, but keep trying to load
-        // The image will show when it loads, or error handler will fire if it fails
         setIsLoading(false)
       }
       timeoutRef.current = undefined
@@ -135,10 +117,7 @@ export function SafeImage({
     }
   }, [src])
 
-  // These handlers are kept for CardMedia's onLoad/onError as backup
-  // but the main loading detection happens in the useEffect with Image preloading
   const handleLoad = () => {
-    // Only update if not already handled by preload
     if (!hasLoadedRef.current) {
       hasLoadedRef.current = true
       if (timeoutRef.current) {
@@ -151,7 +130,6 @@ export function SafeImage({
   }
 
   const handleError = () => {
-    // Only update if not already handled by preload
     if (hasLoadedRef.current === false && isLoading) {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current)
