@@ -22,7 +22,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   })
 
   const direction = i18n.language === 'ar' ? 'rtl' : 'ltr'
-  const theme = useMemo(() => createAppTheme(mode, direction), [mode, direction, i18n.language])
+  const theme = useMemo(() => createAppTheme(mode, direction), [mode, direction])
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.THEME_MODE, mode)
