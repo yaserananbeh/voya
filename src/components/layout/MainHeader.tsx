@@ -53,17 +53,24 @@ export default function MainHeader() {
   }
 
   return (
-    <AppBar position="sticky" color="default" elevation={1}>
+    <AppBar position="sticky" color="default" elevation={1} component="nav" role="navigation">
       <Toolbar>
         <Box
           component={RouterLink}
           to={ROUTES.HOME}
+          aria-label={t('common.home') || 'Home'}
           sx={{
             display: 'flex',
             alignItems: 'center',
             gap: 1,
             textDecoration: 'none',
             flexGrow: 1,
+            '&:focus-visible': {
+              outline: '3px solid',
+              outlineColor: 'primary.main',
+              outlineOffset: 2,
+              borderRadius: 1,
+            },
           }}
         >
           <FlightTakeoffIcon
@@ -71,6 +78,7 @@ export default function MainHeader() {
               color: 'primary.main',
               fontSize: { xs: 24, sm: 32 },
             }}
+            aria-hidden="true"
           />
           <Box
             component="span"
@@ -90,8 +98,14 @@ export default function MainHeader() {
           <>
             <LanguageSwitcher />
             <ThemeToggle />
-            <IconButton color="primary" onClick={handleMenuOpen}>
-              <MenuIcon />
+            <IconButton
+              color="primary"
+              onClick={handleMenuOpen}
+              aria-label={t('common.menu') || 'Open menu'}
+              aria-expanded={Boolean(anchorEl)}
+              aria-haspopup="true"
+            >
+              <MenuIcon aria-hidden="true" />
             </IconButton>
             <Menu
               anchorEl={anchorEl}
@@ -105,22 +119,33 @@ export default function MainHeader() {
                 vertical: 'top',
                 horizontal: 'right',
               }}
+              role="menu"
             >
-              <MenuItem component={RouterLink} to={ROUTES.HOME} onClick={handleMenuClose}>
+              <MenuItem
+                component={RouterLink}
+                to={ROUTES.HOME}
+                onClick={handleMenuClose}
+                role="menuitem"
+              >
                 {t('common.home')}
               </MenuItem>
-              <MenuItem component={RouterLink} to={ROUTES.SEARCH} onClick={handleMenuClose}>
+              <MenuItem
+                component={RouterLink}
+                to={ROUTES.SEARCH}
+                onClick={handleMenuClose}
+                role="menuitem"
+              >
                 {t('common.search')}
               </MenuItem>
-              <MenuItem onClick={handleAuthClick}>
+              <MenuItem onClick={handleAuthClick} role="menuitem">
                 {isAuthenticated ? (
                   <>
-                    <LogoutIcon sx={{ mr: 1 }} />
+                    <LogoutIcon sx={{ mr: 1 }} aria-hidden="true" />
                     {t('common.logout')}
                   </>
                 ) : (
                   <>
-                    <LoginIcon sx={{ mr: 1 }} />
+                    <LoginIcon sx={{ mr: 1 }} aria-hidden="true" />
                     {t('common.login')}
                   </>
                 )}
@@ -128,13 +153,28 @@ export default function MainHeader() {
             </Menu>
           </>
         ) : (
-          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+          <Box
+            component="nav"
+            role="navigation"
+            aria-label={t('common.mainNavigation') || 'Main navigation'}
+            sx={{ display: 'flex', gap: 1, alignItems: 'center' }}
+          >
             <LanguageSwitcher />
             <ThemeToggle />
-            <Button component={RouterLink} to={ROUTES.HOME} color="primary">
+            <Button
+              component={RouterLink}
+              to={ROUTES.HOME}
+              color="primary"
+              aria-label={t('common.home') || 'Home'}
+            >
               {t('common.home')}
             </Button>
-            <Button component={RouterLink} to={ROUTES.SEARCH} color="primary">
+            <Button
+              component={RouterLink}
+              to={ROUTES.SEARCH}
+              color="primary"
+              aria-label={t('common.search') || 'Search'}
+            >
               {t('common.search')}
             </Button>
             <LogoutBtn />

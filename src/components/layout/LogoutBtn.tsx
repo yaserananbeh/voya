@@ -30,7 +30,10 @@ export default function LogoutBtn() {
       onClick={handleClick}
       variant="contained"
       color={isAuthenticated ? 'info' : 'primary'}
-      startIcon={isAuthenticated ? <LogoutIcon /> : <LoginIcon />}
+      startIcon={
+        isAuthenticated ? <LogoutIcon aria-hidden="true" /> : <LoginIcon aria-hidden="true" />
+      }
+      aria-label={isAuthenticated ? t('common.logout') : t('common.login')}
       sx={{ [isRTL ? 'mr' : 'ml']: 2 }}
     >
       {isAuthenticated ? t('common.logout') : t('common.login')}

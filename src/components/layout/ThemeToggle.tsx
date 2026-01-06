@@ -12,8 +12,21 @@ export function ThemeToggle() {
     <Tooltip
       title={mode === 'light' ? t('common.switchToDarkMode') : t('common.switchToLightMode')}
     >
-      <IconButton onClick={toggleTheme} color="inherit" aria-label="toggle theme">
-        {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
+      <IconButton
+        onClick={toggleTheme}
+        color="inherit"
+        aria-label={
+          mode === 'light'
+            ? t('common.switchToDarkMode') || 'Switch to dark mode'
+            : t('common.switchToLightMode') || 'Switch to light mode'
+        }
+        aria-pressed={mode === 'dark'}
+      >
+        {mode === 'light' ? (
+          <DarkModeIcon aria-hidden="true" />
+        ) : (
+          <LightModeIcon aria-hidden="true" />
+        )}
       </IconButton>
     </Tooltip>
   )
