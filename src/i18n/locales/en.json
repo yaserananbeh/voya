@@ -282,5 +282,47 @@
     "adminCities": "Manage Cities",
     "adminHotels": "Manage Hotels",
     "adminRooms": "Manage Rooms"
+  },
+  "seo": {
+    "home": {
+      "title": "Home",
+      "description": "Discover stays that fit how you travel. Search trusted stays, compare deals, and book in minutes—so you can focus on the trip, not the planning.",
+      "keywords": "hotels, booking, travel, accommodation, stays, vacation, trip, book hotel"
+    },
+    "search": {
+      "title": "Search Results",
+      "description": "Find the perfect hotel for your stay. Compare prices, amenities, and locations to make the best choice for your trip.",
+      "keywords": "hotel search, find hotels, compare hotels, hotel booking, accommodation search"
+    },
+    "hotel": {
+      "title": "Hotel Details",
+      "description": "View detailed information about this hotel including rooms, amenities, location, and reviews. Book your stay today.",
+      "keywords": "hotel details, hotel information, book hotel, hotel rooms, hotel amenities"
+    },
+    "login": {
+      "title": "Login",
+      "description": "Sign in to your Voya account to access your bookings and manage your travel plans.",
+      "keywords": "login, sign in, account, user account"
+    },
+    "checkout": {
+      "title": "Checkout",
+      "description": "Complete your hotel booking by providing your details and payment information.",
+      "keywords": "checkout, booking, payment, hotel reservation"
+    },
+    "confirmation": {
+      "title": "Booking Confirmation",
+      "description": "Your booking has been confirmed. View your booking details and confirmation number.",
+      "keywords": "booking confirmation, reservation confirmed, booking details"
+    },
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist or has been moved.",
+      "keywords": "404, page not found, error"
+    },
+    "forbidden": {
+      "title": "Access Forbidden",
+      "description": "You don't have permission to access this page.",
+      "keywords": "403, forbidden, access denied"
+    }
   }
 }
