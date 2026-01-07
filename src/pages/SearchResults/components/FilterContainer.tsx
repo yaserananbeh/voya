@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext } from 'react'
 import type { ReactNode } from 'react'
 import { Box, Paper, Typography, Stack, Divider, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
@@ -8,11 +8,7 @@ type FilterContextValue = {
   onClose?: () => void
 }
 
-const FilterContext = createContext<FilterContextValue>({})
-
-export function useFilterContext() {
-  return useContext(FilterContext)
-}
+export const FilterContext = createContext<FilterContextValue>({})
 
 type FilterContainerProps = {
   children: ReactNode
