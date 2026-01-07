@@ -5,7 +5,7 @@ import NotesIcon from '@mui/icons-material/Notes'
 import { useFormik } from 'formik'
 import { createBookingSchema } from './bookingSchema'
 import { useTranslation } from 'react-i18next'
-import { PAYMENT_METHOD_OPTIONS, UI } from '@/constants'
+import { PAYMENT_METHOD_OPTIONS, FORM } from '../constants'
 import { FormTextField, FormSelectField, SubmitButton } from './'
 
 export type UserInfoValues = {
@@ -107,7 +107,7 @@ export function UserInfoForm({
           }
           placeholder={t('checkout.specialRequestsPlaceholder')}
           multiline
-          rows={UI.FORM.SPECIAL_REQUESTS_ROWS}
+          rows={FORM.SPECIAL_REQUESTS_ROWS}
           startAdornment={
             <Box sx={{ alignSelf: 'flex-start', mt: 1.5 }}>
               <NotesIcon sx={{ color: 'text.secondary' }} aria-hidden="true" />

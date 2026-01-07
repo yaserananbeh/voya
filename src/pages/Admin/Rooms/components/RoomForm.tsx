@@ -17,7 +17,7 @@ import { useGetRoomsAdminQuery } from '../api'
 import { useGetAdminHotelsQuery } from '../../Hotels/api'
 import type { RoomForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
-import { VALIDATION } from '@/constants'
+import { VALIDATION } from '../constants'
 
 type Props = {
   roomId: number | null

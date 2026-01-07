@@ -19,7 +19,7 @@ import {
   DeleteConfirmDialog,
 } from '../components'
 import { usePageTitle } from '@/hooks'
-import { getInitialPaginationModel } from '@/constants'
+import { getInitialPaginationModel } from '../constants'
 
 export default function Rooms() {
   usePageTitle('pages.adminRooms')

@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useGetHotelsQuery, type HotelDto } from '../../Hotel/api'
 import { HotelResultCard } from './HotelResultCard'
 import { LoadingState, ErrorState } from '@/components/common'
-import { PAGINATION } from '@/constants'
+import { PAGINATION } from '../../Admin/constants'
 import { useTranslation } from 'react-i18next'
 
 function hotelMatchesFilters(hotel: HotelDto, filters: ReturnType<typeof selectSearchFilters>) {

@@ -1,5 +1,9 @@
 import { baseApi } from '@/api/baseApi'
 
+const API_ENDPOINTS = {
+  SEARCH_AMENITIES: '/search-results/amenities',
+} as const
+
 export type FilterAmenityDto = {
   id: number
   name: string
@@ -9,7 +13,7 @@ export type FilterAmenityDto = {
 export const searchResultsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAmenities: builder.query<FilterAmenityDto[], void>({
-      query: () => 'search-results/amenities',
+      query: () => API_ENDPOINTS.SEARCH_AMENITIES,
       providesTags: ['Amenities'],
     }),
   }),

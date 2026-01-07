@@ -1,5 +1,9 @@
 import { baseApi } from '@/api/baseApi'
-import { API_ENDPOINTS } from '@/constants'
+
+const API_ENDPOINTS = {
+  BOOKINGS: '/bookings',
+  BOOKING_BY_ID: (id: number) => `/bookings/${id}`,
+} as const
 export type BookingRequest = {
   customerName: string
   hotelName: string

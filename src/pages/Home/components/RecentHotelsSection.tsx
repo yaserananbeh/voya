@@ -5,7 +5,7 @@ import { EmptyState } from './EmptyState'
 import { HotelCard } from './HotelCard'
 import { formatDistanceToNow } from '@/utils/date'
 import { useTranslation } from 'react-i18next'
-import { USER } from '@/constants'
+import { USER } from '../../Login/constants'
 
 export function RecentHotelsSection() {
   const { t } = useTranslation()

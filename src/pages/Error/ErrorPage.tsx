@@ -4,7 +4,8 @@ import RefreshIcon from '@mui/icons-material/Refresh'
 import HomeIcon from '@mui/icons-material/Home'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { ROUTES, UI } from '@/constants'
+import { ROUTES } from '@/constants'
+import { ERROR_PAGE } from './constants'
 import { usePageTitle } from '@/hooks'
 
 interface ErrorPageProps {
@@ -57,8 +58,8 @@ export function ErrorPage({
         <Stack spacing={3} alignItems="center">
           <Box
             sx={{
-              width: UI.ERROR_PAGE.ICON_CONTAINER_SIZE,
-              height: UI.ERROR_PAGE.ICON_CONTAINER_SIZE,
+              width: ERROR_PAGE.ICON_CONTAINER_SIZE,
+              height: ERROR_PAGE.ICON_CONTAINER_SIZE,
               borderRadius: '50%',
               bgcolor: 'error.light',
               display: 'flex',
@@ -67,9 +68,7 @@ export function ErrorPage({
               mb: 2,
             }}
           >
-            <ErrorOutlineIcon
-              sx={{ fontSize: UI.ERROR_PAGE.ICON_FONT_SIZE, color: 'error.main' }}
-            />
+            <ErrorOutlineIcon sx={{ fontSize: ERROR_PAGE.ICON_FONT_SIZE, color: 'error.main' }} />
           </Box>
 
           <Typography variant="h4" fontWeight={700} gutterBottom>
@@ -89,7 +88,7 @@ export function ErrorPage({
                 borderRadius: 1,
                 textAlign: 'left',
                 width: '100%',
-                maxHeight: UI.ERROR_PAGE.ERROR_BOX_MAX_HEIGHT,
+                maxHeight: ERROR_PAGE.ERROR_BOX_MAX_HEIGHT,
                 overflow: 'auto',
               }}
             >

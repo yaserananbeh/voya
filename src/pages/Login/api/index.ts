@@ -1,5 +1,8 @@
 import { baseApi } from '@/api/baseApi'
-import { API_ENDPOINTS } from '@/constants'
+
+const API_ENDPOINTS = {
+  AUTH_AUTHENTICATE: '/auth/authenticate',
+} as const
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

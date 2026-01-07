@@ -1,5 +1,11 @@
 import { baseApi } from '@/api/baseApi'
-import { API_ENDPOINTS } from '@/constants'
+
+const API_ENDPOINTS = {
+  HOME_SEARCH: '/home/search',
+  HOME_FEATURED_DEALS: '/home/featured-deals',
+  HOME_RECENT_HOTELS: (userId: number) => `/home/users/${userId}/recent-hotels`,
+  HOME_TRENDING_DESTINATIONS: '/home/destinations/trending',
+} as const
 export type HomeSearchRequest = {
   checkInDate?: string
   checkOutDate?: string

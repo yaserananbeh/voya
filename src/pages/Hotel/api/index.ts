@@ -1,5 +1,12 @@
 import { baseApi } from '@/api/baseApi'
-import { API_ENDPOINTS } from '@/constants'
+
+const API_ENDPOINTS = {
+  HOTELS: '/hotels',
+  HOTEL_BY_ID: (id: number) => `/hotels/${id}`,
+  HOTEL_GALLERY: (id: number) => `/hotels/${id}/gallery`,
+  HOTEL_ROOMS: (id: number) => `/hotels/${id}/rooms`,
+  HOTEL_REVIEWS: (id: number) => `/hotels/${id}/reviews`,
+} as const
 
 export type HotelAmenityDto = {
   id: number
