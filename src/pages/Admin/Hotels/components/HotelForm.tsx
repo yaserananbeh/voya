@@ -17,6 +17,7 @@ import type { HotelForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
 import { HOTEL } from '../../../Hotel/constants'
 import { VALIDATION } from '../constants'
+import { BUTTON_LABELS } from '../../constants'
 
 type Props = {
   hotelId: number | null
@@ -187,9 +188,9 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
         />
 
         <Stack direction="row" spacing={2} justifyContent="flex-end">
-          <Button onClick={onCancel}>Cancel</Button>
+          <Button onClick={onCancel}>{BUTTON_LABELS.CANCEL}</Button>
           <Button type="submit" variant="contained">
-            {hotelId ? 'Update' : 'Create'}
+            {hotelId ? BUTTON_LABELS.UPDATE : BUTTON_LABELS.CREATE}
           </Button>
         </Stack>
       </Stack>

@@ -22,3 +22,9 @@ export const FORM = {
   SPECIAL_REQUESTS_ROWS: 4,
   DESCRIPTION_ROWS: 3,
 } as const
+
+export const BOOKING_STATUS = {
+  CONFIRMED: 'Confirmed',
+  PENDING: 'Pending',
+  CANCELLED: 'Cancelled',
+} as const

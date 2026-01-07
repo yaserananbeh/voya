@@ -24,6 +24,7 @@ import styles from './styles/styles.module.css'
 import { useNotification } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import { STORAGE_KEYS, ROUTES } from '@/constants'
+import { USER } from './constants'
 import { usePageTitle } from '@/hooks'
 import { SEO } from '@/components/common'
 
@@ -65,7 +66,7 @@ export default function Login() {
 
         showSuccess(t('auth.loginSuccess'))
 
-        if (result.userType === 'Admin') {
+        if (result.userType === USER.TYPES.ADMIN) {
           await navigate(from || ROUTES.ADMIN_DASHBOARD, { replace: true })
         } else {
           await navigate(from || ROUTES.HOME, { replace: true })

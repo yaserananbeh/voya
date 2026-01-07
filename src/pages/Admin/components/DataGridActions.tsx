@@ -9,11 +9,13 @@ interface DataGridActionsProps {
   deleteLabel?: string
 }
 
+import { BUTTON_LABELS } from '../constants'
+
 export function DataGridActions({
   onEdit,
   onDelete,
-  editLabel = 'Edit',
-  deleteLabel = 'Delete',
+  editLabel = BUTTON_LABELS.EDIT,
+  deleteLabel = BUTTON_LABELS.DELETE,
 }: DataGridActionsProps) {
   return (
     <>

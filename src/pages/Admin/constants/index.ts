@@ -15,3 +15,12 @@ export const getInitialPaginationModel = () => ({
 export const ADMIN_LAYOUT = {
   DRAWER_WIDTH: 240,
 } as const
+
+export const BUTTON_LABELS = {
+  CREATE: 'Create',
+  UPDATE: 'Update',
+  CANCEL: 'Cancel',
+  DELETE: 'Delete',
+  EDIT: 'Edit',
+  SUBMIT: 'Submit',
+} as const

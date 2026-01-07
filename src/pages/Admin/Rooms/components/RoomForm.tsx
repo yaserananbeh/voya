@@ -18,6 +18,7 @@ import { useGetAdminHotelsQuery } from '../../Hotels/api'
 import type { RoomForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
 import { VALIDATION } from '../constants'
+import { BUTTON_LABELS } from '../../constants'
 
 type Props = {
   roomId: number | null
@@ -184,9 +185,9 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
         />
 
         <Stack direction="row" spacing={2} justifyContent="flex-end">
-          <Button onClick={onCancel}>Cancel</Button>
+          <Button onClick={onCancel}>{BUTTON_LABELS.CANCEL}</Button>
           <Button type="submit" variant="contained">
-            {roomId ? 'Update' : 'Create'}
+            {roomId ? BUTTON_LABELS.UPDATE : BUTTON_LABELS.CREATE}
           </Button>
         </Stack>
       </Stack>

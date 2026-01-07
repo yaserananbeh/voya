@@ -1,4 +1,5 @@
 import { baseApi } from '@/api/baseApi'
+import { BOOKING_STATUS } from '../constants'
 
 const API_ENDPOINTS = {
   BOOKINGS: '/bookings',
@@ -50,7 +51,9 @@ export const checkoutApi = baseApi.injectEndpoints({
             totalCost: 'totalCost' in res ? (res.totalCost as number) : 0,
             paymentMethod: 'paymentMethod' in res ? (res.paymentMethod as string | null) : null,
             bookingStatus:
-              'bookingStatus' in res ? (res.bookingStatus as string | null) : 'Confirmed',
+              'bookingStatus' in res
+                ? (res.bookingStatus as string | null)
+                : BOOKING_STATUS.CONFIRMED,
             confirmationNumber:
               'confirmationNumber' in res ? (res.confirmationNumber as string | null) : null,
           }
