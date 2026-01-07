@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { baseApi } from '@/api/baseApi'
-import { searchReducer, type SearchState } from './searchSlice'
-import { authReducer } from './authSlice'
-import { STORAGE_KEYS } from '@/constants'
+import { searchReducer, type SearchState } from '@/pages/SearchResults/store'
+import { authReducer } from '@/pages/Login/store'
+import { STORAGE_KEYS } from '@/pages/SearchResults/constants'
 
 function loadSearchState(): SearchState | undefined {
   try {
