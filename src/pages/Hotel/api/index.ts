@@ -7,7 +7,7 @@ import type {
   GetHotelsQuery,
   HotelGalleryPhotoDto,
   HotelReviewDto,
-} from '../types'
+} from '@/pages/Hotel/types'
 
 const API_ENDPOINTS = {
   HOTELS: '/hotels',

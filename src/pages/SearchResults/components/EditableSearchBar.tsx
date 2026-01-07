@@ -14,7 +14,7 @@ import {
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import { selectSearchParams, setSearchParams, clearSearchParams } from '../store'
+import { selectSearchParams, setSearchParams, clearSearchParams } from '@/pages/SearchResults/store'
 import { useTranslation } from 'react-i18next'
 import EditIcon from '@mui/icons-material/Edit'
 import SearchIcon from '@mui/icons-material/Search'
@@ -23,7 +23,7 @@ import ClearIcon from '@mui/icons-material/Clear'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import { formatDateForDisplay, startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from '@/components/common'
-import { SEARCH_BAR } from '../constants'
+import { SEARCH_BAR } from '@/pages/SearchResults/constants'
 
 export function EditableSearchBar() {
   const { t, i18n } = useTranslation()

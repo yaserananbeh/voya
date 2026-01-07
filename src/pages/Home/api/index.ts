@@ -5,7 +5,7 @@ import type {
   FeaturedDealDto,
   RecentHotelResultDto,
   DestinationDto,
-} from '../types'
+} from '@/pages/Home/types'
 
 const API_ENDPOINTS = {
   HOME_SEARCH: '/home/search',

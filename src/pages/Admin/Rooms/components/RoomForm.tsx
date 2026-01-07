@@ -13,12 +13,12 @@ import {
   Box,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useGetRoomsAdminQuery } from '../api'
-import { useGetAdminHotelsQuery } from '../../Hotels/api'
-import type { RoomForCreationDto } from '../types'
+import { useGetRoomsAdminQuery } from '@/pages/Admin/Rooms/api'
+import { useGetAdminHotelsQuery } from '@/pages/Admin/Hotels/api'
+import type { RoomForCreationDto } from '@/pages/Admin/Rooms/types'
 import { VoyaLoader } from '@/components'
-import { VALIDATION } from '../constants'
-import { BUTTON_LABELS } from '../../constants'
+import { VALIDATION } from '@/pages/Admin/Rooms/constants'
+import { BUTTON_LABELS } from '@/pages/Admin/constants'
 
 type Props = {
   roomId: number | null

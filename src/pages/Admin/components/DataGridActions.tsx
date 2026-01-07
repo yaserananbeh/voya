@@ -9,7 +9,7 @@ interface DataGridActionsProps {
   deleteLabel?: string
 }
 
-import { BUTTON_LABELS } from '../constants'
+import { BUTTON_LABELS } from '@/pages/Admin/constants'
 
 export function DataGridActions({
   onEdit,

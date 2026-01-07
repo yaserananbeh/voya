@@ -1,8 +1,8 @@
 import { Slider, Typography, Stack } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectSearchFilters, setSearchFilters } from '../store'
+import { selectSearchFilters, setSearchFilters } from '@/pages/SearchResults/store'
 import { useTranslation } from 'react-i18next'
-import { HOTEL } from '../../Hotel/constants'
+import { HOTEL } from '@/pages/Hotel/constants'
 
 export function PriceFilter() {
   const { t, i18n } = useTranslation()

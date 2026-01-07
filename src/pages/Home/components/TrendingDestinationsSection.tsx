@@ -1,6 +1,6 @@
 import { Alert, Box, Card, CardContent, Typography } from '@mui/material'
-import { useTrendingDestinationsQuery } from '../api'
-import type { DestinationDto } from '../types'
+import { useTrendingDestinationsQuery } from '@/pages/Home/api'
+import type { DestinationDto } from '@/pages/Home/types'
 import { SafeImage } from '@/components/common/SafeImage'
 import { VoyaLoader } from '@/components'
 import { useTranslation } from 'react-i18next'

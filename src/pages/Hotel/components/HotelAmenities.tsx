@@ -1,6 +1,6 @@
 import { Stack, Chip, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import type { HotelAmenityDto } from '../api'
+import type { HotelAmenityDto } from '@/pages/Hotel/api'
 
 type Props = {
   amenities: HotelAmenityDto[]

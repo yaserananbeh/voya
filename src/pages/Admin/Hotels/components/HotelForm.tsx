@@ -11,13 +11,13 @@ import {
   Box,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useGetAdminHotelsQuery } from '../api'
-import { useGetCitiesQuery } from '../../Cities/api'
-import type { HotelForCreationDto } from '../types'
+import { useGetAdminHotelsQuery } from '@/pages/Admin/Hotels/api'
+import { useGetCitiesQuery } from '@/pages/Admin/Cities/api'
+import type { HotelForCreationDto } from '@/pages/Admin/Hotels/types'
 import { VoyaLoader } from '@/components'
-import { HOTEL } from '../../../Hotel/constants'
-import { VALIDATION } from '../constants'
-import { BUTTON_LABELS } from '../../constants'
+import { HOTEL } from '@/pages/Hotel/constants'
+import { VALIDATION } from '@/pages/Admin/Hotels/constants'
+import { BUTTON_LABELS } from '@/pages/Admin/constants'
 
 type Props = {
   hotelId: number | null

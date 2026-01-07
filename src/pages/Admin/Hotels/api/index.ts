@@ -1,5 +1,9 @@
 import { baseApi } from '@/api/baseApi'
-import type { HotelWithoutRoomsDto, HotelForCreationDto, PaginationQuery } from '../types'
+import type {
+  HotelWithoutRoomsDto,
+  HotelForCreationDto,
+  PaginationQuery,
+} from '@/pages/Admin/Hotels/types'
 
 const API_ENDPOINTS = {
   HOTELS: '/hotels',

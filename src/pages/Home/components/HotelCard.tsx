@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { StarRatingDisplay } from '@/components/common'
 import { PriceDisplay } from './PriceDisplay'
 import { ViewDetailsButton } from './ViewDetailsButton'
-import type { HotelCardData } from '../types'
+import type { HotelCardData } from '@/pages/Home/types'
 
 type HotelCardProps = {
   hotel: HotelCardData

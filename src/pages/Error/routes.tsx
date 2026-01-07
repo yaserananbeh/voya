@@ -5,8 +5,8 @@ import { SuspenseLayout } from '@/routes/components'
 import { ROUTES } from '@/pages/Login/constants'
 import { RouteError } from './RouteError'
 
-const NotFound = lazy(() => import('../NotFound'))
-const Forbidden = lazy(() => import('../Forbidden'))
+const NotFound = lazy(() => import('@/pages/NotFound/NotFound'))
+const Forbidden = lazy(() => import('@/pages/Forbidden/Forbidden'))
 
 export const errorRoutes: RouteObject[] = [
   {

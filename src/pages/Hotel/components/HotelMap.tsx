@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Marker } from 'react-leaflet'
 import type { LatLngExpression } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { MAP } from '../constants'
+import { MAP } from '@/pages/Hotel/constants'
 
 type Props = {
   lat: number

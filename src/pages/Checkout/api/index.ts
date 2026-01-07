@@ -4,7 +4,7 @@ import type {
   BookingRequest,
   BookingDetailsResponseDto,
   CreateBookingResponse,
-} from '../types'
+} from '@/pages/Checkout/types'
 
 const API_ENDPOINTS = {
   BOOKINGS: '/bookings',

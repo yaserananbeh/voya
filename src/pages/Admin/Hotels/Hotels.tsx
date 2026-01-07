@@ -17,9 +17,9 @@ import {
   AdminDataGrid,
   AdminFormDialog,
   DeleteConfirmDialog,
-} from '../components'
+} from '@/pages/Admin/components'
 import { usePageTitle } from '@/hooks'
-import { getInitialPaginationModel } from '../utils'
+import { getInitialPaginationModel } from '@/pages/Admin/utils'
 
 export default function Hotels() {
   usePageTitle('pages.adminHotels')

@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { store } from '@/store'
-import Checkout from '../Checkout'
+import Checkout from '@/pages/Checkout/Checkout'
 
 const checkoutContext = {
   hotelId: 1,

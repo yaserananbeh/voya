@@ -5,9 +5,9 @@ import NotesIcon from '@mui/icons-material/Notes'
 import { useFormik } from 'formik'
 import { createBookingSchema } from './bookingSchema'
 import { useTranslation } from 'react-i18next'
-import { PAYMENT_METHOD_OPTIONS, FORM } from '../constants'
+import { PAYMENT_METHOD_OPTIONS, FORM } from '@/pages/Checkout/constants'
 import { FormTextField, FormSelectField, SubmitButton } from './'
-import type { UserInfoValues } from '../types'
+import type { UserInfoValues } from '@/pages/Checkout/types'
 
 export function UserInfoForm({
   initialValues,

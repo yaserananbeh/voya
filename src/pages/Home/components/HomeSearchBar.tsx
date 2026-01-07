@@ -7,8 +7,8 @@ import { selectSearchParams, setSearchParams, clearSearchParams } from '@/pages/
 import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { GuestRoomSelector } from '@/components/common'
 import { useTranslation } from 'react-i18next'
-import { ROUTES } from '../constants'
-import { SEARCH_BAR } from '../../SearchResults/constants'
+import { ROUTES } from '@/pages/Home/constants'
+import { SEARCH_BAR } from '@/pages/SearchResults/constants'
 import { SearchCityField, SearchDateField, SearchActionButtons } from './'
 
 type SearchValues = {

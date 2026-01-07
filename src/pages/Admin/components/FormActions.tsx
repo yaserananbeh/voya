@@ -9,7 +9,7 @@ type FormActionsProps<T = Record<string, unknown>> = {
   formik: FormikProps<T>
 }
 
-import { BUTTON_LABELS } from '../constants'
+import { BUTTON_LABELS } from '@/pages/Admin/constants'
 
 export function FormActions<T = Record<string, unknown>>({
   onCancel,

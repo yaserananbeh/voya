@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { Box, Paper, Typography, Stack, Divider, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import { useMediaQuery, useTheme } from '@mui/material'
-import { FilterProvider } from '../providers'
+import { FilterProvider } from '@/pages/SearchResults/providers'
 
 type FilterContainerProps = {
   children: ReactNode

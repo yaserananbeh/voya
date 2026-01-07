@@ -1,5 +1,5 @@
 import { baseApi } from '@/api/baseApi'
-import type { CityForCreationDto, CityDto, PaginationQuery } from '../types'
+import type { CityForCreationDto, CityDto, PaginationQuery } from '@/pages/Admin/Cities/types'
 
 const API_ENDPOINTS = {
   CITIES: '/cities',

@@ -6,15 +6,21 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { baseApi } from '@/api/baseApi'
 import { server } from '@/tests/msw/server'
 import { http, HttpResponse } from 'msw'
-import Hotel from '../Hotel'
+import Hotel from '@/pages/Hotel/Hotel'
 
-vi.mock('../components/HotelGallery', () => ({ HotelGallery: () => <div data-testid="gallery" /> }))
-vi.mock('../components/HotelAmenities', () => ({
+vi.mock('@/pages/Hotel/components/HotelGallery', () => ({
+  HotelGallery: () => <div data-testid="gallery" />,
+}))
+vi.mock('@/pages/Hotel/components/HotelAmenities', () => ({
   HotelAmenities: () => <div data-testid="amenities" />,
 }))
-vi.mock('../components/HotelMap', () => ({ HotelMap: () => <div data-testid="map" /> }))
-vi.mock('../components/HotelRooms', () => ({ HotelRooms: () => <div data-testid="rooms" /> }))
-vi.mock('../components/HotelReviews', () => ({ HotelReviews: () => <div data-testid="reviews" /> }))
+vi.mock('@/pages/Hotel/components/HotelMap', () => ({ HotelMap: () => <div data-testid="map" /> }))
+vi.mock('@/pages/Hotel/components/HotelRooms', () => ({
+  HotelRooms: () => <div data-testid="rooms" />,
+}))
+vi.mock('@/pages/Hotel/components/HotelReviews', () => ({
+  HotelReviews: () => <div data-testid="reviews" />,
+}))
 
 function makeStore() {
   return configureStore({

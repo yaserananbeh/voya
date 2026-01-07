@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-import { useRecentHotelsQuery } from '../api'
-import type { RecentHotelResultDto } from '../types'
+import { useRecentHotelsQuery } from '@/pages/Home/api'
+import type { RecentHotelResultDto } from '@/pages/Home/types'
 import { LoadingState, ErrorState } from '@/components/common'
 import { EmptyState } from './EmptyState'
 import { HotelCard } from './HotelCard'

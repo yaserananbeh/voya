@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import { VALIDATION } from '../constants'
+import { VALIDATION } from '@/pages/Checkout/constants'
 import type { TFunction } from 'i18next'
 
 export const createBookingSchema = (t: TFunction) =>

@@ -9,9 +9,9 @@ import {
   Star as StarIcon,
   CheckCircle as AvailableIcon,
 } from '@mui/icons-material'
-import { useGetCitiesQuery } from '../Cities/api'
-import { useGetAdminHotelsQuery } from '../Hotels/api'
-import { useGetRoomsAdminQuery } from '../Rooms/api'
+import { useGetCitiesQuery } from '@/pages/Admin/Cities/api'
+import { useGetAdminHotelsQuery } from '@/pages/Admin/Hotels/api'
+import { useGetRoomsAdminQuery } from '@/pages/Admin/Rooms/api'
 import { usePageTitle } from '@/hooks'
 
 export default function Dashboard() {

@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { STORAGE_KEYS, USER } from '../constants'
+import { STORAGE_KEYS, USER } from '@/pages/Login/constants'
 
 interface AuthState {
   token: string | null

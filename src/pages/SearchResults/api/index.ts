@@ -1,5 +1,5 @@
 import { baseApi } from '@/api/baseApi'
-import type { FilterAmenityDto } from '../types'
+import type { FilterAmenityDto } from '@/pages/SearchResults/types'
 
 const API_ENDPOINTS = {
   SEARCH_AMENITIES: '/search-results/amenities',
