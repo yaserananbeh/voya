@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { STORAGE_KEYS, API_TAG_TYPES, AUTH_HEADER_PREFIX } from '@/constants'
+import { STORAGE_KEYS } from '@/pages/Login/constants'
+import { API_TAG_TYPES, AUTH_HEADER_PREFIX } from '@/constants'
 
 export const baseApi = createApi({
   reducerPath: 'api',
