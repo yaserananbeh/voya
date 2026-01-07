@@ -4,8 +4,8 @@ import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAppSelector, useAppDispatch } from '@/hooks'
-import { selectIsAuthenticated, logout } from '@/store/authSlice'
-import { STORAGE_KEYS, ROUTES } from '@/constants'
+import { selectIsAuthenticated, logout } from '@/pages/Login/store'
+import { STORAGE_KEYS, ROUTES } from '@/pages/Login/constants'
 
 export default function LogoutBtn() {
   const { t, i18n } = useTranslation()

@@ -1,7 +1,7 @@
 import { Box, Button } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ROUTES } from '@/constants'
+import { ROUTES } from '@/pages/Home/constants'
 import LogoutBtn from './LogoutBtn'
 
 export function NavigationLinks() {

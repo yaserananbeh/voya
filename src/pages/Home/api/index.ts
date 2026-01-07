@@ -1,4 +1,11 @@
 import { baseApi } from '@/api/baseApi'
+import type {
+  HomeSearchRequest,
+  SearchResultDto,
+  FeaturedDealDto,
+  RecentHotelResultDto,
+  DestinationDto,
+} from '../types'
 
 const API_ENDPOINTS = {
   HOME_SEARCH: '/home/search',
@@ -6,62 +13,6 @@ const API_ENDPOINTS = {
   HOME_RECENT_HOTELS: (userId: number) => `/home/users/${userId}/recent-hotels`,
   HOME_TRENDING_DESTINATIONS: '/home/destinations/trending',
 } as const
-export type HomeSearchRequest = {
-  checkInDate?: string
-  checkOutDate?: string
-  city?: string
-  starRate?: number
-  sort?: string
-  numberOfRooms?: number
-  adults?: number
-  children?: number
-}
-
-export type SearchResultDto = {
-  hotelId: number
-  hotelName: string
-  starRating: number
-  latitude: number
-  longitude: number
-  roomPrice: number
-  roomType: string | null
-  cityName: string | null
-  roomPhotoUrl: string | null
-  discount: number
-  amenities: { id: number; name: string; description: string | null }[] | null
-}
-
-export type FeaturedDealDto = {
-  hotelId: number
-  originalRoomPrice: number
-  discount: number
-  finalPrice: number
-  cityName: string | null
-  hotelName: string | null
-  hotelStarRating: number
-  title: string | null
-  description: string | null
-  roomPhotoUrl: string | null
-}
-
-export type RecentHotelResultDto = {
-  hotelId: number
-  hotelName: string | null
-  starRating: number
-  visitDate: string
-  cityName: string | null
-  thumbnailUrl: string | null
-  priceLowerBound: number
-  priceUpperBound: number
-}
-
-export type DestinationDto = {
-  cityId: number
-  cityName: string | null
-  countryName: string | null
-  description: string | null
-  thumbnailUrl: string | null
-}
 
 export const homeApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

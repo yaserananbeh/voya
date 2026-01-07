@@ -1,14 +1,8 @@
-import { createContext } from 'react'
 import type { ReactNode } from 'react'
 import { Box, Paper, Typography, Stack, Divider, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import { useMediaQuery, useTheme } from '@mui/material'
-
-type FilterContextValue = {
-  onClose?: () => void
-}
-
-export const FilterContext = createContext<FilterContextValue>({})
+import { FilterProvider } from '../providers'
 
 type FilterContainerProps = {
   children: ReactNode
@@ -21,7 +15,7 @@ export function FilterContainer({ children, title = 'Filters', onClose }: Filter
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
-    <FilterContext.Provider value={{ onClose }}>
+    <FilterProvider onClose={onClose}>
       <Paper elevation={1} sx={{ p: { xs: 2, md: 3 } }}>
         <Stack spacing={3}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -37,7 +31,7 @@ export function FilterContainer({ children, title = 'Filters', onClose }: Filter
           {children}
         </Stack>
       </Paper>
-    </FilterContext.Provider>
+    </FilterProvider>
   )
 }
 

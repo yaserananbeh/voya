@@ -1,6 +1,6 @@
 import { Checkbox, FormControlLabel, FormGroup, Typography, Stack, Box } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSearchFilters, selectSearchFilters } from '@/store/searchSlice'
+import { setSearchFilters, selectSearchFilters } from '../store'
 import { useAmenities } from '../hooks/useAmenities'
 import { useTranslation } from 'react-i18next'
 import { VoyaLoader } from '@/components'

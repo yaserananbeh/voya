@@ -1,14 +1,11 @@
 import { baseApi } from '@/api/baseApi'
+import type { FilterAmenityDto } from '../types'
 
 const API_ENDPOINTS = {
   SEARCH_AMENITIES: '/search-results/amenities',
 } as const
 
-export type FilterAmenityDto = {
-  id: number
-  name: string
-  description?: string
-}
+export type { FilterAmenityDto }
 
 export const searchResultsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

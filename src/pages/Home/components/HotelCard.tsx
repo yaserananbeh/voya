@@ -4,19 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { StarRatingDisplay } from '@/components/atomic'
 import { PriceDisplay } from './PriceDisplay'
 import { ViewDetailsButton } from './ViewDetailsButton'
-
-export type HotelCardData = {
-  hotelId: number
-  hotelName: string
-  cityName?: string
-  starRating: number
-  imageUrl?: string
-  price?: number
-  originalPrice?: number
-  discount?: number
-  visitedDate?: string
-  showDiscount?: boolean
-}
+import type { HotelCardData } from '../types'
 
 type HotelCardProps = {
   hotel: HotelCardData

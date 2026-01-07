@@ -5,7 +5,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import SearchIcon from '@mui/icons-material/Search'
 import ExploreIcon from '@mui/icons-material/Explore'
-import { ROUTES } from '@/constants'
+import { ROUTES } from './constants'
 import { usePageTitle } from '@/hooks'
 import { SEO } from '@/components/common'
 
@@ -24,7 +24,7 @@ export default function NotFoundPage() {
   }
 
   const goSearch = () => {
-    void navigate(ROUTES.SEARCH)
+    void navigate('/search')
   }
 
   return (

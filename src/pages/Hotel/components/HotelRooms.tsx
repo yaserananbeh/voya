@@ -2,13 +2,13 @@ import { Box, Card, CardContent, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import type { HotelRoomDto } from '../api'
-import { selectSearchParams } from '@/store/searchSlice'
-import type { CheckoutContext } from '@/types'
-import { saveCheckoutContext } from '@/utils'
+import { selectSearchParams } from '@/pages/SearchResults/store'
+import type { CheckoutContext } from '@/pages/Checkout/types'
+import { saveCheckoutContext } from '@/pages/Checkout/utils/checkoutStorage'
 import { useAppSelector } from '@/hooks'
 import { useTranslation } from 'react-i18next'
-import { STORAGE_KEYS, ROUTES } from '@/constants'
-import { USER } from '../../Login/constants'
+import { STORAGE_KEYS, ROUTES, USER } from '@/pages/Login/constants'
+import { ROUTES as HOTEL_ROUTES } from '../constants'
 import { DateSelectionDialog } from './DateSelectionDialog'
 import { RoomCardImage, RoomCardInfo, RoomCardActions } from './'
 
@@ -44,7 +44,7 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
       }
       saveCheckoutContext(ctx)
 
-      void navigate(ROUTES.LOGIN, { state: { from: { pathname: ROUTES.CHECKOUT } } })
+      void navigate(ROUTES.LOGIN, { state: { from: { pathname: HOTEL_ROUTES.CHECKOUT } } })
       return
     }
 
@@ -62,7 +62,7 @@ export function HotelRooms({ hotelId, hotelName, cityName, rooms }: Props) {
     }
 
     saveCheckoutContext(ctx)
-    void navigate(ROUTES.CHECKOUT, { state: { checkout: ctx } })
+    void navigate(HOTEL_ROUTES.CHECKOUT, { state: { checkout: ctx } })
   }
 
   const handleBook = (room: HotelRoomDto) => {

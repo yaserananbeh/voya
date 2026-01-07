@@ -2,18 +2,18 @@ import { Box, Typography, Container, Paper, Grid, alpha, useTheme } from '@mui/m
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useMemo, useState } from 'react'
 
-import type { CheckoutContext } from '@/types'
+import type { CheckoutContext } from './types'
 import { BookingSummary } from './components/BookingSummary'
-import { UserInfoForm, type UserInfoValues } from './components/UserInfoForm'
+import { UserInfoForm } from './components/UserInfoForm'
+import type { UserInfoValues } from './types'
 import { CheckoutActions } from './components/CheckoutActions'
-import { calculateTotalCost } from './utils/price'
-import { loadCheckoutContext, saveCheckoutContext } from '@/utils'
+import { calculateTotalCost, loadCheckoutContext, saveCheckoutContext } from './utils'
 import { useCreateBookingMutation } from './api'
 import { useNotification, usePageTitle } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import { SEO } from '@/components/common'
 import { CheckoutHeader } from './components'
-import { ROUTES } from '@/constants'
+import { ROUTES } from './constants'
 import { logger } from '@/utils/logger'
 
 type LocationState = { checkout?: CheckoutContext }

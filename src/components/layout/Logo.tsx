@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
 import { useTranslation } from 'react-i18next'
-import { ROUTES } from '@/constants'
+import { ROUTES } from '@/pages/Home/constants'
 
 type LogoProps = {
   size?: 'small' | 'medium' | 'large'

@@ -7,12 +7,7 @@ import { createBookingSchema } from './bookingSchema'
 import { useTranslation } from 'react-i18next'
 import { PAYMENT_METHOD_OPTIONS, FORM } from '../constants'
 import { FormTextField, FormSelectField, SubmitButton } from './'
-
-export type UserInfoValues = {
-  customerName: string
-  paymentMethod: string
-  specialRequests?: string
-}
+import type { UserInfoValues } from '../types'
 
 export function UserInfoForm({
   initialValues,

@@ -2,7 +2,8 @@ import { Stack, Typography } from '@mui/material'
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
 import { useTranslation } from 'react-i18next'
 import { FooterButtons } from './FooterSection'
-import { ROUTES } from '@/constants'
+import { ROUTES } from '@/pages/Home/constants'
+import { ROUTES as LOGIN_ROUTES } from '@/pages/Login/constants'
 
 export function FooterBrand() {
   const { t } = useTranslation()
@@ -33,7 +34,7 @@ export function FooterBrand() {
         buttons={[
           { label: t('common.home'), to: ROUTES.HOME },
           { label: t('common.search'), to: ROUTES.SEARCH },
-          { label: t('common.login'), to: ROUTES.LOGIN },
+          { label: t('common.login'), to: LOGIN_ROUTES.LOGIN },
         ]}
       />
     </>

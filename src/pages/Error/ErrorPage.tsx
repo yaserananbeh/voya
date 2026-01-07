@@ -4,7 +4,7 @@ import RefreshIcon from '@mui/icons-material/Refresh'
 import HomeIcon from '@mui/icons-material/Home'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '@/constants'
+import { ROUTES } from './constants'
 import { ERROR_PAGE } from './constants'
 import { usePageTitle } from '@/hooks'
 

@@ -13,7 +13,7 @@ import * as yup from 'yup'
 import { useTranslation } from 'react-i18next'
 import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import { selectSearchParams, setSearchParams } from '@/store/searchSlice'
+import { selectSearchParams, setSearchParams } from '@/pages/SearchResults/store'
 
 type DateSelectionDialogProps = {
   open: boolean

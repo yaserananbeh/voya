@@ -14,7 +14,7 @@ import {
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import { selectSearchParams, setSearchParams, clearSearchParams } from '@/store/searchSlice'
+import { selectSearchParams, setSearchParams, clearSearchParams } from '../store'
 import { useTranslation } from 'react-i18next'
 import EditIcon from '@mui/icons-material/Edit'
 import SearchIcon from '@mui/icons-material/Search'

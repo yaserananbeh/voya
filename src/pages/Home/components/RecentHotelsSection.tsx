@@ -1,11 +1,12 @@
 import { Box } from '@mui/material'
-import { useRecentHotelsQuery, type RecentHotelResultDto } from '../api'
+import { useRecentHotelsQuery } from '../api'
+import type { RecentHotelResultDto } from '../types'
 import { LoadingState, ErrorState } from '@/components/common'
 import { EmptyState } from './EmptyState'
 import { HotelCard } from './HotelCard'
 import { formatDistanceToNow } from '@/utils/date'
 import { useTranslation } from 'react-i18next'
-import { USER } from '../../Login/constants'
+import { USER } from '@/pages/Login/constants'
 
 export function RecentHotelsSection() {
   const { t } = useTranslation()
