@@ -4,7 +4,7 @@ import { StarRatingFilter } from './StarRatingFilter'
 import { AmenitiesFilter } from './AmenitiesFilter'
 import { HotelTypeFilter } from './HotelTypeFilter'
 import { useTranslation } from 'react-i18next'
-import { FilterContainer, FilterSection } from '@/components/filters'
+import { FilterContainer, FilterSection } from './FilterContainer'
 
 type FiltersSidebarProps = {
   onClose?: () => void

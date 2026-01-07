@@ -1,7 +1,8 @@
 import { Box } from '@mui/material'
 import { useFeaturedDealsQuery } from '@/api/home'
-import { LoadingState, ErrorState, EmptyState } from '@/components/common'
-import { HotelCard } from '@/components/hotel'
+import { LoadingState, ErrorState } from '@/components/common'
+import { EmptyState } from './EmptyState'
+import { HotelCard } from './HotelCard'
 import { useTranslation } from 'react-i18next'
 
 export function FeaturedDealsSection() {

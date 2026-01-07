@@ -2,7 +2,7 @@ import { Card, CardContent, Stack } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import type { HotelDto } from '@/api/hotels'
 import { useTranslation } from 'react-i18next'
-import { HotelCardImage, HotelCardInfo, HotelCardPrice } from '@/components/atomic'
+import { HotelCardImage, HotelCardInfo, HotelCardPrice } from './'
 
 function getMinRoomPrice(hotel: HotelDto): number | null {
   const prices = (hotel.rooms ?? []).map((r) => r.price).filter((p) => typeof p === 'number')

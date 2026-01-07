@@ -22,7 +22,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import ClearIcon from '@mui/icons-material/Clear'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import { formatDateForDisplay, startOfToday, addDays, formatDateForApi } from '@/utils/date'
-import { GuestRoomSelector } from '@/pages/Home/components/GuestRoomSelector'
+import { GuestRoomSelector } from '@/components/common'
 import { UI } from '@/constants'
 
 export function EditableSearchBar() {

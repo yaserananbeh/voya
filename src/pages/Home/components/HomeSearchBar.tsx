@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 import { selectSearchParams, setSearchParams, clearSearchParams } from '@/store/searchSlice'
 import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
-import { GuestRoomSelector } from './GuestRoomSelector'
+import { GuestRoomSelector } from '@/components/common'
 import { useTranslation } from 'react-i18next'
 import { ROUTES, UI } from '@/constants'
-import { SearchCityField, SearchDateField, SearchActionButtons } from '@/components/atomic'
+import { SearchCityField, SearchDateField, SearchActionButtons } from './'
 
 type SearchValues = {
   city: string

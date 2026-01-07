@@ -1,5 +1,5 @@
 import { Container, Typography } from '@mui/material'
-import { PageContainer, Section } from '@/components/layout'
+import { PageContainer, Section } from './components'
 import { HomeSearchBar } from './components/HomeSearchBar'
 import { FeaturedDealsSection } from './components/FeaturedDealsSection'
 import { RecentHotelsSection } from './components/RecentHotelsSection'
