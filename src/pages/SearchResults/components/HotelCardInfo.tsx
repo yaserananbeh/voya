@@ -1,5 +1,5 @@
 import { Typography, Box } from '@mui/material'
-import { StarRatingDisplay } from '@/components/atomic'
+import { StarRatingDisplay } from '@/components/common'
 
 type HotelCardInfoProps = {
   name: string

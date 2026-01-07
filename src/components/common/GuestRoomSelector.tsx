@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Box, Button, Popover, Typography } from '@mui/material'
 import PeopleIcon from '@mui/icons-material/People'
 import { useTranslation } from 'react-i18next'
-import { GuestRoomRow } from '@/components/atomic'
+import { GuestRoomRow } from './GuestRoomRow'
 
 type GuestRoomSelectorProps = {
   adults: number

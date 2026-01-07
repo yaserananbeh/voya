@@ -1,7 +1,7 @@
 import { Card, CardContent, CardActions, Typography, Box } from '@mui/material'
 import { SafeImage } from '@/components/common/SafeImage'
 import { useTranslation } from 'react-i18next'
-import { StarRatingDisplay } from '@/components/atomic'
+import { StarRatingDisplay } from '@/components/common'
 import { PriceDisplay } from './PriceDisplay'
 import { ViewDetailsButton } from './ViewDetailsButton'
 import type { HotelCardData } from '../types'

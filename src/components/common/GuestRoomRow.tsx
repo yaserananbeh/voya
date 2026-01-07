@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import { CounterButton } from '../buttons'
+import { CounterButton } from './CounterButton'
 
 type GuestRoomRowProps = {
   label: string
