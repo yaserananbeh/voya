@@ -1,0 +1,37 @@
+{
+  "search": {
+    "filters": "المرشحات",
+    "noResults": "لم يتم العثور على فنادق",
+    "viewHotel": "عرض الفندق",
+    "perNight": "/ليلة",
+    "priceRange": "نطاق السعر",
+    "priceRangeMin": "الحد الأدنى للسعر",
+    "priceRangeMax": "الحد الأقصى للسعر",
+    "priceLabel": "السعر: {min} - {max}",
+    "starRating": "التقييم بالنجوم",
+    "amenities": "المرافق",
+    "hotelType": "نوع الفندق",
+    "loadingAmenities": "جاري تحميل المرافق…",
+    "failedToLoadAmenities": "فشل تحميل المرافق",
+    "currentSearch": "معاملات البحث الحالية",
+    "searchQuery": "بحث",
+    "editSearch": "تعديل البحث",
+    "collapseSearch": "طي",
+    "loadMore": "تحميل المزيد",
+    "loading": "جاري التحميل…",
+    "noMatchesTryLoadMore": "لا توجد نتائج مطابقة في النتائج المحملة — جرب 'تحميل المزيد'.",
+    "noResultsFound": "لم يتم العثور على نتائج",
+    "reachedEnd": "وصلت إلى النهاية",
+    "failedToLoadHotels": "فشل تحميل الفنادق"
+  },
+  "pages": {
+    "search": "نتائج البحث"
+  },
+  "seo": {
+    "search": {
+      "title": "نتائج البحث",
+      "description": "ابحث عن الفندق المثالي لإقامتك. قارن الأسعار والمرافق والمواقع لاتخاذ أفضل خيار لرحلتك.",
+      "keywords": "بحث عن فنادق, العثور على فنادق, مقارنة فنادق, حجز فندق, بحث عن إقامة"
+    }
+  }
+}

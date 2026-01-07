@@ -1,0 +1,17 @@
+{
+  "admin": {
+    "addRoom": "Add Room",
+    "editRoom": "Edit Room",
+    "createRoom": "Create Room",
+    "roomDeleted": "Room deleted successfully",
+    "roomCreated": "Room created successfully",
+    "roomUpdated": "Room updated successfully",
+    "roomDeleteFailed": "Failed to delete room. Please try again.",
+    "roomCreateFailed": "Failed to create room",
+    "roomUpdateFailed": "Failed to update room",
+    "deleteRoomConfirm": "Are you sure you want to delete this room?"
+  },
+  "pages": {
+    "adminRooms": "Manage Rooms"
+  }
+}

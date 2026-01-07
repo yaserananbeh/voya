@@ -1,0 +1,27 @@
+{
+  "hotel": {
+    "availableRooms": "Available Rooms",
+    "adults": "Adults",
+    "children": "Children",
+    "bookNow": "Book now",
+    "notAvailable": "Not available",
+    "perNight": "/night",
+    "starHotel": "star hotel",
+    "visited": "Visited",
+    "invalidHotelId": "Invalid hotel id",
+    "failedToLoadHotel": "Failed to load hotel",
+    "pleaseSelectDates": "Please select check-in and check-out dates first",
+    "selectDates": "Select Check-in and Check-out Dates",
+    "selectDatesMessage": "Please select your check-in and check-out dates to proceed with booking."
+  },
+  "pages": {
+    "hotel": "Hotel Details"
+  },
+  "seo": {
+    "hotel": {
+      "title": "Hotel Details",
+      "description": "View detailed information about this hotel including rooms, amenities, location, and reviews. Book your stay today.",
+      "keywords": "hotel details, hotel information, book hotel, hotel rooms, hotel amenities"
+    }
+  }
+}

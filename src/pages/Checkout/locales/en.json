@@ -1,0 +1,43 @@
+{
+  "checkout": {
+    "title": "Checkout",
+    "subtitle": "Complete your booking details",
+    "customerInfo": "Customer Information",
+    "fillDetails": "Please fill in your details to complete the booking",
+    "bookingSummary": "Booking Summary",
+    "fullName": "Full name",
+    "paymentMethod": "Payment method",
+    "confirmBooking": "Confirm booking",
+    "bookingConfirmed": "Booking confirmed! Redirecting...",
+    "bookingFailed": "Failed to complete booking. Please try again.",
+    "missingData": "Missing booking data. Go back and select a room first.",
+    "hotel": "Hotel",
+    "room": "Room",
+    "city": "City",
+    "dates": "Dates",
+    "pricePerNight": "Price/night",
+    "nights": "Nights",
+    "total": "Total",
+    "specialRequests": "Special requests or remarks",
+    "specialRequestsHelper": "Optional: Any special requests or additional information",
+    "specialRequestsPlaceholder": "e.g., Late check-in, dietary requirements, room preferences...",
+    "unexpectedError": "Unexpected error occurred",
+    "error": "Error",
+    "processing": "Processing booking...",
+    "paymentMethods": {
+      "Cash": "Cash",
+      "Card": "Card",
+      "PayPal": "PayPal"
+    }
+  },
+  "pages": {
+    "checkout": "Checkout"
+  },
+  "seo": {
+    "checkout": {
+      "title": "Checkout",
+      "description": "Complete your hotel booking by providing your details and payment information.",
+      "keywords": "checkout, booking, payment, hotel reservation"
+    }
+  }
+}

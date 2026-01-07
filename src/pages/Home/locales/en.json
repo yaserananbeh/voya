@@ -1,0 +1,41 @@
+{
+  "home": {
+    "heroTitle": "Discover stays that fit how you travel.",
+    "heroSubtitle": "Search trusted stays, compare deals, and book in minutes—so you can focus on the trip, not the planning.",
+    "heroChip": "Find your next stay",
+    "startExploring": "Start exploring",
+    "viewFeaturedDeals": "View featured deals",
+    "searchStays": "Search stays",
+    "whereGoing": "Search hotels or destinations",
+    "whereGoingPlaceholder": "Hotel name, city, or description",
+    "whereGoingHelper": "Search by hotel name, city, or description",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "cityRequired": "Search query is required",
+    "checkInRequired": "Check-in is required",
+    "checkOutRequired": "Check-out is required",
+    "checkOutAfterCheckIn": "Check-out must be after check-in",
+    "featuredDeals": "Featured deals",
+    "featuredDealsSubtitle": "Special offers tailored for you",
+    "featuredDealsError": "Couldn't load featured deals. Please try again later.",
+    "noFeaturedDeals": "No featured deals at the moment.",
+    "recentHotels": "Your recently visited hotels",
+    "recentHotelsSubtitle": "Quick access to places you checked before",
+    "recentHotelsError": "Couldn't load your recent hotels right now.",
+    "noRecentHotels": "You don't have any recently visited hotels yet.",
+    "trendingDestinations": "Trending destinations",
+    "trendingDestinationsSubtitle": "Popular cities travelers love right now",
+    "trendingDestinationsError": "Unable to load trending destinations at the moment.",
+    "noTrendingDestinations": "No trending destinations right now. Check back later!"
+  },
+  "pages": {
+    "home": "Home"
+  },
+  "seo": {
+    "home": {
+      "title": "Home",
+      "description": "Discover stays that fit how you travel. Search trusted stays, compare deals, and book in minutes—so you can focus on the trip, not the planning.",
+      "keywords": "hotels, booking, travel, accommodation, stays, vacation, trip, book hotel"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "admin": {
+    "addRoom": "إضافة غرفة",
+    "editRoom": "تعديل غرفة",
+    "createRoom": "إنشاء غرفة",
+    "roomDeleted": "تم حذف الغرفة بنجاح",
+    "roomCreated": "تم إنشاء الغرفة بنجاح",
+    "roomUpdated": "تم تحديث الغرفة بنجاح",
+    "roomDeleteFailed": "فشل حذف الغرفة. يرجى المحاولة مرة أخرى.",
+    "roomCreateFailed": "فشل إنشاء الغرفة",
+    "roomUpdateFailed": "فشل تحديث الغرفة",
+    "deleteRoomConfirm": "هل أنت متأكد من حذف هذه الغرفة؟"
+  },
+  "pages": {
+    "adminRooms": "إدارة الغرف"
+  }
+}
