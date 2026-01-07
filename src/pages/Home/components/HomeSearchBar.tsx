@@ -3,12 +3,13 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import { selectSearchParams, setSearchParams, clearSearchParams } from '@/store/searchSlice'
+import { selectSearchParams, setSearchParams, clearSearchParams } from '@/pages/SearchResults/store'
 import { startOfToday, addDays, formatDateForApi } from '@/utils/date'
-import { GuestRoomSelector } from './GuestRoomSelector'
+import { GuestRoomSelector } from '@/components/common'
 import { useTranslation } from 'react-i18next'
-import { ROUTES, UI } from '@/constants'
-import { SearchCityField, SearchDateField, SearchActionButtons } from '@/components/atomic'
+import { ROUTES } from '../constants'
+import { SEARCH_BAR } from '../../SearchResults/constants'
+import { SearchCityField, SearchDateField, SearchActionButtons } from './'
 
 type SearchValues = {
   city: string
@@ -84,16 +85,16 @@ export function HomeSearchBar() {
         error={formik.touched.city && Boolean(formik.errors.city)}
         helperText={formik.touched.city && formik.errors.city}
         sx={{
-          flex: UI.SEARCH_BAR.CITY_FLEX,
-          minWidth: { xs: 0, md: UI.SEARCH_BAR.CITY_MIN_WIDTH },
+          flex: SEARCH_BAR.CITY_FLEX,
+          minWidth: { xs: 0, md: SEARCH_BAR.CITY_MIN_WIDTH },
           maxWidth: { xs: '100%', md: 'none' },
         }}
       />
 
       <Box
         sx={{
-          flex: UI.SEARCH_BAR.DATE_FLEX,
-          minWidth: { xs: 0, md: UI.SEARCH_BAR.DATE_MIN_WIDTH },
+          flex: SEARCH_BAR.DATE_FLEX,
+          minWidth: { xs: 0, md: SEARCH_BAR.DATE_MIN_WIDTH },
           maxWidth: { xs: '100%', md: 'none' },
         }}
       >
@@ -112,8 +113,8 @@ export function HomeSearchBar() {
 
       <Box
         sx={{
-          flex: UI.SEARCH_BAR.DATE_FLEX,
-          minWidth: { xs: 0, md: UI.SEARCH_BAR.DATE_MIN_WIDTH },
+          flex: SEARCH_BAR.DATE_FLEX,
+          minWidth: { xs: 0, md: SEARCH_BAR.DATE_MIN_WIDTH },
           maxWidth: { xs: '100%', md: 'none' },
         }}
       >

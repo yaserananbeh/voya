@@ -13,10 +13,12 @@ import {
   Box,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useGetRoomsAdminQuery, useGetAdminHotelsQuery } from '@/api/admin'
-import type { RoomForCreationDto } from '@/types'
+import { useGetRoomsAdminQuery } from '../api'
+import { useGetAdminHotelsQuery } from '../../Hotels/api'
+import type { RoomForCreationDto } from '../types'
 import { VoyaLoader } from '@/components'
-import { VALIDATION } from '@/constants'
+import { VALIDATION } from '../constants'
+import { BUTTON_LABELS } from '../../constants'
 
 type Props = {
   roomId: number | null
@@ -104,7 +106,7 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
           >
             {hotels.map((hotel) => (
               <MenuItem key={hotel.id} value={hotel.id}>
-                {hotel.name || hotel.hotelName}
+                {hotel.name}
               </MenuItem>
             ))}
           </Select>
@@ -183,9 +185,9 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
         />
 
         <Stack direction="row" spacing={2} justifyContent="flex-end">
-          <Button onClick={onCancel}>Cancel</Button>
+          <Button onClick={onCancel}>{BUTTON_LABELS.CANCEL}</Button>
           <Button type="submit" variant="contained">
-            {roomId ? 'Update' : 'Create'}
+            {roomId ? BUTTON_LABELS.UPDATE : BUTTON_LABELS.CREATE}
           </Button>
         </Stack>
       </Stack>

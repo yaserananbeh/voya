@@ -41,7 +41,7 @@ pnpm verify:stage
 When searching the codebase, you may want to exclude these patterns:
 
 ```
-.config.js,.gitignore, README.md, tsconfig.*, *md,\__, reset.css, api.ts,.env_,_.json,_.yaml, \*.config.ts,.svg,*.yaml,*example, package*,*.config.ts,\_\*,_redirects,*.txt
+.config.js,.gitignore, README.md, tsconfig.*, *md,\__, reset.css, api.ts,.env_,_.json,_.yaml, \*.config.ts,.svg,*.yaml,*example, package*,*.config.ts,\_\*,_redirects,*.txt,generate-sitemap.js,sitemap.xml
 ```
 
 ---

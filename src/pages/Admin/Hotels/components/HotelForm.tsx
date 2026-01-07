@@ -11,10 +11,13 @@ import {
   Box,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useGetAdminHotelsQuery, useGetCitiesQuery } from '@/api/admin'
-import type { HotelForCreationDto } from '@/types'
+import { useGetAdminHotelsQuery } from '../api'
+import { useGetCitiesQuery } from '../../Cities/api'
+import type { HotelForCreationDto } from '../types'
 import { VoyaLoader } from '@/components'
-import { HOTEL, VALIDATION } from '@/constants'
+import { HOTEL } from '../../../Hotel/constants'
+import { VALIDATION } from '../constants'
+import { BUTTON_LABELS } from '../../constants'
 
 type Props = {
   hotelId: number | null
@@ -59,15 +62,15 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
     }
   >({
     initialValues: {
-      name: hotel?.name || hotel?.hotelName || '',
+      name: hotel?.name || '',
       cityId: hotel?.cityId || 0,
-      description: hotel?.description || '',
-      hotelType: hotel?.hotelType || '',
+      description: undefined,
+      hotelType: undefined,
       starRating: hotel?.starRating || 1,
-      location: hotel?.location || '',
-      latitude: hotel?.latitude,
-      longitude: hotel?.longitude,
-      imageUrl: hotel?.imageUrl || '',
+      location: undefined,
+      latitude: undefined,
+      longitude: undefined,
+      imageUrl: undefined,
     },
     validationSchema,
     enableReinitialize: true,
@@ -140,7 +143,7 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
             onChange={formik.handleChange}
             label="Hotel Type"
           >
-            {HOTEL.TYPE_OPTIONS.map((type) => (
+            {HOTEL.TYPE_OPTIONS.map((type: string) => (
               <MenuItem key={type} value={type}>
                 {type}
               </MenuItem>
@@ -185,9 +188,9 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
         />
 
         <Stack direction="row" spacing={2} justifyContent="flex-end">
-          <Button onClick={onCancel}>Cancel</Button>
+          <Button onClick={onCancel}>{BUTTON_LABELS.CANCEL}</Button>
           <Button type="submit" variant="contained">
-            {hotelId ? 'Update' : 'Create'}
+            {hotelId ? BUTTON_LABELS.UPDATE : BUTTON_LABELS.CREATE}
           </Button>
         </Stack>
       </Stack>

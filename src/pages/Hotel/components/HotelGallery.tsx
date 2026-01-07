@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import ImageGallery from 'react-image-gallery'
 import 'react-image-gallery/styles/css/image-gallery.css'
-import type { HotelGalleryPhotoDto } from '@/api/hotels'
+import type { HotelGalleryPhotoDto } from '../api'
 
 type Props = {
   images: HotelGalleryPhotoDto[] | string[]

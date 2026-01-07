@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { AppBar, Toolbar, Box, useMediaQuery, useTheme } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '@/hooks'
-import { selectIsAuthenticated, logout } from '@/store/authSlice'
+import { selectIsAuthenticated, logout } from '@/pages/Login/store'
 import { Logo } from './Logo'
 import { NavigationMenu } from './NavigationMenu'
 import { NavigationLinks } from './NavigationLinks'
 import { ThemeToggle } from './ThemeToggle'
 import { LanguageSwitcher } from './LanguageSwitcher'
-import { STORAGE_KEYS, ROUTES } from '@/constants'
+import { STORAGE_KEYS, ROUTES } from '@/pages/Login/constants'
 
 export default function MainHeader() {
   const theme = useTheme()

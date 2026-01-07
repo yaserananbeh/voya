@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import HomeIcon from '@mui/icons-material/Home'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import LockIcon from '@mui/icons-material/Lock'
-import { ROUTES } from '@/constants'
+import { ROUTES } from './constants'
 import { usePageTitle } from '@/hooks'
 import { SEO } from '@/components/common'
 

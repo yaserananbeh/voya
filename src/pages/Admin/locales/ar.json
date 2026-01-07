@@ -1,0 +1,12 @@
+{
+  "admin": {
+    "dashboard": "لوحة التحكم",
+    "cities": "المدن",
+    "hotels": "الفنادق",
+    "rooms": "الغرف",
+    "search": "بحث",
+    "name": "الاسم",
+    "description": "الوصف",
+    "actions": "الإجراءات"
+  }
+}

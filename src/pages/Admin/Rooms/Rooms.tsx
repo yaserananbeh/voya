@@ -7,19 +7,19 @@ import {
   useCreateRoomMutation,
   useUpdateRoomMutation,
   useDeleteRoomMutation,
-} from '@/api/admin'
-import type { RoomDto } from '@/types'
+} from './api'
+import type { RoomDto } from './types'
 import { RoomForm } from './components/RoomForm'
 import {
-  DeleteConfirmDialog,
   PageHeader,
   SearchBar,
   DataGridActions,
   AdminDataGrid,
   AdminFormDialog,
-} from '@/components'
+  DeleteConfirmDialog,
+} from '../components'
 import { usePageTitle } from '@/hooks'
-import { getInitialPaginationModel } from '@/constants'
+import { getInitialPaginationModel } from '../utils'
 
 export default function Rooms() {
   usePageTitle('pages.adminRooms')

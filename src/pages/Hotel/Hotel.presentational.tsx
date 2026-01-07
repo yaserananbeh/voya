@@ -6,8 +6,8 @@ import { HotelRooms } from './components/HotelRooms'
 import { HotelReviews } from './components/HotelReviews'
 import { VoyaLoader } from '@/components'
 import { useTranslation } from 'react-i18next'
-import { StarRatingDisplay } from '@/components/atomic'
-import type { HotelDto, HotelRoomDto, HotelReviewDto, HotelGalleryPhotoDto } from '@/api/hotels'
+import { StarRatingDisplay } from '@/components/common'
+import type { HotelDto, HotelRoomDto, HotelReviewDto, HotelGalleryPhotoDto } from './api'
 
 type HotelPresentationalProps = {
   hotel?: HotelDto | null

@@ -1,7 +1,9 @@
 import { Box } from '@mui/material'
-import { useFeaturedDealsQuery } from '@/api/home'
-import { LoadingState, ErrorState, EmptyState } from '@/components/common'
-import { HotelCard } from '@/components/hotel'
+import { useFeaturedDealsQuery } from '../api'
+import type { FeaturedDealDto } from '../types'
+import { LoadingState, ErrorState } from '@/components/common'
+import { EmptyState } from './EmptyState'
+import { HotelCard } from './HotelCard'
 import { useTranslation } from 'react-i18next'
 
 export function FeaturedDealsSection() {
@@ -33,7 +35,7 @@ export function FeaturedDealsSection() {
         gap: 3,
       }}
     >
-      {data.map((deal) => (
+      {data.map((deal: FeaturedDealDto) => (
         <HotelCard
           key={deal.hotelId}
           hotel={{

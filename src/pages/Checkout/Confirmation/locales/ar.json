@@ -1,0 +1,39 @@
+{
+  "confirmation": {
+    "bookingConfirmed": "تم تأكيد الحجز",
+    "confirmationNumber": "رقم التأكيد",
+    "pendingConfirmation": "قيد الانتظار",
+    "status": "الحالة",
+    "name": "الاسم",
+    "hotel": "الفندق",
+    "room": "الغرفة",
+    "total": "الإجمالي",
+    "payment": "الدفع",
+    "bookedAt": "تم الحجز في",
+    "invalidBookingId": "رقم حجز غير صالح.",
+    "failedToLoadBooking": "فشل تحميل تفاصيل الحجز.",
+    "print": "طباعة",
+    "downloadPDF": "حفظ كـ PDF",
+    "thankYouMessage": "شكراً لحجزك! نتطلع لاستضافتك.",
+    "customerInfo": "معلومات العميل",
+    "bookingDetails": "تفاصيل الحجز",
+    "accommodation": "الإقامة",
+    "paymentInfo": "معلومات الدفع",
+    "bookingStatus": {
+      "Confirmed": "مؤكد",
+      "Pending": "قيد الانتظار",
+      "Cancelled": "ملغى",
+      "Canceled": "ملغى"
+    }
+  },
+  "pages": {
+    "confirmation": "تأكيد الحجز"
+  },
+  "seo": {
+    "confirmation": {
+      "title": "تأكيد الحجز",
+      "description": "تم تأكيد حجزك. عرض تفاصيل حجزك ورقم التأكيد.",
+      "keywords": "تأكيد الحجز, تأكيد الحجز, تفاصيل الحجز"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "checkout": {
+    "title": "الدفع",
+    "subtitle": "أكمل تفاصيل حجزك",
+    "customerInfo": "معلومات العميل",
+    "fillDetails": "يرجى ملء التفاصيل لإتمام الحجز",
+    "bookingSummary": "ملخص الحجز",
+    "fullName": "الاسم الكامل",
+    "paymentMethod": "طريقة الدفع",
+    "confirmBooking": "تأكيد الحجز",
+    "bookingConfirmed": "تم تأكيد الحجز! جاري إعادة التوجيه...",
+    "bookingFailed": "فشل إتمام الحجز. يرجى المحاولة مرة أخرى.",
+    "missingData": "بيانات الحجز مفقودة. ارجع واختر غرفة أولاً.",
+    "hotel": "الفندق",
+    "room": "الغرفة",
+    "city": "المدينة",
+    "dates": "التواريخ",
+    "pricePerNight": "السعر/ليلة",
+    "nights": "الليالي",
+    "total": "الإجمالي",
+    "specialRequests": "طلبات خاصة أو ملاحظات",
+    "specialRequestsHelper": "اختياري: أي طلبات خاصة أو معلومات إضافية",
+    "specialRequestsPlaceholder": "مثال: تسجيل متأخر، متطلبات غذائية، تفضيلات الغرفة...",
+    "unexpectedError": "حدث خطأ غير متوقع",
+    "paymentMethods": {
+      "Cash": "نقد",
+      "Card": "بطاقة",
+      "PayPal": "باي بال"
+    }
+  },
+  "pages": {
+    "checkout": "الدفع"
+  },
+  "seo": {
+    "checkout": {
+      "title": "الدفع",
+      "description": "أكمل حجز فندقك من خلال تقديم تفاصيلك ومعلومات الدفع.",
+      "keywords": "الدفع, الحجز, الدفع, حجز الفندق"
+    }
+  }
+}

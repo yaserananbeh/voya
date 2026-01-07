@@ -1,6 +1,0 @@
-export { HotelCardImage } from './HotelCardImage'
-export { HotelCardInfo } from './HotelCardInfo'
-export { HotelCardPrice } from './HotelCardPrice'
-export { RoomCardImage } from './RoomCardImage'
-export { RoomCardInfo } from './RoomCardInfo'
-export { RoomCardActions } from './RoomCardActions'

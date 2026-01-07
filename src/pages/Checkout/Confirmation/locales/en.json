@@ -1,0 +1,39 @@
+{
+  "confirmation": {
+    "bookingConfirmed": "Booking confirmed",
+    "confirmationNumber": "Confirmation #",
+    "pendingConfirmation": "Pending",
+    "status": "Status",
+    "name": "Name",
+    "hotel": "Hotel",
+    "room": "Room",
+    "total": "Total",
+    "payment": "Payment",
+    "bookedAt": "Booked at",
+    "invalidBookingId": "Invalid booking id.",
+    "failedToLoadBooking": "Failed to load booking details.",
+    "print": "Print",
+    "downloadPDF": "Save as PDF",
+    "thankYouMessage": "Thank you for your booking! We look forward to hosting you.",
+    "customerInfo": "Customer Information",
+    "bookingDetails": "Booking Details",
+    "accommodation": "Accommodation",
+    "paymentInfo": "Payment Information",
+    "bookingStatus": {
+      "Confirmed": "Confirmed",
+      "Pending": "Pending",
+      "Cancelled": "Cancelled",
+      "Canceled": "Cancelled"
+    }
+  },
+  "pages": {
+    "confirmation": "Booking Confirmation"
+  },
+  "seo": {
+    "confirmation": {
+      "title": "Booking Confirmation",
+      "description": "Your booking has been confirmed. View your booking details and confirmation number.",
+      "keywords": "booking confirmation, reservation confirmed, booking details"
+    }
+  }
+}

@@ -4,7 +4,7 @@ import {
   useGetHotelGalleryQuery,
   useGetHotelRoomsQuery,
   useGetHotelReviewsQuery,
-} from '@/api/hotels'
+} from './api'
 import { HotelPresentational } from './Hotel.presentational'
 import { useTranslation } from 'react-i18next'
 import { usePageTitle } from '@/hooks'

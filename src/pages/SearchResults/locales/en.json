@@ -1,0 +1,37 @@
+{
+  "search": {
+    "filters": "Filters",
+    "noResults": "No hotels found",
+    "viewHotel": "View Hotel",
+    "perNight": "/night",
+    "priceRange": "Price Range",
+    "priceRangeMin": "Minimum price",
+    "priceRangeMax": "Maximum price",
+    "priceLabel": "Price: {min} - {max}",
+    "starRating": "Star Rating",
+    "amenities": "Amenities",
+    "hotelType": "Hotel Type",
+    "loadingAmenities": "Loading amenities…",
+    "failedToLoadAmenities": "Failed to load amenities",
+    "currentSearch": "Current search parameters",
+    "searchQuery": "Search",
+    "editSearch": "Edit search",
+    "collapseSearch": "Collapse",
+    "loadMore": "Load more",
+    "loading": "Loading…",
+    "noMatchesTryLoadMore": "No matches in loaded results — try 'Load more'.",
+    "noResultsFound": "No results found",
+    "reachedEnd": "You reached the end",
+    "failedToLoadHotels": "Failed to load hotels"
+  },
+  "pages": {
+    "search": "Search Results"
+  },
+  "seo": {
+    "search": {
+      "title": "Search Results",
+      "description": "Find the perfect hotel for your stay. Compare prices, amenities, and locations to make the best choice for your trip.",
+      "keywords": "hotel search, find hotels, compare hotels, hotel booking, accommodation search"
+    }
+  }
+}

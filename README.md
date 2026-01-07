@@ -53,7 +53,7 @@ A modern, full-featured travel and accommodation booking platform built with Rea
 - ✨ **Modern Stack**: Built with React 19, TypeScript, and Redux Toolkit
 - 🚀 **React Compiler**: Optimized with Babel React Compiler for automatic memoization
 - 🎨 **Beautiful UI**: Material-UI components with custom theming
-- 🧩 **Atomic Design**: Component architecture following atomic design principles
+- 🏗️ **Feature-Based Architecture**: Organized by features for better maintainability and scalability
 - 🌍 **Internationalization**: Full support for English and Arabic (RTL)
 - 🔒 **Type Safety**: End-to-end TypeScript coverage
 - ⚡ **Performance**: Code splitting, lazy loading, and optimized caching
@@ -375,12 +375,23 @@ pnpm verify:stage
 
 For a detailed and up-to-date project structure, see [PROJECT_STRUCTURE.md](./docs/PROJECT_STRUCTURE.md).
 
-The project follows a well-organized structure with:
-- **API layer** (`src/api/`) - RTK Query endpoints organized by feature
-- **Components** (`src/components/`) - Reusable components following atomic design principles
-- **Pages** (`src/pages/`) - Page-level components organized by feature
-- **State management** (`src/store/`) - Redux slices and store configuration
-- **Utilities** (`src/utils/`, `src/constants/`) - Helper functions and constants
+The project follows a **feature-based architecture** where each feature is self-contained with its own:
+- **API** - Feature-specific API endpoints
+- **Components** - Feature-specific UI components
+- **Constants** - Feature-specific constants
+- **Hooks** - Feature-specific custom hooks
+- **Routes** - Feature-specific route definitions
+- **Store** - Feature-specific Redux slices (where applicable)
+- **Types** - Feature-specific TypeScript types
+- **Utils** - Feature-specific utility functions
+- **Locales** - Feature-specific translations
+- **Tests** - Feature-specific test files
+
+### Shared Resources
+
+- **Components** (`src/components/`) - Shared reusable components
+- **Store** (`src/store/`) - Central Redux store configuration
+- **Utilities** (`src/utils/`, `src/constants/`) - Shared helper functions and constants
 - **Configuration** (`src/i18n/`, `src/theme/`, `src/routes/`) - App-wide configuration
 
 ---
@@ -410,10 +421,11 @@ This project uses **Redux Toolkit (RTK)** and **RTK Query** for state management
 
 ### RTK Slices (Client State)
 
-- **`authSlice`**: Authentication state (token, userType)
-- **`searchSlice`**: Search parameters and filters (persisted to localStorage)
+Store slices are organized by feature:
+- **`src/pages/Login/store/`**: Authentication state (token, userType)
+- **`src/pages/SearchResults/store/`**: Search parameters and filters (persisted to localStorage)
 
-**Note**: The search state is automatically persisted to localStorage and restored on app initialization for better user experience.
+**Note**: The search state is automatically persisted to localStorage and restored on app initialization for better user experience. Each feature manages its own state within its feature folder.
 
 ### RTK Query (Server State)
 
@@ -598,31 +610,33 @@ function MyComponent() {
 
 ### Utility Functions
 
-Located in `src/utils/`:
-
+**Shared utilities** are located in `src/utils/`:
 - **`date.ts`**: Date manipulation and formatting utilities
 - **`logger.ts`**: Centralized logging utility
 - **`globalErrors.ts`**: Global error handling utilities
 
+**Feature-specific utilities** are located in each feature's `utils/` folder:
+- Example: `src/pages/Checkout/utils/price.ts` - Checkout-specific price calculations
+
 ### Constants
 
-The project uses a centralized constants system in `src/constants/`:
+The project uses a **feature-based constants system**:
 
+**Shared constants** in `src/constants/`:
 - **`api.ts`**: API-related constants (endpoints, headers, prefixes)
-- **`hotel.ts`**: Hotel-related constants
-- **`map.ts`**: Map configuration constants
-- **`pagination.ts`**: Pagination defaults
-- **`payment.ts`**: Payment method constants
-- **`routes.ts`**: Route path constants
-- **`storage.ts`**: LocalStorage key constants
 - **`ui.ts`**: UI-related constants
-- **`user.ts`**: User-related constants
-- **`validation.ts`**: Validation rules and schemas
 
-All constants are exported from `src/constants/index.ts` for easy importing:
+**Feature-specific constants** in each feature's `constants/` folder:
+- Each feature has its own `constants/index.ts` with feature-specific constants
+- Examples: `src/pages/Login/constants/`, `src/pages/Checkout/constants/`, etc.
 
 ```typescript
-import { ROUTES, STORAGE_KEYS, AUTH_HEADER_PREFIX } from '@/constants'
+// Feature-specific constants
+import { ROUTES } from '@/pages/Home/constants'
+import { PAYMENT_METHODS } from '@/pages/Checkout/constants'
+
+// Shared constants
+import { API_TAG_TYPES } from '@/constants'
 ```
 
 ---
@@ -663,9 +677,6 @@ All API endpoints are defined using RTK Query's `injectEndpoints`:
 #### Checkout
 - `POST /bookings` - Create booking
 - `GET /bookings/:id` - Get booking details
-
-#### Upload
-- `POST /photos` - Upload photo (used in admin for city, hotel, and room images)
 
 #### Admin
 - `GET /cities` - Get cities list
@@ -737,24 +748,28 @@ This project uses Husky and lint-staged to ensure code quality:
 
 ## 🎨 UI/UX Features
 
-### Atomic Design System
+### Feature-Based Architecture
 
-The project follows an **atomic design methodology** for component organization, ensuring consistency and reusability:
+The project follows a **feature-based architecture** where each feature (Home, Login, Hotel, Checkout, etc.) is self-contained with its own components, API, state, types, and utilities. This approach provides:
 
-- **Atoms** (`components/atomic/`): Basic building blocks
-  - **Buttons**: `CounterButton`, `SearchActionButtons`, `SubmitButton`, `ViewDetailsButton`
-  - **Fields**: `FormTextField`, `FormSelectField`, `SearchCityField`, `SearchDateField`
-  - **Display**: `PriceDisplay`, `StarRatingDisplay`, `DiscountBadge`, `TotalPrice`, `PriceBreakdown`, `SummarySection`, `GuestRoomRow`
-  - **Cards**: `HotelCardImage`, `HotelCardInfo`, `HotelCardPrice`, `RoomCardImage`, `RoomCardInfo`, `RoomCardActions`
+- **Better Organization**: All related code for a feature is in one place
+- **Improved Maintainability**: Easy to locate and modify feature-specific code
+- **Scalability**: New features can be added without affecting existing ones
+- **Team Collaboration**: Different developers can work on different features independently
 
-- **Molecules** (`components/common/`, `components/forms/`, etc.): Composed components
-  - Common components: `SafeImage`, `VoyaLoader`, `SEO`, `SkipLink`, `AriaLiveRegion`
-  - Form components: `FormField`, `FormActions`
-  - State components: `LoadingState`, `ErrorState`, `EmptyState`
+### Shared Component Library
 
-- **Organisms** (`components/layout/`, `components/admin/`): Complex UI sections
-  - Layout components: `MainHeader`, `MainFooter`, `NavigationMenu`
-  - Admin components: `AdminDataGrid`, `AdminFormDialog`, `PageHeader`
+For shared, reusable components, the project organizes them as:
+
+- **Common Components** (`components/common/`): Shared reusable UI components
+  - `CounterButton`, `StarRatingDisplay`, `GuestRoomRow` - Basic UI building blocks
+  - `SafeImage`, `VoyaLoader`, `SEO`, `SkipLink` - Feature-complete components
+  - `LoadingState`, `ErrorState` - State display components
+  - `GuestRoomSelector` - Complex component using other common components
+
+- **Layout Components** (`components/layout/`): App-wide layout components
+  - `MainHeader`, `MainFooter`, `NavigationMenu`
+  - `Logo`, `LanguageSwitcher`, `ThemeToggle`
 
 ### Material-UI Theme
 
@@ -767,7 +782,7 @@ The application uses a custom Material-UI theme with:
 
 ### Responsive Design
 
-- Mobile-first approach
+- Mobile-Tablet responsive design
 - Breakpoints: xs, sm, md, lg, xl
 - Adaptive layouts for all screen sizes
 
@@ -777,7 +792,6 @@ The application uses a custom Material-UI theme with:
 - Keyboard navigation support
 - Screen reader friendly
 - Semantic HTML structure
-- `AriaLiveRegion` component for dynamic content announcements
 - `SkipLink` component for keyboard navigation
 
 ---
@@ -806,7 +820,7 @@ All providers are wrapped in `src/providers/index.tsx` and applied at the root l
 
 ### Authentication
 
-- JWT token-based authentication
+- Token-based authentication
 - Tokens stored in localStorage
 - Automatic token injection in API requests
 - Protected routes for authenticated users
@@ -827,7 +841,6 @@ All providers are wrapped in `src/providers/index.tsx` and applied at the root l
 ### Code Splitting
 
 - Lazy loading for all routes
-- Dynamic imports for heavy components
 - Route-based code splitting
 
 ### Caching
@@ -864,13 +877,13 @@ All providers are wrapped in `src/providers/index.tsx` and applied at the root l
 
 ## 📝 License
 
-This project is private and proprietary. All rights reserved.
+This project is free to use and no rights reserved.
 
 ---
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work*
+- **Yaser Alananbeh** - *Initial work*
 
 ---
 

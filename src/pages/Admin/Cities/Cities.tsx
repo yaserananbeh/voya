@@ -7,19 +7,19 @@ import {
   useCreateCityMutation,
   useUpdateCityMutation,
   useDeleteCityMutation,
-} from '@/api/admin'
-import type { CityDto } from '@/types'
+} from './api'
+import type { CityDto } from './types'
 import { CityForm } from './components/CityForm'
 import {
-  DeleteConfirmDialog,
   PageHeader,
   SearchBar,
   DataGridActions,
   AdminDataGrid,
   AdminFormDialog,
-} from '@/components'
+  DeleteConfirmDialog,
+} from '../components'
 import { useNotification, usePageTitle } from '@/hooks'
-import { getInitialPaginationModel } from '@/constants'
+import { getInitialPaginationModel } from '../utils'
 
 export default function Cities() {
   usePageTitle('pages.adminCities')

@@ -1,6 +1,7 @@
 import { Box, Container, Stack, Typography, Divider, Link } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { ROUTES } from '@/constants'
+import { ROUTES } from '@/pages/Home/constants'
+import { ROUTES as LOGIN_ROUTES } from '@/pages/Login/constants'
 import { FooterSection, FooterLinks } from './FooterSection'
 import { FooterBrand } from './FooterBrand'
 import { FooterContact } from './FooterContact'
@@ -34,7 +35,7 @@ export function MainFooter() {
                 links={[
                   { label: t('footer.browseHotels'), to: ROUTES.HOME },
                   { label: t('footer.searchStays'), to: ROUTES.SEARCH },
-                  { label: t('footer.signIn'), to: ROUTES.LOGIN },
+                  { label: t('footer.signIn'), to: LOGIN_ROUTES.LOGIN },
                 ]}
               />
             </FooterSection>

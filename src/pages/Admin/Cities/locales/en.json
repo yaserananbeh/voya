@@ -1,0 +1,17 @@
+{
+  "admin": {
+    "addCity": "Add City",
+    "editCity": "Edit City",
+    "createCity": "Create City",
+    "cityDeleted": "City deleted successfully",
+    "cityCreated": "City created successfully",
+    "cityUpdated": "City updated successfully",
+    "cityDeleteFailed": "Failed to delete city. Please try again.",
+    "cityCreateFailed": "Failed to create city",
+    "cityUpdateFailed": "Failed to update city",
+    "deleteCityConfirm": "Are you sure you want to delete this city?"
+  },
+  "pages": {
+    "adminCities": "Manage Cities"
+  }
+}

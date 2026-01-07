@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
 import { useTranslation } from 'react-i18next'
-import { ROUTES } from '@/constants'
+import { ROUTES } from '../constants'
 
 export function HeroSection() {
   const { t } = useTranslation()

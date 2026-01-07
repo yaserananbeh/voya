@@ -1,0 +1,17 @@
+{
+  "admin": {
+    "addHotel": "Add Hotel",
+    "editHotel": "Edit Hotel",
+    "createHotel": "Create Hotel",
+    "hotelDeleted": "Hotel deleted successfully",
+    "hotelCreated": "Hotel created successfully",
+    "hotelUpdated": "Hotel updated successfully",
+    "hotelDeleteFailed": "Failed to delete hotel. Please try again.",
+    "hotelCreateFailed": "Failed to create hotel",
+    "hotelUpdateFailed": "Failed to update hotel",
+    "deleteHotelConfirm": "Are you sure you want to delete this hotel?"
+  },
+  "pages": {
+    "adminHotels": "Manage Hotels"
+  }
+}

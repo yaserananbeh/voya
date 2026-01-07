@@ -1,7 +1,8 @@
 import { Stack } from '@mui/material'
-import { FormField, FormActions } from '@/components/forms'
+import { FormField, FormActions } from '../../components'
 import type { FormikProps } from 'formik'
-import type { CityForCreationDto } from '@/types'
+import type { CityForCreationDto } from '../types'
+import { BUTTON_LABELS } from '../../constants'
 
 type CityFormPresentationalProps = {
   cityId: number | null
@@ -17,7 +18,7 @@ export function CityFormPresentational({ cityId, onCancel, formik }: CityFormPre
         <FormField name="description" label="Description" multiline rows={3} formik={formik} />
         <FormActions
           onCancel={onCancel}
-          submitLabel={cityId ? 'Update' : 'Create'}
+          submitLabel={cityId ? BUTTON_LABELS.UPDATE : BUTTON_LABELS.CREATE}
           formik={formik}
         />
       </Stack>

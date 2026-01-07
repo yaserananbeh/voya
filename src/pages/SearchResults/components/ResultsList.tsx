@@ -1,11 +1,11 @@
 import { Stack, Typography, Button } from '@mui/material'
 import { useSelector } from 'react-redux'
-import { selectSearchFilters, selectSearchQuery } from '@/store/searchSlice'
+import { selectSearchFilters, selectSearchQuery } from '../store'
 import { useEffect, useMemo, useState } from 'react'
-import { useGetHotelsQuery, type HotelDto } from '@/api/hotels'
+import { useGetHotelsQuery, type HotelDto } from '../../Hotel/api'
 import { HotelResultCard } from './HotelResultCard'
 import { LoadingState, ErrorState } from '@/components/common'
-import { PAGINATION } from '@/constants'
+import { PAGINATION } from '../../Admin/constants'
 import { useTranslation } from 'react-i18next'
 
 function hotelMatchesFilters(hotel: HotelDto, filters: ReturnType<typeof selectSearchFilters>) {

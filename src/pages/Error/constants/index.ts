@@ -1,0 +1,9 @@
+export const ROUTES = {
+  HOME: '/home',
+} as const
+
+export const ERROR_PAGE = {
+  ICON_CONTAINER_SIZE: 80,
+  ICON_FONT_SIZE: 48,
+  ERROR_BOX_MAX_HEIGHT: 200,
+} as const

@@ -1,0 +1,18 @@
+{
+  "errors": {
+    "forbidden": "Access Forbidden",
+    "forbiddenMessage": "You don't have permission to access this page. This area is restricted to authorized users only.",
+    "forbiddenHelpText": "If you believe this is an error, please contact support or return to the home page.",
+    "goHome": "Go to Home"
+  },
+  "pages": {
+    "forbidden": "Access Forbidden"
+  },
+  "seo": {
+    "forbidden": {
+      "title": "Access Forbidden",
+      "description": "You don't have permission to access this page.",
+      "keywords": "403, forbidden, access denied"
+    }
+  }
+}

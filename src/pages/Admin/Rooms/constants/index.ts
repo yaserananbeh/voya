@@ -1,0 +1,11 @@
+export const VALIDATION = {
+  ROOM: {
+    ROOM_NUMBER_REQUIRED: true,
+    HOTEL_ID_REQUIRED: true,
+    ROOM_TYPE_REQUIRED: true,
+    CAPACITY_OF_ADULTS_MIN: 1,
+    CAPACITY_OF_CHILDREN_MIN: 0,
+    PRICE_MIN: 0,
+    PRICE_STEP: 0.01,
+  },
+} as const

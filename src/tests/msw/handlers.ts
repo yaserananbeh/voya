@@ -184,11 +184,6 @@ export const handlers = [
     })
   }),
 
-  http.post('/api/upload/photo', () => {
-    return HttpResponse.json({
-      url: 'https://mockcdn.com/photo123.jpg',
-    })
-  }),
   http.get('/api/search-results/amenities', () =>
     HttpResponse.json([
       { id: 1, name: 'Free Wi-Fi' },

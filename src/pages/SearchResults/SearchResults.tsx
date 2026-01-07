@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Grid from '@mui/material/Grid'
-import { useMediaQuery, useTheme, Drawer, IconButton, Box } from '@mui/material'
+import { useMediaQuery, useTheme, Drawer, IconButton, Box, Container } from '@mui/material'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import { FiltersSidebar } from './components/FiltersSidebar'
 import { ResultsList } from './components/ResultsList'
@@ -28,21 +28,6 @@ export default function SearchResults() {
         description={t('seo.search.description')}
         keywords={t('seo.search.keywords')}
       />
-      {isMobile && (
-        <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
-          <IconButton
-            onClick={handleFiltersToggle}
-            color="primary"
-            aria-label={t('common.toggleFilters') || 'Toggle filters'}
-            aria-expanded={mobileFiltersOpen}
-            aria-controls="filters-drawer"
-            sx={{ border: 1, borderColor: 'divider' }}
-          >
-            <FilterListIcon aria-hidden="true" />
-          </IconButton>
-        </Box>
-      )}
-
       <Drawer
         anchor="left"
         open={isMobile ? mobileFiltersOpen : false}
@@ -64,17 +49,34 @@ export default function SearchResults() {
         <FiltersSidebar onClose={isMobile ? handleFiltersToggle : undefined} />
       </Drawer>
 
-      <Grid container spacing={2}>
-        <Grid size={{ xs: 0, md: 3 }} sx={{ display: { xs: 'none', md: 'block' } }}>
-          <FiltersSidebar />
-        </Grid>
+      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3 } }}>
+        {isMobile && (
+          <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
+            <IconButton
+              onClick={handleFiltersToggle}
+              color="primary"
+              aria-label={t('common.toggleFilters') || 'Toggle filters'}
+              aria-expanded={mobileFiltersOpen}
+              aria-controls="filters-drawer"
+              sx={{ border: 1, borderColor: 'divider' }}
+            >
+              <FilterListIcon aria-hidden="true" />
+            </IconButton>
+          </Box>
+        )}
 
-        <Grid size={{ xs: 12, md: 9 }}>
-          <EditableSearchBar />
-          <SelectedFiltersBar />
-          <ResultsList />
+        <Grid container spacing={2}>
+          <Grid size={{ xs: 0, md: 3 }} sx={{ display: { xs: 'none', md: 'block' } }}>
+            <FiltersSidebar />
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 9 }}>
+            <EditableSearchBar />
+            <SelectedFiltersBar />
+            <ResultsList />
+          </Grid>
         </Grid>
-      </Grid>
+      </Container>
     </>
   )
 }

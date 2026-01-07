@@ -14,7 +14,7 @@ import {
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import { selectSearchParams, setSearchParams, clearSearchParams } from '@/store/searchSlice'
+import { selectSearchParams, setSearchParams, clearSearchParams } from '../store'
 import { useTranslation } from 'react-i18next'
 import EditIcon from '@mui/icons-material/Edit'
 import SearchIcon from '@mui/icons-material/Search'
@@ -22,8 +22,8 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import ClearIcon from '@mui/icons-material/Clear'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import { formatDateForDisplay, startOfToday, addDays, formatDateForApi } from '@/utils/date'
-import { GuestRoomSelector } from '@/pages/Home/components/GuestRoomSelector'
-import { UI } from '@/constants'
+import { GuestRoomSelector } from '@/components/common'
+import { SEARCH_BAR } from '../constants'
 
 export function EditableSearchBar() {
   const { t, i18n } = useTranslation()
@@ -242,8 +242,8 @@ export function EditableSearchBar() {
               onBlur={formik.handleBlur}
               error={formik.touched.city && Boolean(formik.errors.city)}
               sx={{
-                flex: UI.SEARCH_BAR.CITY_FLEX,
-                minWidth: { xs: 0, md: UI.SEARCH_BAR.CITY_MIN_WIDTH },
+                flex: SEARCH_BAR.CITY_FLEX,
+                minWidth: { xs: 0, md: SEARCH_BAR.CITY_MIN_WIDTH },
                 maxWidth: { xs: '100%', md: 'none' },
               }}
               InputProps={{
@@ -281,8 +281,8 @@ export function EditableSearchBar() {
               helperText={formik.touched.checkInDate && formik.errors.checkInDate}
               InputLabelProps={{ shrink: true }}
               sx={{
-                flex: UI.SEARCH_BAR.DATE_FLEX,
-                minWidth: { xs: 0, md: UI.SEARCH_BAR.DATE_MIN_WIDTH },
+                flex: SEARCH_BAR.DATE_FLEX,
+                minWidth: { xs: 0, md: SEARCH_BAR.DATE_MIN_WIDTH },
                 maxWidth: { xs: '100%', md: 'none' },
               }}
               inputProps={{
@@ -302,8 +302,8 @@ export function EditableSearchBar() {
               helperText={formik.touched.checkOutDate && formik.errors.checkOutDate}
               InputLabelProps={{ shrink: true }}
               sx={{
-                flex: UI.SEARCH_BAR.DATE_FLEX,
-                minWidth: { xs: 0, md: UI.SEARCH_BAR.DATE_MIN_WIDTH },
+                flex: SEARCH_BAR.DATE_FLEX,
+                minWidth: { xs: 0, md: SEARCH_BAR.DATE_MIN_WIDTH },
                 maxWidth: { xs: '100%', md: 'none' },
               }}
               inputProps={{

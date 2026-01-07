@@ -1,10 +1,7 @@
-export * from './api'
-export * from './hotel'
-export * from './map'
-export * from './pagination'
-export * from './payment'
-export * from './routes'
-export * from './storage'
 export * from './ui'
-export * from './user'
-export * from './validation'
+
+export * from './api'
+
+export const STORAGE_KEYS = {
+  THEME_MODE: 'voya-theme-mode',
+} as const

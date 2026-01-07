@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { Box, Typography, useTheme } from '@mui/material'
-import { VoyaLoader, StatCard, StatisticCard, QuickOverviewCard } from '@/components'
+import { VoyaLoader } from '@/components'
+import { StatCard, StatisticCard, QuickOverviewCard } from './components'
 import {
   LocationCity as CityIcon,
   Hotel as HotelIcon,
@@ -8,7 +9,9 @@ import {
   Star as StarIcon,
   CheckCircle as AvailableIcon,
 } from '@mui/icons-material'
-import { useGetCitiesQuery, useGetAdminHotelsQuery, useGetRoomsAdminQuery } from '@/api/admin'
+import { useGetCitiesQuery } from '../Cities/api'
+import { useGetAdminHotelsQuery } from '../Hotels/api'
+import { useGetRoomsAdminQuery } from '../Rooms/api'
 import { usePageTitle } from '@/hooks'
 
 export default function Dashboard() {
@@ -47,7 +50,7 @@ export default function Dashboard() {
       unavailableRooms: totalRooms - totalAvailableRooms,
       citiesWithHotels: new Set(hotels.map((h) => h.cityId)).size,
       occupancyRate: totalRooms > 0 ? ((totalAvailableRooms / totalRooms) * 100).toFixed(1) : 0,
-      totalHotelTypes: new Set(hotels.map((h) => h.hotelType || h.hotelName).filter(Boolean)).size,
+      totalHotelTypes: new Set(hotels.map((h) => h.name).filter(Boolean)).size,
       roomsPerCityAvg: totalCities > 0 ? (totalRooms / totalCities).toFixed(1) : 0,
     }
   }, [cities, hotels, rooms])

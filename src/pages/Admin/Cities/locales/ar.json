@@ -1,0 +1,17 @@
+{
+  "admin": {
+    "addCity": "إضافة مدينة",
+    "editCity": "تعديل مدينة",
+    "createCity": "إنشاء مدينة",
+    "cityDeleted": "تم حذف المدينة بنجاح",
+    "cityCreated": "تم إنشاء المدينة بنجاح",
+    "cityUpdated": "تم تحديث المدينة بنجاح",
+    "cityDeleteFailed": "فشل حذف المدينة. يرجى المحاولة مرة أخرى.",
+    "cityCreateFailed": "فشل إنشاء المدينة",
+    "cityUpdateFailed": "فشل تحديث المدينة",
+    "deleteCityConfirm": "هل أنت متأكد من حذف هذه المدينة؟"
+  },
+  "pages": {
+    "adminCities": "إدارة المدن"
+  }
+}

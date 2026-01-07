@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import LogoutIcon from '@mui/icons-material/Logout'
 import LoginIcon from '@mui/icons-material/Login'
 import { useTranslation } from 'react-i18next'
-import { ROUTES } from '@/constants'
+import { ROUTES } from '@/pages/Home/constants'
 
 type NavigationMenuProps = {
   anchorEl: HTMLElement | null

@@ -1,0 +1,18 @@
+{
+  "errors": {
+    "notFound": "Page not found",
+    "notFoundMessage": "The page you're looking for doesn't exist or has been moved.",
+    "goHome": "Go to Home",
+    "helpText": "If the problem persists, please contact support."
+  },
+  "pages": {
+    "notFound": "Page Not Found"
+  },
+  "seo": {
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist or has been moved.",
+      "keywords": "404, page not found, error"
+    }
+  }
+}

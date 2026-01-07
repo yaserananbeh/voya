@@ -1,10 +1,12 @@
 import { Box } from '@mui/material'
-import { useRecentHotelsQuery } from '@/api/home'
-import { LoadingState, ErrorState, EmptyState } from '@/components/common'
-import { HotelCard } from '@/components/hotel'
+import { useRecentHotelsQuery } from '../api'
+import type { RecentHotelResultDto } from '../types'
+import { LoadingState, ErrorState } from '@/components/common'
+import { EmptyState } from './EmptyState'
+import { HotelCard } from './HotelCard'
 import { formatDistanceToNow } from '@/utils/date'
 import { useTranslation } from 'react-i18next'
-import { USER } from '@/constants'
+import { USER } from '@/pages/Login/constants'
 
 export function RecentHotelsSection() {
   const { t } = useTranslation()
@@ -37,7 +39,7 @@ export function RecentHotelsSection() {
         gap: 3,
       }}
     >
-      {data.map((hotel) => (
+      {data.map((hotel: RecentHotelResultDto) => (
         <HotelCard
           key={hotel.hotelId}
           hotel={{

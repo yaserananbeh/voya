@@ -16,14 +16,14 @@ import LoginIcon from '@mui/icons-material/Login'
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { useLoginMutation } from '@/api/auth'
+import { useLoginMutation } from './api'
 import { useDispatch } from 'react-redux'
-import { setCredentials } from '@/store/authSlice'
+import { setCredentials } from './store'
 import { useNavigate, useLocation } from 'react-router-dom'
-import styles from './styles.module.css'
+import styles from './styles/styles.module.css'
 import { useNotification } from '@/hooks'
 import { useTranslation } from 'react-i18next'
-import { STORAGE_KEYS, ROUTES } from '@/constants'
+import { STORAGE_KEYS, ROUTES, USER } from './constants'
 import { usePageTitle } from '@/hooks'
 import { SEO } from '@/components/common'
 
@@ -65,7 +65,7 @@ export default function Login() {
 
         showSuccess(t('auth.loginSuccess'))
 
-        if (result.userType === 'Admin') {
+        if (result.userType === USER.TYPES.ADMIN) {
           await navigate(from || ROUTES.ADMIN_DASHBOARD, { replace: true })
         } else {
           await navigate(from || ROUTES.HOME, { replace: true })

@@ -1,3 +1,3 @@
-import { useGetAmenitiesQuery } from '@/api/searchResults'
+import { useGetAmenitiesQuery } from '../api'
 
 export const useAmenities = () => useGetAmenitiesQuery()

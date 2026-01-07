@@ -1,0 +1,23 @@
+{
+  "auth": {
+    "loginTitle": "Login to Voya",
+    "welcomeBack": "Welcome back! Please sign in to your account",
+    "username": "Username",
+    "password": "Password",
+    "usernameRequired": "Username is required",
+    "passwordRequired": "Password is required",
+    "loginSuccess": "Login successful!",
+    "loginFailed": "Login failed. Please check your credentials.",
+    "loggingIn": "Logging in..."
+  },
+  "pages": {
+    "login": "Login"
+  },
+  "seo": {
+    "login": {
+      "title": "Login",
+      "description": "Sign in to your Voya account to access your bookings and manage your travel plans.",
+      "keywords": "login, sign in, account, user account"
+    }
+  }
+}

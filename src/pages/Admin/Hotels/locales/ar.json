@@ -1,0 +1,17 @@
+{
+  "admin": {
+    "addHotel": "إضافة فندق",
+    "editHotel": "تعديل فندق",
+    "createHotel": "إنشاء فندق",
+    "hotelDeleted": "تم حذف الفندق بنجاح",
+    "hotelCreated": "تم إنشاء الفندق بنجاح",
+    "hotelUpdated": "تم تحديث الفندق بنجاح",
+    "hotelDeleteFailed": "فشل حذف الفندق. يرجى المحاولة مرة أخرى.",
+    "hotelCreateFailed": "فشل إنشاء الفندق",
+    "hotelUpdateFailed": "فشل تحديث الفندق",
+    "deleteHotelConfirm": "هل أنت متأكد من حذف هذا الفندق؟"
+  },
+  "pages": {
+    "adminHotels": "إدارة الفنادق"
+  }
+}

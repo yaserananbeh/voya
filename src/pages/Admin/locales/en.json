@@ -1,0 +1,12 @@
+{
+  "admin": {
+    "dashboard": "Dashboard",
+    "cities": "Cities",
+    "hotels": "Hotels",
+    "rooms": "Rooms",
+    "search": "Search",
+    "name": "Name",
+    "description": "Description",
+    "actions": "Actions"
+  }
+}
