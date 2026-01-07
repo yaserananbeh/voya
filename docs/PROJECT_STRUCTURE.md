@@ -60,11 +60,6 @@ Voya
 │   │   │   │   ├── StarRatingDisplay.tsx
 │   │   │   │   └── index.ts
 │   │   │   └── index.ts
-│   │   ├── auth
-│   │   │   ├── AdminRoute.tsx
-│   │   │   ├── ProtectedRoute.tsx
-│   │   │   ├── RedirectIfAuthenticated.tsx
-│   │   │   └── index.ts
 │   │   ├── common
 │   │   │   ├── ErrorState.tsx
 │   │   │   ├── GuestRoomSelector.tsx
@@ -91,29 +86,22 @@ Voya
 │   │   └── readme.md
 │   ├── constants
 │   │   ├── api.ts
-│   │   ├── hotel.ts
 │   │   ├── index.ts
-│   │   ├── map.ts
-│   │   ├── pagination.ts
-│   │   ├── payment.ts
-│   │   ├── routes.ts
-│   │   ├── storage.ts
-│   │   ├── ui.ts
-│   │   ├── user.ts
-│   │   └── validation.ts
+│   │   └── ui.ts
 │   ├── hooks
 │   │   ├── index.ts
 │   │   ├── useNotification.ts
 │   │   ├── usePageTitle.ts
-│   │   └── useRTL.ts
+│   │   ├── useRTL.ts
+│   │   └── useRedux.ts
 │   ├── i18n
 │   │   ├── config.ts
 │   │   └── locales
-│   │       ├── ar.json
-│   │       └── en.json
+│   │       └── common
+│   │           ├── ar.json
+│   │           └── en.json
 │   ├── layouts
 │   │   └── MainLayout
-│   │       ├── MainLayout.module.css
 │   │       ├── MainLayout.tsx
 │   │       └── index.ts
 │   ├── main.tsx
@@ -123,87 +111,64 @@ Voya
 │   │   │   │   ├── Cities.tsx
 │   │   │   │   ├── api
 │   │   │   │   │   └── index.ts
-│   │   │   │   ├── assets
 │   │   │   │   ├── components
 │   │   │   │   │   ├── CityForm.container.tsx
 │   │   │   │   │   ├── CityForm.presentational.tsx
 │   │   │   │   │   ├── CityForm.tsx
 │   │   │   │   │   └── index.ts
-│   │   │   │   ├── configs
 │   │   │   │   ├── constants
-│   │   │   │   ├── forms
-│   │   │   │   ├── hooks
+│   │   │   │   │   └── index.ts
 │   │   │   │   ├── index.ts
 │   │   │   │   ├── locales
-│   │   │   │   ├── providers
-│   │   │   │   ├── styles
-│   │   │   │   │   └── styles.module.css
-│   │   │   │   ├── tests
-│   │   │   │   ├── types
-│   │   │   │   └── utils
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   └── types
+│   │   │   │       └── index.ts
 │   │   │   ├── Dashboard
 │   │   │   │   ├── Dashboard.tsx
 │   │   │   │   ├── api
 │   │   │   │   │   └── index.ts
-│   │   │   │   ├── assets
 │   │   │   │   ├── components
 │   │   │   │   │   ├── QuickOverviewCard.tsx
 │   │   │   │   │   ├── StatCard.tsx
 │   │   │   │   │   ├── StatisticCard.tsx
 │   │   │   │   │   └── index.ts
-│   │   │   │   ├── configs
-│   │   │   │   ├── constants
-│   │   │   │   ├── forms
-│   │   │   │   ├── hooks
 │   │   │   │   ├── index.ts
 │   │   │   │   ├── locales
-│   │   │   │   ├── providers
-│   │   │   │   ├── styles
-│   │   │   │   │   └── styles.module.css
-│   │   │   │   ├── tests
-│   │   │   │   ├── types
-│   │   │   │   └── utils
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   └── types
+│   │   │   │       └── index.ts
 │   │   │   ├── Hotels
 │   │   │   │   ├── Hotels.tsx
 │   │   │   │   ├── api
 │   │   │   │   │   └── index.ts
-│   │   │   │   ├── assets
 │   │   │   │   ├── components
 │   │   │   │   │   ├── HotelForm.tsx
 │   │   │   │   │   └── index.ts
-│   │   │   │   ├── configs
 │   │   │   │   ├── constants
-│   │   │   │   ├── forms
-│   │   │   │   ├── hooks
+│   │   │   │   │   └── index.ts
 │   │   │   │   ├── index.ts
 │   │   │   │   ├── locales
-│   │   │   │   ├── providers
-│   │   │   │   ├── styles
-│   │   │   │   │   └── styles.module.css
-│   │   │   │   ├── tests
-│   │   │   │   ├── types
-│   │   │   │   └── utils
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   └── types
+│   │   │   │       └── index.ts
 │   │   │   ├── Rooms
 │   │   │   │   ├── Rooms.tsx
 │   │   │   │   ├── api
 │   │   │   │   │   └── index.ts
-│   │   │   │   ├── assets
 │   │   │   │   ├── components
 │   │   │   │   │   ├── RoomForm.tsx
 │   │   │   │   │   └── index.ts
-│   │   │   │   ├── configs
 │   │   │   │   ├── constants
-│   │   │   │   ├── forms
-│   │   │   │   ├── hooks
+│   │   │   │   │   └── index.ts
 │   │   │   │   ├── index.ts
 │   │   │   │   ├── locales
-│   │   │   │   ├── providers
-│   │   │   │   ├── styles
-│   │   │   │   │   └── styles.module.css
-│   │   │   │   ├── tests
-│   │   │   │   ├── types
-│   │   │   │   └── utils
-│   │   │   ├── assets
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   └── types
+│   │   │   │       └── index.ts
 │   │   │   ├── components
 │   │   │   │   ├── AdminDataGrid.tsx
 │   │   │   │   ├── AdminFormDialog.tsx
@@ -214,45 +179,31 @@ Voya
 │   │   │   │   ├── PageHeader.tsx
 │   │   │   │   ├── SearchBar.tsx
 │   │   │   │   └── index.ts
-│   │   │   ├── configs
 │   │   │   ├── constants
-│   │   │   ├── forms
-│   │   │   ├── hooks
+│   │   │   │   └── index.ts
 │   │   │   ├── index.ts
 │   │   │   ├── layouts
 │   │   │   │   └── AdminLayout
-│   │   │   │       ├── AdminLayout.module.css
 │   │   │   │       ├── AdminLayout.tsx
 │   │   │   │       └── index.ts
 │   │   │   ├── locales
-│   │   │   ├── providers
-│   │   │   ├── styles
-│   │   │   │   └── styles.module.css
-│   │   │   ├── tests
-│   │   │   ├── types
+│   │   │   │   ├── ar.json
+│   │   │   │   └── en.json
+│   │   │   ├── routes.tsx
 │   │   │   └── utils
+│   │   │       └── index.ts
 │   │   ├── Checkout
 │   │   │   ├── Checkout.tsx
 │   │   │   ├── Confirmation
 │   │   │   │   ├── Confirmation.tsx
-│   │   │   │   ├── assets
-│   │   │   │   ├── components
-│   │   │   │   ├── configs
-│   │   │   │   ├── constants
-│   │   │   │   ├── forms
-│   │   │   │   ├── hooks
 │   │   │   │   ├── index.ts
 │   │   │   │   ├── locales
-│   │   │   │   ├── providers
-│   │   │   │   ├── styles
-│   │   │   │   │   ├── confirmation.module.css
-│   │   │   │   │   └── styles.module.css
-│   │   │   │   ├── tests
-│   │   │   │   ├── types
-│   │   │   │   └── utils
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   └── styles
+│   │   │   │       └── confirmation.module.css
 │   │   │   ├── api
 │   │   │   │   └── index.ts
-│   │   │   ├── assets
 │   │   │   ├── components
 │   │   │   │   ├── BookingSummary.tsx
 │   │   │   │   ├── CheckoutActions.tsx
@@ -266,15 +217,13 @@ Voya
 │   │   │   │   ├── UserInfoForm.tsx
 │   │   │   │   ├── bookingSchema.ts
 │   │   │   │   └── index.ts
-│   │   │   ├── configs
 │   │   │   ├── constants
-│   │   │   ├── forms
-│   │   │   ├── hooks
+│   │   │   │   └── index.ts
 │   │   │   ├── index.ts
 │   │   │   ├── locales
-│   │   │   ├── providers
-│   │   │   ├── styles
-│   │   │   │   └── styles.module.css
+│   │   │   │   ├── ar.json
+│   │   │   │   └── en.json
+│   │   │   ├── routes.tsx
 │   │   │   ├── tests
 │   │   │   │   ├── Checkout.test.tsx
 │   │   │   │   ├── Confirmation.test.tsx
@@ -282,43 +231,31 @@ Voya
 │   │   │   ├── types
 │   │   │   │   └── index.ts
 │   │   │   └── utils
+│   │   │       ├── checkoutStorage.ts
+│   │   │       ├── index.ts
 │   │   │       └── price.ts
 │   │   ├── Error
 │   │   │   ├── ErrorPage.tsx
 │   │   │   ├── RouteError.tsx
-│   │   │   ├── assets
-│   │   │   ├── components
-│   │   │   ├── configs
 │   │   │   ├── constants
-│   │   │   ├── forms
-│   │   │   ├── hooks
+│   │   │   │   └── index.ts
 │   │   │   ├── index.ts
 │   │   │   ├── locales
-│   │   │   ├── providers
-│   │   │   ├── styles
-│   │   │   ├── tests
-│   │   │   ├── types
-│   │   │   └── utils
+│   │   │   │   ├── ar.json
+│   │   │   │   └── en.json
+│   │   │   └── routes.tsx
 │   │   ├── Forbidden
 │   │   │   ├── Forbidden.tsx
-│   │   │   ├── assets
-│   │   │   ├── components
-│   │   │   ├── configs
 │   │   │   ├── constants
-│   │   │   ├── forms
-│   │   │   ├── hooks
+│   │   │   │   └── index.ts
 │   │   │   ├── index.ts
-│   │   │   ├── locales
-│   │   │   ├── providers
-│   │   │   ├── styles
-│   │   │   ├── tests
-│   │   │   ├── types
-│   │   │   └── utils
+│   │   │   └── locales
+│   │   │       ├── ar.json
+│   │   │       └── en.json
 │   │   ├── Home
 │   │   │   ├── Home.tsx
 │   │   │   ├── api
 │   │   │   │   └── index.ts
-│   │   │   ├── assets
 │   │   │   ├── components
 │   │   │   │   ├── DiscountBadge.tsx
 │   │   │   │   ├── EmptyState.tsx
@@ -338,25 +275,23 @@ Voya
 │   │   │   │   ├── TrendingDestinationsSection.tsx
 │   │   │   │   ├── ViewDetailsButton.tsx
 │   │   │   │   └── index.ts
-│   │   │   ├── configs
 │   │   │   ├── constants
-│   │   │   ├── forms
-│   │   │   ├── hooks
+│   │   │   │   └── index.ts
 │   │   │   ├── index.ts
 │   │   │   ├── locales
-│   │   │   ├── providers
-│   │   │   ├── styles
+│   │   │   │   ├── ar.json
+│   │   │   │   └── en.json
+│   │   │   ├── routes.tsx
 │   │   │   ├── tests
 │   │   │   │   └── HomeSearchBar.test.tsx
-│   │   │   ├── types
-│   │   │   └── utils
+│   │   │   └── types
+│   │   │       └── index.ts
 │   │   ├── Hotel
 │   │   │   ├── Hotel.container.tsx
 │   │   │   ├── Hotel.presentational.tsx
 │   │   │   ├── Hotel.tsx
 │   │   │   ├── api
 │   │   │   │   └── index.ts
-│   │   │   ├── assets
 │   │   │   ├── components
 │   │   │   │   ├── DateSelectionDialog.tsx
 │   │   │   │   ├── HotelAmenities.tsx
@@ -368,59 +303,54 @@ Voya
 │   │   │   │   ├── RoomCardImage.tsx
 │   │   │   │   ├── RoomCardInfo.tsx
 │   │   │   │   └── index.ts
-│   │   │   ├── configs
 │   │   │   ├── constants
-│   │   │   ├── forms
-│   │   │   ├── hooks
+│   │   │   │   └── index.ts
 │   │   │   ├── index.ts
 │   │   │   ├── locales
-│   │   │   ├── providers
-│   │   │   ├── styles
-│   │   │   │   └── styles.module.css
+│   │   │   │   ├── ar.json
+│   │   │   │   └── en.json
+│   │   │   ├── routes.tsx
 │   │   │   ├── tests
 │   │   │   │   └── Hotel.test.tsx
-│   │   │   ├── types
-│   │   │   └── utils
+│   │   │   └── types
+│   │   │       └── index.ts
 │   │   ├── Login
 │   │   │   ├── Login.tsx
 │   │   │   ├── api
 │   │   │   │   └── index.ts
-│   │   │   ├── assets
 │   │   │   ├── components
-│   │   │   ├── configs
+│   │   │   │   ├── AdminRoute.tsx
+│   │   │   │   ├── ProtectedRoute.tsx
+│   │   │   │   ├── RedirectIfAuthenticated.tsx
+│   │   │   │   └── index.ts
 │   │   │   ├── constants
-│   │   │   ├── forms
-│   │   │   ├── hooks
+│   │   │   │   └── index.ts
 │   │   │   ├── index.ts
 │   │   │   ├── locales
-│   │   │   ├── providers
+│   │   │   │   ├── ar.json
+│   │   │   │   └── en.json
+│   │   │   ├── routes.tsx
+│   │   │   ├── store
+│   │   │   │   ├── authSlice.ts
+│   │   │   │   └── index.ts
 │   │   │   ├── styles
 │   │   │   │   └── styles.module.css
 │   │   │   ├── tests
 │   │   │   │   └── Login.test.tsx
-│   │   │   ├── types
-│   │   │   └── utils
+│   │   │   └── types
+│   │   │       └── index.ts
 │   │   ├── NotFound
 │   │   │   ├── NotFound.tsx
-│   │   │   ├── assets
-│   │   │   ├── components
-│   │   │   ├── configs
 │   │   │   ├── constants
-│   │   │   ├── forms
-│   │   │   ├── hooks
+│   │   │   │   └── index.ts
 │   │   │   ├── index.ts
-│   │   │   ├── locales
-│   │   │   ├── providers
-│   │   │   ├── styles
-│   │   │   │   └── styles.module.css
-│   │   │   ├── tests
-│   │   │   ├── types
-│   │   │   └── utils
+│   │   │   └── locales
+│   │   │       ├── ar.json
+│   │   │       └── en.json
 │   │   └── SearchResults
 │   │       ├── SearchResults.tsx
 │   │       ├── api
 │   │       │   └── index.ts
-│   │       ├── assets
 │   │       ├── components
 │   │       │   ├── AmenitiesFilter.tsx
 │   │       │   ├── EditableSearchBar.tsx
@@ -436,20 +366,25 @@ Voya
 │   │       │   ├── SelectedFiltersBar.tsx
 │   │       │   ├── StarRatingFilter.tsx
 │   │       │   └── index.ts
-│   │       ├── configs
 │   │       ├── constants
-│   │       ├── forms
+│   │       │   └── index.ts
 │   │       ├── hooks
 │   │       │   ├── index.ts
-│   │       │   └── useAmenities.ts
+│   │       │   ├── useAmenities.ts
+│   │       │   └── useFilterContext.ts
 │   │       ├── index.ts
 │   │       ├── locales
+│   │       │   ├── ar.json
+│   │       │   └── en.json
 │   │       ├── providers
-│   │       ├── styles
-│   │       │   └── styles.module.css
-│   │       ├── tests
-│   │       ├── types
-│   │       └── utils
+│   │       │   ├── FilterProvider.tsx
+│   │       │   └── index.ts
+│   │       ├── routes.tsx
+│   │       ├── store
+│   │       │   ├── index.ts
+│   │       │   └── searchSlice.ts
+│   │       └── types
+│   │           └── index.ts
 │   ├── providers
 │   │   ├── ErrorBoundary.tsx
 │   │   ├── LoadingProvider.tsx
@@ -458,11 +393,13 @@ Voya
 │   │   ├── index.ts
 │   │   └── index.tsx
 │   ├── routes
+│   │   ├── components
+│   │   │   ├── SuspenseLayout.tsx
+│   │   │   └── index.ts
+│   │   ├── mainLayoutRoutes.tsx
 │   │   └── routes.tsx
 │   ├── store
-│   │   ├── authSlice.ts
-│   │   ├── index.ts
-│   │   └── searchSlice.ts
+│   │   └── index.ts
 │   ├── styles
 │   │   └── reset.css
 │   ├── tests
@@ -472,11 +409,10 @@ Voya
 │   ├── theme
 │   │   └── index.ts
 │   ├── types
+│   │   ├── common.ts
 │   │   ├── index.ts
-│   │   ├── models.ts
 │   │   └── mui.d.ts
 │   └── utils
-│       ├── checkoutStorage.ts
 │       ├── date.ts
 │       ├── globalErrors.ts
 │       ├── index.ts
