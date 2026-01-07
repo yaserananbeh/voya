@@ -6,7 +6,7 @@ import { store } from '@/store'
 import { ThemeProvider, useThemeMode } from './ThemeContext'
 import { NotificationProvider } from './NotificationProvider'
 import { LoadingProvider } from './LoadingProvider'
-import { useRTL } from '@/hooks/useRTL'
+import { useRTL } from '@/hooks'
 
 function ThemeWrapper({ children }: { children: ReactNode }) {
   const { theme } = useThemeMode()
