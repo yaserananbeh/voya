@@ -764,7 +764,7 @@ The application uses a custom Material-UI theme with:
 
 ### Responsive Design
 
-- Mobile-first approach
+- Mobile-Tablet responsive design
 - Breakpoints: xs, sm, md, lg, xl
 - Adaptive layouts for all screen sizes
 
@@ -802,7 +802,7 @@ All providers are wrapped in `src/providers/index.tsx` and applied at the root l
 
 ### Authentication
 
-- JWT token-based authentication
+- Token-based authentication
 - Tokens stored in localStorage
 - Automatic token injection in API requests
 - Protected routes for authenticated users
@@ -823,7 +823,6 @@ All providers are wrapped in `src/providers/index.tsx` and applied at the root l
 ### Code Splitting
 
 - Lazy loading for all routes
-- Dynamic imports for heavy components
 - Route-based code splitting
 
 ### Caching
@@ -860,13 +859,13 @@ All providers are wrapped in `src/providers/index.tsx` and applied at the root l
 
 ## 📝 License
 
-This project is private and proprietary. All rights reserved.
+This project is free to use and no rights reserved.
 
 ---
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work*
+- **Yaser Alananbeh** - *Initial work*
 
 ---
 
