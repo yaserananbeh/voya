@@ -11,13 +11,13 @@ import {
 import type { CityDto } from '@/types'
 import { CityForm } from './components/CityForm'
 import {
-  DeleteConfirmDialog,
   PageHeader,
   SearchBar,
   DataGridActions,
   AdminDataGrid,
   AdminFormDialog,
-} from '@/components'
+  DeleteConfirmDialog,
+} from '../components'
 import { useNotification, usePageTitle } from '@/hooks'
 import { getInitialPaginationModel } from '@/constants'
 

@@ -11,13 +11,13 @@ import {
 import type { HotelDto } from '@/types'
 import { HotelForm } from './components/HotelForm'
 import {
-  DeleteConfirmDialog,
   PageHeader,
   SearchBar,
   DataGridActions,
   AdminDataGrid,
   AdminFormDialog,
-} from '@/components'
+  DeleteConfirmDialog,
+} from '../components'
 import { usePageTitle } from '@/hooks'
 import { getInitialPaginationModel } from '@/constants'
 

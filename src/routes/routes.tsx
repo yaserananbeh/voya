@@ -16,7 +16,7 @@ const Confirmation = lazy(() => import('@/pages/Checkout/Confirmation'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 const Forbidden = lazy(() => import('@/pages/Forbidden'))
 
-const AdminLayout = lazy(() => import('@/layouts/AdminLayout'))
+const AdminLayout = lazy(() => import('@/pages/Admin/layouts/AdminLayout'))
 const MainLayout = lazy(() => import('@/layouts/MainLayout'))
 
 const Dashboard = lazy(() => import('@/pages/Admin/Dashboard'))

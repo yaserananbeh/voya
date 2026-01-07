@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { Box, Typography, useTheme } from '@mui/material'
-import { VoyaLoader, StatCard, StatisticCard, QuickOverviewCard } from '@/components'
+import { VoyaLoader } from '@/components'
+import { StatCard, StatisticCard, QuickOverviewCard } from './components'
 import {
   LocationCity as CityIcon,
   Hotel as HotelIcon,
