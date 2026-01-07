@@ -15,7 +15,8 @@ import { useGetAdminHotelsQuery } from '../api'
 import { useGetCitiesQuery } from '../../Cities/api'
 import type { HotelForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
-import { HOTEL, VALIDATION } from '@/constants'
+import { HOTEL } from '../../../Hotel/constants'
+import { VALIDATION } from '../constants'
 
 type Props = {
   hotelId: number | null
@@ -141,7 +142,7 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
             onChange={formik.handleChange}
             label="Hotel Type"
           >
-            {HOTEL.TYPE_OPTIONS.map((type) => (
+            {HOTEL.TYPE_OPTIONS.map((type: string) => (
               <MenuItem key={type} value={type}>
                 {type}
               </MenuItem>

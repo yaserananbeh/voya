@@ -11,3 +11,7 @@ export const getInitialPaginationModel = () => ({
   page: PAGINATION.INITIAL_PAGE,
   pageSize: PAGINATION.INITIAL_PAGE_SIZE,
 })
+
+export const ADMIN_LAYOUT = {
+  DRAWER_WIDTH: 240,
+} as const

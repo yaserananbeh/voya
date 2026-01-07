@@ -19,7 +19,7 @@ import {
   DeleteConfirmDialog,
 } from '../components'
 import { useNotification, usePageTitle } from '@/hooks'
-import { getInitialPaginationModel } from '@/constants'
+import { getInitialPaginationModel } from '../constants'
 
 export default function Cities() {
   usePageTitle('pages.adminCities')

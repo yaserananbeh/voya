@@ -23,7 +23,8 @@ import BedIcon from '@mui/icons-material/Bed'
 import { LogoutBtn } from '@/components/layout'
 import { Outlet } from 'react-router-dom'
 import { ScrollToTop } from '@/components/ScrollToTop'
-import { UI, ROUTES } from '@/constants'
+import { ROUTES } from '@/constants'
+import { ADMIN_LAYOUT } from '../../constants'
 import { SEO } from '@/components/common'
 import { useTranslation } from 'react-i18next'
 
@@ -108,10 +109,7 @@ export default function AdminLayout() {
         </Toolbar>
       </AppBar>
 
-      <Box
-        component="nav"
-        sx={{ width: { md: UI.ADMIN_LAYOUT.DRAWER_WIDTH }, flexShrink: { md: 0 } }}
-      >
+      <Box component="nav" sx={{ width: { md: ADMIN_LAYOUT.DRAWER_WIDTH }, flexShrink: { md: 0 } }}>
         <Drawer
           id="admin-drawer"
           variant={isMobile ? 'temporary' : 'permanent'}
@@ -123,7 +121,7 @@ export default function AdminLayout() {
           sx={{
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
-              width: UI.ADMIN_LAYOUT.DRAWER_WIDTH,
+              width: ADMIN_LAYOUT.DRAWER_WIDTH,
             },
           }}
         >
@@ -136,7 +134,7 @@ export default function AdminLayout() {
         sx={{
           flexGrow: 1,
           p: { xs: 2, sm: 3 },
-          width: { md: `calc(100% - ${UI.ADMIN_LAYOUT.DRAWER_WIDTH}px)` },
+          width: { md: `calc(100% - ${ADMIN_LAYOUT.DRAWER_WIDTH}px)` },
           minWidth: 0,
           overflowX: 'hidden',
         }}

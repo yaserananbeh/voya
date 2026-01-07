@@ -1,6 +1,10 @@
 import { baseApi } from '@/api/baseApi'
 import type { CityForCreationDto, CityDto } from '@/types'
-import { API_ENDPOINTS } from '@/constants'
+
+const API_ENDPOINTS = {
+  CITIES: '/cities',
+  CITY_BY_ID: (id: number) => `/cities/${id}`,
+} as const
 
 export interface PaginationQuery {
   searchQuery?: string

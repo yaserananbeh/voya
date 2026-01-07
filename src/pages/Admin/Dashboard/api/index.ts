@@ -1,5 +1,8 @@
 import { baseApi } from '@/api/baseApi'
-import { API_ENDPOINTS } from '@/constants'
+
+const API_ENDPOINTS = {
+  ADMIN_DASHBOARD: '/admin/dashboard',
+} as const
 
 export const dashboardApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

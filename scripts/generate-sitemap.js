@@ -13,14 +13,10 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-/**
- * Load environment variables from .env file
- */
 function loadEnvFile() {
   const envPath = path.join(__dirname, '..', '.env')
   const envLocalPath = path.join(__dirname, '..', '.env.local')
 
-  // Try .env.local first, then .env
   const filesToTry = [envLocalPath, envPath]
 
   for (const envFile of filesToTry) {
@@ -30,7 +26,6 @@ function loadEnvFile() {
 
       for (const line of lines) {
         const trimmedLine = line.trim()
-        // Skip comments and empty lines
         if (!trimmedLine || trimmedLine.startsWith('#')) continue
 
         const match = trimmedLine.match(/^([^=]+)=(.*)$/)
@@ -38,7 +33,6 @@ function loadEnvFile() {
           const key = match[1].trim()
           let value = match[2].trim()
 
-          // Remove quotes if present
           if (
             (value.startsWith('"') && value.endsWith('"')) ||
             (value.startsWith("'") && value.endsWith("'"))
@@ -46,7 +40,6 @@ function loadEnvFile() {
             value = value.slice(1, -1)
           }
 
-          // Only set if not already in process.env (env vars take precedence)
           if (!process.env[key]) {
             process.env[key] = value
           }
@@ -57,16 +50,13 @@ function loadEnvFile() {
   }
 }
 
-// Load .env file
 loadEnvFile()
 
-// API base URL - reads from .env file or environment variable, falls back to production URL
 const API_BASE_URL =
   process.env.VITE_API_BASE_URL || 'https://travel-and-accommodation-booking-static.onrender.com'
 const SITE_URL = 'https://ya-voya.netlify.app'
 const HOTELS_ENDPOINT = `${API_BASE_URL}/hotels`
 
-// Static routes that should always be included
 const staticRoutes = [
   {
     loc: `${SITE_URL}/home`,
@@ -88,15 +78,8 @@ const staticRoutes = [
   },
 ]
 
-/**
- * Fetch all hotels from the API
- * Note: This assumes the API supports pagination or returns all hotels
- * You may need to adjust this based on your API's pagination behavior
- */
 async function fetchAllHotels() {
   try {
-    // Fetch hotels with a large page size to get all hotels
-    // Adjust pageSize based on your API's maximum allowed value
     const response = await fetch(`${HOTELS_ENDPOINT}?pageNumber=1&pageSize=1000`)
 
     if (!response.ok) {
@@ -116,9 +99,6 @@ async function fetchAllHotels() {
   }
 }
 
-/**
- * Generate sitemap XML content
- */
 function generateSitemap(routes) {
   const urls = routes
     .map(
@@ -142,19 +122,14 @@ ${urls}
 </urlset>`
 }
 
-/**
- * Main function to generate sitemap
- */
 async function main() {
   console.log('Generating sitemap...')
   console.log(`API URL: ${API_BASE_URL}`)
   console.log(`Site URL: ${SITE_URL}`)
 
-  // Fetch hotels from API
   const hotels = await fetchAllHotels()
   console.log(`Found ${hotels.length} hotels`)
 
-  // Create routes for hotels
   const hotelRoutes = hotels.map((hotel) => ({
     loc: `${SITE_URL}/hotel/${hotel.id}`,
     lastmod: new Date().toISOString().split('T')[0],
@@ -162,13 +137,10 @@ async function main() {
     priority: '0.7',
   }))
 
-  // Combine static and dynamic routes
   const allRoutes = [...staticRoutes, ...hotelRoutes]
 
-  // Generate sitemap XML
   const sitemapXml = generateSitemap(allRoutes)
 
-  // Write to public/sitemap.xml
   const sitemapPath = path.join(__dirname, '..', 'public', 'sitemap.xml')
   fs.writeFileSync(sitemapPath, sitemapXml, 'utf8')
 
@@ -179,7 +151,6 @@ async function main() {
   console.log(`   Saved to: ${sitemapPath}`)
 }
 
-// Run the script
 main().catch((error) => {
   console.error('Error generating sitemap:', error)
   process.exit(1)

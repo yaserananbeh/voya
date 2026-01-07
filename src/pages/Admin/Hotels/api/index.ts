@@ -1,6 +1,10 @@
 import { baseApi } from '@/api/baseApi'
 import type { HotelWithoutRoomsDto, HotelForCreationDto } from '@/types'
-import { API_ENDPOINTS } from '@/constants'
+
+const API_ENDPOINTS = {
+  HOTELS: '/hotels',
+  HOTEL_BY_ID: (id: number) => `/hotels/${id}`,
+} as const
 
 export interface PaginationQuery {
   searchQuery?: string

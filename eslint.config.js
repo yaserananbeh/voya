@@ -34,20 +34,14 @@ export default defineConfig([
       'react-hooks': reactHooks,
     },
 
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked, // ✅ FULL TYPE CHECK
-      prettier, // ✅ no formatting conflict
-    ],
+    extends: [js.configs.recommended, ...tseslint.configs.recommendedTypeChecked, prettier],
 
     rules: {
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
     },
   },
-  // =====================================
-  // TEST FILE RULES (RELAXED)
-  // =====================================
+
   {
     files: ['**/*.test.ts', '**/*.test.tsx', '**/__tests__/**/*'],
     rules: {

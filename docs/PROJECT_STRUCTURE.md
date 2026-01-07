@@ -48,19 +48,7 @@ Voya
 ├── src
 │   ├── App.tsx
 │   ├── api
-│   │   ├── admin
-│   │   │   └── index.ts
-│   │   ├── auth
-│   │   │   └── index.ts
-│   │   ├── baseApi.ts
-│   │   ├── checkout
-│   │   │   └── index.ts
-│   │   ├── home
-│   │   │   └── index.ts
-│   │   ├── hotels
-│   │   │   └── index.ts
-│   │   └── searchResults
-│   │       └── index.ts
+│   │   └── baseApi.ts
 │   ├── components
 │   │   ├── ScrollToTop.tsx
 │   │   ├── atomic
@@ -133,6 +121,8 @@ Voya
 │   │   ├── Admin
 │   │   │   ├── Cities
 │   │   │   │   ├── Cities.tsx
+│   │   │   │   ├── api
+│   │   │   │   │   └── index.ts
 │   │   │   │   ├── assets
 │   │   │   │   ├── components
 │   │   │   │   │   ├── CityForm.container.tsx
@@ -153,6 +143,8 @@ Voya
 │   │   │   │   └── utils
 │   │   │   ├── Dashboard
 │   │   │   │   ├── Dashboard.tsx
+│   │   │   │   ├── api
+│   │   │   │   │   └── index.ts
 │   │   │   │   ├── assets
 │   │   │   │   ├── components
 │   │   │   │   │   ├── QuickOverviewCard.tsx
@@ -173,6 +165,8 @@ Voya
 │   │   │   │   └── utils
 │   │   │   ├── Hotels
 │   │   │   │   ├── Hotels.tsx
+│   │   │   │   ├── api
+│   │   │   │   │   └── index.ts
 │   │   │   │   ├── assets
 │   │   │   │   ├── components
 │   │   │   │   │   ├── HotelForm.tsx
@@ -191,6 +185,8 @@ Voya
 │   │   │   │   └── utils
 │   │   │   ├── Rooms
 │   │   │   │   ├── Rooms.tsx
+│   │   │   │   ├── api
+│   │   │   │   │   └── index.ts
 │   │   │   │   ├── assets
 │   │   │   │   ├── components
 │   │   │   │   │   ├── RoomForm.tsx
@@ -254,6 +250,8 @@ Voya
 │   │   │   │   ├── tests
 │   │   │   │   ├── types
 │   │   │   │   └── utils
+│   │   │   ├── api
+│   │   │   │   └── index.ts
 │   │   │   ├── assets
 │   │   │   ├── components
 │   │   │   │   ├── BookingSummary.tsx
@@ -318,6 +316,8 @@ Voya
 │   │   │   └── utils
 │   │   ├── Home
 │   │   │   ├── Home.tsx
+│   │   │   ├── api
+│   │   │   │   └── index.ts
 │   │   │   ├── assets
 │   │   │   ├── components
 │   │   │   │   ├── DiscountBadge.tsx
@@ -354,6 +354,8 @@ Voya
 │   │   │   ├── Hotel.container.tsx
 │   │   │   ├── Hotel.presentational.tsx
 │   │   │   ├── Hotel.tsx
+│   │   │   ├── api
+│   │   │   │   └── index.ts
 │   │   │   ├── assets
 │   │   │   ├── components
 │   │   │   │   ├── DateSelectionDialog.tsx
@@ -381,6 +383,8 @@ Voya
 │   │   │   └── utils
 │   │   ├── Login
 │   │   │   ├── Login.tsx
+│   │   │   ├── api
+│   │   │   │   └── index.ts
 │   │   │   ├── assets
 │   │   │   ├── components
 │   │   │   ├── configs
@@ -414,6 +418,8 @@ Voya
 │   │   │   └── utils
 │   │   └── SearchResults
 │   │       ├── SearchResults.tsx
+│   │       ├── api
+│   │       │   └── index.ts
 │   │       ├── assets
 │   │       ├── components
 │   │       │   ├── AmenitiesFilter.tsx
