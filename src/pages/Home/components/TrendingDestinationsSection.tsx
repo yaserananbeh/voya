@@ -1,5 +1,5 @@
 import { Alert, Box, Card, CardContent, Typography } from '@mui/material'
-import { useTrendingDestinationsQuery } from '@/api/home'
+import { useTrendingDestinationsQuery, type DestinationDto } from '../api'
 import { SafeImage } from '@/components/common/SafeImage'
 import { VoyaLoader } from '@/components'
 import { useTranslation } from 'react-i18next'
@@ -48,7 +48,7 @@ export function TrendingDestinationsSection() {
         gap: 3,
       }}
     >
-      {data.map((dest) => (
+      {data.map((dest: DestinationDto) => (
         <Card key={dest.cityId}>
           <SafeImage src={dest.thumbnailUrl} alt={dest.cityName ?? 'Destination'} height={140} />
           <CardContent>

@@ -13,7 +13,8 @@ import {
   Box,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useGetRoomsAdminQuery, useGetAdminHotelsQuery } from '@/api/admin'
+import { useGetRoomsAdminQuery } from '../api'
+import { useGetAdminHotelsQuery } from '../../Hotels/api'
 import type { RoomForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
 import { VALIDATION } from '@/constants'

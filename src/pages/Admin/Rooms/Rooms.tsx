@@ -7,7 +7,7 @@ import {
   useCreateRoomMutation,
   useUpdateRoomMutation,
   useDeleteRoomMutation,
-} from '@/api/admin'
+} from './api'
 import type { RoomDto } from '@/types'
 import { RoomForm } from './components/RoomForm'
 import {

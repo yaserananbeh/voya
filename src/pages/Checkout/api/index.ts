@@ -1,4 +1,4 @@
-import { baseApi } from '../baseApi'
+import { baseApi } from '@/api/baseApi'
 import { API_ENDPOINTS } from '@/constants'
 export type BookingRequest = {
   customerName: string

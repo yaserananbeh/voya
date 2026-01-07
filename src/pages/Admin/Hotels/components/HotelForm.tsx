@@ -11,7 +11,8 @@ import {
   Box,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useGetAdminHotelsQuery, useGetCitiesQuery } from '@/api/admin'
+import { useGetAdminHotelsQuery } from '../api'
+import { useGetCitiesQuery } from '../../Cities/api'
 import type { HotelForCreationDto } from '@/types'
 import { VoyaLoader } from '@/components'
 import { HOTEL, VALIDATION } from '@/constants'

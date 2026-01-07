@@ -1,7 +1,7 @@
 import { Box, Card, CardContent, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import type { HotelRoomDto } from '@/api/hotels'
+import type { HotelRoomDto } from '../api'
 import { selectSearchParams } from '@/store/searchSlice'
 import type { CheckoutContext } from '@/types'
 import { saveCheckoutContext } from '@/utils'

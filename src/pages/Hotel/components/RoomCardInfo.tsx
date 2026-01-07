@@ -1,6 +1,6 @@
 import { Typography, Stack, Chip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import type { HotelRoomDto } from '@/api/hotels'
+import type { HotelRoomDto } from '../api'
 
 type RoomCardInfoProps = {
   room: HotelRoomDto

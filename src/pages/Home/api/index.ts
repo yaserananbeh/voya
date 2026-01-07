@@ -1,5 +1,4 @@
-import type { AmenityDto } from '@/types'
-import { baseApi } from '../baseApi'
+import { baseApi } from '@/api/baseApi'
 import { API_ENDPOINTS } from '@/constants'
 export type HomeSearchRequest = {
   checkInDate?: string
@@ -89,13 +88,6 @@ export const homeApi = baseApi.injectEndpoints({
       }),
       providesTags: ['Home'],
     }),
-    amenities: build.query<AmenityDto[], void>({
-      query: () => ({
-        url: API_ENDPOINTS.SEARCH_AMENITIES,
-        method: 'GET',
-      }),
-      providesTags: ['Amenities'],
-    }),
   }),
 })
 
@@ -104,5 +96,4 @@ export const {
   useFeaturedDealsQuery,
   useRecentHotelsQuery,
   useTrendingDestinationsQuery,
-  useAmenitiesQuery,
 } = homeApi

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { useFeaturedDealsQuery } from '@/api/home'
+import { useFeaturedDealsQuery, type FeaturedDealDto } from '../api'
 import { LoadingState, ErrorState } from '@/components/common'
 import { EmptyState } from './EmptyState'
 import { HotelCard } from './HotelCard'
@@ -34,7 +34,7 @@ export function FeaturedDealsSection() {
         gap: 3,
       }}
     >
-      {data.map((deal) => (
+      {data.map((deal: FeaturedDealDto) => (
         <HotelCard
           key={deal.hotelId}
           hotel={{

@@ -7,7 +7,7 @@ import {
   useCreateCityMutation,
   useUpdateCityMutation,
   useDeleteCityMutation,
-} from '@/api/admin'
+} from './api'
 import type { CityDto } from '@/types'
 import { CityForm } from './components/CityForm'
 import {

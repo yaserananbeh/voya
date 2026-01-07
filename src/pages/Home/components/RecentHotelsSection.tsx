@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { useRecentHotelsQuery } from '@/api/home'
+import { useRecentHotelsQuery, type RecentHotelResultDto } from '../api'
 import { LoadingState, ErrorState } from '@/components/common'
 import { EmptyState } from './EmptyState'
 import { HotelCard } from './HotelCard'
@@ -38,7 +38,7 @@ export function RecentHotelsSection() {
         gap: 3,
       }}
     >
-      {data.map((hotel) => (
+      {data.map((hotel: RecentHotelResultDto) => (
         <HotelCard
           key={hotel.hotelId}
           hotel={{

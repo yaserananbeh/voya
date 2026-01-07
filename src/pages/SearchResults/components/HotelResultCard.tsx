@@ -1,6 +1,6 @@
 import { Card, CardContent, Stack } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import type { HotelDto } from '@/api/hotels'
+import type { HotelDto } from '../../Hotel/api'
 import { useTranslation } from 'react-i18next'
 import { HotelCardImage, HotelCardInfo, HotelCardPrice } from './'
 

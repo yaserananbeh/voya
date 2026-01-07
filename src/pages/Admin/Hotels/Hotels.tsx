@@ -7,7 +7,7 @@ import {
   useCreateHotelMutation,
   useUpdateHotelMutation,
   useDeleteHotelMutation,
-} from '@/api/admin'
+} from './api'
 import type { HotelDto } from '@/types'
 import { HotelForm } from './components/HotelForm'
 import {
