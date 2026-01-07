@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import type { HotelRoomDto } from '@/api/hotels'
 import { selectSearchParams } from '@/store/searchSlice'
-import type { CheckoutContext } from '@/pages/Checkout/types'
-import { saveCheckoutContext } from '@/pages/Checkout/utils/checkoutStorage'
+import type { CheckoutContext } from '@/types'
+import { saveCheckoutContext } from '@/utils'
 import { useAppSelector } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import { STORAGE_KEYS, ROUTES, USER } from '@/constants'
 import { DateSelectionDialog } from './DateSelectionDialog'
-import { RoomCardImage, RoomCardInfo, RoomCardActions } from '@/components/atomic'
+import { RoomCardImage, RoomCardInfo, RoomCardActions } from './'
 
 type Props = {
   hotelId: number
