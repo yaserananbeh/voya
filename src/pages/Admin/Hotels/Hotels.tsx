@@ -8,7 +8,7 @@ import {
   useUpdateHotelMutation,
   useDeleteHotelMutation,
 } from './api'
-import type { HotelDto } from '@/types'
+import type { HotelWithoutRoomsDto } from './types'
 import { HotelForm } from './components/HotelForm'
 import {
   PageHeader,
@@ -19,7 +19,7 @@ import {
   DeleteConfirmDialog,
 } from '../components'
 import { usePageTitle } from '@/hooks'
-import { getInitialPaginationModel } from '../constants'
+import { getInitialPaginationModel } from '../utils'
 
 export default function Hotels() {
   usePageTitle('pages.adminHotels')
@@ -39,14 +39,14 @@ export default function Hotels() {
   const [updateHotel] = useUpdateHotelMutation()
   const [deleteHotel] = useDeleteHotelMutation()
 
-  const columns: GridColDef<HotelDto>[] = [
+  const columns: GridColDef<HotelWithoutRoomsDto>[] = [
     {
       field: 'name',
       headerName: 'Name',
       width: 200,
       flex: 1,
       minWidth: 150,
-      valueGetter: (_value, row) => row.hotelName || row.name,
+      valueGetter: (_value, row) => row.name,
     },
     {
       field: 'starRating',
@@ -61,7 +61,7 @@ export default function Hotels() {
       width: 150,
       minWidth: 120,
       type: 'number',
-      valueGetter: (_value, row) => row.rooms?.length ?? 0,
+      valueGetter: (_value, row) => row.numberOfRooms ?? 0,
     },
     {
       field: 'actions',
@@ -116,7 +116,7 @@ export default function Hotels() {
 
       <SearchBar value={searchQuery} onChange={setSearchQuery} />
 
-      <AdminDataGrid<HotelDto>
+      <AdminDataGrid<HotelWithoutRoomsDto>
         rows={hotels}
         columns={columns}
         loading={isLoading}

@@ -50,7 +50,7 @@ export default function Dashboard() {
       unavailableRooms: totalRooms - totalAvailableRooms,
       citiesWithHotels: new Set(hotels.map((h) => h.cityId)).size,
       occupancyRate: totalRooms > 0 ? ((totalAvailableRooms / totalRooms) * 100).toFixed(1) : 0,
-      totalHotelTypes: new Set(hotels.map((h) => h.hotelType || h.hotelName).filter(Boolean)).size,
+      totalHotelTypes: new Set(hotels.map((h) => h.name).filter(Boolean)).size,
       roomsPerCityAvg: totalCities > 0 ? (totalRooms / totalCities).toFixed(1) : 0,
     }
   }, [cities, hotels, rooms])

@@ -8,7 +8,7 @@ import {
   useUpdateRoomMutation,
   useDeleteRoomMutation,
 } from './api'
-import type { RoomDto } from '@/types'
+import type { RoomDto } from './types'
 import { RoomForm } from './components/RoomForm'
 import {
   PageHeader,
@@ -19,7 +19,7 @@ import {
   DeleteConfirmDialog,
 } from '../components'
 import { usePageTitle } from '@/hooks'
-import { getInitialPaginationModel } from '../constants'
+import { getInitialPaginationModel } from '../utils'
 
 export default function Rooms() {
   usePageTitle('pages.adminRooms')
