@@ -8,6 +8,33 @@ This document describes how to contribute, follow standards, and work efficientl
 # 📁 Project Structure
 
 Refer to `docs/PROJECT_STRUCTURE.md` for the full project layout.
+
+## Feature-Based Architecture
+
+This project follows a **feature-based architecture**. Each feature (page/module) is self-contained with its own:
+
+- `api/` - Feature-specific API endpoints
+- `components/` - Feature-specific UI components
+- `constants/` - Feature-specific constants
+- `hooks/` - Feature-specific custom hooks
+- `routes.tsx` - Feature-specific route definitions
+- `store/` - Feature-specific Redux slices (where applicable)
+- `types/` - Feature-specific TypeScript types
+- `utils/` - Feature-specific utility functions
+- `locales/` - Feature-specific translations
+- `tests/` - Feature-specific test files
+
+### Adding a New Feature
+
+When adding a new feature:
+
+1. Create a new folder under `src/pages/YourFeature/`
+2. Add the feature structure folders (api, components, constants, etc.)
+3. Create the main feature component (e.g., `YourFeature.tsx`)
+4. Add routes in `YourFeature/routes.tsx`
+5. Export from `YourFeature/index.ts`
+6. Register routes in `src/routes/mainLayoutRoutes.tsx`
+
 Follow existing conventions when adding new pages, hooks, utils, or API modules.
 
 ---

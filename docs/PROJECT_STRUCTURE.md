@@ -51,22 +51,16 @@ Voya
 │   │   └── baseApi.ts
 │   ├── components
 │   │   ├── ScrollToTop.tsx
-│   │   ├── atomic
-│   │   │   ├── buttons
-│   │   │   │   ├── CounterButton.tsx
-│   │   │   │   └── index.ts
-│   │   │   ├── display
-│   │   │   │   ├── GuestRoomRow.tsx
-│   │   │   │   ├── StarRatingDisplay.tsx
-│   │   │   │   └── index.ts
-│   │   │   └── index.ts
 │   │   ├── common
+│   │   │   ├── CounterButton.tsx
 │   │   │   ├── ErrorState.tsx
+│   │   │   ├── GuestRoomRow.tsx
 │   │   │   ├── GuestRoomSelector.tsx
 │   │   │   ├── LoadingState.tsx
 │   │   │   ├── SEO.tsx
 │   │   │   ├── SafeImage.tsx
 │   │   │   ├── SkipLink.tsx
+│   │   │   ├── StarRatingDisplay.tsx
 │   │   │   ├── VoyaLoader.tsx
 │   │   │   └── index.ts
 │   │   ├── index.ts
