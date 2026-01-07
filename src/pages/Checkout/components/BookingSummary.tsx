@@ -13,10 +13,10 @@ import HotelIcon from '@mui/icons-material/Hotel'
 import BedIcon from '@mui/icons-material/Bed'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
-import type { CheckoutContext } from '../types'
+import type { CheckoutContext } from '@/types'
 import { calculateTotalCost, nightsBetween } from '../utils/price'
 import { useTranslation } from 'react-i18next'
-import { SummarySection, PriceBreakdown, TotalPrice } from '@/components/atomic'
+import { SummarySection, PriceBreakdown, TotalPrice } from './'
 
 export function BookingSummary({ ctx }: { ctx: CheckoutContext }) {
   const { t, i18n } = useTranslation()

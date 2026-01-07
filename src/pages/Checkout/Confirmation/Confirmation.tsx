@@ -25,7 +25,7 @@ import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber'
 import RoomIcon from '@mui/icons-material/Bed'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import { alpha, useTheme } from '@mui/material/styles'
-import styles from './confirmation.module.css'
+import styles from './styles/confirmation.module.css'
 import { usePageTitle } from '@/hooks'
 import { SEO } from '@/components/common'
 

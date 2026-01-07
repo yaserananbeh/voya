@@ -6,7 +6,7 @@ import { useFormik } from 'formik'
 import { createBookingSchema } from './bookingSchema'
 import { useTranslation } from 'react-i18next'
 import { PAYMENT_METHOD_OPTIONS, UI } from '@/constants'
-import { FormTextField, FormSelectField, SubmitButton } from '@/components/atomic'
+import { FormTextField, FormSelectField, SubmitButton } from './'
 
 export type UserInfoValues = {
   customerName: string
