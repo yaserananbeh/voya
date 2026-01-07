@@ -7,11 +7,6 @@ export const PAGINATION = {
   INITIAL_PAGE_SIZE: 10 as number,
 } as const
 
-export const getInitialPaginationModel = () => ({
-  page: PAGINATION.INITIAL_PAGE,
-  pageSize: PAGINATION.INITIAL_PAGE_SIZE,
-})
-
 export const ADMIN_LAYOUT = {
   DRAWER_WIDTH: 240,
 } as const
@@ -23,4 +18,12 @@ export const BUTTON_LABELS = {
   DELETE: 'Delete',
   EDIT: 'Edit',
   SUBMIT: 'Submit',
+} as const
+
+export const ROUTES = {
+  ADMIN: '/admin',
+  ADMIN_DASHBOARD: '/admin/dashboard',
+  ADMIN_CITIES: '/admin/cities',
+  ADMIN_HOTELS: '/admin/hotels',
+  ADMIN_ROOMS: '/admin/rooms',
 } as const

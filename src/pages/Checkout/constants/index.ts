@@ -28,3 +28,8 @@ export const BOOKING_STATUS = {
   PENDING: 'Pending',
   CANCELLED: 'Cancelled',
 } as const
+
+export const ROUTES = {
+  CHECKOUT: '/checkout',
+  CHECKOUT_CONFIRMATION: (bookingId: string | number) => `/checkout/confirmation/${bookingId}`,
+} as const

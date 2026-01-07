@@ -31,3 +31,8 @@ export const MAP = {
   DEFAULT_HEIGHT: 300,
   SCROLL_WHEEL_ZOOM: false,
 } as const
+
+export const ROUTES = {
+  HOTEL: (hotelId: string | number) => `/hotel/${hotelId}`,
+  CHECKOUT: '/checkout',
+} as const
