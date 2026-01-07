@@ -13,7 +13,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { useGetAdminHotelsQuery } from '../api'
 import { useGetCitiesQuery } from '../../Cities/api'
-import type { HotelForCreationDto } from '@/types'
+import type { HotelForCreationDto } from '../types'
 import { VoyaLoader } from '@/components'
 import { HOTEL } from '../../../Hotel/constants'
 import { VALIDATION } from '../constants'
@@ -62,15 +62,15 @@ export function HotelForm({ hotelId, onSubmit, onCancel }: Props) {
     }
   >({
     initialValues: {
-      name: hotel?.name || hotel?.hotelName || '',
+      name: hotel?.name || '',
       cityId: hotel?.cityId || 0,
-      description: hotel?.description || '',
-      hotelType: hotel?.hotelType || '',
+      description: undefined,
+      hotelType: undefined,
       starRating: hotel?.starRating || 1,
-      location: hotel?.location || '',
-      latitude: hotel?.latitude,
-      longitude: hotel?.longitude,
-      imageUrl: hotel?.imageUrl || '',
+      location: undefined,
+      latitude: undefined,
+      longitude: undefined,
+      imageUrl: undefined,
     },
     validationSchema,
     enableReinitialize: true,

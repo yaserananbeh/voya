@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material'
 import { FormField, FormActions } from '../../components'
 import type { FormikProps } from 'formik'
-import type { CityForCreationDto } from '@/types'
+import type { CityForCreationDto } from '../types'
 import { BUTTON_LABELS } from '../../constants'
 
 type CityFormPresentationalProps = {

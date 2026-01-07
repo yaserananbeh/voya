@@ -1,17 +1,10 @@
 import { baseApi } from '@/api/baseApi'
-import type { CityForCreationDto, CityDto } from '@/types'
+import type { CityForCreationDto, CityDto, PaginationQuery } from '../types'
 
 const API_ENDPOINTS = {
   CITIES: '/cities',
   CITY_BY_ID: (id: number) => `/cities/${id}`,
 } as const
-
-export interface PaginationQuery {
-  searchQuery?: string
-  name?: string
-  pageNumber?: number
-  pageSize?: number
-}
 
 export const citiesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

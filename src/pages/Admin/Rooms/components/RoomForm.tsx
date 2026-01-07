@@ -15,7 +15,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { useGetRoomsAdminQuery } from '../api'
 import { useGetAdminHotelsQuery } from '../../Hotels/api'
-import type { RoomForCreationDto } from '@/types'
+import type { RoomForCreationDto } from '../types'
 import { VoyaLoader } from '@/components'
 import { VALIDATION } from '../constants'
 import { BUTTON_LABELS } from '../../constants'
@@ -106,7 +106,7 @@ export function RoomForm({ roomId, onSubmit, onCancel }: Props) {
           >
             {hotels.map((hotel) => (
               <MenuItem key={hotel.id} value={hotel.id}>
-                {hotel.name || hotel.hotelName}
+                {hotel.name}
               </MenuItem>
             ))}
           </Select>

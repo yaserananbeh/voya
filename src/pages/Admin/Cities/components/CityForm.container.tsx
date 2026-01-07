@@ -3,7 +3,7 @@ import * as yup from 'yup'
 import { Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useGetCitiesQuery } from '../api'
-import type { CityForCreationDto } from '@/types'
+import type { CityForCreationDto } from '../types'
 import { CityFormPresentational } from './CityForm.presentational'
 import { VoyaLoader } from '@/components'
 

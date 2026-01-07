@@ -1,4 +1,5 @@
 import { baseApi } from '@/api/baseApi'
+import type { DashboardStatsDto } from '../types'
 
 const API_ENDPOINTS = {
   ADMIN_DASHBOARD: '/admin/dashboard',
@@ -6,16 +7,7 @@ const API_ENDPOINTS = {
 
 export const dashboardApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getDashboardStats: build.query<
-      {
-        totalCities: number
-        totalHotels: number
-        totalRooms: number
-        averageStarRating: number
-        totalAvailableRooms: number
-      },
-      void
-    >({
+    getDashboardStats: build.query<DashboardStatsDto, void>({
       query: () => API_ENDPOINTS.ADMIN_DASHBOARD,
       providesTags: ['Admin'],
     }),

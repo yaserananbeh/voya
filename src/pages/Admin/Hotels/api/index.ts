@@ -1,17 +1,10 @@
 import { baseApi } from '@/api/baseApi'
-import type { HotelWithoutRoomsDto, HotelForCreationDto } from '@/types'
+import type { HotelWithoutRoomsDto, HotelForCreationDto, PaginationQuery } from '../types'
 
 const API_ENDPOINTS = {
   HOTELS: '/hotels',
   HOTEL_BY_ID: (id: number) => `/hotels/${id}`,
 } as const
-
-export interface PaginationQuery {
-  searchQuery?: string
-  name?: string
-  pageNumber?: number
-  pageSize?: number
-}
 
 export const hotelsAdminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
