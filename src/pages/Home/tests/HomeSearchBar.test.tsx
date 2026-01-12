@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit'
 import { searchReducer } from '@/pages/SearchResults/store'
-import { HomeSearchBar } from '../components/HomeSearchBar'
+import { HomeSearchBar } from '@/pages/Home/components/HomeSearchBar'
 
 function renderWithStore(ui: React.ReactElement) {
   const store = configureStore({

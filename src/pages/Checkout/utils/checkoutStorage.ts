@@ -1,4 +1,4 @@
-import type { CheckoutContext } from '../types'
+import type { CheckoutContext } from '@/pages/Checkout/types'
 
 const KEY = 'voya.checkout.context'
 

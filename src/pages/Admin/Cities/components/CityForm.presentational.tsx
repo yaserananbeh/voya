@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material'
-import { FormField, FormActions } from '../../components'
+import { FormField, FormActions } from '@/pages/Admin/components'
 import type { FormikProps } from 'formik'
-import type { CityForCreationDto } from '../types'
-import { BUTTON_LABELS } from '../../constants'
+import type { CityForCreationDto } from '@/pages/Admin/Cities/types'
+import { BUTTON_LABELS } from '@/pages/Admin/constants'
 
 type CityFormPresentationalProps = {
   cityId: number | null

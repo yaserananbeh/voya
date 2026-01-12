@@ -1,4 +1,4 @@
-import { PAGINATION } from '../constants'
+import { PAGINATION } from '@/pages/Admin/constants'
 
 export const getInitialPaginationModel = () => ({
   page: PAGINATION.INITIAL_PAGE,

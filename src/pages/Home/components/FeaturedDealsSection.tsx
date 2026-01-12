@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-import { useFeaturedDealsQuery } from '../api'
-import type { FeaturedDealDto } from '../types'
+import { useFeaturedDealsQuery } from '@/pages/Home/api'
+import type { FeaturedDealDto } from '@/pages/Home/types'
 import { LoadingState, ErrorState } from '@/components/common'
 import { EmptyState } from './EmptyState'
 import { HotelCard } from './HotelCard'

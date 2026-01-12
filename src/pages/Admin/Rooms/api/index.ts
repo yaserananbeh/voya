@@ -1,5 +1,5 @@
 import { baseApi } from '@/api/baseApi'
-import type { RoomDto, RoomForCreationDto, PaginationQuery } from '../types'
+import type { RoomDto, RoomForCreationDto, PaginationQuery } from '@/pages/Admin/Rooms/types'
 
 const API_ENDPOINTS = {
   ROOMS: '/rooms',

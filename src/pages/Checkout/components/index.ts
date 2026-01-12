@@ -1,6 +1,6 @@
 export { BookingSummary } from './BookingSummary'
 export { UserInfoForm } from './UserInfoForm'
-export type { UserInfoValues } from '../types'
+export type { UserInfoValues } from '@/pages/Checkout/types'
 export { CheckoutActions } from './CheckoutActions'
 export { createBookingSchema } from './bookingSchema'
 export { CheckoutHeader } from './CheckoutHeader'

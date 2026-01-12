@@ -1,5 +1,5 @@
 import { Stack, Typography, Rating, Paper, Divider } from '@mui/material'
-import type { HotelReviewDto } from '../api'
+import type { HotelReviewDto } from '@/pages/Hotel/api'
 
 type Props = {
   reviews: HotelReviewDto[]

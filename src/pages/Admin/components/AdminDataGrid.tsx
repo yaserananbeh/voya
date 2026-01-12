@@ -5,7 +5,7 @@ import {
   type GridPaginationModel,
   type GridValidRowModel,
 } from '@mui/x-data-grid'
-import { PAGINATION } from '../constants'
+import { PAGINATION } from '@/pages/Admin/constants'
 
 type AdminDataGridProps<T extends GridValidRowModel> = {
   rows: T[]

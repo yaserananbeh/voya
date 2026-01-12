@@ -1,5 +1,5 @@
 import { baseApi } from '@/api/baseApi'
-import type { DashboardStatsDto } from '../types'
+import type { DashboardStatsDto } from '@/pages/Admin/Dashboard/types'
 
 const API_ENDPOINTS = {
   ADMIN_DASHBOARD: '/admin/dashboard',

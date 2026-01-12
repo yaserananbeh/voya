@@ -3,7 +3,7 @@ import { screen, render } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { store } from '@/store'
-import Confirmation from '../Confirmation/Confirmation'
+import Confirmation from '@/pages/Checkout/Confirmation/Confirmation'
 
 describe('Confirmation', () => {
   it('renders booking details', async () => {

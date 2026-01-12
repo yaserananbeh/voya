@@ -12,7 +12,7 @@ import {
   Grid,
 } from '@mui/material'
 import { useParams } from 'react-router-dom'
-import { useGetBookingByIdQuery } from '../api'
+import { useGetBookingByIdQuery } from '@/pages/Checkout/api'
 import { useTranslation } from 'react-i18next'
 import { VoyaLoader } from '@/components/common/VoyaLoader'
 import PrintIcon from '@mui/icons-material/Print'

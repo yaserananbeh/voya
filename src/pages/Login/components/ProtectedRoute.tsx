@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom'
 import type { ReactElement } from 'react'
-import { STORAGE_KEYS, ROUTES } from '../constants'
+import { STORAGE_KEYS, ROUTES } from '@/pages/Login/constants'
 
 interface Props {
   children: ReactElement

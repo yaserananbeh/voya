@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { UserInfoForm } from '../components/UserInfoForm'
+import { UserInfoForm } from '@/pages/Checkout/components/UserInfoForm'
 import { NotificationProvider } from '@/providers/NotificationProvider'
 
 const renderUserInfoForm = (props: Parameters<typeof UserInfoForm>[0]) => {

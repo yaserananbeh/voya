@@ -1,6 +1,6 @@
 import { Rating, Typography, Stack, Button } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectSearchFilters, setSearchFilters } from '../store'
+import { selectSearchFilters, setSearchFilters } from '@/pages/SearchResults/store'
 import { useTranslation } from 'react-i18next'
 
 export function StarRatingFilter() {

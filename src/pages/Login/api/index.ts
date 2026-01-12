@@ -1,5 +1,5 @@
 import { baseApi } from '@/api/baseApi'
-import type { LoginRequestDto, LoginResponseDto } from '../types'
+import type { LoginRequestDto, LoginResponseDto } from '@/pages/Login/types'
 
 const API_ENDPOINTS = {
   AUTH_AUTHENTICATE: '/auth/authenticate',
